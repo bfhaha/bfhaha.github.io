@@ -1,0 +1,110 @@
+﻿
+<html>
+
+<head>
+
+<title>DOSBox教學</title>
+
+<style>
+code, pre {background-color: lightgray;}
+h2 {color:red;}
+</style>
+
+</head>
+
+<body>
+
+
+<h1>DOSBox教學</h1>
+
+
+<!---------------------------------->
+<!---------------------------------->
+<h2>設定遊戲</h2>
+
+
+<ul>
+
+<!---------------------------------->
+<li>到官方網站<a href="https://www.dosbox.com/">https://www.dosbox.com/</a>下載DOSBox。</li>
+<img width="70%" src="/img/dosbox/website.jpg"></img>
+
+<!---------------------------------->
+<li>安裝後執行</li>
+<img width="70%" src="/img/dosbox/install.jpg"></img>
+
+<!---------------------------------->
+<li>下載遊戲並解壓縮，假設把遊戲放在<code>C:\Users\bfhaha\Downloads\LostVikings</code>，我們就要在DOSBox中掛載這個目錄，例如<code>mount c c:\Users\bfhaha\Downloads\LostVikings</code>。第一個c表示我們要在DOSBox中建立一個虛擬的磁碟c，然後後面的目錄表示這個虛擬的磁碟c所指向的資料夾。</li>
+<img width="70%" src="/img/dosbox/mount.jpg"></img>
+
+<!---------------------------------->
+<li>接著我們利用指令<code>c:</code>把目錄切換到這個虛擬的c槽。</li>
+<img width="70%" src="/img/dosbox/switchtoc.jpg"></img>
+
+<!---------------------------------->
+<li>輸入<code>dir</code>可以檢視當前目錄裡的檔案。</li>
+<img width="70%" src="/img/dosbox/dir.jpg"></img>
+
+<!---------------------------------->
+<li>注意到裡面有一個setup.exe檔案（隨著遊戲不同可能有所變化），輸入<code>setup</code>即可開始遊戲。</li>
+<img width="70%" src="/img/dosbox/setup.jpg"></img>
+
+<!---------------------------------->
+<li>設定音效，注意到選擇到不好的音效卡會大幅降低遊戲音樂的呈現品質。</li>
+<img width="70%" src="/img/dosbox/speaker.jpg"></img>
+
+<!---------------------------------->
+<li>按照指示輸入即可開始遊戲。</li>
+<img width="70%" src="/img/dosbox/typetostart.jpg"></img>
+
+<!---------------------------------->
+<li>開始遊戲。</li>
+<img width="70%" src="/img/dosbox/done.jpg"></img>
+
+</ul>
+
+
+<!---------------------------------->
+<!---------------------------------->
+<h2>設定搖桿</h2>
+
+<ul>
+
+<!---------------------------------->
+<li>首先當然要先插入搖桿，筆者用的是Logitech Gamepad F310，USB介面，就是在順發3C買的最陽春的那種。</li>
+<img width="70%" src="/img/dosbox/F310.jpg"></img>
+
+<!---------------------------------->
+<li>回到剛才進到DOSBox的畫面，我們現在要設定搖桿，按下Ctrl+F1。</li>
+<img width="70%" src="/img/dosbox/joystick.jpg"></img>
+
+<!---------------------------------->
+<li>會顯示鍵盤，我們現在要做的就是設定搖桿的按鍵要對應到鍵盤上的哪一個按鍵。</li>
+<img width="70%" src="/img/dosbox/map.jpg"></img>
+
+<!---------------------------------->
+<li>直接用滑鼠點選要設定的鍵盤按鍵，例如a，並按下Add。</li>
+<img width="70%" src="/img/dosbox/chooseakey.jpg"></img>
+
+<!---------------------------------->
+<li>這時候會等待輸入搖桿上的按鍵。</li>
+<img width="70%" src="/img/dosbox/waitingforsetting.jpg"></img>
+
+<!---------------------------------->
+<li>按下搖桿上對應的按鍵即可，成功的話可以看到顯示搖桿上的對應按鍵。</li>
+<img width="70%" src="/img/dosbox/newkey.jpg"></img>
+
+<!---------------------------------->
+<li>最後按下Save，即可儲存這個對應。</li>
+<img width="70%" src="/img/dosbox/savemapping.jpg"></img>
+
+<!---------------------------------->
+<li>下次執行遊戲時，可以看到會自動讀取上次儲存的按鍵對應檔。</li>
+<img width="70%" src="/img/dosbox/loadmapping.jpg"></img>
+
+
+</ul>
+
+</body>
+
+</html>
