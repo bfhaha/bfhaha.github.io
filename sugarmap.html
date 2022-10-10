@@ -1,0 +1,327 @@
+﻿<html>
+
+<head>
+
+<title>抓取台糖公司待活化可供釋出土地的座標及地價</title>
+<meta name="description" content="抓取台糖公司待活化可供釋出土地的座標及地價">
+
+<style>
+dfn{color:green;}
+pre, code {background-color: lightgray;}
+</style>
+
+</head>
+
+<body>
+
+<h1>抓取台糖公司待活化可供釋出土地的座標及地價</h1>
+
+<p>在本篇文章中常用的名稱及其簡稱。
+</p>
+
+<table border="1">
+<tr><th>全名</th><th>簡稱</th></tr>
+<tr><td><a href="https://www.taisugar.com.tw/upload/UserFiles/CP2/34/637577281030350842.ods">台糖公司待活化可供釋出土地清冊</a></td><td>清冊</td></tr>
+<tr><td><a href="https://easymap.land.moi.gov.tw/Index">地籍圖資網路便民服務系統</a></td><td>地籍圖資系統</td></tr>
+<tr><td><a href="https://lisp.land.moi.gov.tw/MMS/MMSpage.aspx#gobox02">土地段名代碼暨詮釋資料查詢系統</a></td><td>土地段名系統</td></tr>
+</table>
+
+<p>下面幾個名詞的使用並沒有統一，在不同的系統裡有不同的名稱，所以附上對照表。
+</p>
+
+<table border="1">
+<tr><th>清冊</th><th>地籍圖資系統</th><th>土地段名系統</th></tr>
+<tr><td>縣市名稱</td><td>縣市</td><td>縣市名稱</td></tr>
+<tr><td>鄉鎮名稱</td><td>鄉鎮市區</td><td>鄉鎮市區名稱</td></tr>
+<tr><td>段號名稱</td><td>段名</td><td>段</td></tr>
+<tr><td>小段名稱</td><td>段名</td><td>小段</td></tr>
+<tr><td>母號</td><td>地號</td><td></td></tr>
+<tr><td>子號</td><td>地號</td><td></td></tr>
+</table>
+
+
+<p>下面說明如何抓取，主要有兩個部分。
+</p>
+
+<p>第一個部分是要從<dfn>清冊</dfn>中整理出土地的<dfn>縣市</dfn>、<dfn>鄉鎮市區</dfn>、<dfn>段名</dfn>、<dfn>地號</dfn>等資訊，並且轉換成跟<dfn>地籍圖資系統</dfn>一樣的格式。
+</p>
+
+<p>第二個部分就是利用這些資訊從<dfn>地籍圖資系統</dfn>抓取土地座標。抓取的方式就是利用一個python的程式getCoordinate.py，模擬在<dfn>地籍圖資系統</dfn>上查詢地籍的動作。
+</p>
+
+
+
+
+<details>
+<summary>getCoordinate.py程式碼點我展開</summary>
+<pre>
+from selenium import webdriver 
+from selenium.webdriver.support.ui import Select # For finding select tag
+from selenium.webdriver import ActionChains # For mouse actions
+import time # For pause
+
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+
+# For Windows, place getCoordinate.py and chromedriver under c:\users\bfhaha
+# driver = webdriver.Chrome(r"C:\Users\bfhaha\chromedriver")
+
+# For MacOS, place getCoordinate.py and chromedriver under users\bfhaha
+driver = webdriver.Chrome("./chromedriver")
+
+driver.get("https://easymap.land.moi.gov.tw/Index")
+
+time.sleep(5)
+
+allCity = [
+"臺中市",
+"臺中市",
+]
+
+allTown = [
+"后里區",
+"后里區",
+]
+
+allSect = [
+"(3010)牛稠坑段",
+"(3016)金城段",
+]
+
+allLand = [
+"0179-0103",
+"0169-0000",
+]
+
+n = len(allTown)
+
+f = open("ValueCoordinate.txt", "a")
+f.truncate(0) # empty ValueCoordinate.txt
+
+for i in range(n):
+    
+  city = Select(driver.find_element_by_id("select_city_id"))
+  city.select_by_visible_text(allCity[i])
+
+  time.sleep(2)
+
+  city = Select(driver.find_element_by_id("select_town_id"))
+  city.select_by_visible_text(allTown[i])
+
+  time.sleep(2)
+
+  city = Select(driver.find_element_by_id("select_sect_id"))
+  city.select_by_visible_text(allSect[i])
+  #driver.find_element_by_xpath("//select[@id = 'select_sect_id']/option[contains(text(), '" + allSect[i] + "')]").click()
+
+  time.sleep(2)
+
+  landno = driver.find_element_by_id("landno")
+  landno.clear()
+  landno.send_keys(allLand[i])
+
+  time.sleep(1)
+
+  search = driver.find_element_by_id("land_button")
+  search.click()
+
+  try:
+    WebDriverWait(driver, 3).until(EC.alert_is_present())
+    alert = driver.switch_to.alert
+
+    if "查無" in alert.text:
+      time.sleep(1)
+      alert.accept()
+      time.sleep(1)
+      print("No land")
+      f.write("x\n")
+      continue
+
+    if "查詢次數過多" in alert.text:
+      time.sleep(1)
+      alert.accept()
+      #time.sleep(2)
+      #WebDriverWait(driver, 600).until(EC.text_to_be_present_in_element_value((By.ID,"recaptcha_id"),"1111"))
+      #time.sleep(30)
+      time.sleep(120)
+      print("Captcha")
+  except:
+    print(i+1,"-",n)
+
+  time.sleep(15)
+
+  # The value of the land
+  temp = driver.find_element_by_xpath("//table[@id='one-column-emphasis']/tbody/tr[7]/td").text
+  f.write(temp)
+  f.write(",")
+
+  sect = driver.find_element_by_id("sectNoId")
+
+  # Right clicking on the land, choosing showing the coordinate
+  action = ActionChains(driver)
+  action.move_to_element_with_offset(sect,170,240)
+  action.context_click()
+
+  action.move_to_element_with_offset(sect,190,90)
+  action.click()
+
+  action.perform()
+
+  # The coordinate of the land
+  temp = driver.find_element_by_id("coordDisplayLonLat").text
+  f.write(temp)
+  f.write("\n")
+f.close()
+</pre>
+</details>
+
+<!---------------------------------->
+<h2>第一部分</h2>
+
+
+<p>先來討論第一個部分。
+</p>
+
+<p>先下載[台糖公司待活化可供釋出土地清冊.ods]</p>
+
+<p>將某特定縣市（例如台中或是台東）的部分複製到另一張新的工作表，假設為sugarmap.csv。（直行標題的部分也要複製）</p>
+
+<ul>
+<li><dfn>縣市名稱</dfn>、<dfn>鄉鎮名稱</dfn>、<dfn>段號名稱</dfn>、<dfn>小段名稱</dfn>的字串中可能有一些空白，利用尋找及取代功能將其刪除。（可以對整個工作表搜尋及取代，<dfn>使用分區名稱</dfn>也有空白。）</li>
+<hr>
+<li>利用公式<code>=concatenate(char(34),縣市名稱,char(34),",")</code>，在<dfn>縣市名稱</dfn>前後加上雙引號，後面再加上一個逗號。</li>
+<li>將這些<dfn>縣市名稱</dfn>貼到getCoordinate.py的<font color="red">allCity</font>變數。注意，剛開始執行時貼個5筆就好，確認執行上沒問題。熟練後一次也貼個50筆就好，不要全貼。</li>
+<hr>
+<li>利用公式<code>=concatenate(char(34),鄉鎮名稱,char(34),",")</code>，在<dfn>鄉鎮名稱</dfn>前後加上雙引號，後面再加上一個逗號。</li>
+<li>將這些<dfn>鄉鎮名稱</dfn>貼到getCoordinate.py的<font color="red">allTown</font>變數。注意，剛開始執行時貼個5筆就好，確認執行上沒問題。熟練後一次也貼個50筆就好，不要全貼。</li>
+<li>可以每次固定查詢50筆，這樣一來查詢下一批次時，只要更新allTown, allSect, allLand就好，不用再更新allCity。</li>
+<hr>
+<li>利用公式<code>=concatenate(char(34),母號,"-",子號,char(34),",")</code>合併<dfn>母號</dfn>跟<dfn>子號</dfn>，並且在中間加入一個連字號-，char(34)就是雙引號的意思，前後加上雙引號，後面再加上一個逗號。合併之後我們就稱為<dfn>地號</dfn>。</li>
+<li>將這些<dfn>地號</dfn>貼到getCoordinate.py的<font color="red">allLand</font>變數。注意，剛開始執行時貼個5筆就好，確認執行上沒問題。熟練後一次也貼個50筆就好，不要全貼。</li>
+<li>可以每次固定查詢50筆，這樣一來查詢下一批次時，只要更新allTown, allSect, allLand就好，不用再更新allCity。</li>
+</ul>
+
+<p>注意到，新增直行的時候，建議一定要輸入直行標題，因為有些試算表應用程式，在建立filter的時候，對於沒有標題的直行就不會加上filter，就會造成其他行排序時，該直行沒有跟著排序的情況發生。
+</p>
+
+<p><dfn>段名</dfn>的部分比較麻煩，因為<dfn>地籍圖資系統</dfn>的<dfn>段名</dfn>還包括編號，例如臺中市北區(1006)中清段，原本是用程式碼<code>driver.find_element_by_xpath("//select[@id = 'select_sect_id']/option[contains(text(), '" + allSect[i] + "')]").click()</code>就可以抓出含有“中清段”這個字串的<dfn>段名</dfn>，但麻煩的地方是，有一些地段下面又分好幾個小段，而且大段本身也是一個地段，例如臺中市后里區(3000)后里段及臺中市后里區(3001)后里段后里小段，這就讓上面的方法有風險。為了符合<dfn>地籍圖資系統</dfn>的檢索條件，所以我們要把根據<dfn>鄉鎮名稱</dfn>、<dfn>段號名稱</dfn>、<dfn>小段名稱</dfn>，將其加入編號。</p>
+
+<p>另一個造成麻煩的原因是因為在不同的<dfn>鄉鎮市區</dfn>中，可能存在相同的<dfn>段名</dfn>，例如台中后里區跟霧峰區都有四德段。</p>
+
+<p>看起來很複雜，簡單來說可以歸納為下列的步驟。
+</p>
+
+<table style="text-align:center">
+<tbody>
+<tr>
+<td>&nbsp;</td>
+<td>生成取代的指令</td>
+<td>&nbsp;</td>
+<td>取代其中的字串</td>
+<td>&nbsp;</td>
+<td>生成取代的指令</td>
+<td>&nbsp;</td>
+<td>取代其中的字串</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>F-台中市.csv</td>
+<td>&rarr;</td>
+<td>replace1.py</td>
+<td>&rarr;</td>
+<td>（修改後的）段名代碼表.csv</td>
+<td>&rarr;</td>
+<td>replace2.py</td>
+<td>&rarr;</td>
+<td>sugarmap.csv</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>要先到<dfn>土地段名系統</dfn>（<a href="https://lisp.land.moi.gov.tw/MMS/MMSpage.aspx#gobox02">連結</a>）下載兩個檔案。</li>
+<li>第一個先切到[段名代碼表]標籤，選擇你要的縣市，按下[下載純文字檔]或是[下載CSV檔]，得到一個[段名代碼表.csv]。</li>
+<li>第二個是切到[縣市及鄉鎮市區代碼表]標籤，一樣下載得到一個[F-台中市.csv]。</li>
+<li>根據[F-台中市.csv]中，[鄉鎮市區名稱]與[鄉鎮市區代碼]的對應，將[段名代碼表.csv]中，每一行最後面的兩碼轉換成對應的[鄉鎮市區名稱]，看下一步操作。</li>
+<li>開啟[F-台中市.csv]（開啟時要把[鄉鎮市區代碼]的格式設定為文字，才不會讓補齊位數的0不見），利用公式<code>=CONCATENATE("filedata = filedata.replace(",CHAR(34),"qq",F2,CHAR(34),",",CHAR(34),E2,CHAR(34),")")</code>得到取代的指令，例如<code>filedata = filedata.replace("qq01","中區")</code></li>
+<li>建立下面的replace1.py檔案，注意，這只是部分的程式碼。</li>
+
+<pre>
+with open("段名代碼表.csv", "r") as file :
+  filedata = file.read()
+
+filedata = filedata.replace("qq01","中區")
+filedata = filedata.replace("qq02","東區")
+
+with open("段名代碼表.csv", "w") as file:
+  file.write(filedata)
+</pre>
+
+  <li>開啟[段名代碼表.csv]（開啟時要把[代碼]的格式設定為文字，才不會讓補齊位數的0不見），把[所區碼]的末兩位擷取出來，可以用指令<code>=CONCATENATE("qq",RIGHT(E2,2))</code>，這個新增的直行命名為[末兩碼]。在這個兩碼前面加上qq是為了等下取代這些末兩碼的時候不會跟前面的其他數字重複而被誤取代。儲存離開。</li>
+  <li>執行replace1.py，取代[段名代碼表.csv]中的字串。</li>
+  <li>再次開啟[段名代碼表.csv]（開啟時要把[代碼]的格式設定為文字，才不會讓補齊位數的0不見），利用公式<code>=IF(B2="", CONCATENATE("filedata = filedata.replace(",CHAR(34),F2,A2,"qq",CHAR(34),",",CHAR(34),"(",C2,")",A2,"段",CHAR(34),")"), CONCATENATE("filedata = filedata.replace(",CHAR(34),F2,A2,B2,CHAR(34),",",CHAR(34),"(",C2,")",A2,"段",B2,"小段",CHAR(34),")"))</code>得到取代的指令，例如<code>filedata = filedata.replace("中區繼光一","(0001)繼光段一小段")</code>，這個公式是由一個判斷式組成，如果沒有小段，要用大段qq，如果有小段，則用大段小段。<font color="red">為什麼要這樣處理呢？舉例來說，臺中市潭子區有[聚興段]跟[聚興段新興小段]，如果先取代掉[聚興段]的話，就會連[聚興段新興小段]的前半部都被取代掉。</font></li>
+  <li>建立下面的replace2.py檔案，注意，這只是部分的程式碼。</li>
+
+<pre>
+with open("sugarmap.csv", "r") as file :
+  filedata = file.read()
+
+filedata = filedata.replace("中區繼光一","(0001)繼光段一小段")
+filedata = filedata.replace("中區繼光二","(0002)繼光段二小段")
+
+with open("sugarmap.csv", "w") as file:
+  file.write(filedata)
+</pre>
+  
+<li>開啟sugarmap.csv，利用公式<code>=IF(小段名稱="", CONCATENATE(未加引號的鄉鎮名稱, 段號名稱, "qq"), CONCATENATE(未加引號的鄉鎮名稱, 段號名稱, 小段名稱))</code>合併，假設新增的直行標題為[完整段名]。儲存離開。</li>
+<li>執行replace2.py</li>
+<li>再次開啟sugarmap.csv，將[完整段名]一樣前後加上雙引號，後面再加上一個逗號，就可以貼到getCoordinate.py的<font color="red">allSect</font>變數。</li>
+</ul>
+
+
+
+<!---------------------------------->
+<h2>第二部分</h2>
+
+
+<p>再來第二個部分就是執行getCoordinate.py，程式執行的流程大致如下。
+</p>
+
+<ul>
+<li>一開始就是<code>from ... import ...</code>一些必要的功能。</li>
+<li>再來是讀取瀏覽器及網頁，這個會隨著作業系統不同而有所變化。</li>
+
+<pre>
+driver = webdriver.Chrome("...chromedriver")
+driver.get("https://easymap.land.moi.gov.tw/Index")
+</pre>
+
+<li>再來就是設定<code>allCity, allTown, allSect, allLand</code>這些變數，這是上一部分的重點。</li>
+<li>接著就是跑廻圈，模擬在<dfn>地籍圖資系統</dfn>上查詢地籍的動作，依序選擇<dfn>縣市</dfn>、<dfn>鄉鎮市區</dfn>、<dfn>段名</dfn>，然後模擬輸入<dfn>地號</dfn>，模擬點選[查詢]按鈕。</li>
+<li>中間一定要延遲，否則瀏覽器反應不過來會讓後面的操作沒辦法正常執行。</li>
+<li>模擬點選[查詢]後有一段例外處理，這個我們等下再說明。</li>
+<li>查到土地後會把[公告土地地價]寫入temp變數。</li>
+<li>接著會模擬滑鼠的動作，在地圖中標記土地的大頭針上按右鍵（是用螢幕座標來定位的），並且選擇[取得此座標位置]，接著就會把座標[經緯度]寫入temp變數。</li>
+<li>最後就是把temp寫入文字檔ValueCoordinate.txt當中。</li>
+<li>執行完後開啟ValueCoordinate.txt，將內容貼到sugmap.csv當中。</li>
+<li>現在來說明點選[查詢]後可能會出現的例外狀況。<dfn>地籍圖資系統</dfn>有兩種警告訊息，一種是查不到該筆土地，另一種是因為查詢次數過多，要求使用者輸入驗證碼。對於第一種情形，會在記錄地價及座標的文字檔中記錄此筆土地為x，並且在prompt輸出No land，對於第二種情形，則會等待120秒，讓使用者輸入驗證碼後繼續查詢，並且在prompt輸出Captcha。（理想中的處理方式為，等待十分鐘，等待使用者輸入驗證碼，在驗證碼輸入的地方輸入1111就能解除等待，也就是這段程式碼<code>WebDriverWait(driver, 600).until(EC.text_to_be_present_in_element_value((By.ID,"recaptcha_id"),"1111"))</code>的功能，不過實際測試結果無法順利運作，原因不明。）過程中prompt皆會顯示查詢到的土地是總查詢筆數的第幾筆，由此追蹤進度。</li>
+</ul>
+
+
+<p>下面是其他說明。
+</p>
+
+
+<ul>
+<li>寫getCoordinate.py的時候，可以下載Selenium IDE這個Chrome的extension，可以先用這個Selenium IDE錄製你在Chrome中要做的動作，Selenium IDE中有個[Target]，會顯示網頁中element的“位置”，可以輔助你在寫<code>find_element</code>的時候，知道要怎麼找到網頁中的element。</li>
+<li>有時候開啟<dfn>地籍圖資系統</dfn>時會是衛星檢視模式，右上角可以選擇[正射影像(航照圖)]，預設是[NLSC地圖]，[NLSC地圖]讀取比較快，建議手動切換過去。</li>
+<li><dfn>地籍圖資系統</dfn>中的[查詢結果]並不統一，例如臺中市大甲區(3668)奉仁段303號地，就會多出[使用分區]及[使用地類別]，在這個情形之下，getCoordinate.py的<code>temp = driver.find_element_by_xpath("//table[@id='one-column-emphasis']/tbody/tr[7]/td").text</code>這段程式碼就會抓到[使用地類別]，而不是抓到[公告土地地價]，我的解決辦法就是全部抓完後，再根據這些沒抓到[公告土地地價]的土地排序，重新抓取這些土地，但上面那行程式碼中的<code>tr[7]</code>要改成<code>tr[9]</code></li>
+<li>注意到，如果座標經度（左右方向）常出現偏差，很有可能是因為選擇不同的<dfn>段名</dfn>時造成的。因為<dfn>段名</dfn>有長有短，會影響<dfn>段名</dfn>選擇的方塊，進而影響輸入<dfn>地號</dfn>方塊的位置，如果模擬滑鼠按右鍵的位置是以輸入<dfn>地號</dfn>的方塊為基準，就會產生誤差。</li>
+<li>關於模擬滑鼠在大頭針上按右鍵的動作，可能會因為你的視窗大小及位置而有所不同，你可能要視情況調整。</li>
+<li>上傳到Google MyMap之前，可以先把<dfn>縣市</dfn>、<dfn>鄉鎮市區</dfn>、<dfn>段名</dfn>、<dfn>地號</dfn>等資訊合併成一個新的直行，名為[標題]。然後座標要選擇latitude, longitude。</li>
+</ul>
+
+
+</body>
+</html>

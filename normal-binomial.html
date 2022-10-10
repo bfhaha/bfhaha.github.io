@@ -1,0 +1,73 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Normal Approximation to the Binomial Distribution</title>
+<meta name="description" content="用常態分布近似二項分布的證明。">
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+</head>
+<body>
+
+
+
+  
+  <h1>De Moivre-Laplace Theorem</h1>
+  
+  <p><font color="blue">Normal Approximation to the Binomial Distribution. 用常態分佈近似二項分佈。</font></p>
+  
+  <p><font color="blue">主要內容來自於page 762 and page 765, problem 8, section 8, chapter 15 in Boas's Mathematical Methods in The Physical Sciences 3rd edition. 黑色字體是課文，藍色字體是我的補充說明。</font></p>
+  
+  <p><font color="blue">如果可以用中央極限定理(Central Limit Theore)就簡單多了。  
+\[
+\begin{array}{cl}
+& Y\sim \text{binomial}(n, p) \\
+\Rightarrow & Y=\sum_{i=1}^{n}X_i, \text{ where }X_i\sim \text{Bernoulli}(p) \\
+\stackrel{\text{Central Limit Theorem}}{\Rightarrow} & \frac{\bar{X}-p}{\sqrt{\frac{p(1-p)}{n}}} \sim \text{normal}(0, 1) \\
+\Rightarrow & \frac{n\bar{X}-np}{\sqrt{np(1-p)}} \sim \text{normal}(0, 1) \\
+\Rightarrow & Y=n\bar{X} \sim \text{normal}(np, np(1-p))
+\end{array}
+\]
+但我們在這裡是不用中央極限定理的證明。</font></p>
+  
+  <p><b>Normal Approximation to the Binomial Distribution</b> As an example of approximating another distribution by a normal distribution, let's consider the binomial distribution (7.3). For large \(n\) and large \(np\), we can use <a href="https://bfhaha.github.io/stirling-formula.html">Stirling's formula</a> (Chapter 11, Section 11) to approximate the factorials in \(C(n, x)\) in (7.3) and make other approximations to find \[f(x)=C(n, x)p^x q^{n-x}\sim \frac{1}{\sqrt{2\pi npq}}e^{-(x-np)^2/(2npq)}.\tag{8.3}\]</p>
+  
+  <p>Carry through the following details of a derivation of (8.3). Start with (7.3); we want an approximation to (7.3) for large \( n \). First approximate the factorials in \(C(n, x)\) by <a href="https://bfhaha.github.io/stirlingformula.html">Stirling's formula</a> (Chapter 11, Section 11) and simplify to get \[f(x)\sim \left(\frac{np}{x}\right)^x \left(\frac{nq}{n-x}\right)^{n-x}\sqrt{\frac{n}{2\pi x(n-x)}}.\]</p>
+  
+  <p><font color="blue">
+    \begin{array}{cl}
+      & C(n, x)p^x q^{n-x} \\ 
+    = & \frac{n!}{(n-x)!x!}p^x q^{n-x} \\
+    \stackrel{\text{Stirling's formula}}{\sim} & \frac{n^n e^{-n}\sqrt{2\pi n}}{(n-x)^{n-x} e^{-(n-x)} \sqrt{2\pi (n-x)} ~x^x e^{-x} \sqrt{2\pi x}}p^x q^{(n-x)} \\
+    \stackrel{\text{cancel out }e, \sqrt{2\pi}}{=} & \frac{n^n \sqrt{n}}{(n-x)^{n-x} \sqrt{n-x}~ x^x \sqrt{2\pi x}}p^x q^{(n-x)} \\
+    = & \sqrt{\frac{n}{2\pi x(n-x)}}\frac{n^n}{(n-x)^{n-x}x^x} p^x q^{n-x} \\
+    \stackrel{n^n=n^{n-x}\cdot n^x}{=} & \sqrt{\frac{n}{2\pi x(n-x)}}\frac{n^{n-x}\cdot n^x}{(n-x)^{n-x}x^x} p^x q^{n-x} \\
+    = & \sqrt{\frac{n}{2\pi x(n-x)}}\left(\frac{np}{x}\right)^x \left(\frac{nq}{n-x}\right)^{n-x}
+    \end{array}</font></p>
+  
+  <p>Show that if \(\delta=x-np\), then \(x=np+\delta\) and \(n-x=nq-\delta\). <font color="blue">(\(p+q=1\).)</font> Make these substitutions for \(x\) and \(n-x\) in the approximate \(f(x)\). To evaluate the first two factors in \(f(x)\) (ignore the square root for now): Take the logarithm of the first two factors; show that \[\ln{\frac{np}{x}}=-\ln{\left(1+\frac{\delta}{np}\right)}\] and a similar formula for \(\ln{[nq/(n-x)]}\); expand the logarithms in a series of powers of \(\delta/(np)\), collect terms and simplify to get \[\ln{\left(\frac{np}{x}\right)^x\left(\frac{nq}{n-x}\right)^{n-x}}\sim -\frac{\delta^2}{2npq}\left(1+\text{power of }\frac{\delta}{n}\right)\]</p>
+
+  <p><font color="blue">
+    Recall that \(\frac{1}{1-x}=1+x+x^2+\cdots\) and \(\ln{(1-x)}=-x-\frac{x^2}{2}-\frac{x^3}{3}-\cdots \) by integrating both sides and \(\ln{(1+x)}=x-\frac{x^2}{2}+\frac{x^3}{3}-\cdots\).
+    \begin{array}{cl}
+      & \left(\frac{np}{x}\right)^x \left(\frac{nq}{n-x}\right)^{n-x} \\ 
+    = & \text{exp}\left\{\ln{\left[\left(\frac{np}{x}\right)^x \left(\frac{nq}{n-x}\right)^{n-x}\right]}\right\} \\
+    = & \text{exp}\left\{-x\ln{\left(\frac{x}{np}\right)} -(n-x)\ln{\left(\frac{n-x}{nq}\right)}\right\} \\
+    \stackrel{\text{substitutions}}{=} & \text{exp}\left\{-x\ln{\left(\frac{np+\delta}{np}\right)} -(n-x)\ln{\left(\frac{nq-\delta}{nq}\right)}\right\} \\
+    = & \text{exp}\left\{-x\ln{\left(1+\frac{\delta}{np}\right)} -(n-x)\ln{\left(1-\frac{\delta}{nq}\right)}\right\} \\
+    \sim & \text{exp}\left\{-x\left(\frac{\delta}{np}-\frac{\delta^2}{2n^2 p^2}+\frac{\delta^3}{3n^3 p^3}+\cdots \right) -(n-x)\left(-\frac{\delta}{nq}-\frac{\delta^2}{2n^2 q^2}-\frac{\delta^3}{3n^3 q^3}-\cdots \right)\right\} \\
+    \stackrel{\text{substitutions}}{=} & \text{exp}\left\{(-np-\delta)\left(\frac{\delta}{np}-\frac{\delta^2}{2n^2 p^2}+\frac{\delta^3}{3n^3 p^3}+\cdots \right) -(nq-\delta)\left(-\frac{\delta}{nq}-\frac{\delta^2}{2n^2 q^2}-\frac{\delta^3}{3n^3 q^3}-\cdots \right)\right\} \\
+    = & \text{exp}\left\{-\delta\underline{-\frac{\delta^2}{np}+\frac{\delta^2}{2np}}+\frac{\delta^3}{2n^2 p^2}+\cdots +\delta\underline{-\frac{\delta^2}{nq}+\frac{\delta^2}{2nq}}-\frac{\delta^3}{2n^2 q^2}+\cdots \right\} \\
+    \stackrel{\text{cancel out }\delta, \text{ combine }\frac{\delta^2}{np} \text{ and } \frac{\delta^2}{nq}}{=} & \text{exp}\left\{-\frac{\delta^2}{2np}-\frac{\delta^2}{2nq}+\cdots \right\} \\
+    = & \text{exp}\left\{ \frac{-\delta^2}{2npq}(p+q+\cdots )\right\} \\
+    = & \text{exp}\left\{ \frac{-\delta^2}{2npq}\left(1+\text{powers of }\frac{\delta}{n} \right)\right\} \\
+    \end{array}</font></p>
+
+  <p>Hence \[\left(\frac{np}{x}\right)^x \left(\frac{nq}{n-x}\right)^{n-x}\sim e^{-\delta^2/(2npq)}\] for large \(n\). [We really want \(\delta/n\) small, that is, \(x\) near enough to its average value \(np\) so that \(\delta/n=(x-np)/n\) is small. This means that our approximation is valid for the central part of the graph (see Figures 7.1 to 7.3) around \(x=np\) where \(f(x)\) is large. Since \(f(x)\) is negligibly small anyway for \(x\) far from \(np\), we ignore the fact that our approximation may not be good there. For more detail on this point, see Feller, p. 192]. Returning to the square root factor in \(f(x)\), approximate \(x\) by \(np\) and \(n-x\) by \(nq\) (assuming \(\delta\ll np\) or \(nq\)) and obtain (8.3).</p>
+  
+  
+  
+</body>
+</html>

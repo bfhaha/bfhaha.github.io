@@ -1,0 +1,86 @@
+﻿<html>
+
+<head>
+
+<title>一些常用的ImageMagick指令</title>
+<meta name="description" content="個人常用的一些ImageMagick指令，包括批次裁切圖片，批次在圖檔中加入字樣。">
+
+<style>
+code, pre {background-color: lightgray;}
+</style>
+
+</head>
+
+<body>
+
+<h1>一些常用的ImageMagick指令</h1>
+
+<p>ImageMagick也有portable免安裝版，在<a href="https://imagemagick.org/script/download.php">這裡</a>搜尋portable，解壓縮後把圖檔跟程式放在一起，再用命令提示字元執行程式就好。
+</p>
+
+<!---------------------------------->
+<hr>
+<h2>批次裁切圖片</h2>
+
+<p><code>mogrify -crop 700x500+0+50 -format jpg -path ./cropped *.png</code>這個指令可以把所有png檔案裁切並且轉成jpg檔，並存在cropped資料夾中。這裡700x500是裁切後的大小，+0+50是從左上角的座標點開始。
+</p>
+
+<p>至於怎麼知道裁切的範圍的座標，這裡分享一個好方法，用小畫家就可以做到。
+</p>
+
+<p>例如下面這張圖（是我很喜歡的一個樂團)，我想要裁切出圖中紅色框框的範圍。我用小畫家打開這張圖後，我把游標移動到紅框框左上角的頂點時，小畫家就會在左下角顯示該點的座標，假設是(500, 150)。類似地，將游標移到紅框框的右下角，得到該點的座標(800, 450)。所以起始點的座標就是紅框框左上角的點，然後圖片大小是800-500=300乘以450-150=300（左右乘以上下），所以指令是<code>-crop 300x300+500+150</code>。
+</p>
+<img width="70%" src="img/imagemagick/coordinate.jpg">
+
+<p>如果要批次裁切的圖片尺寸不相同，裁切尺寸的部分也可以用百分比，例如我想要裁切每張圖片的上半部，就可以用<code>mogrify -crop 100%x50%+0+0 -format jpg -path ./upper *.bmp</code>。如果要裁切下半部，因為每張圖片的尺寸不同，所以裁切的起點不固定，所以要改用<code>-chop</code>指令，也就是把上半部刪掉，例如<code>mogrify -chop 0%x50%+0+0 -format jpg -path ./lower *.tiff</code>。注意到水平方向的百分比為0，不是100。
+</p>
+
+<!---------------------------------->
+<hr>
+<h2>批次在圖片中加入字樣</h2>
+
+<p>筆者的部落格中，所有圖片中間都有加入部落格的網址字樣，做為類似浮水印的用途，下面討論如何做到這個效果。
+</p>
+
+<p>在ImageMagick中加入字樣的指令為<code>magick convert -pointsize 20 -draw "gravity center fill grey text 0,0 'Copyright'" "input.jpg" "output.jpg"</code>。
+</p>
+
+<p>這個指令是說，在圖片的正中間輸入bfhaha.blogspot.com的字樣，文字大小為20。注意到這個大小是固定的，所以對於解析度較高的圖片，這個字樣會看起來很小。
+</p>
+
+<p>但因為ImageMagick本身不支援批次編輯圖檔，所以我們在這裡就是利用Microsoft Excel產生所有加入字樣的指令，再利用bat批次檔執行這些指令。
+</p>
+
+<ol>
+
+<li>先把所有圖檔放在一個資料夾中，包括子資料夾。利用命令提示字元將當前目錄切換到放置圖檔的資料夾，利用指令<code>dir /a /s /b > allfiles.txt</code>可以把所有檔案的檔名，輸出到一個文字列表<code>allfiles.txt</code>，其中參數<code>/s</code>表示包括所有子資料夾，參數<code>/b</code>表示僅輸出檔名。<font color="red">注意到資料夾名稱不要有中文，否則等下ImageMagick無法處理。</font>
+</li>
+
+<li>因為<code>allfiles.txt</code>會連資料夾及不是jpg的檔案都編入，所以我們要把這些部分刪除。把<code>allfiles.txt</code>的內容貼到Excel，利用<code>=right(A1, 4)</code>函數，刪除掉不是.jpg結尾的列。
+</li>
+
+<li>另外再開一個Excel檔案，在儲存格B1，貼上剛剛篩選出來的以.jpg結尾的路徑及檔名。
+</li>
+
+<li>在儲存格A1輸入<code>magick convert -pointsize 20 -draw "gravity center fill grey text 0,0 'bfhaha.blogspot.com'"</code>。
+</li>
+
+<li>將儲存格A1的內容往下自動完成，要注意Excel有沒有自動把指令中的數字遞增，有的話要用複製的方式避免這個狀況。
+</li>
+
+<li>儲存格C1利用公式<code>=CONCATENATE(A1, " ", CHAR(34), B1, CHAR(34), " ", CHAR(34), B1, CHAR(34))</code>產生指令。注意到這個指令中，input.jpg跟output.jpg相同，意思就是加入字樣的檔案會取代掉原檔案，所以建議將原始圖檔另外備份存放。
+</li>
+
+<li>將儲存格C1的公式向下自動完成。
+</li>
+
+<li>將這些指令複製到記事本，另存為<code>watermark.bat</code>，跟ImageMagick及圖檔放在一起即可批次執行這些指令。注意到bat檔在有些電腦，第一行指令會因為字元的編碼的問題無法順利執行，所以最好第一行空一行。
+</li>
+
+</ol>
+
+
+
+
+</body>
+</html>

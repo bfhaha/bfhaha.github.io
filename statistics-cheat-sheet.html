@@ -1,0 +1,257 @@
+﻿<html>
+
+<head>
+
+<title>Statistics Cheat Sheet</title>
+<meta name="description" content="Statistics Cheat Sheet">
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+
+</head>
+
+
+<body>
+
+
+
+<h1>Statistics Cheat Sheet</h1>
+
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Simple Linear Regression</h2>
+
+
+
+<table border="1">
+<tbody>
+<tr>
+<td>\(\hat{y}=\)</td>
+<td>\(b_0+b_1 x\)</td>
+</tr>
+<tr>
+<td>
+<table>
+<tbody>
+<tr>
+<td>Coefficients:</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>Estimate</td>
+<td>Std. Error</td>
+<td>t value</td>
+<td>Pr(&gt;|t|)</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>(Intercept)</td>
+<td>(1)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>***</td>
+</tr>
+<tr>
+<td>x</td>
+<td>(2)</td>
+<td>(3)</td>
+<td>(4)</td>
+<td>&nbsp;</td>
+<td>***</td>
+</tr>
+</tbody>
+</table>
+<br />---<br />signif codes<br />Residual Standard error: (5)<br />Multiple R-squared: (6), Adjusted R-squared:<br />F-statistic: (7), p-value:</td>
+<td>(1) \(b_0\)<br />(2) \(b_1\)<br />(3) \(\hat{\sigma}_{b_1}\)<br />(4) \(t=b_1/\hat{\sigma}_{b_1}\)<br />(5) \(\hat{\sigma}\)<br />(6) \(r^2\)<br />(7) \(\text{F}=\frac{\text{MSR}}{\text{MSE}}\)</td>
+</tr>
+<tr>
+<td>SSE, SSR, SST<br />Relation<br />Picture</td>
+<td>\(\text{SSE}=\sum(y_i-\hat{y}_i)^2\)<br />\(\text{SSR}=\sum(\hat{y} _i-\overline{y})^2\)<br />\(\text{SST}=\sum(y_i-\overline{y})^2\)<br />\(\text{SSE}+\text{SSR}=\text{SST}\)</td>
+</tr>
+<tr>
+<td>\(b_0\)<br />\(b_1\)<br />\(\hat{\sigma}\)<br />\(\hat{\sigma}_{b_1}\)<br />\(r^2\)<br />\(t\) <br />\(F\)</td>
+<td>\(b_0=\overline{y}-b_1 \overline{x}\)<br />\(b_1=\frac{\sum(x_i-\overline{x})(y_i-\overline{y})}{\sum(x_i-\overline{x})^2}\)<br />\(\hat{\sigma}=\sqrt{\frac{\text{SSE}}{n-2}}\)<br />\(\hat{\sigma}_{b_1}=\frac{\hat{\sigma}}{\sqrt{\sum(x_i-\overline{x})^2}}\)<br />\(r^2=\frac{\text{SSR}}{\text{SST}}\)<br />\(t=\frac{b_1}{\hat{\sigma}_{b_1}}\)<br />\(F=\frac{\text{MSR}}{\text{MSE}}\)</td>
+</tr>
+<tr>
+<td>ANOVA Table \(\text{E}(y)=\beta_0+\beta_1 x\)</td>
+<td>
+<table border="1">
+<tbody>
+<tr>
+<th>source of variation</th>
+<th>sum of squares</th>
+<th>degrees of freedom</th>
+<th>mean square</th>
+<th>\(F\)</th>
+</tr>
+<tr>
+<td>Regression</td>
+<td>\(\text{SSR}\)</td>
+<td>\(1\)</td>
+<td>\(\text{MSR}=\frac{\text{SSR}}{1}\)</td>
+<td>\(F=\frac{\text{MSR}}{\text{MSE}}\)</td>
+</tr>
+<tr>
+<td>Error</td>
+<td>\(\text{SSE}\)</td>
+<td>\(n-2\)</td>
+<td>\(\text{MSE}=\frac{\text{SSE}}{n-2}\)</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Total</td>
+<td>\(\text{SST}\)</td>
+<td>\(n-1\)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td>ANOVA Table \(\text{E}(y)=\beta_0+\beta_1 x_1+\beta_2 x_2+\cdots+\beta_p x_p\)</td>
+<td>
+<table border="1">
+<tbody>
+<tr>
+<th>source of variation</th>
+<th>sum of squares</th>
+<th>degrees of freedom</th>
+<th>mean square</th>
+<th>\(F\)</th>
+</tr>
+<tr>
+<td>Regression</td>
+<td>\(\text{SSR}\)</td>
+<td>\(p\)</td>
+<td>\(\text{MSR}=\frac{\text{SSR}}{p}\)</td>
+<td>\(F=\frac{\text{MSR}}{\text{MSE}}\)</td>
+</tr>
+<tr>
+<td>Error</td>
+<td>\(\text{SSE}\)</td>
+<td>\(n-p-1\)</td>
+<td>\(\text{MSE}=\frac{\text{SSE}}{n-p-1}\)</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Total</td>
+<td>\(\text{SST}\)</td>
+<td>\(n-1\)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td>Confidence Interval of \(\hat{y}\) at \(x=x_0\)</td>
+<td>\(b_0+b_1 x_0+t_{\alpha/2, n-2}\hat{\sigma}\sqrt{1+\frac{1}{n}+\frac{(x_0-\overline{x})^2}{\sum(x_i-\overline{x})^2}}\)</td>
+</tr>
+<tr>
+<td>Big Picture for \(\text{SSE}, \text{SSR}, \text{SST}, r^2\) and \(s_x, s_y, s_{xy}, r_{xy}\)</td>
+<td>&nbsp;</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr>
+<td>SSE, SSTR, SST</td>
+<td>\(\text{SSE}=\sum_{j=1}^{k}\sum_{i=1}^{n_j}(x_{ij}-\overline{x}_j)^2=\sum_{j=1}^{k}(n_j-1)s_j^2\)<br />\(\text{SSTR}=\sum_{j=1}^{k}n_j(\overline{x}_j-\bar{\bar{x}})^2\)<br />\(\text{SST}=\sum_{j=1}^{k}\sum_{i=1}^{n_j}(x_{ij}-\bar{\bar{x}})^2\)\[ \begin{array}{cccccc} \text{treatment 1} &amp; \text{treatment 2} &amp; \cdots &amp; \text{treatment k} \\ x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1k} \\ x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2k} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ x_{n_1 1} &amp; x_{n_2 2} &amp; \cdots &amp; x_{n_k k} \\ \downarrow &amp; \downarrow &amp; \cdots &amp; \downarrow &amp; \searrow \\ \overline{x}_1 &amp; \overline{x}_2 &amp; \cdots &amp; \overline{x}_k &amp; &amp; \bar{\bar{x}} \end{array} \]</td>
+</tr>
+<tr>
+<td>Picture</td>
+<td>\[ \begin{array}{cccc} &amp; &amp; &amp; \text{SST}\\ \text{SSE} &amp; \downarrow &amp; \searrow &amp; \\ &amp; &amp; \longrightarrow \\ &amp; &amp; \text{SSTR} \end{array} \]</td>
+</tr>
+<tr>
+<td>ANOVA Table</td>
+<td>
+<table border="1">
+<tbody>
+<tr>
+<th>source of variation</th>
+<th>sum of squares</th>
+<th>degrees of freedom</th>
+<th>mean square</th>
+<th>\(F\)</th>
+</tr>
+<tr>
+<td>Treatments</td>
+<td>\(\text{SSTR}\)</td>
+<td>\(k-1\)</td>
+<td>\(\text{MSTR}=\frac{\text{SSTR}}{k-1}\)</td>
+<td>\(F=\frac{\text{MSTR}}{\text{MSE}}\)</td>
+</tr>
+<tr>
+<td>Error</td>
+<td>\(\text{SSE}\)</td>
+<td>\(n-k\)</td>
+<td>\(\text{MSE}=\frac{\text{SSE}}{n-k}\)</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Total</td>
+<td>\(\text{SST}\)</td>
+<td>\(n-1\)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td>Fisher's LSD<br />Test Statistic<br />Compare with</td>
+<td>\(\frac{\overline{x}_i-\overline{x}_j}{\sqrt{\text{MSE}\left(\frac{1}{n_i}+\frac{1}{n_j}\right)}}\)<br />\(t_{\alpha/2, n-k}\)</td>
+</tr>
+</tbody>
+</table>
+
+
+</body>
+</html>

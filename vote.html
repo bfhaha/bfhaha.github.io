@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>國一下不等式，確定當選最少票數問題</title>
+<meta name="description" content="國一下不等式，確定當選最少票數問題">
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+
+</head>
+<body>
+
+  <h1>國一下不等式，確定當選最少票數問題</h1>
+  
+  <p>題目：有 \(n\) 位候選人，要選出 \(m\) 位，共有 \(p\) 票，請問得幾票就確定當選？</p>
+  
+  <p>
+  解法：假設 \(n\) 位候選人的得票數由大到小排列為 
+  \[x_1 \geq x_2 \geq \cdots \geq x_m \color{red}{>} x_{m+1} \geq \cdots \geq x_{n} \geq 0.\]
+  於是我們有
+  \[
+  \begin{array}{lcl}
+  p &=&\underline{x_1+x_2+\cdots+x_m+x_{m+1}}+x_{m+2} \cdots +x_{n} \\
+    &\stackrel{x_1 \geq x_2 \geq \cdots \geq x_m \geq x_{m+1}}{\geq}& \underbrace{x_{m+1}+x_{m+1}+\cdots +x_{m+1}+x_{m+1}}_{m+1 \text{ times}}+x_{m+2}+ \cdots +x_{n} \\
+    &\geq& \underline{(m+1)\cdot x_{m+1}}+x_{m+2}+ \cdots +x_{n} \\
+    &\stackrel{\color{red}{x_{m+2}} \geq \cdots \geq x_{n} \geq 0}{\geq}& (m+1)\cdot x_{m+1}.
+  \end{array}
+  \]
+  所以 
+  \[\frac{p}{m+1} \geq x_{m+1}.\]
+  只要得 \(\left\lceil \frac{p}{m+1}\right\rceil+1\) 票（或以上）即確定當選。其中 \(\lceil x\rceil\) 是天花板符號，也就是取不小於 \(x\) 的最小整數。
+  </p>
+ 
+  
+</body>
+
+</html>

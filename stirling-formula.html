@@ -1,0 +1,124 @@
+﻿<html>
+<head>
+
+<title>A Proof of Stirling's Formula</title>
+<meta name="description" content="A Proof of Stirling's Formula">
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+
+<style>
+td {
+  text-align : right;
+  color : blue;
+}
+</style>
+
+</head>
+<body>
+
+<h2>Stirling's Formula</h2>
+
+<p>
+<font color="blue">
+筆者在另一篇證明<a href="https://bfhaha.github.io/normalbinomial.html">用常態分佈近似二項分佈</a>的文章中，用到了這個Stirling's Formula，這裡證明一下。主要內容來自於page 552, section 11, chapter 11 in Boas's Mathematical Methods in The Physical Sciences 3rd edition. 黑色字體是課文，藍色字體是我的補充說明。
+</font>
+</p>
+
+<p>
+\[n!\sim n^{n}e^{-n}\sqrt{2\pi n}\tag{11.1}\]
+</p>
+
+<p>
+<font color="blue">
+Proof:
+</font>
+</p>
+
+<p>Start with 
+\[p!=\int_0^{\infty}x^{p} e^{-x}dx=\int_0^{\infty}e^{(p\ln{x})-x}dx.\tag{11.2}\]
+</p>
+
+<font color="blue">
+Remark: I show that \(p!=\int_0^{\infty}x^{p} e^{-x}dx\) by integral by parts.
+<table color="blue">
+<tr><td>\(x^p\)</td><td></td><td>\(e^{-x}\)</td></tr>
+<tr><td></td><td>\\(+\)</td><td></td></tr>
+<tr><td>\(px^{p-1}\)</td><td></td><td>\(-e^{-x}\)</td></tr>
+<tr><td></td><td>\\(-\)</td><td></td></tr>
+<tr><td>\(p(p-1)x^{p-2}\)</td><td></td><td>\(e^{-x}\)</td></tr>
+<tr><td></td><td>\\(+\)</td><td></td></tr>
+<tr><td>\(p(p-1)(p-2)x^{p-3}\)</td><td></td><td>\(-e^{-x}\)</td></tr>
+<tr><td></td><td>\\(-\)</td><td></td></tr>
+<tr><td>\(\vdots\)</td><td>\(\vdots\)</td><td>\(\vdots\)</td></tr>
+<tr><td>\(p(p-1)(p-2)\cdots 2 x\)</td><td></td><td>\(\pm e^{-x}\)</td></tr>
+<tr><td></td><td>\\(\pm\)</td><td></td></tr>
+<tr><td>\(p!\)</td><td></td><td>\(\pm e^{-x}\)</td></tr>
+<tr><td></td><td>\\(\pm\)</td><td></td></tr>
+<tr><td>\(0\)</td><td>---\(\int \pm\)</td><td>\(\pm e^{-x}\)</td></tr>
+</table>
+\[\int_0^{\infty}x^{p} e^{-x}dx=\lim_{b\to \infty}[-x^{p}e^{-x}-px^{p-1}e^{-x}-p(p-1)x^{p-2}e^{-x}-\cdots -p(p-1)(p-2)\cdots 2x e^{-x}-p!e^{-x}]_{0}^{b}=p!,\]
+where 
+\[\lim_{x\to \infty}x^c e^{-x}=0\]
+by L'Hospital Rule.
+</font>
+
+<p>
+Substitute a new variable \(y\) such that \[x=p+y\sqrt{p}.\]
+</p>
+
+<p>
+Then 
+\[dx=\sqrt{p}dy\]
+</p>
+
+<p>
+\[x=0 \text{ corresponds to }y=-\sqrt{p},\]
+</p>
+
+<p>
+and (11.2) becomes 
+\[p!=\int_{-\sqrt{p}}^{\infty}e^{p\ln{(p+y\sqrt{p})}-p-y\sqrt{p}}\sqrt{p}dy.\tag{11.3}\]
+</p>
+
+<p>
+For large \(p\), the logarithm can be expanded in the following power series:
+\[\ln{(p+y\sqrt{p})}=\ln{p}+\ln{\left(1+\frac{y}{\sqrt{p}}\right)}=\ln{p}+\frac{y}{\sqrt{p}}-\frac{y^2}{2p}+\cdots.\tag{11.4}\]
+</p>
+
+<p>
+<font color="blue">
+since \(\frac{1}{1-x}=1+x+x^2+\cdots\) and \(\ln{(1-x)}=-x-\frac{x^2}{2}-\frac{x^3}{3}-\cdots \) by integrating both sides and \(\ln{(1+x)}=x-\frac{x^2}{2}+\frac{x^3}{3}-\cdots\).
+</font>
+</p>
+
+<p>
+<font color="red">
+I don't know why we can omit the later terms in the following deduction.
+</font>
+</p>
+
+<p>
+Substituting (11.4) into (11.3), we get
+\[
+\begin{array}{rcl}
+  p! &\sim& \int_{-\sqrt{p}}^{\infty} e^{(p\ln{p})+y\sqrt{p}-(y^2/2)-p-y\sqrt{p}}\sqrt{p}dy\\
+     &\stackrel{\text{cancel out }y\sqrt{p}}{=}& e^{(p\ln{p})-p}\sqrt{p}\int_{-\sqrt{p}}^{\infty}e^{-y^2/2}dy \\
+     &=& p^p e^{-p}\sqrt{p}\left[\int_{-\infty}^{\infty}e^{-y^2/2}dy-\int_{-\infty}^{-\sqrt{p}}e^{-y^2/2}dy\right].
+\end{array}
+\]
+</p>
+
+<p>
+<a href="https://en.wikipedia.org/wiki/Gaussian_integral">The first integral is easily shown to be \(\sqrt{2\pi}\) (Problem 9.4)</a>. 
+The second integral tends to zero as \(p\to \infty\), and we have 
+\[p!\sim p^{p} e^{-p} \sqrt{2\pi p}\]
+</p>
+
+<p>
+which is (11.1).
+</p>
+
+
+</body>
+</html>

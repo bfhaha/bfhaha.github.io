@@ -1,0 +1,2245 @@
+﻿<html>
+<head>
+
+<title>Casella的Statistical Inference學習筆記</title>
+<meta name="description" content="Casella的Statistical Inference學習筆記">
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+
+
+
+<style>
+.note {
+  color: blue;
+}
+</style>
+
+</head>
+<body>
+
+<h1>Rigorous Probability and Statistic</h1>
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Errata</h2>
+
+<ul>
+
+<li>p.470, exa.10.1.8, \(\lim \sqrt{n}\text{Var}\bar{X}_n=\sigma^2\) should be \(\lim n\text{Var}\bar{X}_n=\sigma^2\).</li>
+
+<li>p.472, line 13, ``the MLE is defined as the zero of the likelihood function'' should be ``the MLE is defined as the zero of the derivative of the log likelihood function'' </li>
+
+<li>p.474, line -2, ''Exercise 5.5.22'' should be ''Example 5.5.22''</li>
+
+<li>p.473, line 18, ``Theorem 10.1.6'' should be ``Theorem 10.1.12''</li>
+
+<li>p.474, line -10, ``Theorem 10.1.6'' should be ``Theorem 10.1.12''</li>
+
+<li>p.475, line -3, ``Theorem 10.1.6'' should be ``Theorem 10.1.12''</li>
+  
+  <li>p.582, line -7, ``As in (11.3.6) and (11.3.6)'' should be ``As in (11.3.6) and (11.3.7)''</li>
+
+<li></li>
+
+<li></li>
+
+<li></li>
+
+
+</ul>
+
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Preface</h2>
+
+<p class="note">筆者在學習機率統計的過程中，教材中符號與敘述的不嚴謹一直是筆者頭痛的問題之一，這篇筆記是筆者以Casella及Berger的<i>Statistical Inference</i>這本書為本，對一些不嚴謹的部分，補充說明，希望能夠幫助到其他跟我有一樣問題的讀者。</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Chapter 1 Probability Theory</h2>
+
+
+<!---------------------------------->
+<!---------------------------------->
+<h3>Section 1.1 Set Theory</h3>
+
+
+
+<ul>
+
+<li>
+[Casella, p.1, def.1.1.1.] 
+The set, \(S\), of all possible outcomes of a particular experiment is called the <i>sample space</i> for the experiment.
+</li><br>
+
+<li>
+[Casella, p.2, def.1.1.2.]
+An <i>event</i> is any collection of possible outcomes of an experiment, that is, any subset of \(S\) (including \(S\) itself).
+</li><br>
+
+</ul>
+
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<h3>Section 1.2 Basics of Probability Theory</h3>
+
+
+
+<ul>
+
+<li>
+[Casella, p.6, def.1.2.1.]
+A collection of subsets of \(S\) is called a <i>sigma algebra</i> (or <i>Borel field</i>), denoted by \(\mathcal{B}\), if it satisfies the following three properties:
+    <ul>
+    <li>\(\emptyset\in \mathcal{B}\) (the empty set is an element of \(\mathcal{B}\).</li>
+    <li>If \(A\in \mathcal{B}\), then \(A^{c}\in \mathcal{B}\) (\(\mathcal{B}\) is closed under complementation).</li>
+    <li>If \(A_1, A_2, ...\in \mathcal{B}\), then \(\cup_{i=1}^{\infty}A_i\in \mathcal{B}\) (\(\mathcal{B}\) is clsed under countable unions).</li>
+    </ul>
+</li><br>
+
+<li>
+[Casella, p.6, exa.1.2.2.]
+If \(S\) is finite or countable, then these technicalities really do not arise, for we define for a given sample space \(S\), 
+\[\mathcal{B}=\{\text{all subsets of }S, \text{ including }S\text{ itself}\}.\]
+If \(S\) has \(n\) elements, there are \(2^n\) sets in \(\mathcal{B}\) (see Exercise 1.14).
+</li><br>
+
+<li>
+[Casella, p.6, exa.1.2.3.]
+Let \(S=(-\infty, \infty)\), the real line. Then \(\mathcal{B}\) is chosen to contain all sets of the form
+\[[a, b], (a, b], (a, b), \text{ and }[a, b)\]
+for all real numbers \(a\) and \(b\). Also, from the properties of \(\mathcal{B}\), it follows that \(\mathcal{B}\) contains all sets that can be formed by taking (possibly countably infinite) unions and intersections of sets of the above varieties.
+</li><br>
+
+
+<li>
+[Casella, p.7, def.1.2.4.]
+Given a sample space \(S\) and an associated sigma algebra \(\mathcal{B}\), a <i>probability function</i> is a function \(P\) with domain \(\mathcal{B}\) that satisfies
+    <ul>
+    <li>\(P(A)\geq 0\) for all \(A\in \mathcal{B}\).</li>
+    <li>\(P(S)=1\).</li>
+    <li>If \(A_1, A_2, ...\in \mathcal{B}\) are pairwise disjoint, then \(P(\cup_{i=1}^{\infty}A_i)=\sum_{i=1}^{\infty}P(A_i)\).</li>
+    </ul>
+</li><br>
+
+
+<li class="note">
+為什麼probability function的定義域不用直接用\(S\)的power set就好，這是一個不好回答的問題，這需要用到measure theory。
+</li><br>
+
+
+<li>
+[Casella, p.7, thm.1.2.6.]
+Let \(S=\{s_1, ..., s_n\}\) be a finite set. Let \(\mathcal{B}\) be any sigma algebra of subsets of \(S\). Let \(p_1, ..., p_n\) be nonnegative numbers that sum to \(1\). For any \(A\in \mathcal{B}\), define \(P(A)\) by 
+\[P(A)=\sum_{\{i\mid s_i\in A\}}p_i.\]
+(The sum over an empty set is defined to be \(0\).) Then \(P\) is a probability function on \(\mathcal{B}\). This remains true if \(S=\{s_1, s_2, ...\}\) is a countable set.
+<br>
+
+</li><br>
+
+
+<li class="note">
+關於上面定理一個最簡單的例子就是\(p_1=p_2=\cdots=p_n=\frac{1}{n}\).
+</li><br>
+
+
+
+<li>
+[Casella, p.18, exa.1.2.20]
+<b>Calculating an average)</b> As an illustration of the distinguishable/indistinguishable approach, suppose that we are going to calculate all possible averages of four numbers selected from 
+\[
+2, 4, 9, 12
+\]
+where we draw the numbers with replacement. For example, possible draws are \(\{2, 4, 4, 9\}\) with average \(4.75\) and \(\{4, 4, 9, 9\}\) with average \(6.5\). If we are only interested in the average of the sampled numbers, the ordering is unimportant, and thus the total number of distinct samples is obtained by counting according to unordered, with-replacement sampling.
+<br><br>
+The total number of distinct samples is \(\binom{n+n-1}{n}\). But now, to calculate the probability distribution of the sampled averages, we must count the different ways that a particular average can occur. 
+<br><br>
+The value \(4.75\) can occur only if the sample contains on \(2\), two \(4\)s, and one \(9\). The number of possible samples that have this configuration is given in the following table:
+</li><br>
+
+<li class="note">
+這裡的講解很奇怪，在這裡順序是要考慮的，但講解中又說順序不重要。p.19, line -8的講解是一個例子。
+</li><br>
+
+
+
+</ul>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3>Section 1.3 Conditional Probability and Independence</h3>
+
+
+<ul>
+
+<li>
+[Casella, p.23, thm.1.3.5.]
+<b>(Bayes' Rule)</b> Let \(A_1, A_2, ...\) be a partition of the sample space, and let \(B\) be any set. Then, for each \(i=1, 2, ...\), 
+\[
+P(A_i|B)=\frac{P(B|A_i)P(A_i)}{\sum_{j=1}^{\infty}P(B|A_j)P(A_j)}.
+\]
+</li><br>
+
+<li class="note">
+\[
+P(A_i|B)
+\stackrel{\text{(1.3.5)}}{=}\frac{P(B|A_i)P(A_i)}{P(B)}
+=\frac{P(B|A_i)P(A_i)}{\sum_{j=1}^{\infty}P(B\cap A_j)}
+=\frac{P(B|A_i)P(A_i)}{\sum_{j=1}^{\infty}P(B|A_j)P(A_j)}
+\]
+</li><br>
+
+</ul>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3>Section 1.4 Random Variables</h3>
+
+
+<ul>
+
+<li>
+[Casella, p.27, def.1.4.1.]
+A <i>random variable</i> is a function from a sample space \(S\) into the real numbers.
+</li><br>
+
+
+<li>
+[Casella, p.28, remark.]
+In defining a random variable, we have also defined a new sample space (the range of the random variable). We must now check formally that our probability function, which is defined on the original sample space, can be used for the random variable.
+</li><br>
+
+<li>
+[Casella, p.28, remark.]
+Suppose we have a sample space 
+\[S=\{s_1, ..., s_n\}\]
+with a probability function \(P\) and we define a random variable \(X\) with range \(\mathcal{X}=\{x_1, ..., x_n\}\). We can define a probability function \(P_X\) on \(\mathcal{X}\) in the following way. We will observe \(X=x_i\) if and only if the outcome of the random experiment is an \(s_j\in S\) such that \(X(s_j)=x_j\). Thus, 
+\[P_X(X=x_i)=P(\{s_j\in S\mid X(s_j)=x_i\}).\tag{1.4.1}\]
+</li><br>
+
+<li>
+[Casella, p.28, remark.]
+Note that the left-had side of (1.4.1), the function \(P_X\), is an induced probability function on \(\mathcal{X}\), defined in terms of the original function \(P\). Equation (1.4.1) formally defines a probability function, \(P_X\), fot the random variable \(X\). Of course, we have to verify that \(P_X\) satisfies the Kolmogorov Axioms, but that is not a very difficult job (see Exercise 1.45). Because of the equivalence in (1.4.1), we will simply write \(P(X=x_i)\) rather than \(P_X(X=x_i)\). 
+</li><br>
+
+<li>
+[Casella, p.28, remark.]
+A note on notation: Random variables will always be denoted with uppercase letters and the realized values of the variable (or its range) will be denoted by the corresponding lowercase letters. Thus, the random variable \(X\) can take the value \(x\).
+</li><br>
+
+<li>
+[Casella, p.29, remark.]
+The previous illustrations had both a finite \(S\) and finite \(\mathcal{X}\), and the definition of \(P_X\) was straightforward. Such is also the case if \(\mathcal{X}\) is countable. If \(\mathcal{X}\) is uncountable, we define the induced probability function, \(P_X\), in a manner similar to (1.4.1). For any set \(A\subseteq \mathcal{X}\), 
+\[P_X(X\in A)=P(\{s\in S\mid X(s)\in A\}).\]
+This does define a legitimate probability function for which the Kolmogorov Axioms can be verified. (To be precise, we use (1.4.2) to define probabilities only for a certain sigma algebra of subsets of \(\mathcal{X}\). But we will not concern ourselves with these technicalities.)
+</li><br>
+  
+<li class="note">
+這本書有時候也會用\(\{X=x\}\)這個符號表示event，也就是說，\(\{X=x\}\stackrel{\text{def.}}{=}\{s\in S\mid X(s)=x\}\)，例如p.89, line -11。
+</li><br>
+
+<li class="note">
+\(A\subseteq \mathcal{X}\) 這個條件我覺得是多餘的，例如書上p.30的範例Example 1.5.2中，\(\mathcal{X}=\{0, 1, 2, 3\}\)，而且\(F_X(1)=P_X(X\leq 1)=P_X(X\in (-\infty, 1])\)，但是\((-\infty, 1]\not\subseteq \mathcal{X}\)。
+</li><br>
+
+
+</ul>
+
+
+<!---------------------------------->
+<!---------------------------------->
+<h3>Section 1.5 Distribution Functions</h3>
+
+
+
+
+
+<ul>
+
+<li>
+[Casella, p.29, def.1.5.1.]
+The <i>cumulative distribution function</i> or <i>cdf</i> of a random variable \(X\), denoted by \(F_X(x)\), is defined by
+\[F_X(x)=P_X(X\leq x), \text{ for all }x.\]
+</li><br>
+
+<li class="note">
+在這裡符號用得有點不嚴謹，\(P_X(X\leq x)\) 應該寫成 \(P_X(X\in (-\infty, x))\)，我確定這個猜測是對的，因為作者在第34頁證明Theorem 1.5.10的時候，就用了 \(F_X(x)=P(X\in (-\infty, x])\)。
+</li><br>
+
+
+<li class="note">
+Casella這本書常使用兩個名詞：
+    <ul>
+    <li>distribution of a random variable</li>
+    <li>distribution function of a random variable</li>
+    </ul>
+例如在下面幾個地方都有出現，
+    <ul>
+    <li>p.29, line 3; </li>
+    <li>p.29, line -6; </li>
+    <li>p.33, line 19; </li>
+    <li>p.33, line 23; </li>
+    <li>p.34, line 1 </li>
+    </ul>
+但Casella對這兩個名詞都沒有正式定義，
+    <ul>
+    <li>distribution of a random variable第一次出現在p.29的Example 1.4.4的標題；</li>
+    <li>distribution function of a random variable第一次出現在p.29的section 1.5的標題</li>
+    </ul>
+從Casella的用法來看，
+    <ul>
+    <li>distribution of a random variable是指probability function \(P\)。</li>
+    <li>distribution function of a random variable是指cdf。</li>
+    </ul>
+</li><br>
+
+
+<li>
+[Casella, p.32, line -10]
+\(F_X(x)\) is the cdf of a distribution called the <i>geometric distribution</i> (after the series) and is pictured in Figure 1.5.2.
+</li><br>
+
+<li class="note">
+用詞很不嚴謹，在p.29, def.1.5.1明明是說cdf of a random variable.
+</li><br>
+
+<li>
+[Casella, p.33, def.1.5.7.]
+A random variable \(X\) is <i>continuous</i> if \(F_X(x)\) is a continuous function of \(x\). A random variable \(X\) is <i>discrete</i> if \(F_X(x)\) is a step function of \(x\).
+</li><br>
+
+<li class="note">
+上面定義discrete或continuous random variables的方法比較抽象，下面兩個是比較簡單的定義。
+</li><br>
+
+<li>
+[Casella, p.48, line 10]
+If \(X\) is a discrete random variable, then \(\mathcal{X}\) is countable.
+</li><br>
+
+
+<li>
+[Casella, p.33, remark]
+We close this section with a theorem formally stating that \(F_X\) completely determines the probability distribution of a random variable \(X\). This is true if \(P(X\in A)\) is defined only for events \(A\) in \(\mathcal{B}^1\), the smallest sigma algebra containing all the intervals of real numbers of the form \((a, b), [a, b), (a, b]\), and \([a, b]\). If probabilities are defined for a larger class of events, it is possible for two random variables to have the same distribution function but not the same probability for every event (see Chung 1974, page 27). In this book, as in most statistical applications, we are concerned only with events that are intervals, countable unions or intersections of intervals, etc. So we do not consider such pathological cases. We first need the notion of two random variables being identically distributed.
+</li><br>
+
+
+<li>
+[Casella, p.33, def.1.5.8.]
+The random variables \(X\) and \(Y\) are <i>identically distributed</i> if, for every set \(A\in \mathcal{B}^1\), \(P(X\in A)=P(Y\in A)\).
+</li><br>
+
+
+<li>
+[Casella, p.85, line -3]
+A random variable \(X\) is said to have a discrete distribution if the range of \(X\), the sample space, is countable. 
+</li><br>
+
+<li>
+[Casella, p.34, def.1.6.1.]
+The <i>probability mass function</i> (<i>pmf</i>) of a discrete random variable \(X\) is given by
+\[f_X(x)=P(X=x)\text{ for all }x.\]
+</li><br>
+
+
+<li>
+[Casella, p.35, def.1.6.3.]
+The <i>probability density function</i> or <i>pdf</i>, \(f_X(x)\), of a continuous random variable \(X\) is the function that satisfies
+\[F_X(x)=\int_{-\infty}^{x}f_X(t)dt\text{ for all }x.\]
+</li><br>
+
+<li class="note">
+理論上來說，應該先定義pmf及pdf，再定義cdf比較直覺，但是對於continuous random variables來說，沒辦法直接定義pdf。p.34, section 1.6有解釋。
+</li><br>
+
+<li class="note">
+總結來說，
+我們有
+<font color="red">
+\[S
+\stackrel{\text{random variable }X}{\longrightarrow}X(S)
+\stackrel{\text{pmf or pdf }f(x)}{\longrightarrow}\mathbb{R}\]
+</font>
+</li><br>
+
+<li>
+[Casella, p.35, remark]
+<i>A note on notation</i>: The expression "\(X\) has a distribution given by \(F_X(x)\)" is abbreviated symbolically by "\(X\sim F_X(x)\)," where we read the symbol "\(\sim\)" as "is distributed as." We can similarly write \(X\sim f_X(x)\) or, if \(X\) and \(Y\) have the same distribution, \(X\sim Y\).
+</li><br>
+
+
+</ul>
+
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+
+<h2>Chapter 2 Transformations and Expectations</h2>
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<h3>Section 2.1 Distributions of Functions of a Random Variable</h3>
+
+
+<ul>
+<li>
+[Casella, p.47, remark]
+Formally, if we write \(y=g(x)\), the function \(g(x)\) defines a mapping from the original sample space of \(X\), \(\mathcal{X}\), to a new sample space, \(\mathcal{Y}\), the sample space of the random variable \(Y\). That is, 
+\[g(x):\mathcal{X}\to \mathcal{Y}.\]
+</li><br>
+
+
+<li class="note">
+這裡用original sample space of \(X\)不太正確，我有寫信問過作者，他也認為寫得不好，正確來說，假設\(X:S\to \mathcal{X}\)，由p.28的說明，\(\mathcal{X}\)是\(P_X\)的sample space，不是\(X\)的sample space，要說的話應該說\(\mathcal{X}\)是\(X\)的image。
+</li><br>
+
+
+<li>
+[Casella, p.48, line 3]
+If the random variable \(Y\) is now defined by \(Y=g(X)\), we can write for any set \(A\subseteq \mathcal{Y}\), 
+\[
+\begin{array}{lll}
+P(Y\in A) 
+&=& P(g(X)\in A) \\
+&=& P(\{x\in \mathcal{X}:g(x)\in A\})\\
+&=& P(X\in g^{-1}(A)).
+\end{array}\tag{2.1.2}
+\]
+This defines the probability distribution of \(Y\). It is straightforward to show that this probability distribution satisfies the Kolmogorov Axioms.
+</li><br>
+
+<li class="note">
+這裡寫得嚴謹一點，應該寫
+\[
+\begin{array}{lll}
+P(Y\in A) 
+&=& P(g(X)\in A) \\
+&=& P_{\color{red}{X}}(\{x\in \mathcal{X}:g(x)\in A\})\\
+&=& P(\{s\in S:g(\color{red}{X}(s))\in A\})\\
+&=& P(X\in g^{-1}(A)).
+\end{array}
+\]
+其中\(X:S\to \mathcal{X}\)。再說明一次，p.28說過，\(P_X\)是\(X\)的image \(\mathcal{X}\)上的一個probability function，所以\(P_X(\{x\in \mathcal{X}:g(x)\in A\})\)這個符號是合法的，而且由p.7, def.1.2.4.(iii)，
+\[
+P_X(\{x\in \mathcal{X}:g(x)\in A\})=
+\left\{
+\begin{array}{l}
+\sum_{g(x)\in A}P(X=x)\\
+\int_{g(x)\in A}P(X=x)
+\end{array}
+\right.
+\]
+</li><br>
+
+
+<li>
+[Casella, p.48, line 10]
+If \(X\) is a discrete random variable, then \(\mathcal{X}\) is countable. The sample space for \(Y=g(X)\) is \(\mathcal{Y}=\{y:y=g(x), x\in \mathcal{X}\}\), which is also a countable set. Thus, \(Y\) is also a discrete random variable. From (2.1.2), the pmf for \(Y\) is 
+\[f_Y(y)=P(Y=y)=\sum_{x\in g^{-1}(y)}P(X=x)=\sum_{x\in g^{-1}(y)}f_X(x), \text{ for }y\in \mathcal{Y},\]
+and \(f_Y=0\) for \(y\notin \mathcal{Y}\). In this case, finding the pmf of \(Y\) involves simply identifying \(g^{-1}(y)\), for each \(y\in \mathcal{Y}\), and summing the appropriate probabilities.
+</li><br>
+
+
+<li>
+[Casella, p.49, line 1]
+The cdf of \(Y=g(X)\) is 
+\[
+\begin{array}{lll}
+F_Y(y)
+&=& P(Y\leq y) \\
+&=& P(g(X)\leq y) \\
+&=& P(\{x\in \mathcal{X}:g(x)\leq y\}) \\
+&=& \int_{\{x\in \mathcal{X}:g(x)\leq y\}}f_X(x)dx.
+\end{array}\tag{2.1.4}
+\]
+</li><br>
+
+<li>
+[Casella, p.55, line 11]
+One application of Theorem 2.1.10 is in the generation of random samples from a particular distribution. If it is required to generate an observation \(X\) from a population with cdf \(F_X\), we need only generate a uniform random number \(V\), between \(0\) and \(1\), and solve for \(x\) in the equation \(F_X(x)=u\). (For many distributions there are other methods of generating observations that take less computer time, but this method is still useful because of its general applicability. 
+</li><br>
+
+<li class="note">
+random samples第一次定義是在p.207, def.5.1.1.
+</li><br>
+
+</ul>
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+
+<h2>Chapter 3 Common Families of Distributions</h2>
+
+
+<!---------------------------------->
+<!---------------------------------->
+<h3>Section 3.2 Discrete Distributions</h3>
+
+<ul>
+
+
+<li>
+[Casella, p.86, line -2]
+The hypergeometric distribution has many applications in finite population sampling and is best understood through the classic example of the urn model.
+</li><br>
+
+<li class="note">
+沒定義population sampling。
+</li><br>
+
+
+</ul>
+
+
+<!---------------------------------->
+<!---------------------------------->
+<h3>Section 3.3 Continuous Distributions</h3>
+
+<ul>
+
+
+<li>
+[Casella, p.102, line -7]
+If \(X\sim \text{n}(\mu, \sigma^2)\), then the random variable \(Z=(X-\mu)/\sigma\) has a \(\text{n}(0, 1)\) distribution, also known as the <i>standard normal</i>. This is easily established by writing
+\[
+\begin{array}{lll}
+P(Z\leq z) 
+&=& P\left(\frac{X-\mu}{\sigma}\leq z\right) \\
+&=& P(X\leq z\sigma+\mu) \\
+&=& \frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{z\sigma+\mu}e^{-(x-\mu)^2/(2\sigma^2)}dx \\
+&=& \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{z}e^{-t^2/2}dt ~\left(\text{substitute }t=\frac{x-\mu}{\sigma}\right)
+\end{array}
+\]
+showing that \(P(Z\leq z)\) is the standard normal cdf.
+</li><br>
+
+<li class="note">
+The converse is true. That is, 
+\[
+X\sim \text{n}(\mu, \sigma^2)\Leftarrow \frac{X-\mu}{\sigma}\sim \text{n}(0, 1)
+\]
+See [Hogg, IMS, p.188]
+</li><br>
+
+
+<li class="note">
+By this theorem, 
+\[
+X\sim \text{n}(\mu, \sigma^2)\Rightarrow \frac{X-\mu}{\sigma}\sim \text{n}(0, 1)
+\]
+By the Central Limit Theorem, 
+\[
+Y\sim \text{arbitrary}\Rightarrow \frac{\overline{Y}-\mu}{\sigma/\sqrt{n}}\sim \text{n}(0, 1)
+\]
+</li><br>
+
+
+
+</ul>
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+
+<h2>Chapter 4 Multiple Random Variables</h2>
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<h3>Section 4.1 Joint and Marginal Distributions</h3>
+
+<ul>
+
+<li>
+[Casella, p.139, def.4.1.1.]
+An <i>\(n\)-dimensional random vector</i> is a function from a sample space \(S\) into \(\mathbb{R}^n\), \(n\)-dimensional Euclidean space.
+</li><br>
+
+<li>
+[Casella, p.140, def.4.1.3.]
+Let \((X, Y)\) be a discrete bivariate random vector. Then the function \(f(x, y)\) from \(\mathbb{R}^2\) into \(\mathbb{R}\) defined by \(f(x, y)=P(X=x, Y=y)\) is called the <i>joint probability mass function</i> or <i>joint pmf</i> of \((X, Y)\). If it is necessary to stress the fact that \(f\) is the joint pmf of the vector \((X, Y)\) rather than some other vector, the notation \(f_{X, Y}(x, y)\) will be used.
+</li><br>
+
+<li>
+[Casella, p.142, remark.]
+Even if we are considering a probability model for a random vector \((X, Y)\), there may be probabilities or expectations of interest that involve only one of the random variables in the vector. We may wish to know \(P(X=2)\), for instance. The variable \(X\) is itself a random variable, in the sense of Chapter 1, and its probability distribution is described by its pmf, namely, \(f_X(x)=P(X=x)\). (As mentioned earlier, we now use the subscript to distinguish \(f_X(x)\) from the joint pmf \(f_{X, Y}(x, y)\).) We now call \(f_X(x)\) the <i>marginal pmf of \(X\)</i> to emphasize the fact that it is the pmf of \(X\) but in the context of the probability model that gives the joint distribution of the vector \((X, Y)\). The marginal pmf of \(X\) or \(Y\) is easily calculated from the joint pmf of \((X, Y)\) as Theorem 4.1.6 indicates.
+</li><br>
+
+
+<li>
+[Casella, p.143, thm.4.1.6.]
+Let \((X, Y)\) be a discrete bivariate random vector with joint pmf \(f_{X, Y}(x, y)\). Then the marginal pmfs of \(X\) and \(Y\), \(f_X(x)=P(X=x)\) and \(f_Y(y)=P(Y=y)\), are given by 
+\[
+f_X(x)=\sum_{y\in\mathbb{R}}f_{X, Y}(x, y)
+\text{ and }
+f_Y(y)=\sum_{x\in\mathbb{R}}f_{X, Y}(x, y)
+\]
+</li><br>
+
+
+<li>
+[Casella, p.144, def.4.1.10.]
+A function \(f(x, y)\) from \(\mathbb{R}^2\) into \(\mathbb{R}\) is called a <i>joint probability density function</i> or <i>joint pdf of the continuous bivariate random vector \((X, Y)\)</i> if, for every \(A\subseteq \mathbb{R}^2\), 
+\[
+P((X, Y)\in A)=\iint_{A}f(x, y)dxdy.
+\]
+</li><br>
+
+<li>
+[Casella, p.145, remark.]
+The <i>marginal probability density functions</i> of \(X\) and \(Y\) are also defined as in the discrete case with integrals replacing sums. The marginal pdfs may be used to compute probabilities or expectations that involve only \(X\) or \(Y\). Specifically, the marginal pdfs of \(X\) and \(Y\) are given by 
+\[
+\begin{array}{llll}
+f_X(x) &=& \int_{-\infty}^{\infty} f(x, y)dy, & -\infty < x < \infty, \\
+f_Y(y) &=& \int_{-\infty}^{\infty} f(x, y)dx, & -\infty < y < \infty.
+\end{array}
+\]
+</li><br>
+
+</ul>
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<h3>Section 4.2 Conditional Distributions and Independence</h3>
+
+<ul>
+
+<li>
+[Casella, p.148, def.4.2.1.]
+Let \((X, Y)\) be a discrete bivariate random vector with joint pmf \(f(x, y)\) and marginal pmfs \(f_X(x)\) and \(f_Y(y)\). For any \(x\) such that \(P(X=x)=f_X(x) > 0\), the <i>conditional pmf of \(Y\) given that \(X=x\)</i> is the function of \(y\) denoted by \(f(y|x)\) and defined by 
+\[f(y|x)=P(Y=y|X=x)=\frac{f(x, y)}{f_X(x)}.\]
+For any \(y\) such that \(P(Y=y)=f_Y(y) > 0\), the <i>conditional pmf of \(X\) given that \(Y=y\)</i> is the function of \(x\) denoted by \(f(x|y)\) and defined by 
+\[f(x|y)=P(X=x|Y=y)=\frac{f(x, y)}{f_Y(y)}.\]
+</li><br>
+
+
+<li>
+[Casella, p.150, def.4.2.3.]
+Let \((X, Y)\) be a continuous bivariate random vector with joint pdf \(f(x, y)\) and marginal pdfs \(f_X(x)\) and \(f_Y(y)\). For any \(x\) such that \(f_X(x) > 0\), the <i>conditional pdf of \(Y\) given that \(X=x\)</i> is the function of \(y\) denoted by \(f(y|x)\) and defined by 
+\[f(y|x)=\frac{f(x, y)}{f_X(x)}.\]
+For any \(y\) such that \(f_Y(y) > 0\), the <i>conditional pdf of \(X\) given that \(Y=y\)</i> is the function of \(x\) denoted by \(f(x|y)\) and defined by 
+\[f(x|y)=\frac{f(x, y)}{f_Y(y)}.\]
+</li><br>
+
+
+
+<li>
+[Casella, p.152, def.4.2.5.]
+Let \((X, Y)\) be a bivariate random vector with joint pdf or pmf \(f(x, y)\) and marginal pdfs or pmfs \(f_X(x)\) and \(f_Y(y)\). Then \(X\) and \(Y\) are called <i>independent random variables</i> if, for every \(x\in \mathbb{R}\) and \(y\in \mathbb{R}\), 
+\[f(x, y)=f_X(x)f_Y(y).\tag{4.2.1}\]
+</li><br>
+
+
+<li>
+[Casella, p.160, line -11]
+Similarly, Theorem 4.2.12 could be used to find that the marginal distribution of \(V\) is also \(\text{n}(0, 2)\).
+</li><br>
+
+<li class="note">
+雖然p.155, thm.4.2.12是說 \(X+Y\) 的distribution，但可以利用一樣的證明過程，求出 \(X-Y\) 的distribution。或是直接用p.184, cor.4.6.10。
+</li><br>
+
+
+</ul>
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<h3>Section 4.4 Hierarchical Models and Mixture Distributions</h3>
+
+
+<ul>
+
+<li>
+[Casella, p.163, exa.4.4.2]
+<b>(Continuation of Example 4.4.1)</b> The random variable of interest, \(X=\) number of survivors, has the distribution given by 
+\[
+\begin{array}{lllr}
+P(X=x)
+&=& \sum_{y=0}^{\infty} P(X=x, Y=y) \\
+&=& \sum_{y=0}^{\infty} P(X=x|Y=y)P(Y=y) & 
+\left(
+\begin{array}{c}
+\text{definition of} \\
+\text{conditional probability}
+\end{array}
+\right) \\
+&=& \sum_{y=x}^{\infty}\left[\binom{y}{x}p^x (1-p)^{y-x}\right]\left[\frac{e^{-\lambda} \lambda^y}{y!}\right] &  \left(
+\begin{array}{c}
+\text{conditional probability} \\
+\text{is }0\text{ if }y\lt x
+\end{array}
+\right)
+\end{array}
+\]
+since \(X|Y=y\) is \(\text{binomial}(y, p)\) and \(Y\) is \(\text{Poisson}(\lambda)\). 
+</li><br>
+
+<li class="note">
+\(X|Y=y\) 應該寫 \(X|(Y=y)\) 比較不會誤會。p.471, exa.10.1.10也有一樣的狀況。
+</li><br>
+
+</ul>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3>Section 4.5 Covariance and Correlation</h3>
+
+
+<ul>
+
+
+<li>
+
+</li><br>
+
+</ul>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3>Section 4.6 Multivariate Distributions</h3>
+
+
+<ul>
+
+
+<li>
+[Casella, p.177, remark.]
+At the beginning of this chapter, we discussed observing more than two random variables in an experiment. In the previous sections our discussions have concentrated on a bivariate random vector \((X, Y)\). In this section we discuss a multivariate random vector \((X_1, ..., X_n)\). 
+</li><br>
+
+
+<li>
+[Casella, p.177, remark.]
+<i>A note on notation</i>: We will use boldface letters to denote multiple variates. Thus, we write \(\mathbf{X}\) to denote the random variables \(X_1, ..., X_n\) and \(\mathbf{x}\) to denote the sample \(x_1, ..., x_n\).
+</li><br>
+
+
+<li>
+[Casella, p.177, remark.]
+The random vector \(\mathbf{X}=(X_1, ..., X_n)\) has a sample space that is a subset of \(\mathbb{R}^n\). If \((X_1, ..., X_n)\) is a discrete random vector (the sample space is countable), then the <i>joint pmf of \((X_1, ..., X_n)\)</i> is the function defined by \(f(\mathbf{x}=f(x_1, ..., x_n)=P(X_1=x_1, ..., X_n=x_n)\) for each \((x_1, ..., x_n)\in \mathbb{R}^n\). Then for any \(A\subseteq \mathbb{R}^n\), 
+\[P(\mathbf{X}\in A)=\sum_{\mathbf{x}\in A}f(\mathbf{x}).\tag{4.6.1}\]
+If \((X_1, ..., X_n)\) is a continuous random vector, the <i>joint pdf of \((X_1, ..., X_n)\)</i> is a function \(f(x_1, ..., x_n)\) that satisfies
+\[P(\mathbf{X}\in A)=\int\cdots\int_A f(\mathbf{x}d\mathbf{x}=\int\cdots\int_A f(x_1, ..., x_n)dx_1\cdots dx_n.\tag{4.6.2}\]
+These integrals are \(n\)-fold integrals with limits of integration set so that the integration is over all points \(\mathbf{x}\in A\).
+</li><br>
+
+
+<li class="note">
+上面中說的\(\mathbf{X}=(X_1, ..., X_n)\) has a sample space that is a subset of \(\mathbb{R}^n\)這句話，應該是說\(\mathbf{X}=(X_1, ..., X_n)\)的image是\(\mathbb{R}^n\)的一個subset，這個subset是\(P_{\mathbf{X}}\)的sample space。
+</li><br>
+
+
+<li>
+[Casella, p.182, def.4.6.5.]
+Let \(\mathbf{X}_1, ..., \mathbf{X}_n\) be random vectors with joint pdf or pmf \(f(\mathbf{x}_1, ..., \mathbf{x}_n)\). Let \(f_{\mathbf{X}_i}(\mathbf{x}_i)\) denote the marginal pdf or pmf of \(\mathbf{X}_i\). Then \(\mathbf{X}_1, ..., \mathbf{X}_n\) are called <i>mutually independent random vectors</i> if, for every \((\mathbf{x}_1, ..., \mathbf{x}_n)\), 
+\[f(\mathbf{x}_1, ..., \mathbf{x}_n)=f_{\mathbf{X}_1}(\mathbf{x}_1)\cdot\cdots\cdot f_{\mathbf{X}_n}(\mathbf{x}_n)=\prod_{i=1}^{n}f_{\mathbf{X}_i}(\mathbf{x}_i).\]
+If the \(X_i\)s are all one-dimensional, then \(X_1, ..., X_n\) are called <i>mutually independent random variables</i>.
+</li><br>
+
+
+</ul>
+
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+
+<h2>Chapter 5 Properties of a Random Sample</h2>
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<h3>Section 5.1 Basic Concepts of Random Samples</h3>
+
+<ul>
+
+<li>
+[Casella, p.207, def.5.1.1.]
+The random variables \(X_1, ..., X_n\) are called a <i>random sample of size \(n\) from the population \(f(x)\)</i> if \(X_1, ..., X_n\) are mutually independent random variables and the marginal pdf or pmf of each \(X_i\) is the same function \(f(x)\). Alternatively, \(X_1, ..., X_n\) are called <i>independent and identically distributed random variables with pdf or pmf \(f(x)\)</i> This is commonly abbreviated to iid random variables.
+</li><br>
+
+<li>
+[Casella, p.207, remark.]
+The random sampling model describes a type of experimental situation in which the variable of interest has a probability distribution described by \(f(x)\). If only one observation \(X\) is made on this variable, then probabilities regarding \(X\) can be calculated using \(f(x)\). In most experiments there are \(n > 1\) (a fixed, positive integer) repeated observations made on the variable, the first observation is \(X_1\), the second is \(X_2\), and so on. Under the random sampling model each \(X_i\) is an observation on the same variable and each \(X_i\) has a marginal distribution given by \(f(x)\). Furthermore, the observations are taken in such a way that the value of one observation has no effect on or relationship with any of the other observations; that is, \(X_1, ..., X_n\) are <i>mutually independent</i>. (See Exercise 5.4 for a generalization of independence.)
+</li><br>
+
+<li>
+[Casella, p.207, remark.]
+From Definition 4.6.5, the joint pdf or pmf of \(X_1, ..., X_n\) is given by 
+\[f(x_1, ..., x_n)=f(x_1)f(x_2)\cdot\cdots\cdot f(x_n)=\prod_{i=1}^{n}f(x_i).\tag{5.1.1}\]
+This joint pdf or pmf can be used to calculate probabilities involving the sample. Since \(X_1, ..., X_n\) are identically distributed, all the marginal densities \(f(x)\) are the same function.
+</li><br>
+
+
+
+<li class="note">
+假設投擲一顆骰子 \(n\) 次，則
+\[
+S=\left\{
+\begin{array}{cccc}
+(\overbrace{1,1,...,1,1}^{n\text{-times}}), & (1,1,...,1,2), & ..., & (1,1,...,1,6), \\
+(1,1,...,2,1), & (1,1,...,2,2), & ..., & (1,1,...,2,6), \\
+\vdots & \vdots & \ddots & \vdots \\
+(6,6,...,6,1), & (6,6,...6,2), & ..., & (6,6,...6,6)
+\end{array}
+\right\}
+\]
+\(X_1, X_2, ..., X_n\) 是從 \(S\) 到 \(\mathbb{R}\) 的函數，而且注意，<font color="red">每次代入 \(X_1, X_2, ..., X_n\) 的“東西”是相同的</font>。例如 \(n=4\)，\(w=(2, 3, 6, 2)\)，
+\[X_1(w)=2, X_2(w)=3, X_3(w)=6, X_4(w)=2.\]
+參考Chung's Elementary Probability Theory, Chapter 4。
+</li><br>
+
+<li class="note">
+上面所說的“代入 \(X_1, X_2, ..., X_n\) 的東西必須是相同的”這句話很重要，我們在Section 5.2會定義 \(X_1, X_2, ..., X_n\) 的運算，如果代入的東西不同，就沒辦法定義函數的運算；我們在Section 5.4會比較 \(X_1, X_2, ..., X_n\) 的大小，如果代入的東西不同，也沒辦法比較大小。
+</li><br>
+
+<li class="note">
+來看看Mood對population的定義。
+</li><br>
+
+<li>
+[Mood, p.221, remark]
+Let us illustrate inductive inference by a simple example. Suppose that we have a storage bin which contains (let us say) 10 million flower seeds which we know will each produce either white or red flowers. The information which we want is: How many (or what percent) of these 10 million seeds will produce white flowers? Now the only way in which we can be sure that this question is answered correctly is to plant every seed and observe the number producing white flowers. However, this is not feasible since we want to sell the seeds. Even if we did not want to sell the seeds, we would prefer to obtain an answer without expending so much effort. Of course, without planting each seed and observing the color of flower that each produces we cannot be certain of the number of seeds producing white flowers. Another thought which occurs is: Can we plant a few of the seeds and, on the basis of the colors of these few flowers, make a statement as to how many of the 10 million seeds will produce white flowers? The answer is that we cannot make an exact prediction as to how many white flowers the seeds will produce but we can make a probabilistic statement if we select the few seeds in a certain fashion. This is inductive inference. We select a few of the 10 million seeds, plant them, observe the number which produce white flowers, and on the basis of these few we make a prediction as to how many of the 10 million will produce white flowers; from a knowledge of the color of a few we generalize to the whole 10 million. We cannot be certain of our answer, but we can have confidence in it in a frequency-ratio-probability sense.
+</li><br>
+
+
+<li>
+[Mood, p.222, def.1]
+<b>Target population</b>
+The totality of elements which are under discussion and about which information is desired will be called the <i>target population</i>.
+</li><br>
+
+
+
+<li>
+[Mood, p.222, remark]
+In the example in the previous subsection the 10 million seeds in the storage bin form the target population. The target population may be all the dairy cattle in Wisconsin on a certain date, the prices of bread in New York City on a certain date, the hypothetical sequence of heads and tails obtained by tossing a certain coin an infinite number of times, the hypothetical set of an infinite number of measurements of the velocity of light, and so forth. The important thing is that the target population must be capable of being quite well defined; it may be real or hypothetical.
+</li><br>
+
+
+<li>
+[Mood, p.223, def.2]
+<b>Definition 2 Random sample</b> Let the random variables \(X_1, X_2, ..., X_n\) have a joint density \(f_{X_1, ..., X_n}(\cdot, ..., \cdot)\) that factors as follows:
+\[f_{X_1, X_2, ..., X_n}(x_1, x_2, ..., x_n)=f(x_1)f(x_2)\cdot \cdots \cdot f(x_n),\]
+where \(f(\cdot)\) is the (common) density of each \(X_i\). Then \(X_1, X_2, ..., X_n\) is defined to be a <i>random sample</i> of size \(n\) from a population with density \(f(\cdot)\).
+</li><br>
+
+
+
+<li>
+[Mood, p.223, remark]
+In the example in the previous subsection the 10 million seeds in the storage bin formed the population from which we propose to sample. Each seed is an element of the population and will produce a white or red flower; so strictly speaking, there is not a numerical value associated with each element of the population. However, if we, say, associate the number \(1\) with white and the number \(0\) with red, then there is a numerical value associated with each element of the population, and we can discuss whether or not a particular sample is seed sampled produces a white or red flower, \(i=1, ..., n\). Now if the sampling of seeds is performed in such a way that the random variables \(X_1, ..., X_n\) are independent and have the same density, then, according to Definition 2, the sample is called random.
+</li><br>
+
+
+<li>
+[Mood, p.223, remark]
+An important part of the definition of a random sample is the meaning of the random variables \(X_1, ..., X_n\). The random variable \(X_i\) is a representation for the numerical value that the \(i\)th item (or element) sampled will assume. After the sample is observed, the actual values of \(X_1, ..., X_n\) are known, and as usual, we denote these observed values by \(x_1, ..., x_n\). Sometimes the observations \(x_1, ..., x_n\) are called a random sample if \(x_1, ..., x_n\) are the values of \(X_1, ..., X_n\), where \(X_1, ..., X_n\) is a random sample.
+</li><br>
+
+
+
+</ul>
+
+
+<!---------------------------------->
+<!---------------------------------->
+<h3>Section 5.2 Sums of Random Variables from a Random Sample</h3>
+
+<ul>
+
+<li>
+[Chung, p.79, prop.1]
+If \(X\) and \(Y\) are random variables, then so are 
+\[X+Y, X-Y, XY, X/Y, (Y\neq 0), \]
+and \(aX+bY\) where \(a\) and \(b\) are two numbers.
+</li><br>
+
+
+
+<li>
+[Casella, p.90, line 8]
+The random variable 
+\[Y=\sum_{i=1}^{n}X_i\]
+has the binomial\((n, p)\) distribution.
+</li><br>
+
+
+<li>
+[Casella, p.141, line -7.]
+Expectations of functions of random vectors are computed just as with univariate random variables. Let \(g(x, y)\) be a real-valued function defined for all possible values \((x, y)\) of the discrete random vector \((X, Y)\). Then \(g(X, Y)\) is itself a random variable and its expected value \(\text{E}g(X, Y)\) is given by
+\[\text{E}g(X, Y)=\sum_{(x, y)\in \mathbb{R}^2}g(x, y)f(x, y).\]
+</li><br>
+
+<li>
+[Casella, p.211, remark.]
+When a sample \(X_1, ..., X_n\) is drawn, some summary of the values is usually computed. Any well-defined summary may be expressed mathematically as a function \(T(x_1, ..., x_n)\) whose domain includes the sample space of the random vector \((X_1, ..., X_n)\). The function \(T\) may be real-valued or vector-valued; thus the summary is a random variable (or vector), \(Y=T(X_1, ..., X_n)\). This definition of a random variable as a function of others was treated in detail in Chapter 4, and the techniques in Chapter 4 can be used to describe the distribution of \(Y\) in terms of the distribution of the population from which the sample was obtained. Since the random sample \(X_1, ..., X_n\) has a simple probabilistic structure (because the \(X_i\)s are independent and identically distributed), the distribution of \(Y\) is particularly tractable. Because this distribution is usually derived from the distribution of the variables in the random sample, it is called the <i>sampling distribution</i> of \(Y\). This distinguishes the probability distribution of \(Y\) from the distribution of the population, that is, the marginal distribution of each \(X_i\). In this section, we will discuss some properties of sampling distribution distributions, especially for functions \(T(x_1, ..., x_n)\) defined by sums of random variables.
+</li><br>
+
+
+<li class="note">
+上面說的the sample space of the random vector \((X_1, ..., X_n)\)應該是指the sample space of \(P_{(X_1, ..., X_n)}\)，下面也是一樣。
+</li><br>
+
+
+<li>
+[Casella, p.211, def.5.2.1.]
+Let \(X_1, ..., X_n\) be a random sample of size \(n\) from a population and let \(T(x_1, ..., x_n)\) be a real-valued or vector-valued function whose domain includes the sample space of \((X_1, ..., X_n)\). Then the random variable or random vector \(Y=T(X_1, ..., X_n)\) is called a <i>statistic</i>. The probability distribution of a statistic \(Y\) is called the <i>sampling distribution of \(Y\)</i>.
+</li><br>
+
+
+
+
+<li>
+[Casella, p.212, def.5.2.2.]
+The <i>sample mean</i> is the arithmetic average of the values in a random sample. It is usually denoted by 
+\[\bar{X}=\frac{X_1+\cdots+X_n}{n}=\frac{1}{n}\sum_{i=1}^{n}X_i.\]
+</li><br>
+
+<li>
+[Casella, p.212, def.5.2.3.]
+The <i>sample variance</i> is the statistic defined by 
+\[S^2=\frac{1}{n-1}\sum_{i=1}^{n}\sum_{i=1}^{n}(X_i-\bar{X})^2.\]
+The <i>sample standard deviation</i> is the statistic defined by \(S=\sqrt{S^2}\).
+</li><br>
+
+<li class="note">
+注意，sample mean跟sample variance都還是random variable。
+</li><br>
+
+<li class="note">
+“樣本變異數(sample variance)的分母為什麼是 \(n-1\) 而不是 \(n\)”是學生們常見的問題之一，也是老師們難以解釋的頭痛問題，不過現在高中課程改成分母是 \(n\) 了（之後可能又會改回來，最方便的方法就是參考學測指考試題最後附的公式表），的確省下了老師們不少麻煩。分母是 \(n-1\) 的理由有兩個：
+    <ul>
+    <li>為了 \(\text{E}S^2=\sigma^2\)，這樣 \(S^2\) 才會是 \(\sigma^2\) 的一個不偏估計量(unbiased statistic)。</li>
+    <li>另一個解釋是用degree of freedom，這我還搞不懂。</li>
+    </ul>
+</li><br>
+
+<li>
+[Casella, p.213, thm.5.2.6.]
+Let \(X_1, ..., X_n\) be a random sample from a population with mean \(\mu\) and variance \(\sigma^2 \lt \infty\). Then 
+    <ol>
+    <li>\(\text{E}\bar{X}=\mu\),</li>
+    <li>\(\text{Var }\bar{X}=\frac{\sigma^2}{n}\),</li>
+    <li>\(\text{E}S^2=\sigma^2\).</li>
+    </ol>
+</li><br>
+
+
+<li class="note">
+\(\text{E}S^2=\sigma^2\)的證明中，用到了 \(\text{E}\bar{X}^2=\text{Var }\bar{X}+(\text{E}\bar{X})^2。\)
+</li><br>
+
+
+<li>
+[Casella, p.214, line -7]
+First we note some simple relationships. Since \(\bar{X}=\frac{1}{n}(X_1+\cdots+X_n)\), if \(f(y)\) is the pdf of \(Y=(X_1+\cdots+X_n)\), then \(f_{\bar{X}}(x)=nf(nx)\) is the pdf of \(\bar{X}\) (see Exercise 5.5).
+</li><br>
+
+<li>
+[Casella, p.214, line -7]
+First we note some simple relationships. Since \(\bar{X}=\frac{1}{n}(X_1+\cdots+X_n)\), if \(f(y)\) is the pdf of \(Y=(X_1+\cdots+X_n)\), then \(f_{\bar{X}}(x)=nf(nx)\) is the pdf of \(\bar{X}\) (see Exercise 5.5).
+</li><br>
+
+
+<li>
+[Casella, p.216, line -17]
+Thus, the sum of two independent Cauchy random variables is agian a Cauchy, with the scale parameters adding. It therefore follows that if \(Z_1, ..., Z_n\) are iid \(\text{Cauchy}(0, 1)\) random variables, then \(\sum Z_i\) is \(\text{Cauchy}(0, n)\) and also \(\bar{Z}\) is \(\text{Cauchy}(0, 1)\)!
+</li><br>
+
+<li class="note">
+上面的論述直接用p.213, thm.5.2.6即可得到。
+</li><br>
+
+
+
+<li>
+[Casella, p.222, line -8]
+If \(X_1, ..., X_n\) are a random sample from a \(\text{n}(\mu, \sigma^2)\), we know that the quantity
+\[\frac{\bar{X}-\mu}{\sigma/\sqrt{n}}\tag{5.3.3}\]
+is distributed as a \(\text{n}(0, 1)\) random variable.
+</li><br>
+
+<li class="note">
+由p.218, thm.5.3.1.(b), \(\bar{X}\sim \text{n}(\mu, \sigma^2/n)\)。再由p.102, \(\frac{\bar{X}-\mu}{\sigma/\sqrt{n}}\sim \text{n}(0, 1)\)。
+</li><br>
+
+
+
+
+</ul>
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+
+<h3>Section 5.4 Order Statistics</h3>
+
+
+<ul>
+
+<li>
+[Casella, p.225, def.5.4.1]
+The _order statistics_ of a random sample \(X_1, ..., X_n\) are the sample values placed in ascending order. They are denoted by \(X_{(1)}, ..., X_{(n)}\).
+</li><br>
+
+<li>
+[Casella, p.225, remark]
+The order statistics are random variables that satisfy \(X_{(1)} \leq \cdots \leq X_{(n)}\). In particular,
+\[
+\begin{array}{lll} 
+X_{(1)} &=& \min_{1\leq i\leq n} X_i, \\
+X_{(2)} &=& \text{second smallest }X_i, \\
+ & \vdots & \\
+X_{(n)} &=& \max_{1\leq i\leq n} X_i.
+\end{array}
+\]
+</li><br>
+
+<li class="note">
+\(\min_{1\leq i\leq n}X_i=\min\{X_1(w), X_2(w), ..., X_n(w)\}\). 
+</li><br>
+
+</ul>
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+
+<h3>Section 5.5 Convergence Concepts</h3>
+
+
+<!---------------------------------->
+<h4>5.5.2 Almost Sure Convergence</h4>
+
+<ul>
+
+
+
+<li>
+[Casella, p.235, def.5.5.10]
+A sequence of random variables, \(X_1, X_2, ...\), <i>converges in distribution</i> to a random variable \(X\) if 
+\[
+\lim_{n\to \infty}F_{X_n}(x)=F_X(x)
+\]
+at all points \(x\) where \(F_X(x)\) is continuous.
+</li><br>
+
+<li class="note">
+almost surely \(\Rightarrow\) in probability \(\Rightarrow\) in distribution
+</li><br>
+
+
+</ul>
+
+<!---------------------------------->
+<h4>5.5.4 The Delta Method</h4>
+
+<ul>
+
+
+
+<li>
+[Casella, p.241]
+Let \(T_1, ..., T_k\) be random variables with means \(\theta_1, ..., \theta_k\), and define \(\mathbf{T}=(T_1, ..., T_k)\) and \(\boldsymbol{\theta}=(\theta_1, ..., \theta_k)\). Suppose there is a differentiable function \(g(\mathbf{T})\) (an estimator of some parameter) for which we want an approximate estimate of variance. Define 
+\[g_i'(\boldsymbol{\theta})=\frac{\partial}{\partial t_i} g(\mathbf{t})|_{t_1=\theta_1, ..., t_k=\theta_k}.\]
+The first-order Taylor series expansion of \(g\) about \(\boldsymbol{\theta}\) is 
+\[
+g(\mathbf{t})=g(\boldsymbol{\theta})+\sum_{i=1}^{k}g_i'(\boldsymbol{\theta})(t_i-\theta_i)+\text{Remainder}.
+\]
+For our statistical approximation we forget about the remainder and write 
+\[
+g(\mathbf{t})\approx g(\boldsymbol{\theta})+\sum_{i=1}^{k} g_i'(\boldsymbol{\theta})(t_i-\theta_i).
+\tag{5.5.7}
+\]
+Now, take expectations on both sides of (5.5.7) to get 
+\[
+\begin{array}{lllr}
+\text{E}_{\boldsymbol{\theta}}g(\mathbf{T}) & \approx & g(\boldsymbol{\theta})+\sum_{i=1}^{k} g_i'(\boldsymbol{\theta})\text{E}_{\boldsymbol{\theta}}(T_i-\theta_i) \\
+& = & g(\boldsymbol{\theta}). &  (T_i\text{ has mean }\theta_i)
+\end{array}
+\tag{5.5.8}
+\]
+We can now approximate the variance of \(g(\mathbf{T})\) by 
+\[
+\begin{array}{lllr}
+\text{Var}_{\boldsymbol{\theta}} g(\mathbf{T}) 
+&\approx & \text{E}_{\boldsymbol{\theta}} ([g(\mathbf{T})-g(\boldsymbol{\theta})]^2) & (\text{using (5.5.8)}) \\
+& \approx & \text{E}_{\boldsymbol{\theta}} \left(\left(\sum_{i=1}^{k} g_i'(\boldsymbol{\theta})(T_i-\theta_i)\right)^2\right) & (\text{using (5.5.7)}) \\
+& = & \sum_{i=1}^{k} [g_i'(\boldsymbol{\theta})]^2\text{Var}_{\boldsymbol{\theta}} T_i+2\sum_{i \gt j} g_i'(\boldsymbol{\theta})g_j'(\boldsymbol{\theta})\text{Cov}_{\boldsymbol{\theta}}(T_i, T_j),
+\end{array}
+\tag{5.5.9}
+\]
+where the last equality comes from expanding the square and using the definition of variance and covariance (similar to Exercise 4.44). Approximation (5.5.9) is very useful because it gives us a variance formula for a general function, using only simple variances and covariances. Here are two examples.
+</li><br>
+
+<li class="note">
+上面的討論有點抽象，是多變數向量的版本，而且我們實際只用到單變數的版本，如下：
+Define 
+\[g'(\theta)=\frac{d}{d t} g(t)|_{t=\theta}.\]
+The first-order Taylor series expansion of \(g\) about \(\theta\) is 
+\[
+g(t)=g(\theta)+g'(\theta)(t-\theta)+\text{Remainder}.
+\]
+For our statistical approximation we forget about the remainder and write 
+\[
+g(t)\approx g(\theta)+ g'(\theta)(t-\theta).
+\tag{5.5.7}
+\]
+Now, take expectations on both sides of (5.5.7) to get 
+\[
+\begin{array}{lllr}
+\text{E}_{\theta}g(T) & \approx & g(\theta)+ g'(\theta)\text{E}_{\theta}(T-\theta) \\
+& = & g(\theta). &  (T\text{ has mean }\theta)
+\end{array}
+\tag{5.5.8}
+\]
+We can now approximate the variance of \(g(t)\) by 
+\[
+\begin{array}{lllr}
+\text{Var}_{\theta} g(T) 
+&\approx & \text{E}_{\theta} ([g(T)-g(\theta)]^2) & (\text{using (5.5.8)}) \\
+& \approx & \text{E}_{\theta} ([g'(\theta)(T-\theta)]^2) & (\text{using (5.5.7)}) \\
+& = & [g'(\theta)]^2\text{Var}_{\theta} T,
+\end{array}
+\tag{5.5.9}
+\]
+where the last equality comes from expanding the square and using the definition of variance and covariance (similar to Exercise 4.44). Approximation (5.5.9) is very useful because it gives us a variance formula for a general function, using only simple variances and covariances. Here are two examples. 
+</li><br>
+
+
+
+<li class="note">
+p.242, (5.5.9)第一個近似。
+Recall that 
+\[
+\text{E}_{\theta}(g(T))
+\stackrel{\text{(5.5.8)}}{=}g(\theta)
+\stackrel{g(\theta)\text{ is a constant}}{=}\text{E}_{\theta}(g(\theta)).
+\]
+Similarly, 
+\[
+[\text{E}_{\theta}(g(T))]^2=g(\theta)^2
+\stackrel{g(\theta)\text{ is a constant}}{=}\text{E}_{\theta}(g(\theta)^2)
+\]
+Therefore, 
+\[
+\begin{array}{lll}
+\text{Var}_{\theta}(g(T))
+&=& \text{E}_{\theta}(g(T)^2)-[\text{E}_{\theta}(g(T))]^2 \\
+&=& \text{E}_{\theta}(g(T)^2)-2\text{E}_{\theta}(g(T))^2+[\text{E}_{\theta}(g(T))]^2 \\
+&=& \text{E}_{\theta}(g(T)^2)-2\text{E}_{\theta}(g(T))\text{E}_{\theta}(g(T))+[\text{E}_{\theta}(g(T))]^2 \\
+&=& \text{E}_{\theta}(g(T)^2)-2\text{E}_{\theta}(g(T))g(\theta)+\text{E}_{\theta}(g(\theta)^2) \\
+&=& \text{E}_{\theta}(g(T)^2)-\text{E}_{\theta}(2g(T)g(\theta))+\text{E}_{\theta}(g(\theta)^2) \\
+&=& \text{E}_{\theta}([g(T)-g(\theta)]^2).
+\end{array}
+\]
+</li><br>
+
+<li class="note">
+p.242, (5.5.9)第三個等於。
+\[
+\begin{array}{lll}
+\text{Var}_{\theta}(g(T)) 
+&\approx & \text{E}_{\theta}([g(T)-g(\theta)]^2) \\
+&\approx & \text{E}_{\theta}([g'(\theta)(T-\theta))]^2) \\
+&=& \text{E}_{\theta}[g'(\theta)^2(T^2-2T\theta+\theta^2)] \\
+&=& g'(\theta)^2[\text{E}_{\theta}(T^2)-2\theta\text{E}_{\theta}(T)+\theta^2] \\
+&=& g'(\theta)^2[\text{E}_{\theta}(T^2)-2\theta^2+\theta^2] \\
+&=& g'(\theta)^2[\text{E}_{\theta}(T^2)-\theta^2] \\
+&=& g'(\theta)^2[\text{E}_{\theta}(T^2)-\text{E}_{\theta}(T)^2] \\
+&=& g'(\theta)^2\text{Var}_{\theta}(T).
+\end{array}
+\]
+In summary, 
+\[
+\begin{array}{ll}
+\theta & \text{ is the parameter}, \\
+T & \text{ is the estimator}, \\
+g & \text{ is a function of }T.
+\end{array}
+\]
+</li><br>
+
+
+<li>
+[Casella, p.242, exa.5.5.22]
+<b>(Continuation of Example 5.5.19)</b> Recall that we are interested in the properties of \(\frac{\hat{p}}{1-\hat{p}}\) as an estimate of \(\frac{p}{1-p}\), where \(p\) is a binomial success probability. In our above notation, take \(g(p)=\frac{p}{1-p}\) so \(g'(p)=\frac{1}{(1-p)^2}\) and 
+\[
+\begin{array}{lll}
+\text{Var}\left(\frac{\hat{p}}{1-\hat{p}}\right)
+& \approx & [g'(p)]^2 \text{Var}(\hat{p}) \\
+& = & \left[\frac{1}{(1-p)^2}\right]^2 \frac{p(1-p)}{n}=\frac{p}{n(1-p)^3},
+\end{array}
+\]
+giving us an approximation for the variance of our estimator.
+</li><br>
+
+<li class="note">
+在此例中，\(g(t)=\frac{t}{1-t}, \mathbf{T}=T_1=\hat{p}=\frac{\sum X_i}{n}, \boldsymbol{\theta}=\theta_1=p\)。
+</li><br>
+
+
+<li>
+[Casella, p.243, thm.5.5.24]
+<b>(Delta Method)</b> Let \(Y_n\) be a sequence of random variables that satisfies \(\sqrt{n}(Y_n-\theta)\to \text{n}(0, \sigma^2)\) in distribution. For a given function \(g\) and a specific value of \(\theta\), suppose that \(g'(\theta)\) exists and is not \(0\). Then 
+\[
+\sqrt{n}[g(Y_n)-g(\theta)]\to \text{n}(0, \sigma^2[g'(\theta)]^2)\text{ in distribution}.
+\tag{5.5.10}
+\]
+</li><br>
+
+<li class="note">
+\[
+\begin{array}{cl}
+\text{Suppose} & \sqrt{n}(Y_n-\theta)\to \text{n}(0, \sigma^2) \\
+\text{By Taylor} & g(Y_n)=g(\theta)+g'(\theta)(Y_n-\theta) \\
+\Rightarrow & g(Y_n)-g(\theta)=g'(\theta)(Y_n-\theta) \\
+\Rightarrow & \sqrt{n}[g(Y_n)-g(\theta)]=\sqrt{n}[g'(\theta)(Y_n-\theta)]=g'(\theta)[\sqrt{n}(Y_n-\theta)] \\
+\text{By Slutsky's Theorem} & g'(\theta)[\sqrt{n}(Y_n-\theta)]\stackrel{\text{distribution}}{\to} g'(\theta)X, \text{ where }X\sim \text{n}(0, \sigma^2) \\
+\Rightarrow & g'(\theta)[\sqrt{n}(Y_n-\theta)]\to \text{n}(0, [g'(\theta)]^2 \sigma^2) \\
+\Rightarrow & \sqrt{n}[g(Y_n)-g(\theta)]\to \text{n}(0, [g'(\theta)]^2 \sigma^2).
+\end{array}
+\]
+</li><br>
+
+
+
+<li>
+[Casella, p.243, exa.5.5.25]
+<b>(Continuation of Example 5.5.23)</b> Suppose now that we have the mean of a random sample \(\bar{X}\). For \(\mu\neq 0\), we have 
+\[
+\sqrt{n}\left(\frac{1}{\bar{X}}-\frac{1}{\mu}\right)\to \text{n}\left(0, \left(\frac{1}{\mu}\right)^4\text{Var}_{\mu}X_1\right)
+\]
+in distribution.
+<br><br>
+If we do not know the variance of \(X_1\), to use the above approximation requires an estimate, say \(S^2\). Moreover, there is the question of what to do with the \(1/\mu\) term, as we also do not know \(\mu\). We can estimate everything, which gives us the approximate variance
+\[
+\hat{\text{Var}}\left(\frac{1}{\bar{X}}\right)\approx \left(\frac{1}{\bar{X}}\right)^4 S^2.
+\]
+Furthermore, as both \(\bar{X}\) and \(S^2\) are consistent estimators, we can again apply Slutsky's Theorem to conclude that for \(\mu\neq 0\), 
+\[
+\frac{\sqrt{n}\left(\frac{1}{\bar{X}}-\frac{1}{\mu}\right)}{\left(\frac{1}{\bar{X}}\right)^2 S}\to \text{n}(0, 1)
+\]
+in distribution.
+<br><br>
+Note how we wrote this latter quantity, dividing through by the estimated standard deviation and making the limiting distribution a standard normal. This is the only way that makes sense if we need to estimate any parameters in the limiting distribution. We also note that there is an alternative approach when there are parameters to estimate, and here we can actually avoid using an estimate for \(\mu\) in the variance (see the score test in Section 10.3.2).
+</li><br>
+
+<li class="note">
+在此例中，用到了Central Limit Theorem, \(\sqrt{n}(\bar{X}-\mu)\to \text{n}(0, \sigma^2)\).
+</li><br>
+
+</ul>
+
+
+<!---------------------------------->
+<!---------------------------------->
+
+<h3>Section 5.7 Exercises</h3>
+
+
+<ul>
+
+<li>
+[Casella, p.256, exe.5.5]
+Let \(X_1, ..., X_n\) be iid with pdf \(f_X(x)\), and let \(\bar{X}\) denote the sample mean. Show that 
+\[f_{\bar{X}}(x)=nf_{X_1+\cdots+X_n}(nx),\]
+even if the mgf of \(X\) does not exist.
+</li><br>
+
+<li class="note">
+考考讀者，下面這個關於p.256, exe.5.5的證明哪裡有問題。
+\[
+\begin{array}{lll}
+f_{\bar{X}}(x) 
+&=& P(\bar{X}=x) \\
+&=& P(X_1+\cdots+X_n=nx) \\
+&=& f_{X_1+\cdots+X_n}(nx).
+\end{array}
+\]
+反白看答案：<font color="white">問題在於對於continuous distribution來說，並沒有 \(f(x)=P(X=x)\)</font>
+這題的正確解法應該是要用p.51, thm.2.1.5。
+</li><br>
+
+
+
+<li>
+[Casella, p.257, exe.5.8]
+Let \(X_1, ..., X_n\) be a random sample, where \(\overline{X}\) and \(S^2\) are calculated in the usual way.
+<ol>
+<li>Show that 
+\[
+S^2=\frac{1}{2n(n-1)}\sum_{i=1}^{n}\sum_{j=1}^{n}(X_i-X_j)^2.
+\]
+Assume now that the \(X_i\)s have a finite fourth moment, and denote \(\theta_1=\text{E}(X_i), \theta_j=\text{E}((X_i-\theta_1)^j), j=2, 3, 4\).</li>
+<li>Show that \(\text{Var}(S^2)=\frac{1}{n}(\theta_4-\frac{n-3}{n-1}\theta_2^2\).</li>
+<li>Find \(\text{Cov}(\overline{X}, S^2)\) in terms of \(\theta_1, ..., \theta_4\). Under what conditions is \(\text{Cov}(\overline{X}, S^2)=0\)?</li>
+</ol>
+</li><br>
+
+
+<li>
+[Casella, p.257, exe.5.10]
+Let \(X_1, ..., X_n\) be a random sample from a \(\text{n}(\mu, \sigma^2)\) population.
+<ol>
+<li>Find expressions for \(\theta_1, ..., \theta_4\), as defined in Exercise 5.8, in terms of \(\mu\) and \(\sigma^2\). </li>
+<li>Use the results of Exercise 5.8, together with the results of part (a), to calculate \(\text{Var}(S^2)\).</li>
+<li>Calculate \(\text{Var}(S^2)\) a completely different (and easier) way: Use the fact that \((n-1)S^2/\sigma^2\sim \chi_{n-1}^2\).</li>
+</ol>
+</li><br>
+
+
+
+<li class="note">
+Exercise 5.8 is really tedious. The method of Exercise 5.10.(c) is strongly recommended.
+</li><br>
+
+
+</ul>
+
+<!---------------------------------->
+<!---------------------------------->
+
+<h3>Section 7.2 Methods of Finding Estimators</h3>
+
+
+
+<!---------------------------------->
+<h4>7.2.2 Maximum Likelihood Estimators</h4>
+
+<ul>
+
+<li>
+[Casella, p.315, remark]
+The method of maximum likelihood is, by far, the most popular technique for deriving estimators. Recall that if \(X_1, ..., X_n\) are an iid sample from a population with pdf or pmf \(f(x|\theta_1, ..., \theta_k)\), the likelihood function is defined by 
+\[L(\theta|\mathbf{x})=L(\theta_1, ..., \theta_k|x_1, ..., x_n)=\prod_{i=1}^{n} f(x_i|\theta_1, ..., \theta_k).\tag{7.2.3}\]
+</li><br>
+
+
+<li>
+[Casella, p.316, def.7.2.4]
+For each sample point \(\mathbf{x}\), let \(\hat{\theta}(\mathbf{x})\) be a parameter value at which \(L(\theta|\mathbf{x})\) attains its maximum as a function of \(\theta\), with \(\mathbf{x}\) held fixed. A <i>maximum likelihood estimator</i> (MLE) of the parameter \(\theta\) based on a sample \(\mathbf{X}\) is \(\hat{\theta}(\mathbf{X})\).
+</li><br>
+
+<li class="note">
+Why we maximize the likelihood function? 關於為什麼要取likelihood function的最大值，參考Hogg的Introduction to Mathematical Statistics，Section 6.1。
+</li><br>
+
+
+</ul>
+
+
+<!---------------------------------->
+<h4>7.2.3 Bayes Estimators</h4>
+
+<ul>
+
+
+<li>
+[Casella, p.324, line 16]
+If we denote the prior distribution by \(\pi(\theta)\) and the sampling distribution by \(f(\mathbf{x}|\theta)\), then the posterior distribution, the conditional distribution of \(\theta\) given the sample, \(\mathbf{x}\), is
+\[
+\pi(\theta|\mathbf{x})=f(\mathbf{x}|\theta)\pi(\theta)/m(\mathbf{x}), ~(f(\mathbf{x}|\theta)\pi(\theta)=f(\mathbf{x}, \theta)) \tag{7.2.7}
+\]
+where \(m(\mathbf{x})\) is the marginal distribution of \(\mathbf{X}\), that is, 
+\begin{equation}
+m(\mathbf{x})=\int f(\mathbf{x}|\theta)\pi(\theta)d\theta.
+\tag{7.2.9}
+\end{equation}
+Notice that the posterior distribution is a conditional distribution, conditional upon observing the sample. The posterior distribution is now used to make statements about \(\theta\), which is still considered a random quantity. For instance, the mean of the posterior distribution can be used as a point estimate of \(\theta\).
+</li><br>
+
+<li class="note">
+這裡寫得嚴謹一點，應該要把全部的 \(\mathbf{x}\) 寫成 \(T(\mathbf{x})\)。
+</li><br>
+
+  
+</ul>
+
+
+<!---------------------------------->
+<!---------------------------------->
+
+<h3>Section 7.3 Methods of Evaluating Estimators</h3>
+
+
+
+<!---------------------------------->
+<h4>7.3.1 Mean Squared Error</h4>
+
+<ul>
+
+<li>
+[Casella, ]
+
+</li><br>
+
+</ul>
+
+<!---------------------------------->
+<h4>7.3.2 Best Unbiased Estimators</h4>
+
+<ul>
+
+
+<li>
+[Casella, p.334, line 21]
+Before proceeding we note that, although we will be dealing with unbiased estimators, the results here and in the next section are actually more general. Suppose that there is an estimator \(W^*\) of \(\theta\) with \(\text{E}_{\theta}W^*=\tau(\theta)\neq \theta\), and we are interested in investigating the worth of \(W^*\). Consider the class of estimators 
+\[
+\mathcal{C}_{\tau}=\{W\mid \text{E}_{\theta}W=\tau(\theta)\}.
+\]
+For any \(W_1, W_2\in \mathcal{C}_{\tau}\), \(\text{Bias}_{\theta}W_1=\text{Bias}_{\theta}W_2\), so
+\[
+\text{E}_{\theta}(W_1-\theta)^2-\text{E}_{\theta}(W_2-\theta)^2=\text{Var}_{\theta}W_1-\text{Var}_{\theta}W_2, 
+\]
+and MSE comparisons, within the class \(\mathcal{C}_{\tau}\), can be based on variance alone. Thus, although we speak in terms of unbiased estimators, we really are comparing estimators that have the same expected value, \(\tau(\theta)\).
+</li><br>
+
+<li class="note">
+這段不太懂。其中的 \(\text{Bias}_{\theta}W_1=\text{Bias}_{\theta}W_2\) 是因為
+\[
+\text{Bias}_{\theta}W_1=\text{E}_{\theta}(W_1)-\theta=\tau(\theta)-\theta=\text{Bias}_{\theta}W_2
+\]
+</li><br>
+
+
+<li>
+[Casella, p.338, exa.7.3.12]
+<b>(Conclusion of Example 7.3.8)</b> Here \(\tau(\lambda)=\lambda\), so \(\tau'(\lambda)=1\). Also, since we have an exponential family, using Lemma 7.3.11 gives us
+\[
+\begin{array}{lll}
+\text{E}_{\lambda}\left(\left(\frac{\partial}{\partial \lambda}\log{\prod_{i=1}^{n}f(X_i|\lambda)}\right)^2\right)
+&=& -n\text{E}_{\lambda}\left(\frac{\partial^2}{\partial \lambda^2}\log{f(X|\lambda)}\right) \\
+&=& -n\text{E}_{\lambda}\left(\frac{\partial^2}{\partial \lambda^2}\log{\left(\frac{e^{-\lambda}\lambda^{X}}{X!}\right)}\right) \\
+&=& -n\text{E}_{\lambda}\left(\frac{\partial^2}{\partial \lambda^2}(-\lambda+X\log{\lambda}-\log{X!})\right) \\
+&=& -n\text{E}_{\lambda}\left(-\frac{X}{\lambda^2}\right) \\
+&=& \frac{n}{\lambda}.
+\end{array}
+\]
+Hence for any unbiased estimator, \(W\), of \(\lambda\), we must have 
+\[
+\text{Var}_{\lambda}W\geq \frac{\lambda}{n}.
+\]
+Since \(\text{Var}_{\lambda}\bar{X}=\lambda/n\), \(\bar{X}\) is a best unbiased estimator of \(\lambda\).
+</li><br>
+
+
+<li class="note">
+這裡不只用到Lemma 7.3.11，還用到p.337, line 8。
+</li><br>
+
+
+<li>
+[Casella, p.339, exa.7.3.13]
+<b>(Unbiased estimator for the scale uniform)</b> Let \(X_1, ..., X_n\) be iid with pdf \(f(x|\theta)=1/\theta\), \(0\lt x\lt \theta\). Since \(\frac{\partial}{\partial \theta}\log{f(x|\theta)}=-1/\theta\), we have
+\[
+\text{E}_{\theta}\left(\left( \frac{\partial}{\partial \theta}\log{f(X|\theta)}\right)^2\right)=\frac{1}{\theta^2}.
+\]
+The Cram&eacute;r-Rao Theorem would seem to indicate that if \(W\) is any unbiased estimator of \(\theta\), 
+\[
+\text{Var}_{\theta}W\geq \frac{\theta^2}{n}.
+\]
+We would now like to find an unbiased estimator with small variance. As a first guess, consider the sufficient statistic \(Y=\max{(X_1, ..., X_n)}\), the largest order statistic. The pdf of \(Y\) is \(f_Y(y|\theta)=ny^{n-1}/\theta^n\), \(0\lt y\lt \theta\), so
+\[
+\text{E}_{\theta}Y=\int_{0}^{\theta}\frac{ny^n}{\theta^n}dy=\frac{n}{n+1}\theta, 
+\]
+showing that \(\frac{n+1}{n}Y\) is an unbiased estimator estimator of \(\theta\). We next calculate 
+\[
+\begin{array}{lll}
+\text{Var}_{\theta}\left(\frac{n+1}{n}Y\right)
+&=& \left(\frac{n+1}{n}\right)^2 \text{Var}_{\theta}Y \\
+&=& \left(\frac{n+1}{n}\right)^2 \left[\text{E}_{\theta}Y^2-\left(\frac{n}{n+1}\theta\right)^2\right] \\
+&=& \left(\frac{n+1}{n}\right)^2 \left[\frac{n}{n+2}\theta^2-\left(\frac{n}{n+1}\theta\right)^2\right] \\
+&=& \frac{1}{n(n+2)}\theta^2, 
+\end{array}
+\]
+which is uniformly smaller than \(\theta^2/n\). This indicates that the Cram&eacute;r-Rao Theorem is not applicable to this pdf. To see that this is so, we can use Leibnitz's Rule (Section 2.4) to calculate 
+\[
+\begin{array}{lll}
+\frac{d}{d\theta} \int_{0}^{\theta} h(x)f(x|\theta)dx
+&=& \frac{d}{d\theta}\int_{0}^{\theta} h(x)\frac{1}{\theta}dx \\
+&=& \frac{h(\theta)}{\theta}+\int_{0}^{\theta} h(x)\frac{\partial}{\partial \theta}\left(\frac{1}{\theta}\right) dx \\
+&\neq & \int_{0}^{\theta} h(x)\frac{\partial}{\partial \theta}f(x|\theta)dx,
+\end{array}
+\]
+unless \(h(\theta)/\theta=0\) for all \(\theta\). Hence, the Cram&eacute;r-Rao Theorem does not apply. In general, if the range of the pdf depends on the parameter, the theorem will not be applicable. 
+</li><br>
+
+
+<li class="note">
+When we were applying Corollary 7.3.10, we used the fact that \(W\) is any unbiased estimator of \(\theta\). By this, we have \(\frac{d}{d\theta}\text{E}_{\theta}W(\mathbf{X})=\frac{d}{d\theta}\theta=1\).
+</li><br>
+
+<li class="note">
+The pdf of \(Y\) see p.229, (5.4.4).
+</li><br>
+
+
+<li class="note">
+Apply the definition to get \(\text{E}_{\theta}(Y)=\int_{0}^{\theta} \frac{ny^{n+1}}{\theta^n}dy=\frac{n}{n+1}\theta^2\).
+</li><br>
+
+</ul>
+
+
+
+
+<!---------------------------------->
+<h4>7.3.3 Sufficiency and Unbiasedness</h4>
+
+<ul>
+
+<li>
+[Casella, p.347, thm.7.3.23]
+Let \(T\) be a complete sufficient statistic for a parameter \(\theta\), and let \(\phi(T)\) be any estimator based only on \(T\). Then \(\phi(T)\) is the unique best unbiased
+estimator of its expected value.</li><br>
+
+<li class="note">
+<table style="text-align: center;" border="1">
+<tbody>
+<tr>
+<td>&nbsp;</td>
+<td>\(\theta\)</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>\(\exists\) complete sufficient statistic</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>\(\tau(\theta)\)</td>
+<td>\(T\)</td>
+<td>\(\tau(\theta)\)</td>
+</tr>
+<tr>
+<td>\(\exists\) unbiased estimator</td>
+<td>\(\Rightarrow\)</td>
+<td>\(\exists\) best unbiased estimator</td>
+</tr>
+<tr>
+<td>\(h(X_1, ..., X_n)\)</td>
+<td>&nbsp;</td>
+<td>\(\phi(T)=\text{E}(h(X_1, ..., X_n)|T)\)</td>
+</tr>
+</tbody>
+</table>
+</li><br>
+
+
+</ul>
+
+<!---------------------------------->
+<!---------------------------------->
+
+<h3>Section 8.3 Methods of Evaluating Tests</h3>
+
+
+
+<!---------------------------------->
+<h4>8.3.1 Error Probabilities and the Power Function</h4>
+
+<ul>
+
+<li>
+[Casella, p.383, tab.8.3.1]
+<table border="1">
+<tbody>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>Decision</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>Accept \(H_0\)</td>
+<td>Reject \(H_0\)</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>\(H_0\)</td>
+<td>Correct</td>
+<td>Type I</td>
+</tr>
+<tr>
+<td>Truth</td>
+<td>&nbsp;</td>
+<td>decision</td>
+<td>Error</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>\(H_1\)</td>
+<td>Type II</td>
+<td>Correct</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>Error</td>
+<td>decision</td>
+</tr>
+</tbody>
+</table>
+</li><br>
+
+<li class="note">
+上面這個表格我都是這樣記的，當助教工作的時候，用心教的助教反而被投訴，這對助教的教學熱情傷害很大，比較嚴重，所以是Type I；對於不用心教的助教，就算沒被投訴傷害也不大。
+<table border="1">
+<tbody>
+<tr>
+<td></td>
+<td>沒被投訴</td>
+<td>被投訴</td>
+</tr>
+<tr>
+<td>用心教</td>
+<td></td>
+<td>I</td>
+</tr>
+<tr>
+<td>不用心教</td>
+<td>II</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li><br>
+
+<li>
+[Casella, p.384, exa.8.3.3]
+<b>(Normal power function)</b>Let \(X_1, ..., X_n\) be a random sample from a \(\text{n}(\theta, \sigma^2)\) population, \(\sigma^2\) know. An LRT of \(H_0:\theta\leq \theta_0\) versus \(H_1:\theta > \theta_0\) is a test that rejects \(H_0\) if \((\bar{X}-\theta_0)/(\sigma/\sqrt{n}) > c\) (see Exercise 8.37). The constant \(c\) can be any positive number. The power function of this test is 
+\[
+\begin{array}{lll}
+\beta(\theta)
+&=& P_{\theta}\left(\frac{\bar{X}-\theta_0}{\sigma/\sqrt{n}} > c\right) \\
+&=& P_{\theta}\left(\frac{\bar{X}-\theta}{\sigma/\sqrt{n}} > c+\frac{\theta_0-\theta}{\sigma/\sqrt{n}}\right) \\
+&=& P\left(Z > c+\frac{\theta_0-\theta}{\sigma/\sqrt{n}}\right),
+\end{array}
+\]
+where \(Z\) is a standard normal random variable, since \((\bar{X}-\theta)/(\sigma/\sqrt{n})\sim \text{n}(0, 1)\). As \(\theta\) increases from \(-\infty\) to \(\infty\), it is easy to see that this normal probability increases from \(0\) to \(1\). Therefore, it follows that \(\beta(\theta)\) is an increasing function of \(\theta\), with 
+\[
+\lim_{\theta\to -\infty}\beta(\theta)=0, ~~
+\lim_{\theta\to \infty}\beta(\theta)=1, ~~
+\text{ and }~~
+\beta(\theta_0)=\alpha
+\text{ if }P(Z > c)=\alpha.
+\]
+A graph of \(\beta(\theta)\) for \(c=1.28\) is given in Figure 8.3.2.
+</li><br>
+
+
+<li class="note">
+先看過exa.8.2.2，上面這個範例中，\(c\) 應該改成 \(c'=\sqrt{-2\ln{c}}\)，\(c\) 是rejection region \(\{\mathbf{x}\mid \lambda(\mathbf{x} \geq c\}\) 中的那個 \(c\)。
+所以算式全變成
+\[
+\begin{array}{lll}
+\beta(\theta)
+&=& P_{\theta}\left(\frac{\bar{X}-\theta_0}{\sigma/\sqrt{n}} > c'\right) \\
+&=& P_{\theta}\left(\frac{\bar{X}-\theta}{\sigma/\sqrt{n}} > c'+\frac{\theta_0-\theta}{\sigma/\sqrt{n}}\right) \\
+&=& P\left(Z > c'+\frac{\theta_0-\theta}{\sigma/\sqrt{n}}\right),
+\end{array}
+\]
+另外，注意這裡跟exa.8.2.2不同，exa.8.2.2是 \(|(\bar{X}-\theta_0)/(\sigma/\sqrt{n})| > c'\)
+</li><br>
+
+<li>
+[Casella, p.386, exa.8.3.7]
+<b>(Size of LRT)</b>
+In general, a size \(\alpha\) LRT is constructed by choosing \(c\) such that \(\sup_{\theta\in \Theta_0} P_{\theta}(\lambda(\mathbf{X})\leq c)=\alpha\). How that \(c\) is determined depends on the particular problem. For example, in Example 8.2.2, \(\Theta_0\) consists of the single point \(\theta=\theta_0\) and \(\sqrt{n}(\bar{X}-\theta_0)\sim \text{n}(0, 1)\) if \(\theta=\theta_0\). So the test
+\[
+\text{reject }H_0\text{ if }|\bar{X}-\theta_0|\geq z_{\alpha/2}/\sqrt{n},
+\]
+where \(z_{\alpha/2}\) satisfies \(P(Z\geq z_{\alpha/2})=\alpha/2\) with \(Z\sim \text{n}(0, 1)\), is the size \(\alpha\) LRT. Specifically, this corresponds to choosing \(c=\exp{(-z_{\alpha/2}^2/2)}\), but this is not an important point.
+</li><br>
+
+
+
+<li class="note">
+上面這個例子要多講一下。仿照p.375, exa.8.2.2的討論，我們有
+\[\lambda(\mathbf{x})=e^{-n(\bar{x}-\theta_0)^2/(2\sigma^2)}\]
+\[\text{rejection region }\{\mathbf{x}\mid \lambda(\mathbf{x})\leq c\}=\left\{\mathbf{x}\mid |\bar{x}-\theta_0|\geq \frac{\sigma\sqrt{-2\ln{c}}}{\sqrt{n}}\right\}.\]
+於是
+\[
+\begin{array}{lll}
+\beta(\theta)=P_{\theta}(\mathbf{X}\in R)=P_{\theta}(\lambda(\mathbf{X})\leq c)
+&=& P\left(|\bar{X}-\theta_0|\geq \frac{\sigma\sqrt{-2\ln{c}}}{\sqrt{n}}\right) \\
+&=& P_{\theta}\left(\left|\frac{\bar{X}-\theta_0}{\sigma/\sqrt{n}}\right|\geq \sqrt{-2\ln{c}}\right) \\
+&=& P_{\theta}\left(\frac{\bar{X}-\theta_0}{\sigma/\sqrt{n}}\leq -\sqrt{-2\ln{c}}\right)+P_{\theta}\left(\frac{\bar{X}-\theta_0}{\sigma/\sqrt{n}}\geq \sqrt{-2\ln{c}}\right) \\
+&=& P_{\theta}\left(\frac{\bar{X}-\theta}{\sigma/\sqrt{n}}\leq -\sqrt{-2\ln{c}}+\frac{\theta_0-\theta}{\sigma/\sqrt{n}}\right)+P_{\theta}\left(\frac{\bar{X}-\theta_0}{\sigma/\sqrt{n}}\geq \sqrt{-2\ln{c}}+\frac{\theta_0-\theta}{\sigma/\sqrt{n}}\right)
+\end{array}\tag{*}
+\]
+接著注意到，這裡是 \(H_0:\theta=\theta_0\)，而在p.384, exa.8.3.3則是 \(H_0:\theta\leq \theta_0\)。所以
+\[
+\begin{array}{ll}
+\sup_{\theta\in \Theta_0}\beta(\theta)\stackrel{\Theta_0=\{\theta_0\}}{=}\sup_{\theta=\theta_0}\beta(\theta)=\beta(\theta_0) 
+&=& P_{\theta}\left(\frac{\bar{X}-\theta}{\sigma/\sqrt{n}}\leq -\sqrt{-2\ln{c}}\right)+P_{\theta}\left(\frac{\bar{X}-\theta}{\sigma/\sqrt{n}}\geq \sqrt{-2\ln{c}}\right) \\
+&=& 2P(Z\geq \sqrt{-2\ln{c}}) \\
+&=& \alpha,
+\end{array}
+\]
+其中 \(Z\sim \text{n}(0, 1)\)。
+於是 \(P(Z\geq \sqrt{-2\ln{c}})=\frac{\alpha}{2}\)，所以 \(\sqrt{-2\ln{c}}=z_{\alpha/2}\)，而且 \(c=e^{-z_{\alpha/2}^2/2}\)。
+注意！這裡跟p.384, exa.8.3.3不太一樣。
+    <ul>
+    <li>exa.8.3.3把 \(\left|\frac{\bar{X}-\theta_0}{\sigma/\sqrt{n}}\right|\geq \sqrt{-2\ln{c}}\) 的(a)絕對值拿掉（人工地拿掉），而且(b) \(H_0\) 是 \(\theta\leq \theta_0\)，也就是 \(\Theta_0=(-\infty, \theta_0)\)，在(a), (b)兩個條件下，\(\beta(\theta)\) 是遞增的，\(\sup_{\theta\in \Theta_0}\beta(\theta)=\beta(\theta_0)\)；</li>
+    <li>而在exa.8.3.7，\(\left|\frac{\bar{X}-\theta_0}{\sigma/\sqrt{n}}\right|\geq \sqrt{-2\ln{c}}\) 是有絕對值的，而且 \(\theta=\theta_0\)，在exa.8.3.7不能是 \(\theta\leq \theta_0\)，因為這麼一來，由(*)會得到 \(\beta(\theta)\) 越往左越大，也越靠近 \(1\)，\(\sup_{\theta\in \Theta_0}\beta(\theta)\) 會是 \(1\)，不會如希望的 \(2P(Z\geq \sqrt{-2\ln{c}})\)。</li>
+    </ul>
+</li><br>
+
+</ul>
+
+
+<!---------------------------------->
+<!---------------------------------->
+
+<h3>Section 8.3 Methods of Evaluating Tests</h3>
+
+
+
+<!---------------------------------->
+<h4>8.3.1 Error Probabilities and the Power Function</h4>
+
+<ul>
+
+<li>
+The correspondence between testing and interval estimation for the two-sided normal problem is illustrated in Figure 9.2.1. There it is, perhaps, more easily seen that both tests and intervals ask the same question, but from a slightly different perspective. Both procedures look for consistency between sample statistics and population parameters. The hypothesis test fixes the parameter and asks what sample values (the acceptance region) are consistent with that fixed value. The confidence set fixes the sample value and asks what parameter values (the confidence interval) make this sample value most plausible.
+</li><br>
+
+<li class="note">
+一言以敝之，就是
+<table>
+<tr><td>fixed parameter, </td><td>accepted sample</td></tr>
+<tr><td>fixed sample, </td><td>possible parameter</td></tr>
+</table>
+</li><br>
+
+
+</ul>
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Chapter 10 Asymptotic Evaluations</h2>
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+
+<h3>Section 10.1 Point Estimation</h3>
+
+
+
+<!---------------------------------->
+<h4>10.1.1 Consistency</h4>
+
+<ul>
+
+<li>
+</li><br>
+
+
+</ul>
+
+
+<!---------------------------------->
+<h4>10.1.2 Efficiency</h4>
+
+<ul>
+
+<li>
+[Casella, p.470, exa.10.1.8]
+<b>(Limiting variances)</b> For the mean \(\bar{X}_n\) of \(n\) iid normal observations with \(\text{E}(X)=\mu\) and \(\text{Var}(X)=\sigma^2\), if we take \(T_n=\bar{X}_n\), then \(\lim \sqrt{n}\text{Var}(\bar{X}_n)=\sigma^2\) is the limiting variance of \(T_n\).
+<br><br>
+But a troubling thing happens if, for example, we were instead interested in estimating \(1/\mu\) using \(1/\bar{X}_n\). If we now take \(T_n=1/\bar{X}_n\), we find that the variance is \(\text{Var}(T_n)=\infty\), so the limit of the variances is infinity. 
+</li><br>
+
+
+<li class="note">
+There is a typo. \(\lim \sqrt{n}\text{Var}(\bar{X}_n)=\sigma^2\) should be \(\lim n\text{Var}(\bar{X}_n)=\sigma^2\).
+</li><br>
+
+<li class="note">
+不知道為什麼 \(\text{Var}(T_n)=\infty\)，目前找到的解釋在<a href="https://stats.stackexchange.com/questions/70045/mean-and-variance-of-inverse-of-a-normal-rv">這裡</a>，但我覺得不漂亮。
+</li><br>
+
+
+
+<li>
+[Casella, p.471, exa.10.1.10]
+<b>(Large-sample mixture variances)</b> The hierarchical model
+\[
+\begin{array}{rcl}
+Y_n|(W_n=w_n) & \sim & \text{n}(0, w_n+(1-w_n)\sigma_n^2), \\
+W_n & \sim & \text{Bernoulli}(p_n), 
+\end{array}
+\]
+can exhibit big discrepancies between the asymptotic and limiting variances. (This is also sometimes described as a mixture model, where we observe \(Y_n\sim \text{n}(0, 1)\) with probability \(p_n\) and \(Y_n\sim \text{n}(0, \sigma_n^2)\) with probability \(1-p_n\).)
+<br><br>
+First, using Theorem 4.4.7 we have
+\[
+\text{Var}(Y_n)=p_n+(1-p_n)\sigma_n^2.
+\]
+It then follows that the limiting variance of \(Y_n\) is finite only if \(\lim_{n\to \infty}(1-p_n)\sigma_n^2\lt \infty\).
+<br><br>
+On the other hand, the asymptotic distribution of \(Y_n\) can be directly calculated using
+\[
+P(Y_n\lt a)=p_n P(Z\lt a)+(1-p_n)P(Z\lt a/\sigma_n).
+\]
+Suppose now we let \(p_n\to 1\) and \(\sigma_n\to \infty\) in such a way that \((1-p_n)\sigma_n^2\to \infty\). It then follows that \(P(Y_n\lt a)\to P(Z\lt a)\), that is, \(Y_n\to \text{n}(0, 1)\), and we have 
+\[
+\begin{array}{rcl}
+\text{limiting variance} &=& \lim_{n\to \infty} p_n+(1-p_n)\sigma_n^2=\infty, \\
+\text{asymptotic variance} &=& 1.
+\end{array}
+\]
+See Exercise 10.6 for more details.
+</li><br>
+
+
+
+<li class="note">
+解釋一下 \(P(Y_n\lt a)\) 那行。As we did in p.163, exa.4.4.2, 
+\[
+\begin{array}{lll}
+P(Y_n=y_n)
+&=& \sum_{w_n=0}^{1} P(Y_n=y_n, W_n=w_n) \\
+&=& \sum_{w_n=0}^{1} P(Y_n=y_n|W_n=w_n)P(W_n=w_n) \\
+&=& P(Y_n=y_n|W_n=0)P(W_n=0)+P(Y_n=y_n|W_n=1)P(W_n=1) \\
+&=& \frac{1}{\sqrt{2\pi}\sigma_n}e^{\frac{-y_n^2}{2\sigma_n^2}}(1-p_n)+\frac{1}{\sqrt{2\pi}}e^{\frac{-y_n^2}{2}}p_n.
+\end{array}
+\]
+Then 
+\[
+\begin{array}{rcl}
+P(Y_n\lt a)
+&=& (1-p_n)\int_{-\infty}^{a} \frac{1}{\sqrt{2\pi}\sigma_n}e^{\frac{-y_n^2}{2\sigma_n^2}}dy_n+p_n\int_{-\infty}^{a}\frac{1}{\sqrt{2\pi}}e^{\frac{-y_n^2}{2}}dy_n \\
+&=& (1-p_n)\int_{-\infty}^{a} \frac{1}{\sqrt{2\pi}\sigma_n}e^{\frac{-y_n^2}{2\sigma_n^2}}dy_n+p_n P(Z\lt a) \\
+&\stackrel{u=\frac{y_n}{\sigma_n}}{=}& (1-p_n)\int_{-\infty}^{\frac{a}{\sigma_n}} \frac{1}{\sqrt{2\pi}}e^{\frac{-u^2}{2}}du+p_n P(Z\lt a) \\
+&=& (1-p_n)P\left(Z\lt \frac{a}{\sigma_n}\right)+p_n P(Z\lt a)
+\end{array}
+\] 
+</li><br>
+
+
+
+<li>
+[Casella, p.472, thm.10.1.12]
+<b>(Asymptotic efficiency of MLEs)</b> Let \(X_1, X_2, ...\), be iid \(f(x|\theta)\), let \(\hat{\theta}\) denote the MLE of \(\theta\), and let \(\tau(\theta)\), be a continuous function of \(\theta\). Under the regularity conditions in Miscellanea 10.6.2 on \(f(x|\theta)\) and, hence, \(L(\theta|\mathbf{x})\), 
+\[
+\sqrt{n}[\tau(\hat{\theta})-\tau(\theta)]\to \text{n}[0, v(\theta)], 
+\]
+where \(v(\theta)\) is the Cram&eacute;r-Rao Lower Bound. That is, \(\tau(\hat{\theta})\) is a consistent and asymptotically efficient estimator of \(\tau(\theta)\).
+<br><br>
+<b>Proof:</b> The proof of this theorem is interesting for its use of Taylor series and its exploiting of the fact that the MLE is defined as the zero of the likelihood function. We will outline the proof showing that \(\hat{\theta}\) is asymptotically efficient; the extension to \(\tau(\hat{\theta})\) is left to Exercise 10.7.
+<br><br>
+Recall that \(l(\theta|\mathbf{x})=\sum\log{f(x_i|\theta)}\) is the log likelihood function. Denote deriatives (with respect to \(\theta\)) by \(l', l'', ...\). Now expand the first derivative of the log likelihood around the true value \(\theta_0\), 
+\[
+l'(\theta|\mathbf{x})=l'(\theta_0|\mathbf{x})+(\theta-\theta_0)l''(\theta_0|\mathbf{x})+\cdots, 
+\tag{10.1.4}
+\]
+where we are going to ignore the higher-order terms (a justifiable maneuver under the regularity conditions).
+<br><br>
+Now substitute the MLE \(\hat{\theta}\) for \(\theta\), and realize that the left-hand side of (10.1.4) is \(0\). Rearranging and multiplying through by \(\sqrt{n}\) gives us
+\[
+\sqrt{n}(\hat{\theta}-\theta_0)=\sqrt{n}\frac{-l'(\theta_0|\mathbf{x})}{l''(\theta_0|\mathbf{x})}=\frac{-\frac{1}{\sqrt{n}}l'(\theta_0|\mathbf{x})}{\frac{1}{n}l''(\theta_0|\mathbf{x})}.
+\tag{10.1.5}
+\]
+If we let \(I(\theta_0)=\text{E}[l'(\theta_0|X)]^2=1/v(\theta)\) denote the information number for one observation, application of the Central Limit Theorem and the Weak Law of Large Numbers will show (see Exercise 10.8 for details)
+\[
+\begin{array}{rclr}
+-\frac{1}{\sqrt{n}}l'(\theta_0|\mathbf{X}) & \to & \text{n}[0, I(\theta_0)], & (\text{in distribution}) \\
+\frac{1}{n}l''(\theta_0|\mathbf{X}) & \to & I(\theta_0). & (\text{in probability})
+\end{array}
+\tag{10.1.6}
+\]
+Thus, if we let \(W\sim \text{n}[0, I(\theta_0)]\), then \(\sqrt{n}(\hat{\theta}-\theta_0)\) converges in distribution to \(W/I(\theta_0)\sim \text{n}[0, 1/I(\theta_0)]\), proving the theorem.
+</li><br>
+
+<li class="note">
+In the last sentence, we applied p.239, thm.5.5.17, Slutsky's Theorem.
+</li><br>
+
+
+<li>
+[Casella, p.475, line 3]
+\[
+\begin{array}{lll}
+\hat{\text{Var}}\left(\frac{\hat{p}}{1-\hat{p}}\right)
+&=& \frac{\left[\frac{\partial}{\partial p}\left(\frac{p}{1-p}\right)\right]^2|_{p=\hat{p}}}{-\frac{\partial^2}{\partial p^2}\log{L(p|\mathbf{x}})|_{p=\hat{p}}} \\
+&=& \frac{\left[\frac{(1-p)+p}{(1-p)^2}\right]^2|_{p=\hat{p}}}{\frac{n}{p(1-p)}|_{p=\hat{p}}} \\
+&=& \frac{\hat{p}}{n(1-\hat{p})^3}.
+\end{array}
+\]
+</li><br>
+
+<li class="note">
+In the second equality, I don't know why \(-\frac{\partial^2}{\partial p^2}\log{L(p|\mathbf{x}})=\frac{n}{p(1-p)}\). Just get it by using p.474, line -11.
+</li><br>
+
+
+<li>
+[Casella, p.475, exa.10.1.15]
+<b>(Continuation of Example 10.1.14)</b> Suppose now that we want to estimate the variance of the Bernoulli distribution, \(p(1-p)\). The MLE of this variance is given by \(\hat{p}(1-\hat{p})\), and an estimate of the variance of this estimator can be obtained by applying the approximation of (10.1.7). We have 
+\[
+\begin{array}{lll}
+\hat{\text{Var}}\left(\hat{p}(1-\hat{p})\right)
+&=& \frac{\left[\frac{\partial}{\partial p}\left(p(1-p)\right)\right]^2|_{p=\hat{p}}}{-\frac{\partial^2}{\partial p^2}\log{L(p|\mathbf{x}})|_{p=\hat{p}}} \\
+&=& \frac{(1-2p)^2|_{p=\hat{p}}}{\frac{n}{p(1-p)}|_{p=\hat{p}}} \\
+&=& \frac{\hat{p}(1-\hat{p})(1-2\hat{p})^2}{n},
+\end{array}
+\]
+which can be \(0\) if \(\hat{p}=\frac{1}{2}\), a clear underestimate of the variance of \(\hat{p}(1-\hat{p})\). The fact that the function \(p(1-p)\) is not monotone is a cause of this problem. 
+<br><br>
+Using Theorem 10.1.6, we can conclude that out estimator is asymptotically efficient as long as \(p\neq 1/2\). If \(p=1/2\) we need to use a second-order approximation as given in Theorem 5.5.26 (see Exercise 10.10).
+</li><br>
+
+
+
+
+</ul>
+
+<!---------------------------------->
+<h4>10.1.3 Calculations and Comparisons</h4>
+
+
+<ul>
+
+<li>
+The asymptotic formulas developed in the previous sections can provide us with approximate variances for large-sample use. Again, we have to be concerned with regularity conditions (Miscellanea 10.6.2), but these are quite general and almost always satisfied in common circumstances. One condition deserves special mention, however, whose violation can lead to complications, as we have already seen in Example 7.3.13. For the following approximations to be valid, it must be the case that the support of the pdf or pmf, hence likelihood function, must be independent of the parameter.
+<br><br>
+If an MLE is asymptotically efficient, the asymptotic variance in Theorem 10.1.6 is the Delta Method variance of Theorem 5.5.24 (without the \(1/n\) term). Thus, we can use the Cram&eacute;r-Rao Lower Bound as an approximation to the true variance of the MLE. Suppose that \(X_1, ..., X_n\) are iid \(f(x|\theta)\), \(\hat{\theta}\) is the MLE of \(\theta\), and \(I_n(\theta)=\text{E}_{\theta}\left(\frac{\partial}{\partial \theta}\log{L(\theta|\mathbf{X})}\right)^2\) is the information number of the sample. From the Delta Method and asymptotic efficiency of MLEs, the variance of \(h(\theta)\) can be approximated by
+\[
+\begin{array}{rclr}
+\text{Var}(h(\hat{\theta})|\theta) 
+&\approx & \frac{[h'(\theta)]^2}{I_n(\theta)} \\
+&=& \frac{[h'(\theta)]^2}{\text{E}_{\theta}\left(-\frac{\partial^2}{\partial \theta^2}\log{L(\theta|\mathbf{X})}\right)} & \left(\begin{array}{c}\text{using the identity}\\\text{of Lemma 7.3.11}\end{array}\right) \\
+&=& \frac{[h'(\theta)]^2|_{\theta=\hat{\theta}}}{-\frac{\partial^2}{\partial \theta^2}\log{L(\theta|\mathbf{X})}|_{\theta=\hat{\theta}}}. & \left(\begin{array}{c}\text{the denominator is }\hat{I}_n(\hat{\theta}), \text{ the}\\\text{observed information number}\end{array}\right)
+\tag{10.1.7}
+\end{array}
+\]
+</li><br>
+
+<li class="note">
+(10.1.7)第一個近似是用p.472, thm.10.1.12。
+</li><br>
+
+
+
+<li class="note">
+注意到，在這裡說information number是
+\[
+\text{E}_{\theta}\left(\frac{\partial}{\partial \theta}\log{L(\theta|\mathbf{X})}\right)^2
+\]
+而在p.338, line 8則是
+\[
+\text{E}_{\theta}\left(\left(\frac{\partial}{\partial \theta}\log{f(\mathbf{X}|\theta)}\right)^2\right)
+\]
+這兩個是一樣的，參考p.315, (7.2.3)
+\[
+</li><br>
+
+
+<li class="note">
+If an MLE is asymptotically efficient, the asymptotic variance in Theorem 10.1.6 is the Delta Method variance of Theorem 5.5.24 (without the \(1/n\) term).
+<br><br>
+這段看不懂，而且應該是用Theorem 10.1.12吧？
+</li><br>
+
+<li>
+[Casella, p.474, line 1]
+It follows from Theorem 10.1.6 that \(-\frac{1}{n}\frac{\partial^2}{\partial \theta^2}\log{L(\theta|\mathbf{X})}|_{\theta=\hat{\theta}}\) is a consistent estimator of \(I(\theta)\), so it follows that \(\text{Var}_{\hat{\theta}}h(\hat{\theta})\) is a consistent estimator of \(\text{Var}_{\theta}h(\hat{\theta})\).
+</li><br>
+
+<li class="note">
+在(10.1.7)中，把 \(I_n(\theta)\) 跟 \(-\frac{\partial^2}{\partial \theta^2}\log{L(\theta|\mathbf{X})}\) 視為相同的。
+</li><br>
+
+</ul>
+
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Chapter 11 Analysis of Variance and Regression</h2>
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+
+<h3>Section 11.3 Simple Linear Regression</h3>
+
+
+<ul>
+
+<li>
+[Casella, p.539, line 11]
+In the analysis of variance we looked at how one factor (variable) influenced the means of a response variable. We now turn to simple linear regression, where we try to better understand the functional dependence of one variable on another. In particular, in simple linear regression we have a relationship of the form
+\[
+Y_i=\alpha+\beta x_i+\epsilon_i, 
+\tag{11.3.1}
+\]
+where \(Y_i\) is a random variable and \(x_i\) is another observable variable.
+</li><br>
+
+<li class="note">
+\(x_i\) 不一定是random variable，等下p.539, line -16會講，也可能是random variable，參考p.539, line -1。
+</li><br>
+
+<li class="note">
+這裡可以參考Anderson的Figure 14.6，非常有幫助。
+</li><br>
+
+<li class="note">
+各個假設出現的段落。
+  <ul>
+  <li>p.539, (11.3.1): \(Y_i=\alpha+\beta x_i+\epsilon_i\)</li>
+  <li>p.539, line 14: \(\text{E}(\epsilon_i)=0\)</li>
+  <li>p.544, (11.3.12): \(\text{Var}(Y_i)=\sigma^2\)</li>
+  <li>p.545, (11.3.14): \(\text{Var}(\epsilon_i)=\sigma^2\)</li>
+  <li>p.545, line 4: \(\epsilon_1, ..., \epsilon_n\) are uncorrelated</li>
+  <li>p.545, line 7: \(Y_i\)s are uncorrelated</li>
+  <li>p.549, line 7: \(Y_1, ..., Y_n\) are assumed to be independent</li>
+  <li>p.549, (11.3.22): \(Y_i\sim \text{n}(\alpha+\beta x_i, \sigma^2)\)</li>
+  <li>p.549, line 14: \(\epsilon_1, ..., \epsilon_n\) are iid \(\text{n}(0, \sigma^2)\)</li>
+  <li></li>
+  </ul>
+</li><br>
+
+</ul>
+
+
+<!---------------------------------->
+<h4>11.3.1 Least Squares: A Mathematical Solution</h4>
+
+
+<!---------------------------------->
+<h4>11.3.2 Best Linear Unbiased Estimators: A Statistical Solution</h4>
+
+
+
+<ul>
+
+<li class="note">
+我覺得這小節很不自然，用到Lemma 11.2.7也很tricky。
+</li><br>
+
+</ul>
+
+
+
+<!---------------------------------->
+<h4>11.3.3 Models and Distribution Assumptions</h4>
+
+
+
+<ul>
+
+<li class="note">
+這小節分成兩部分，第一部分是Conditional normal model，第二部分是Bivariate normal model，第二部分跟第一部分的差別在\(X\)是random variable，不太懂這個情況。
+</li><br>
+
+</ul>
+
+
+<!---------------------------------->
+<h4>11.3.4 Estimation and Testing with Normal Errors</h4>
+
+<ul>
+
+<li>[Casella, p.553, thm.11.3.3]
+Under the conditional normal regression model (11.3.22), the sampling distributions of the estimators \(\hat{\alpha}, \hat{\beta}\), and \(S^2\) are 
+\[
+\hat{\alpha}\sim \text{n}\left(\alpha, \frac{\sigma^2}{nS_{xx}}\sum_{i=1}^{n}x_i^2\right), ~~~\hat{\beta}\sim \text{n}\left(\beta, \frac{\sigma^2}{S_{xx}}\right), 
+\]
+with 
+\[
+\text{Cov}(\hat{\alpha}, \hat{\beta})=\frac{-\sigma^2 \bar{x}}{S_{xx}}.
+\]
+Furthermore, \((\hat{\alpha}, \hat{\beta})\) and \(S^2\) are independent and 
+\[
+\frac{(n-2)S^2}{\sigma^2}\sim \chi^2_{n-2}.
+\]
+</li><br>
+
+
+<li>
+[Casella, p.554, line 12]
+The details are somewhat involved because of the general nature of the \(x_i\)s. We omit details.
+</li><br>
+
+<li class="note">
+A proof see [Roussas, p.434, thm.5].
+</li><br>
+
+
+</ul>
+
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Chapter 12 Regression Models</h2>
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+
+<h3>Section 12.3 Logistic Regression</h3>
+
+
+
+<!---------------------------------->
+<h4>12.3.1 The Model</h4>
+
+<ul>
+
+<li class="note">
+\[
+\begin{array}{ll}
+Y_i\sim \text{n}(\alpha+\beta x_i, \sigma^2) & Y_i\sim \text{Bernoulli}(\pi_i) \\
+\text{E}(Y_i)=\alpha+\beta x_i & \pi_i=\text{E}(Y_i)=\frac{e^{\alpha+\beta x_i}}{1+e^{\alpha+\beta x_i}} \\
+f(y_i)=\frac{1}{\sqrt{2\pi}\sigma}e^{\frac{-(y_i-(\alpha+\beta x_i))^2}{2\sigma^2}} & f(y_i)=\pi_i^{y_i}(1-\pi_i)^{1-y_i}
+\end{array}
+\]
+</li><br>
+
+
+</ul>
+
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+
+<h2>Law of Large Numbers</h2>
+
+<ul>
+
+<li>Ross, p.25, sec.2.3.
+On way of defining the probability of an even is in terms of its <i>relative frequency</i>. Such a definition usually goes as follows: We suppose that an experiment, whose sample space is \(S\), is repeatedly performed under exactly the same conditions. For each even \(E\) of the sample space \(S\), we define \(n(E)\) to be the number of times in the first \(n\) repetitions of the experiment that the even \(E\) occurs. Then \(P(E)\), the probability of the event \(E\), is defined as 
+\[P(E)=\lim_{n\to \infty}\frac{n(E)}{n}\]
+That is, \(P(E)\) is defined as the (limiting) proportion of time that \(E\) occurs. It is thus the limiting relative frequency of \(E\).
+</li><br>
+
+<li>Ross, p.25, sec.2.3.
+Although the preceding definition is certainly intuitively pleasing and should always be kept in mind by the reader, it possesses a serious drawback: How do we know that \(n(E)/n\) will converge to some constant limiting value that will be the same for each possible sequence of repetitions of the experiment? For example, suppose that the experiment to be repeatedly performed consists of flipping a coin. How do we know that the proportion of heads obtained in the first \(n\) flips will converge to some value as \(n\) gets large? Also, even if it does converge to some value, how do we know that, if the experiment is repeatedly performed a second time, we shall obtain the same limiting proportion of heads?
+</li><br>
+
+<li>Ross, p.25, sec.2.3.
+Proponents of the relative frequency definition of probability usually answer this objection by stating that the convergence of \(n(E)/n\) to a constant limiting value is an assumption, or an <i>axiom</i>, of the system. However, to assume that \(n(E)/n\) will necessarily converge to some constant value seems to be an extraordinarily complicated assumption. For, although we might indeed hope that such a constant limiting frequency exists, it does not at all seem to be a priori evident that this need be the case. In fact, would it not be more reasonable to assume a set of simpler and more self-evident axioms about probability and then attempt to prove that such a constant limiting frequency does in some sense exist? The latter approach is the modern axiomatic approach to probability theory that we shall adopt in this text. In particular, we shall assume that, for each event \(E\) in the sample space \(S\), there exists a value \(P(E)\), referred to as the probability of \(E\). We shall then assume that all these probabilities satisfy a certain set of axioms, which, we hope the reader will agree, is in accordance with our intuitive notion of probability.
+</li><br>
+
+<li>Kenneth, p.137.
+The Law of Large Numbers was once taken as the justification for defining probability in terms of the frequency of occurrence of an event. This led to an interpretation of probability called the frequentist point of view that had a significant influence at one time. The problem with founding an interpretation of probability on the Law of Large Numbers is that it is a purely mathematical theorem. In order for it to make sense, we must already have the concepts of probability, random variables and expectations. To use the Law as the <i>definition</i> of probability leads to circular reasoning.
+</li><br>
+
+</ul>
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+
+<h2>Central Limit Theorem</h2>
+
+<ul>
+
+<li class="note">
+Weak Law of Large Number是Central Limit Theorem的一個Corollary，參考Chung's Elementary Probability Theory, Section 7.6。不過大部分的書都是先證Weak Law of Large Number，再來才證Central Limit Theorem，畢竟Weak Law of Large Number的證明蠻簡單的。另外，因為不同的書對於Weak Law of Large Number及Central Limit Theorem這兩個定理的描述跟假設會有些不同，所以並不是
+\[\text{Central Limit Theorem} \Rightarrow \text{Weak Law of Large Number}\]
+對每一本書的描述都成立。
+</li><br>
+
+<li>
+Hogg, p.182. If all \(n\) of the distributions are the same, then the collection of \(n\) independent and identically distributed random variables, \(X_1, X_2, ..., X_n\), is said to be a <b>random sample of size \(n\) from that common distribution</b>.
+</li><br>
+
+<li>注意到這個random sample是一個隨機變數，不是如名稱上所說的"樣本"。</li><br>
+
+<li>
+Hogg, p.185.
+Now consider the <b>mean of a random sample</b>, \(X_1, X_2, ..., X_n\), from a distribution with mean \(\mu\) and variance \(\sigma^2\), namely,
+\[\bar{X}=\frac{X_1+X_2+\cdots+X_n}{n},\]
+which is a linear function with each \(a_i=1/n\).
+</li><br>
+
+<li>
+Hogg, p.200, thm.5.6-1.
+<b>(Central Limit Theorem)</b> If \(\bar{X}\) is the mean of a random sample \(X_1, X_2, ..., X_n\) of size \(n\) from a distribution with a finite mean \(\mu\) and a finite positive variance \(\sigma^2\), then the distribution of
+\[W=\frac{\bar{X}-\mu}{\sigma/\sqrt{n}}=\frac{\sum_{i=1}^{n}X_i-n\mu}{\sqrt{n}\sigma}\]
+is \(N(0, 1)\) in the limit as \(n\to \infty\).
+</li><br>
+
+<li>
+Kenneth, p.129. 
+The two most common manifestations of the Central Limit Theorem are the following:
+    <ul>
+    <li>As \(n\to \infty\), the sum \(S_n\) "tends" to the distribution \(N(nm, n\sigma^2)\).</li><br>
+    <li>As \(n\to \infty\), the <b>sample average</b> (or <b>sample mean</b>) \(\bar{m}=\frac{S_n}{n}\) "tends" to the distribution \(N(m, \sigma^2/n)\).</li><br>
+    </ul>
+</li><br>
+
+</ul>
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+
+
+<h2>References</h2>
+
+<ul>
+
+<li>Casella and Berger's <i>Statistical Inference</i></li><br>
+
+<li>Chung's <i>Elementary Probability Theory</i></li><br>
+
+<li>Hogg and Tannis's <i>Probability and Statistical Inference</i></li><br>
+
+<li>Kenneth's <i>Introduction to Probability with R</i></li><br>
+
+<li>Roussas's <i>An Introduction to Probability and Statistical Inference</i></li><br>
+
+<li>Ross's <i>First Course in Probability</i></li><br>
+
+</ul>
+
+</body>
+</html>

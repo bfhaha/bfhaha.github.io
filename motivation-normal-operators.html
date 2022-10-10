@@ -1,0 +1,146 @@
+﻿<html>
+
+<head>
+
+<title>A Motivation of Normal Operators on Inner Product Spaces</title>
+<meta name="description" content="A Motivation of Normal Operators on Inner Product Spaces">
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+
+<style>
+.box {
+  border: 1px solid black;
+  padding: 20px;
+  margin: 20px;
+}
+</style>
+
+</head>
+<body>
+
+
+<h1>A Motivation of Normal Operators</h1>
+
+<p>Let \(A\) be a \(n\times n\) matrix. We've already known that 
+\[A\text{ is symmetric}\Leftrightarrow A\text{ is diagonally diagonalizable}\]
+</p>
+
+<div class="box">
+
+<p>Proof: (Theorem 6.17)
+</p>
+
+<p>"\(\Leftarrow\)" is easy.
+</p>
+
+<p>There are four parts for proving "\(\Rightarrow\)". 
+</p>
+
+<p>Part I: We show that the eigenvalues of \(A\) are real. Suppose that \(A\mathbf{v}=\lambda v\). Then 
+\[\lambda \langle \mathbf{v}, \mathbf{v}\rangle
+=\langle \lambda \mathbf{v}, \mathbf{v}\rangle
+=\langle A\mathbf{v}, \mathbf{v}\rangle
+=\langle \mathbf{v}, A^t\mathbf{v}\rangle
+=\langle \mathbf{v}, A\mathbf{v}\rangle
+=\langle \mathbf{v}, \lambda\mathbf{v}\rangle
+=\overline{\lambda}\langle \mathbf{v}, \mathbf{v}\rangle
+\]
+This follows that \(\lambda=\overline{\lambda}\) since \(\mathbf{v}\neq \mathbf{0}\).
+</p>
+  
+<p>Part II: We show that the characteristic polynomial of \(A\) splits. Let \(f(x)\) be the characteristic polynomial of \(A\). By the Fundamental Theorem of Algebra, \(f(x)\) splits over \(\mathbb{C}\). Since all eigenvalues of \(A\) are real, \(f(x)\) splits over \(\mathbb{R}\). 
+</p>
+
+<p>Part III: Schur's Theorem. See Theorem 6.4.3 in Leon's Linear Algebra.
+</p>
+
+<p>Part IV: Finally, we show that \(A\) is diagonally diagonalizable. By Schur's Theorem, there exists an orthonormal basis for \(\mathbb{R}^n\) such that \(A=PUP^t\), where \(P\)'s columns consists of those orthonormal eigenvectors of \(A\) and \(U\) is an upper triangular matrix. Then 
+\[PU^t P^t=A^t=A=PUP^t.\]
+This follows that \(U=U^t\) and \(U\) is a diagonal matrix.
+</p>
+
+</div>
+
+<p>A natural conjecture is
+\[A\text{ is self-adjoint}\Leftrightarrow A\text{ is unitarily diagonalizable}\]
+</p>
+
+<p>The proof of "\(\Rightarrow\)" is similar to the previous one. However, it is easy to find an counterexample for "\(\Leftarrow\)".
+</p>
+
+<p>Let's recall the proof of "\(A\) is symmetric \(\Leftarrow\) \(A\) is orthogonally diagonalizable" and examine it why the same method can't apply here. 
+</p>
+
+<p>When we were proving "\(A\) is symmetric \(\Leftarrow\) \(A\) is orthogonally diagonalizable", we had
+\[A^t=(PDP^t)^t=PD^t P=PDP^t=A.\]
+At here, we only have
+\[A^*=(PDP^*)^*=PD^* P^*.\]
+The proof failed because \(D\neq D^*\). 
+</p>
+
+<p>However, above discussion gives us a theorem. (Corollary 3 of Theorem 6.25.)
+\[A\text{ is self-adjoint}\Leftrightarrow A\text{ is unitarily diagonalizable and all eigenvalues are real}\]
+</p>
+
+<p>However, this theorem doesn't give us any equivalent property of being unitarily diagonalizable.
+</p>
+
+<p>Suppose that \(A=PDP^*\). The key observation is that
+\[
+\begin{array}{lll}AA^*
+&=& (PDP^*)(PDP^*)^* \\
+&=& PDP^* PD^* P \\
+&=& PDD^* P^* \\
+&=& PD^* DP^* \\
+&=& PD^* P^* PDP^* \\
+&=& A^* A.
+\end{array}
+\]
+</p>
+
+<p>This motivates us to define a matrix \(A\) is normal if \(AA^*=A^* A\).
+</p>
+
+<p>Now, we prove that 
+\[A\text{ is normal}\Leftrightarrow A\text{ is unitarily diagonalizable}\]
+</p>
+
+<div class="box">
+
+<p>Proof: (Theorem 6.16)
+</p>
+
+<p>We have already proved "\(\Leftarrow\)".
+</p>
+
+<p>
+For "\(\Rightarrow\)", 
+we need a lemma: If \(A\) is normal and \(A\mathbf{v}=\lambda \mathbf{v}\), then \(A^*\mathbf{v}=\overline{\lambda}\mathbf{v}\). See Theorem 6.15(c).
+</p>
+
+<p>Now, back to our main theorem. Since we are over \(\mathbb{C}\), by Schur's Theorem, there exists an orthonormal basis \(\{\mathbf{v}_1, \mathbf{v}_2, ..., \mathbf{v}_n\}\) for \(\mathbb{C}^n\) form a unitary matrix \(P\) such that \(A=PUP^*\). That is, \(P=[\mathbf{v}_1|\mathbf{v}_2|\cdots|\mathbf{v}_n]\).
+</p>
+
+<p>Note that \(A\mathbf{v}_1=U_{11}\mathbf{v}_1\). That is, \(\mathbf{v}_1\) is an eigenvector of \(A\). We use induction. Suppose that \(\mathbf{v}_1, \mathbf{v}_2, ..., \mathbf{v}_{i-1}\) are eigenvectors of \(A\). Then since \(\{\mathbf{v}_1, \mathbf{v}_2, ..., \mathbf{v}_n\}\) is an orthonormal basis, 
+we have
+\[
+\begin{array}{cccccccccccc}
+A\mathbf{v}_i
+&=& U_{1i} & \mathbf{v}_1 & + & U_{2i} & \mathbf{v}_2 & + & \cdots & + & U_{ii} & \mathbf{v}_i \\
+&=& \langle A\mathbf{v}_i, \mathbf{v}_1\rangle & \mathbf{v}_1 & + & \langle A\mathbf{v}_i, \mathbf{v}_2\rangle & \mathbf{v}_2 & + & \cdots & + & \langle A\mathbf{v}_i, \mathbf{v}_i\rangle & \mathbf{v}_i \\
+&=& \langle \mathbf{v}_i, A^*\mathbf{v}_1\rangle & \mathbf{v}_1 & + & \langle \mathbf{v}_i, A^*\mathbf{v}_2\rangle & \mathbf{v}_2 & + & \cdots & + & \langle \mathbf{v}_i, A^*\mathbf{v}_i\rangle & \mathbf{v}_i \\
+&=& \langle \mathbf{v}_i, \overline{\lambda}_1\mathbf{v}_1\rangle & \mathbf{v}_1 & + & \langle \mathbf{v}_i, \overline{\lambda}_2\mathbf{v}_2\rangle & \mathbf{v}_2 & + & \cdots & + & \langle \mathbf{v}_i, A^*\mathbf{v}_i\rangle & \mathbf{v}_i \\
+&=& \lambda_1\langle \mathbf{v}_i, \mathbf{v}_1\rangle & \mathbf{v}_1 & + & \lambda_2\langle \mathbf{v}_i, \mathbf{v}_2\rangle & \mathbf{v}_2 & + & \cdots & + & \langle \mathbf{v}_i, A^*\mathbf{v}_i\rangle & \mathbf{v}_i \\
+&=& \mathbf{0} & & + & \mathbf{0} & & + & \cdots & + & \langle \mathbf{v}_i, A^*\mathbf{v}_i\rangle & \mathbf{v}_i 
+\end{array}.
+\]
+Thus, \(\mathbf{v}_i\) is also an eigenvector of \(A\).
+</p>
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+<title>假設檢定</title>
+<meta name="description" content="Hypothesis Tests">
+
+<style>
+td {word-break:normal;}
+</style>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+</head>
+<body>
+
+<h1>假設檢定</h1>
+
+
+
+<canvas id="myCanvas1" width="450" height="170" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+var c = document.getElementById("myCanvas1");
+var ctx = c.getContext("2d");
+
+//right tail
+ctx.beginPath();
+ctx.moveTo(220, 20);
+ctx.bezierCurveTo(260, 20, 220, 100, 420, 100);
+ctx.stroke();
+
+//left tail
+ctx.beginPath();
+ctx.moveTo(220, 20);
+ctx.bezierCurveTo(180, 20, 220, 100, 20, 100);
+
+//horizontal
+ctx.moveTo(20, 120);
+ctx.lineTo(420, 120);
+
+//right vertical
+ctx.moveTo(220, 110);
+ctx.lineTo(220, 130);
+
+//right vertical
+ctx.moveTo(100, 50);
+ctx.lineTo(100, 140);
+ctx.stroke();
+
+ctx.font = "20px Arial";
+ctx.fillText("Lower Tail Test", 15, 30);
+
+ctx.font = "20px Arial";
+ctx.fillText("p-value", 25, 115);
+
+ctx.font = "20px Arial";
+ctx.fillText("\u03BC_0", 205, 145);
+
+ctx.font = "20px Arial";
+ctx.fillText("bar{x}", 80, 155);
+
+</script> 
+
+<table border="1">
+<tbody>
+<tr>
+<td>&nbsp;</td>
+<td>Lower Tail Test</td>
+<td>Upper Tail Test</td>
+<td>Two-Tailed Test</td>
+</tr>
+<tr>
+<td>Hypotheses</td>
+<td>\(H_0:\mu\geq \mu_0\)<br />\(H_a:\mu\lt \mu_0\)</td>
+<td>\(H_0:\mu\leq \mu_0\)<br />\(H_a:\mu\gt \mu_0\)</td>
+<td>\(H_0:\mu= \mu_0\)<br />\(H_a:\mu\neq \mu_0\)</td>
+</tr>
+<tr>
+<td>Test Statistic</td>
+<td>\(z=\frac{\overline{x}-\mu_0}{\sigma/\sqrt{n}}\)</td>
+<td>\(z=\frac{\overline{x}-\mu_0}{\sigma/\sqrt{n}}\)</td>
+<td>\(z=\frac{\overline{x}-\mu_0}{\sigma/\sqrt{n}}\)</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>如果 \(\overline{x}\lt \mu_0\) 就reject \(H_0\)，那這樣檢驗就太嚴格了，所以可以接受 \(\overline{x}\) 稍微<span style="color: red;">小於</span> \(\mu_0\)，但又不能<span style="color: red;">小</span>得太誇張，所以我們要制定 \(\alpha\)，如果 \(p\text{-value}\lt \alpha\) 就reject \(H_0\)。（\(\alpha\) 越大越嚴格）</td>
+<td>如果 \(\overline{x}\gt \mu_0\) 就reject \(H_0\)，那這樣檢驗就太嚴格了，所以可以接受 \(\overline{x}\) 稍微<span style="color: red;">大於</span> \(\mu_0\)，但又不能<span style="color: red;">大</span>得太誇張，所以我們要制定 \(\alpha\)，如果 \(p\text{-value}\lt \alpha\) 就reject \(H_0\)。（\(\alpha\) 越大越嚴格）</td>
+<td>如果 \(\overline{x}\neq \mu_0\) 就reject \(H_0\)，那這樣檢驗就太嚴格了，所以可以接受 \(\overline{x}\) 稍微<span style="color: red;">小</span>於 \(\mu_0\) 或稍微<span style="color: red;">大</span>於 \(\mu_0\)  ，但又不能<span style="color: red;">小</span>得太誇張或<span style="color: red;">大</span>得太誇張，所以我們要制定 \(\alpha\)，如果 \(p\text{-value}\lt \alpha\) 就reject \(H_0\)。（\(\alpha\) 越大越嚴格）<span style="color: red;">注意這裡的 \(p\text{-value}\) 要兩尾加起來。</span></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>想一想 \(\alpha\) 的定義，\(\alpha\) 稱為level of significance，信心水準，也就是 \(\alpha\) 越大越有信心，這呼應了剛才說的 \(\alpha\) 越大越嚴格。</td>
+<td>想一想 \(\alpha\) 的定義，\(\alpha\) 稱為level of significance，信心水準，也就是 \(\alpha\) 越大越有信心，這呼應了剛才說的 \(\alpha\) 越大越嚴格。</td>
+<td>想一想 \(\alpha\) 的定義，\(\alpha\) 稱為level of significance，信心水準，也就是 \(\alpha\) 越大越有信心，這呼應了剛才說的 \(\alpha\) 越大越嚴格。</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>另一方面，\(\alpha\) 也表示犯型I錯誤的機率。</td>
+<td>另一方面，\(\alpha\) 也表示犯型I錯誤的機率。</td>
+<td>另一方面，\(\alpha\) 也表示犯型I錯誤的機率。</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<p><font color="red">Note that the alpha region contains the p-value region.</font></p>
+
+<canvas id="myCanvas2" width="450" height="170" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+var c = document.getElementById("myCanvas2");
+var ctx = c.getContext("2d");
+
+//right tail
+ctx.beginPath();
+ctx.moveTo(220, 20);
+ctx.bezierCurveTo(260, 20, 220, 100, 420, 100);
+ctx.stroke();
+
+//left tail
+ctx.beginPath();
+ctx.moveTo(220, 20);
+ctx.bezierCurveTo(180, 20, 220, 100, 20, 100);
+ctx.stroke();
+
+//horizontal
+ctx.moveTo(20, 120);
+ctx.lineTo(420, 120);
+ctx.stroke();
+
+//left vertical
+ctx.moveTo(290, 50);
+ctx.lineTo(290, 140);
+ctx.stroke();
+
+//right vertical
+ctx.moveTo(350, 50);
+ctx.lineTo(350, 140);
+ctx.stroke();
+
+ctx.font = "20px Arial";
+ctx.fillText("Upper Tail Test", 15, 30);
+
+ctx.font = "20px Arial";
+ctx.fillText("alpha", 315, 115);
+
+ctx.font = "20px Arial";
+ctx.fillText("p-value", 375, 115);
+
+ctx.font = "20px Arial";
+ctx.fillText("test statistic", 335, 155);
+
+ctx.font = "20px Arial";
+ctx.fillText("critical value", 200, 155);
+
+ctx.font = "20px Arial";
+ctx.fillText("reject!", 330, 40);
+
+</script> 
+
+</body>
+</html>

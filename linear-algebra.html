@@ -1,0 +1,658 @@
+﻿<html>
+
+<title>線性代數筆記</title>
+<meta name="description" content="線性代數筆記">
+
+<head>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+
+
+<!--
+下面這個CSS是用來做出滑鼠移到上面就跳出解釋訊息的效果，用在Equivalent Conditions of an Invertible Matrix那個小節。
+-->
+<style>
+  table.ct {text-align: center;}
+  td {word-break:normal;}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+<h1>Linear Algebra</h1>
+  
+<h1>Contents</h1>
+
+<ul>
+<li><a href="#tashoun">TASHOUN（她笑）</a></li>
+<li><a href="#spectraldecomposition">Spectral Decomposition</a></li>
+<li><a href="#invertiblematrix">Equivalent Conditions of an Invertible Matrix</a></li>
+<li><a href="#consistency">Consistency of Ax=b</a></li>
+<li><a href="#adjointoperators">A Motivation of Adjoint Operators</a></li>
+<li><a href="#normaloperators">A Motivation of Normal Operators</a></li>
+<li><a href="#transposetrace">Transpose, Trace, Determinant, Rank, Inverse</a></li>
+<li><a href="#giofdet">A Geometric Interpretation of Determinant</a></li>
+<li><a href="#determinant">Properties of the Determinant</a></li>
+<li><a href="#recurrencerelation">遞迴方程式的線性代數觀點recurrence relation (linear algebra aspect)</a></li>
+
+<li><a href="#diamond">Diamond</a></li>
+<li><a href="#strangbigpicture">The Importance of Strang's Big Picture</a></li>
+<li><a href="#jordanform">Jordan Canonical Form</a></li>
+
+</ul>
+
+<hr>
+
+
+
+
+
+<!--------------------------->
+<!--------------------------->
+<!--------------------------->
+<h2 id="tashoun">
+TASHOUN（她笑）
+</h2>
+
+
+<table class="ct">
+<tbody>
+<tr>
+<th>&nbsp;</th>
+<th>&nbsp;</th>
+<th>real</th>
+<th>complex</th>
+<th>&nbsp;</th>
+<th>&nbsp;</th>
+<th>&nbsp;</th>
+<th>&nbsp;</th>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>transpose<br />\(A^t\)</td>
+<td>adjoint<br />\(A^*\)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>orthogonally<br>diagonalizable</td>
+<td>spectral theorem<br />\(\Leftrightarrow\)</td>
+<td>symmetric<br />\(A^t=A\)</td>
+<td>Hermitian (self-adjoint)<br />\(A^*=A\)</td>
+<td>\(\Rightarrow\)</td>
+<td>unitarily<br>diagonalizable</td>
+<td>spectral theorem<br>\(\Leftrightarrow\)</td>
+<td>normal</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>orthogonal<br />\(A^tA=I\)</td>
+<td>unitary<br />\(A^* A=I\)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>注意到上面這張圖，美中不足的地方在於Hermitian並不是unitarily diagonalizable的等價條件，讓這張圖並沒有呈現完美的對稱。
+</p>
+
+<!--------------------------->
+<!--------------------------->
+<!--------------------------->
+<h2 id="spectraldecomposition">
+Spectral Decomposition
+</h2>
+
+Let 
+\[
+\begin{array}{lll}
+A &=& PDP^t \\
+&=& (\mathbf{u}_1|\mathbf{u}_2|\cdots |\mathbf{u}_n)\begin{pmatrix}\lambda_1 & 0 & \cdots & 0 \\ 0 & \lambda_2 & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & \lambda_n \end{pmatrix}\begin{pmatrix}\mathbf{u}_1^t \\ \mathbf{u}_2^t \\ \vdots \\ \mathbf{u}_n^t \end{pmatrix} \\
+&=& \lambda_1 \mathbf{u}_1 \mathbf{u}_1^t+\lambda_2 \mathbf{u}_2\mathbf{u}_2^t+\cdots +\lambda_n \mathbf{u}_n \mathbf{u}_n^t \\
+\end{array}
+\]
+be the orthogonal diagonalization of \(A\).
+For any \(\mathbf{v}\), 
+\[
+\begin{array}{lll}
+\mathbf{u}_i\mathbf{u}_i^t\mathbf{v} 
+&=& (\mathbf{u}_i^t \mathbf{v})\mathbf{u}_i \\
+&=& \langle \mathbf{u}_i, \mathbf{v}\rangle \mathbf{u}_i \\
+&=& \langle \mathbf{v}, \mathbf{u}_i\rangle \mathbf{u}_i \\
+&=& \frac{\langle \mathbf{v}, \mathbf{u}_i\rangle}{||\mathbf{u}_i||^2}\mathbf{u}_i \\
+&=& \text{proj}_{\text{span}(\mathbf{u}_i)}\mathbf{v} \\
+&=& \text{the orthogonal projection of }\mathbf{v}\text{ on the subspace }\text{span}(\mathbf{u}_i)\leq E_{\lambda_i}
+\end{array}
+\]
+
+<img width="70%" src="img/linear_algebra/linear_algebra_01.jpg">
+
+<!--------------------------->
+<!--------------------------->
+<!--------------------------->
+<h2 id="invertiblematrix">
+Equivalent Conditions of an Invertible Matrix
+</h2>
+
+<p>See Anton's Theorem 6.4.5 in <cite>Elementary Linear Algebra</cite>.
+</p>
+
+<p>If \(A\) is an \(n\times n\) matrix, then the following statements are equivalent.
+</p>
+
+<ol type="a">
+
+<li>\(A\) is invertible.</li>
+<li>\(A\mathbf{x}=\mathbf{0}\) has only the trivial solution.</li>
+<li>The reduced row echelon form of \(A\) is \(I_n\).</li>
+<li>\(A\) is expressible as a product of elementary matrices.</li>
+<li>\(A\mathbf{x}=\mathbf{b}\) is consistent for every \(n\times 1\) matrix \(\mathbf{b}\).</li>
+<li>\(A\mathbf{x}=\mathbf{b}\) has exactly one solution for every \(n\times 1\) matrix \(\mathbf{b}\).</li>
+<li>\(\det{(A)}\neq 0\).</li>
+<li>The column vectors of \(A\) are linearly independent&nbsp;.</li>
+<li>The row vectors of \(A\) are linearly indenpendent.</li>
+<li>The column vectors of \(A\) span \(\mathbb{R}^n\).</li>
+<li>The row vectors of \(A\) span \(\mathbb{R}^n\).</li>
+<li>The column vectors of \(A\) form a basis for \(\mathbb{R}^n\).</li>
+<li>The row vectors of \(A\) form a basis for \(\mathbb{R}^n\).</li>
+<li>\(A\) has rank \(n\).</li>
+<li>\(A\) has nullity \(0\).</li>
+<li>The orthogonal complement of the null space of \(A\) is \(\mathbb{R}^n\).</li>
+<li>The orthogonal complement of the row space of \(A\) is \(\{\mathbf{0}\}\).</li>
+<li>The kernel of \(T_A\) is \(\{\mathbf{0}\}\).</li>
+<li>The range of \(T_A\) is \(\mathbb{R}^n\).</li>
+<li>\(T_A\) is one-to-one.</li>
+<li>\(\lambda=0\) is not an eigenvalue of \(A\).</li>
+<li>\(A^T A\) is invertible.</li>
+
+</ol>
+
+<p>上面這個列表不太好用，因為一般來說不一定有 \(m=n\)，所以我個人比較喜歡用下面的等價關係。<font color="red">下面 \(A\) 為一 \(m\times n\) 的矩陣。</font>點擊箭頭可以看到證理由。
+</p>
+
+<table class="ct">
+<tbody>
+<tr>
+<td>線性變換的觀點</td>
+<td>&nbsp;</td>
+<td>向量空間的觀點</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>維度的觀點</td>
+<td>&nbsp;</td>
+<td>向量的觀點</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>columns are linearly independent</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>
+<span class="tooltip">&neArr;<span class="tooltiptext">rank = the number of linearly independent columns</span></span>
+<span class="tooltip">&swArr;<span class="tooltiptext">rank = the number of linearly independent columns</span></span>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>\(A:F^n\to F^m\) is one-to-one</td>
+<td><span class="tooltip">&hArr;<span class="tooltiptext">Theorem 8.2.1</span></span></td>
+<td>kernel A = 0</td>
+<td><span class="tooltip">&hArr;<span class="tooltiptext">Definition</span></span></td>
+<td>nullity A= 0</td>
+<td><span class="tooltip">&hArr;<span class="tooltiptext">Dimension Theorem</span></span></td>
+<td>rank A = n</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>
+<span class="tooltip">&seArr;<span class="tooltiptext">(rank = the number of linearly independent rows) and (n linearly independent vectors in F^n span F^n)</span></span>
+<span class="tooltip">&nwArr;<span class="tooltiptext">(spanning set can be reduced to a basis) and (rank = the number of linearly independent rows)</span></span>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>rows span F^n</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>columns span F^m</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>
+<span class="tooltip">&neArr;<span class="tooltiptext">(rank = the number of linearly independent columns) and (m linearly independent vectors in F^m span F^m)</span></span>
+<span class="tooltip">&swArr;<span class="tooltiptext">(spanning set can be reduced to a basis) and (rank = the number of linearly independent columns)</span></span>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>\(A:F^n\to F^m\) is onto</td>
+<td><span class="tooltip">&hArr;<span class="tooltiptext">Definition</span></span></td>
+<td>image A = F^m</td>
+<td>&nbsp;</td>
+<td><span class="tooltip">&hArr;<span class="tooltiptext">rank = dimension of image</span></span></td>
+<td>&nbsp;</td>
+<td>rank A = m</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>
+<span class="tooltip">&seArr;<span class="tooltiptext">rank = the number of linearly independent rows</span></span>
+<span class="tooltip">&nwArr;<span class="tooltiptext">rank = the number of linearly independent rows</span></span>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>rows are linearly independent</td>
+</tr>
+</tbody>
+</table>
+
+
+<!--------------------------->
+<!--------------------------->
+<!--------------------------->
+<h2 id="consistency">
+Consistency of \(A\mathbf{x}=\mathbf{b}\)
+</h2>
+
+<ul>
+<li>\(\text{rank}(A)\neq \text{rank}(A|\mathbf{b})\Leftrightarrow A\mathbf{x}=\mathbf{b}\) has no solutions</li>
+<li>\(\text{rank}(A)=\text{rank}(A|\mathbf{b})=n\Leftrightarrow A\mathbf{x}=\mathbf{b}\) has exactly one solution</li>
+<li>\(\text{rank}(A)=\text{rank}(A|\mathbf{b})&lt; n\Leftrightarrow A\mathbf{x}=\mathbf{b}\) has infinitely many solutions</li>
+</ul>
+
+<p>上面這三個敘述可以利用上面的one-to-one及onto的等價敘述得到。另外，\(A\mathbf{x}=\mathbf{b}\) 的解只有三種可能，無解、恰有一組解、無線多組解。證明如下：假設 \(\mathbf{x}_1, \mathbf{x}_2\) 為相異兩組解，則 \(\mathbf{x}_1+c(\mathbf{x}_1-\mathbf{x}_2)\) 皆為解，其中 \(c\) 為任意實數。
+</p>
+
+<p>注意到，例如空間中的三個平面，既使判斷方程式是無解、無限多組解還是唯一解之後，仍然要再更進一步探討（可以利用法向量）三個平面的相交情況。（平面相交的圖形來自於Anton的書）
+</p>
+
+<img width="70%" src="img/linear_algebra/linear_algebra_02.jpg">
+
+<!--------------------------->
+<!--------------------------->
+<!--------------------------->
+<h2 id="adjointoperators">
+A Motivation of Adjoint Operators
+</h2>
+
+<p><a href="https://bfhaha.github.io/motivation-adjoint-operators.html">
+Click Me!
+</a></p>
+
+<!--------------------------->
+<!--------------------------->
+<!--------------------------->
+<h2 id="normaloperators">
+A Motivation of Normal Operators
+</h2>
+
+<p><a href="https://bfhaha.github.io/motivation-normal-operators.html">
+Click Me!
+</a></p>
+
+<!--------------------------->
+<!--------------------------->
+<!--------------------------->
+<h2 id="transposetrace">
+Transpose, Trace, Determinant, Rank, Inverse
+</h2>
+
+<table class="ct" border="1">
+  <tr><th></th><th>transpose</th><th>trace</th><th>det</th><th>rank</th><th>inverse</th></tr>
+  <tr><td>\(cA\)</td><td>\((cA)^t=cA^t\)<br>by def.</td><td>\(\text{tr }cA=c\cdot \text{tr }A\)<br>by def.</td><td>\(\det{cA}=c^n \det{A}\)<br>by def.</td><td>\(\text{rank }cA=\text{rank }A\), \(c\neq 0\)</td><td>\((cA)^{-1}=c^{-1}A^{-1}\), \(c\neq 0\)<br>by def.</td></tr>
+  <tr><td>\(A+B\)</td><td>\((A+B)^t=A^t+B^t\)<br>by def.</td><td>\(\text{tr }(A+B)=\text{tr }A+\text{tr }B\)<br>by def.</td><td></td><td>\(\text{rank }(A+B)\leq \text{rank }A+\text{rank }B\)</td><td></td></tr>
+  <tr><td>\(AB\)</td><td>\((AB)^t=B^t A^t\)<br>by def.</td><td>\(\text{tr }AB=\color{red}{\text{tr }BA}\)<br>by def.</td><td>\(\det{AB}=\det{A}\cdot \det{B}\)<br>difficult</td><td>\(\text{rank }AB\leq \min{\{\text{rank }A, \text{rank }B\}}\)</td><td>\((AB)^{-1}=B^{-1}A^{-1}\)<br>by def.</td></tr>
+  <tr><td>\(A^t\)</td><td>\((A^t)^t=A\)<br>by def.</td><td>\(\text{tr }A^t=\text{tr }A\)<br>by def.</td><td>\(\det{A^t}=\det{A}\)<br>by def.</td><td>\(\text{rank }A^t=\text{rank }A\)<br>difficult</td><td>\((A^t)^{-1}=(A^{-1})^t\)<br></td></tr>
+  </table>
+
+<!--------------------------->
+<!--------------------------->
+<!--------------------------->
+<h2 id="giofdet">
+A Geometric Interpretation of Determinant
+</h2>
+
+<br><img width="70%" src="img/linear_algebra/linear_algebra_03.jpg">
+  
+<p>參考<a href="https://davidroodman.com/blog/2016/02/21/on-the-geometric-interpretation-of-the-determinant-of-a-matrix/">這裡</a>。另一個比較常見的證法是<a href="https://math.stackexchange.com/a/115545/128942">這個</a>，還有一個比較少見的<a href="https://math.stackexchange.com/a/3115488/128942">證法</a>，不過我覺得後面兩個都比不上第一個簡單。
+</p> 
+  
+<!--------------------------->
+<!--------------------------->
+<!--------------------------->
+<h2 id="determinant">
+Properties of the Determinant
+</h2>
+
+<p>See Friedberg's <cite>Linear Algebra</cite>
+</p>
+
+<ol>
+
+<li>
+If \(B\) is a matrix obtained by interchanging any two rows or interchanging any two columns of an \(n\times n\) matrix \(A\), then \(\det{B} = −\det{A}\). (Proof: By the definition.)
+</li>
+
+<li>
+If \(B\) is a matrix obtained by multiplying each entry of some row or column of an \(n\times n\) matrix \(A\) by a scalar \(k\), then \(\det{B} = k\cdot \det{A}\). (Proof: By the definition.)
+</li>
+
+<li>
+If \(B\) is a matrix obtained from an \(n\times n\) matrix \(A\) by adding a multiple of row \(i\) to row \(j\) or a multiple of column \(i\) to column \(j\) for \( i\neq j\), then
+\(\det{B} = \det{A}\). (Proof: Waiting for proving.)
+</li>
+
+<li>
+The determinant of an upper triangular matrix is the product of its diagonal entries. In particular, \(\det{I} = 1\). (Proof: By the definition.)
+</li>
+
+<li>
+If two rows (or columns) of a matrix are identical, then the determinant of the matrix is zero. (Proof: By 3 and 10.)
+</li>
+
+<li>
+For any \(n\times n\) matrices \(A\) and \(B\), \(\det{AB}=\det{A}\cdot \det{B}\). (Proof: It is difficult to prove.)
+</li>
+
+<li>
+An \(n\times n\) matrix \(A\) is invertible if and only if \(\det{A}\neq 0\). Furthermore, if \(A\) is invertible, then \(\det{A^{-1}}=\frac{1}{\det{A}}\). (Proof: By 4 and 6.)
+</li>
+
+<li>
+For any \(n\times n\) matrix \(A\), the determinants of \(A\) and \(A^t\) are equal. (Proof: By the definition.)
+</li>
+
+<li>
+If \(A\) and \(B\) are similar matrices, then \(\det{A}=\det{B}\). (Proof: By 6 and 7.)
+</li>
+
+<li>
+If \(A\) has a \(0\) row or a \(0\) column, then \(\det{A}=0\). (Proof: By the definition.)
+</li>
+
+<li>
+If \(i\)th row equals a multiple of \(j\)th row, then \(\det{A}=0\). (Proof: 3 and 10.)
+</li>
+
+<li>
+\(\det{A}\) is row linear. (Proof: Waiting for proving.)
+</li>
+
+
+</ol>
+
+<!--------------------------->
+<!--------------------------->
+<!--------------------------->
+<h2 id="recurrencerelation">
+遞迴方程式的線性代數觀點recurrence relation (linear algebra aspect)
+</h2>
+
+<p><a href="https://www.dropbox.com/s/oxls4q0n89oeizt/recurrencerelation.pdf?dl=0">Click Me!</a>
+</p>
+
+<p>我們大學時（甚至是高中），即學過遞迴方程式（recurrence relation），例如 \(a_{n+2}=5a_{n+1}-6a_n\)，其中 \(n\) 為大於等於 \(1\) 的正整數，一般書上教我們的解法是，先求出此遞迴方程式的特徵方程式（characteristic equation） \(r^2=5r-6\)，並求出此特徵方程式的根為 \(r=2\) 或是 \(r=3\)，則此遞迴方程式的解為 \(a_n=c_1\cdot 2^n+c_2\cdot 3^n.\)
+</p>
+
+<p>又例如遞迴方程式 \(a_{n+2}=4a_{n+1}-4a_n.\)，此遞迴方程式的特徵方程式為 \(r^2=4r-4\)，有重根 \(r=2\)，這時候我們要調整遞迴方程式的解為 \(a_n=c_1\cdot 2^n+c_2\cdot n\cdot 2^n\)，學生到這裡可能會有三個問題。
+</p>
+
+<ol>
+
+<li>特徵方程式是我們在線性代數中學習到的觀念，遞迴方程式是否跟向量空間(vector space)、線性變換（linear transformation）有關係，為何在解遞迴方程式時會用到特徵方程式？
+</li>
+
+<li>我們何以知道當特徵方程式有重根時，其遞迴方程式的解要做如此的調整？
+</li>
+
+<li>一般書上都是給出遞迴方程式的解，然後用代入驗證的方法證明，然而，相信數學家們不是一開始研究遞迴方程式時就知道其解的形式，數學家們當初是如何知道遞迴方程式的解的形式呢？
+</li>
+
+</ol>
+
+<p>本文的目的在回答這三個問題。
+</p>
+
+
+
+<!--------------------------->
+<!--------------------------->
+<!--------------------------->
+<h2 id="diamond">
+Diamond
+</h2>
+
+<a href="https://bfhaha.github.io/diamond.html">
+<table>
+
+<tr>
+<td></td>
+<td></td>
+<td>Singular Value<br />Decomposition</td>
+<td style="text-align: center;">&rarr;</td>
+<td>Pseudoinverse</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>↗</td>
+<td></td>
+<td></td>
+<td></td>
+<td>↘</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align: right;">↗</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>↘</td>
+</tr>
+<tr>
+<td>Gram-Schmidt<br />Process</td>
+<td>&larr;</td>
+<td style="text-align: center;">&larr;</td>
+<td style="text-align: center;">Orthogonal<br />Projection</td>
+<td style="text-align: center;">&rarr;</td>
+<td>&rarr;</td>
+<td>Least Square<br />Problem</td>
+</tr>
+<tr>
+<td style="text-align: right;">↘</td>
+<td></td>
+<td></td>
+<td style="text-align: center;">&darr;</td>
+<td></td>
+<td></td>
+<td>↗</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td style="text-align: center;">↘</td>
+<td style="text-align: center;">Householder<br />Reflection</td>
+<td style="text-align: center;">↗</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td style="text-align: right;">↘</td>
+<td style="text-align: center;">&darr;</td>
+<td>↗</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td style="text-align: center;">QR-decomposition</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+</table>
+</a>
+
+<!--------------------------->
+<!--------------------------->
+<!--------------------------->
+<h2 id="strangbigpicture">
+The Importance of Strang's Big Picture
+</h2>
+
+<p><a href="https://bfhaha.github.io/linear-algebra-big-picture.html">
+Click Me!
+</a></p>
+
+
+
+<!--------------------------->
+<!--------------------------->
+<!--------------------------->
+<h2 id="jordanform">
+Jordan Canonical Form
+</h2>
+
+<p><a href="https://bfhaha.github.io/jordan-form.html">
+我個人偏好的Jordan Form的證明。
+</a></p>
+
+<!--
+<p>Dot Diagram of \(T|_{K_{\lambda_i}}\).
+</p>
+
+<p>
+Let \(A\) be a square matrix.<br>
+Let \(c(x)=(x-\lambda_1)^{\ell_1}(x-\lambda_2)^{\ell_2}\cdots (x-\lambda_k)^{\ell_k}\) be the characteristic polynomial of \(A\).<br>
+Let \(m(x)=(x-\lambda_1)^{s_1}(x-\lambda_2)^{s_2}\cdots (x-\lambda_k)^{s_k}\) be the minimal polynomial of \(A\).<br>
+Let \(E_{\lambda_i}\) be the eigenspace of \(A\) corresponding to \(\lambda_i\).<br>
+Let \(K_{\lambda_i}\) be the generalized eigenspace of \(A\) corresponding to \(\lambda_i\).<br>
+</p>
+<br><img width="70%" src="img/linear_algebra/linear_algebra_04.jpg">
+<a href="https://1.bp.blogspot.com/-2oBGa7F2aSQ/XtOgUlme0OI/AAAAAAAABjM/g6yuVH_YnZcugPFFmZss9NPR2h4YchErwCLcBGAsYHQ/s1600/DotDiagram.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="461" data-original-width="879" height="167" src="https://1.bp.blogspot.com/-2oBGa7F2aSQ/XtOgUlme0OI/AAAAAAAABjM/g6yuVH_YnZcugPFFmZss9NPR2h4YchErwCLcBGAsYHQ/s320/DotDiagram.jpg" width="320" /></a></div>
+<br />
+
+-->
+
+
+
+
+</body>
+</html>

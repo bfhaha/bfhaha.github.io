@@ -1,0 +1,133 @@
+﻿<html>
+
+<head>
+
+<title>利用PowerShell達到一鍵開啟proxy代理伺服器、顯示隱藏檔案副檔名、新增刪除輸入法</title>
+<meta name="description" content="利用PowerShell達到一鍵開啟proxy代理伺服器、顯示隱藏檔案副檔名、新增刪除輸入法">
+
+<style>
+code, pre {background-color: lightgray;}
+</style>
+
+</head>
+
+<body>
+
+<h1>一鍵開啟proxy代理伺服器、顯示隱藏檔案副檔名、新增刪除輸入法</h1>
+
+<p>有時候我會需要從校外連線進校內資料庫，
+所以需要在開啟與關閉proxy代理伺服器之間來回切換，
+如果每次都要手動切換太麻煩了，
+所以我寫了一個PowerShell腳本來自動切換開啟關閉。</p>
+
+<p><font color="red">網路上大部分的教學是修改登錄檔，
+但是實際上是行不通的，
+修改登錄檔只能"表面上"把開啟代理伺服器的選項打勾，
+並沒有真正地開啟代理伺服器。
+這就是為什麼你可能按照網路上的方法寫了一個修改登錄檔的批次檔，
+執行之後仍然不能夠從校外連線，
+但是進到設定代理伺服器的頁面時，
+卻又可以看到其代理伺服器已經被打勾啟動，
+這時候又突然可以校外連線了。
+（當你"檢視"啟動代理伺服器到底有沒有打勾時，
+這時候windows後台又會做一些動作，
+來"真正地"啟動代理伺服器。）</font></p>
+
+<p><font color="red">我有用過RegFromApp這套監視登錄檔變化的軟體，
+我發現當你勾選啟動代理伺服器時，
+登錄檔不只有網路教學中所述的那個機碼有變化，
+而是還有另一個神祕的機碼也被改值了，
+但是這個機碼的值很奇怪，
+每次的值都不一樣，
+所以我也不知道要怎麼用批次檔來設定這個神祕的值，
+也就是不知道要把這個機碼的值設定成什麼，
+來達到批次作業的目的，
+所以只好借助PowerShell腳本的方法，
+模擬鍵盤按鍵，
+來開啟代理伺服器。</font>
+</p>
+
+<p>你要知道，
+在Windows是可以用鍵盤操作完成一些作業的（不用滑鼠），
+例如你試試按幾下Tab鍵，
+會有一個框框在視窗上的物件間移動，
+你可以把這個框框視為你的滑鼠移到上面，
+這時候你按下Enter或是Space，
+就會執行或啟動你框框所在的物件。
+另外，在視窗的一些選項後面會有一個英文字母，
+表示按住Alt+該英文字母可以觸發那個選項。</p>
+
+<p>所以你可以試試看在[資料夾選項]中，
+用鍵盤的Tab鍵及上下鍵及Space鍵，
+來顯示或隱藏檔案的副檔名。</p>
+
+<p>本腳本的原理就只是很簡單地模擬鍵盤的動作，
+<font color="red">請按照自己的作業系統環境做相應的修改，
+因為不同版本的windows顯示隱藏檔案副檔名的選項位置可能不同，
+所需要按的按鍵組合也不同。</font>
+腳本執行時也請不要做其他動作，
+避免當前工作視窗跑掉而執行失敗。</p>
+
+<p>同樣的原理與方法，
+也可以拿來開關隱藏檔案副檔名，或是新增刪除輸入法。</p>
+
+<p>開啟Windows PowerShell ISE（不是Windows PowerShell），
+修改下面的程式碼並輸入，
+存檔執行，
+確定可以準確完成任務。
+</p>
+
+<p>如果出現 無法辨識 'xxx.ps1' 辭彙是否為Cmdlet、函數、指令檔或可執行程式的名稱。...
+（通常第一次執行時會如此，）
+則必須用系統管理員的身分（按右鍵），
+開啟Windows PowerShell ISE，
+輸入Set-ExecutionPolicy RemoteSigned執行，
+並且同意執行原則變更。
+</p>
+
+<p>
+之後要用的時候，
+就只要在存下來的ps1檔案上按右鍵並執行（直接雙點左鍵會用記事本開啟）。
+</p>
+
+<pre>
+# 註解
+# 開啟[網際網路 - 內容]
+control inetcpl.cpl
+
+# 如果是要開啟[資料夾選項]，顯示隱藏檔案的副檔名，可以用RunDll32.exe shell32.dll,Options_RunDLL 7
+# 如果是要開啟[地區及語言]，新增或刪除輸入法，可以用control intl.cpl
+# 更多進入控制台下的項目的指令，參考https://support.microsoft.com/en-us/help/192806/how-to-run-control-panel-tools-by-typing-a-command
+
+# 讓系統取得title叫做[開啟網際網路 - 內容]的視窗
+# 並讓該視窗變成當前視窗
+$wshell = New-Object -ComObject wscript.shell;
+$wshell.AppActivate('開啟網際網路 - 內容')
+
+#停頓1秒，避免delay造成下一步無法順利進行
+Sleep 1
+
+# 按下鍵盤上的各鍵
+# ' '表示按下space鍵, +表示搭配Shift, %表示搭配Alt
+# 各鍵的對應表參考https://msdn.microsoft.com/en-us/library/office/aa202943(v=office.10).aspx
+# 注意，每個電腦的按鍵組合可能不相同，
+# 請自行做相應的修改
+
+$wshell.SendKeys('+{TAB}')
+
+For ($i=1; $i -le 4; $i++)
+{$wshell.SendKeys('{RIGHT}')}
+
+$wshell.SendKeys('%l')
+
+$wshell.SendKeys('{TAB}')
+$wshell.SendKeys('{TAB}')
+
+$wshell.SendKeys(' ')
+
+$wshell.SendKeys('{ENTER}')
+$wshell.SendKeys('{ENTER}')
+</pre>
+
+</body>
+</html>

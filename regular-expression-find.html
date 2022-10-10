@@ -1,0 +1,31 @@
+﻿<html>
+
+<head>
+
+<title>在網頁中使用Regular Expression搜尋</title>
+<meta name="description" content="在網頁中使用Regular Expression搜尋">
+
+<style>
+code, pre {background-color: lightgray;}
+</style>
+</head>
+
+<body>
+
+<h1>在網頁中使用Regular Expression搜尋</h1>
+  
+<p>Chrome（或一般瀏覽器）內建的搜尋功能通常不能使用正規表示（Regular Expression，類似於Word的萬用字元）功能，這裡教各位怎麼解決。</p>
+  
+<p>在網頁加入下面的程式碼</p>
+
+<code>&lt;a href="javascript:(function(){var count=0, text, regexp;text=prompt(&amp;quot;Search regexp:&amp;quot;, &amp;quot;&amp;quot;);if(text==null || text.length==0)return;try{regexp=new RegExp(&amp;quot;(&amp;quot; + text +&amp;quot;)&amp;quot;, &amp;quot;i&amp;quot;);}catch(er){alert(&amp;quot;Unable to create regular expression using text '&amp;quot;+text+&amp;quot;'.\n\n&amp;quot;+er);return;}function searchWithinNode(node, re){var pos, skip, spannode, middlebit, endbit, middleclone;skip=0;if( node.nodeType==3 ){pos=node.data.search(re);if(pos&amp;gt;=0){spannode=document.createElement(&amp;quot;SPAN&amp;quot;);spannode.innerHTML=&amp;quot;[mark]&amp;quot;;middlebit=node.splitText(pos);endbit=middlebit.splitText(RegExp.$1.length);middleclone=middlebit.cloneNode(true);spannode.appendChild(middleclone);middlebit.parentNode.replaceChild(spannode,middlebit);++count;skip=1;}}else if( node.nodeType==1 &amp;amp;&amp;amp; node.childNodes &amp;amp;&amp;amp; node.tagName.toUpperCase()!=&amp;quot;SCRIPT&amp;quot; &amp;amp;&amp;amp; node.tagName.toUpperCase!=&amp;quot;STYLE&amp;quot;){for (var child=0; child &amp;lt; node.childNodes.length; ++child){child=child+searchWithinNode(node.childNodes[child], re);}}return skip;}window.status=&amp;quot;Searching for &amp;quot;+regexp+&amp;quot;...&amp;quot;;searchWithinNode(document.body, regexp);window.status=&amp;quot;Found &amp;quot;+count+&amp;quot; match&amp;quot;+(count==1?&amp;quot;&amp;quot;:&amp;quot;es&amp;quot;)+&amp;quot; for &amp;quot;+regexp+&amp;quot;.&amp;quot;;})();"&gt;Find RegExp&lt;/a&gt;</code>
+
+
+<p>網頁中就會有一個名叫Find RegExp的連結，點擊連結就會執行某段JavaScript程式碼，跳出一個搜尋框，這個搜尋支援正規表示。例如想要搜尋would be Ving這個句型，就搜尋would be \S*ing，其中\S表示空格以外的任意字元，*表示任意長度。這個搜尋並不會跳到搜尋到的結果，而是會將滿足搜尋條件的字串前面加上[mark]。然後你就可以用你瀏覽器內建的搜尋功能，搜尋[mark]這個字串，就可以找到需要的句子。</p>
+
+<a href="javascript:(function(){var count=0, text, regexp;text=prompt(&quot;Search regexp:&quot;, &quot;&quot;);if(text==null || text.length==0)return;try{regexp=new RegExp(&quot;(&quot; + text +&quot;)&quot;, &quot;i&quot;);}catch(er){alert(&quot;Unable to create regular expression using text '&quot;+text+&quot;'.\n\n&quot;+er);return;}function searchWithinNode(node, re){var pos, skip, spannode, middlebit, endbit, middleclone;skip=0;if( node.nodeType==3 ){pos=node.data.search(re);if(pos&gt;=0){spannode=document.createElement(&quot;SPAN&quot;);spannode.innerHTML=&quot;[mark]&quot;;middlebit=node.splitText(pos);endbit=middlebit.splitText(RegExp.$1.length);middleclone=middlebit.cloneNode(true);spannode.appendChild(middleclone);middlebit.parentNode.replaceChild(spannode,middlebit);++count;skip=1;}}else if( node.nodeType==1 &amp;&amp; node.childNodes &amp;&amp; node.tagName.toUpperCase()!=&quot;SCRIPT&quot; &amp;&amp; node.tagName.toUpperCase!=&quot;STYLE&quot;){for (var child=0; child &lt; node.childNodes.length; ++child){child=child+searchWithinNode(node.childNodes[child], re);}}return skip;}window.status=&quot;Searching for &quot;+regexp+&quot;...&quot;;searchWithinNode(document.body, regexp);window.status=&quot;Found &quot;+count+&quot; match&quot;+(count==1?&quot;&quot;:&quot;es&quot;)+&quot; for &quot;+regexp+&quot;.&quot;;})();">Find RegExp</a>
+
+<p>這個JavaScript指令是從<a href="https://www.squarefree.com/bookmarklets/pagedata.html">這裡</a>學來的（highlight regexp），原本是將搜尋到的字串highlight，也就是程式碼中的指令spannode.style.backgroundColor=&quot;yellow&quot;;，但因為搜尋的文章太大，就算highlight之後還是不容易找到，所以我將其改為spannode.innerHTML=&quot;[mark]&quot;;，也就是將搜尋到的字串前面加上[mark]這個標記。</p>
+
+</body>
+</html>

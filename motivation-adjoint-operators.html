@@ -1,0 +1,221 @@
+﻿<html>
+<head>
+
+<title>A Motivation of Adjoint Operators on Inner Product Spaces</title>
+<meta name="description" content="A Motivation of Adjoint Operators on Inner Product Spaces">
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+
+<style>
+.box {
+  border: 1px solid black;
+  padding: 20px;
+  margin: 20px;
+}
+</style>
+
+</head>
+
+
+<body>
+
+<h1>A motivation of adjoint operators</h1>
+
+<p>In the real inner product space \(\mathbb{R}^n\) with the standard inner product
+\[
+\langle \mathbf{v}, \mathbf{w}\rangle
+=\left\langle\begin{bmatrix}a_1\\a_2\\\vdots\\a_n\end{bmatrix}, \begin{bmatrix}b_1\\b_2\\\vdots\\b_n\end{bmatrix}\right\rangle
+=a_1 b_1+a_2 b_2+\cdots +a_n b_n
+=\mathbf{w}^t \mathbf{v},
+\]
+we have
+\[
+\langle A\mathbf{v}, \mathbf{w}\rangle
+=\langle \mathbf{v}, A^t\mathbf{w}\rangle.
+\]
+</p>
+
+<p>
+However, in the complex inner product space \(\mathbb{C}^n\) with the standard inner product
+\[
+\langle \mathbf{v}, \mathbf{w}\rangle
+=\left\langle\begin{bmatrix}w_1\\w_2\\\vdots\\w_n\end{bmatrix}, \begin{bmatrix}z_1\\z_2\\\vdots\\z_n\end{bmatrix}\right\rangle
+=w_1 \overline{z_1}+w_2 \overline{z_2}+\cdots +w_n \overline{z_n}
+=\overline{\mathbf{w}^t} \mathbf{v},
+\]
+we DO NOT have
+\[\langle A\mathbf{v}, \mathbf{w}\rangle=\langle \mathbf{v}, A^t\mathbf{w}\rangle.\]
+Instead, we have
+\[\langle A\mathbf{v}, \mathbf{w}\rangle=\langle \mathbf{v}, \overline{A^t}\mathbf{w}\rangle.\]
+Recall that we define the conjugate transpose or adjoint \(A^*\) of a matrix \(A\) as \(A^*=\overline{A^t}\). Hence, we have
+\[\langle A\mathbf{v}, \mathbf{w}\rangle=\langle \mathbf{v}, A^*\mathbf{w}\rangle.\]
+This gives us a motivation of defining adjoint of matrices. We want to define a linear operator \(T^*\) on a finite dimensional inner product space \(V\) which satisfies that
+\[\langle T(\mathbf{v}), \mathbf{w}\rangle=\langle \mathbf{v}, T^*(\mathbf{w})\rangle\]
+</p>
+
+<p>
+In most of standard textbooks, like Friedberg, Insel and Spence's <cite>Linear Algebra</cite>, they gave a lemma first (Theorem 6.8, Riesz Representation Theorem), then proved the existence of \(T^*\) by using the lemma (Theorem 6.9). However, the lemma seems to be clever for novices.
+</p>
+
+<p>
+I am going to define <strong>adjoint of operators</strong> through <strong>adjoint of matrices</strong> here. A brief version see Treil's <cite>Linear Algebra Done Wrong</cite> (Section 5.5).
+</p>
+
+<p>
+Let \(V\) be a finite dimensional inner product space \(V\) and let \(T\) be a linear operator on \(V\).
+Given an "orthonormal" basis \(\beta\) for \(V\),
+(the existence of such basis follows immediately from the Gram-Schmidt process,)
+we have the following commutative diagram
+\[
+\begin{array}{rcl}
+V & \stackrel{T}{\longrightarrow}& V \\
+\phi_{\beta}\downarrow & & \downarrow \phi_{\beta} \\
+F^n & \underset{[T]_{\beta}}{\longrightarrow} & F^n
+\end{array}
+\]
+where \(\phi_{\beta}\) is the standard representation of \(V\) with respect to \(\beta\) and \([T]_{\beta}\) is the matrix representation of \(T\) in the ordered basis \(\beta\).
+The definitions and properties of \(\phi_{\beta}\) and \([T]_{\beta}\) see Chapter 2 in Friedberg, Insel and Spence's <cite>Linear Algebra</cite>.
+</p>
+
+<p>
+Note that we have (Theorem 2.14)
+\[T(\mathbf{v})
+=\phi_{\beta}^{-1}([T]_{\beta}\phi_{\beta}(\mathbf{v})). 
+\]
+Imitating this, let us define a mapping \(T^*:V\to V\) by
+\[T^*(\mathbf{v})
+=\phi_{\beta}^{-1}([T]_{\beta}^*\phi_{\beta}(\mathbf{v})), 
+\]
+where \([T]_{\beta}^*\) is the conjugate transpose of \([T]_{\beta}\).
+</p>
+
+<p>
+Obviously, \(T^*\) is a linear operator. We show that 
+\[\langle T(\mathbf{v}), \mathbf{w}\rangle=\langle \mathbf{v}, T^*(\mathbf{w})\rangle\]
+We need a key lemma (without proof): If \(\beta\) is an orthonormal basis for \(V\), then \(\langle \mathbf{v}, \mathbf{w}\rangle
+=\langle [\mathbf{v}]_{\beta}, [\mathbf{w}]_{\beta}\rangle
+=\langle \phi_{\beta}(\mathbf{v}), \phi_{\beta}(\mathbf{w})\rangle\).
+</p>
+
+<p>
+Therefore,
+\[
+\begin{array}{lcl}
+\langle \mathbf{v}, T^*(\mathbf{w})\rangle
+&=& \langle \mathbf{v}, \phi_{\beta}^{-1}([T]_{\beta}^*\phi_{\beta}(\mathbf{w}))\rangle \\
+&\stackrel{\text{Lemma}}{=}& \langle \phi_{\beta}(\mathbf{v}), [T]_{\beta}^*\phi_{\beta}(\mathbf{w})\rangle \\
+&=& \langle [T]_{\beta}\phi_{\beta}(\mathbf{v}), \phi_{\beta}(\mathbf{w})\rangle \\
+&\stackrel{\text{Theorem 2.14}}{=}& \langle \phi_{\beta}(T(\mathbf{v})), \phi_{\beta}(\mathbf{w})\rangle \\
+&\stackrel{\text{Lemma}}{=}& \langle T(\mathbf{v}), \mathbf{w}\rangle.
+\end{array}
+\]
+</p>
+
+<p>
+Remark. 
+We defined \(T^*\) by choosing a specific orthonormal basis. 
+But the definition of \(T^*\) is independent on the choice of the orthonormal basis since 
+\[\langle [\mathbf{v}]_{\beta}, [\mathbf{w}]_{\beta}\rangle
+=\langle [\mathbf{v}]_{\alpha}, [\mathbf{w}]_{\alpha}\rangle\]
+for any two orthonormal bases.
+</p>
+
+<div class="box">
+
+<p>
+Proof:
+Suppose that \(\alpha=\{\mathbf{v}_1, \mathbf{v}_2, ..., \mathbf{v}_n\}\) and \(\beta=\{\mathbf{w}_1, \mathbf{w}_2, ..., \mathbf{w}_n\}\) are two orthonormal bases for \(\mathbb{C}^n\).
+Then \([\mathbf{v}]_{\beta}=[I]_{\alpha}^{\beta}[\mathbf{v}]_{\alpha}\).
+Note that 
+\[([I]_{\alpha}^{\beta})_{ij}=\langle \mathbf{v}_j, \mathbf{w}_i\rangle\]
+and 
+\[([I]_{\alpha}^{\beta})_{ij}^*
+=\overline{([I]_{\alpha}^{\beta})_{ji}}
+=\overline{\langle \mathbf{v}_i, \mathbf{w}_j\rangle}
+=\langle \mathbf{w}_j, \mathbf{v}_i\rangle
+=([I]_{\beta}^{\alpha})_{ij}
+=([I]_{\alpha}^{\beta})^{-1}_{ij}
+\]
+Therefore, 
+\[\langle [\mathbf{v}]_{\beta}, [\mathbf{w}]_{\beta}\rangle
+=\langle [I]_{\alpha}^{\beta}[\mathbf{v}]_{\alpha}, [I]_{\alpha}^{\beta}[\mathbf{w}]_{\alpha}\rangle
+=\langle [\mathbf{v}]_{\alpha}, ([I]_{\alpha}^{\beta})^*[I]_{\alpha}^{\beta}[\mathbf{w}]_{\alpha}\rangle
+=\langle [\mathbf{v}]_{\alpha}, [\mathbf{w}]_{\alpha}\rangle
+\]
+</p>
+
+</div>
+
+<p>As I mentioned before, Theorem 6.8 and Theorem 6.9 are tricky. But they appear in many exams. So you still have to know how to prove them. I come up with a method to help you remember these theorems.
+</p>
+
+<p>We will need a very basic but important theorem (Theorem 6.5). 
+</p>
+
+<p>Theorem 6.5. Let \(V\) be a nonzero finite-dimensional inner product space. Then \(V\) has an orthonormal basis \(\beta\). Furthermore, if \(\beta=\{\mathbf{v}_1, \mathbf{v}_2, ..., \mathbf{v}_n\}\) and \(\mathbf{x}\in V\}\), then 
+\[
+\mathbf{x}
+=\sum_{i=1}^{n} \langle \mathbf{x}, \mathbf{v}_i\rangle \mathbf{v}_i.
+\]
+</p>
+
+<p>Now, let us discuss Theorem 6.8 and Theorem 6.9.
+</p>
+
+<p>Theorem 6.8. Let \(V\) be a finite-dimensional inner product space over \(F\), and let \(g:V\to F\) be a linear transformation. Then there exists a unique vector \(y\in V\) such that \(g(x)=\langle x, y\rangle\) for all \(x\in V\).
+</p>
+
+<p>
+I am used to using the following identities to remind me the form of \(y\). Let \(\{\mathbf{v}_1, \mathbf{v}_2, ..., \mathbf{v}_n\}\) be an orthonormal basis for \(F^n\).
+\[
+\begin{array}{lll}
+\langle x, y\rangle 
+& = & \langle \langle x, \mathbf{v}_1\rangle \mathbf{v}_1+\cdots +\langle x, \mathbf{v}_n\rangle \mathbf{v}_n, \langle y, \mathbf{v}_1\rangle \mathbf{v}_1+\cdots +\langle y, \mathbf{v}_n\rangle \mathbf{v}_n\rangle \\
+& = & \langle x, \mathbf{v}_1\rangle \overline{\langle y, \mathbf{v}_1\rangle}+\cdots+\langle x, \mathbf{v}_n\rangle \overline{\langle y, \mathbf{v}_n\rangle} \\
+g(x) 
+& = & g(\langle x, \mathbf{v}_1\rangle \mathbf{v}_1+\cdots+\langle x, \mathbf{v}_n\rangle \mathbf{v}_n) \\
+& = & \langle x, \mathbf{v}_1\rangle g(\mathbf{v}_1)+\cdots+\langle x, \mathbf{v}_n\rangle g(\mathbf{v}_n)
+\end{array}
+\]
+Compare the terms. To get \(g(x)=\langle x, y\rangle\), we must have \(g(\mathbf{v}_i)=\overline{\langle y, \mathbf{v}_i\rangle}\). Equivalently, \(\langle y, \mathbf{v}_i\rangle=\overline{g(\mathbf{v}_i)}\). Therefore, 
+\[
+\begin{array}{lll}
+y
+&=& \langle y, \mathbf{v}_1\rangle \mathbf{v}_1+\cdots+\langle y, \mathbf{v}_n\rangle \mathbf{v}_n \\
+&=& \overline{g(\mathbf{v}_1)}\mathbf{v}_1+\cdots+\overline{g(\mathbf{v}_n)}\mathbf{v}_n
+\end{array}
+\]
+I have the following diagram.
+\[
+\begin{array}{lll}
+V & & V \\
+\downarrow g & = & \downarrow \langle \cdot, y\rangle \\
+F & & F 
+\end{array}
+\]
+</p>
+
+<p>Theorem 6.9. Let \(V\) be a finite-dimensional inner product space, and let \(T\) be a linear operator on \(V\). Then there exists a unique function \(T^*:V\to V\) such that \(\langle T(x), y\rangle=\langle x, T^*(y)\rangle\) for all \(x, y\in V\). Furthermore, \(T^*\) is linear.
+</p>
+
+<p>For applying the lemma, we have to construct a linear functional first and define \(T^*(\mathbf{v})\) to be the \(y\) induced by the lemma.
+\[
+\begin{array}{lll}
+V & & V \\
+\downarrow ? & = & \downarrow \langle \cdot, y\rangle \\
+F & & F 
+\end{array}
+\]
+How to define the linear functional? Let us observate that \(\langle \cdot, y\rangle=\langle \cdot, T^*(\mathbf{v})\rangle=\langle T(\cdot), \mathbf{v}\rangle\). Thus, \(\langle T(\cdot), \mathbf{v}\rangle\) is the desired linear functional. That is, given \(\mathbf{v}\in V\), we have a linear functional \(\langle T(\cdot), \mathbf{v}\rangle:V\to F\). By the lemma, which induces a unique vector \(y\). Then define \(T^*\) by \(T^*(\mathbf{v})=y\).
+\[
+\begin{array}{lll}
+V & & V \\
+\downarrow \langle T(\cdot), \mathbf{v}\rangle & = & \downarrow \langle \cdot, y\rangle \\
+F & & F 
+\end{array}
+\]
+</p>
+
+</body>
+</html>

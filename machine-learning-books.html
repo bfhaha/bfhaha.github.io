@@ -1,0 +1,209 @@
+﻿<html>
+<head>
+
+<title>機器學習書單</title>
+<meta name="description" content="個人的機器學習書單">
+
+<style>
+
+td {word-break:normal;}
+pre, code {background-color: lightgray;}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<h2>書單</h2>
+
+
+
+
+<p>學習時，強烈建議讀者一定要先實作再理論。一方面是因為這個領域實在是變化太快了，如果不先把教材中的程式碼跑一遍，很可能學完之後才發現程式碼已經因為語法的更新而無法順利執行。另一方面，Elgendy在<cite>Deep Learning for Vision Systems</cite>中給了不錯的理由：
+As mentioned before, if you are not working in research or academia, you most probably won’t need to implement object detection architectures yourself. In most cases, you will download an open source implementation and build on it to work on your problem.
+</p>
+
+
+<p>筆者念完Chollet的<cite>Deep Learning with Python</cite>跟Hastie的<cite>An Introduction to Statistical Learning</cite>之後就很少唸書了，這個領域更新太快，念完基本的東西後，就可以找幾個大公司的開源專案來實作。
+</p>
+
+
+
+<!---------------------------------->
+<h3>Deep Learning
+</h3>
+
+<table border="1">
+<tbody>
+<tr>
+<th>Author</th>
+<th>Title</th>
+<th>Comment</th>
+</tr>
+<tr>
+<td>Chollet</td>
+<td>Deep Learning with Python</td>
+<td>
+<ul>
+<li>Keras發明人寫的。作者預設的讀者是一般大眾，就如作者在Preface裡面所說的，他希望可以讓Deep Learning這個技術democratize（大眾化）。</li>
+<li>本書的行文很淺顯。但這個是雙面刃，例如第二章講tensor的運算，其實就是向量內積跟矩陣乘法，用數學的語言來講會比較清楚容易。</li>
+<li>比較著重在實作（用Keras），原理只有稍微講一點，想要更深入瞭解的讀者需要參考其他的書。如果只看這本書，會不知道怎麼調整參數，還有可能會不知道什麼是activation='relu', activation='softmax', optimizer='rmsprop'等等。</li>
+<li>筆者喜歡這本書的另一個特點是，作者在書中會講一些比較哲學性的觀點，例如下面這段話：Interestingly, these early successes weren't quite enough to make deep learning mainstream at the time---it took a few years. The computer vision research community had spent many years investing in methods other than neural networks, and it wasn't quite ready to give up on them just because there was a new kid on the block In 2013 and 2014, deep learning still faced intense skepticism from many senior computer vision researchers. It's only in 2016 that it finally became dominant. I remember exhorting an ex-professor of mine, in February 2014, to pivot to deep learning. "It's the next big thing!", I would say. "Well, maybe it's just a fad.", he replied. By 2016, his entire lab was doing deep learning. There's no stopping an idea whose time has come.</li>
+<li>gradient descent可以參考Shwartz, David的<cite>Understanding Machine Learning: From Theory to Algorithms</cite>，Section 14.1，定義跟直觀都有解釋，蠻容易懂的。</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>Moroney</td>
+<td>AI and Machine Learning for Coders</td>
+<td>
+<ul>
+<li>跟Chollet是同一類型的書，也就是比較著重在實作，原理只有稍微講一點。</li>
+<li>也是用Keras實作。程式碼風格跟Chollet稍微不一樣。</li>
+<li>一樣也是圍繞在四個大主題，Neural Networks, Computer Vision, Natural Language Processing, Time Series，這四個主題也是<a href="https://www.tensorflow.org/extras/cert/TF_Certificate_Candidate_Handbook.pdf">TensorFlow Developer Certificate</a>要考的。</li>
+<li>基本上我就是Chollet跟Moroney兩本交替著看，一本看不懂的地方就看另一本。</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<!---------------------------------->
+<h3>Neural Network
+</h3>
+
+<p>建議讀者直接寫程式碼實作，因為每本書的理論都有些微的差異，每個程式碼的背後實作方式可能也會不太一樣。
+</p>
+
+<p>如果要學Neural Network，只要具備下面這些知識就夠了。但如果讀者比較重視應用，不是那麼重視原理的話其實也不一定要具備這些知識。</p>
+
+<ul>
+<li>Calculus中的gradient，</li>
+<li>Linear Algebra中的matrix, inner product</li>
+</ul>
+
+<p>沒學過的讀者我推薦下列幾本書。</p>
+<ul>
+<li>Stewart's <cite>Calculus</cite></li>
+<li>Anton's <cite>Elementary Linear Algebra</cite></li>
+</ul>
+
+<table border="1">
+<tbody>
+<tr>
+<th>Author</th>
+<th>Title</th>
+<th>Comment</th>
+</tr>
+<tr>
+<td>Hastie, Tibshirani, Friedman</td>
+<td>The Elements of Statistical Learning</td>
+<td>
+<ul>
+<li>純理論。</li>
+<li>這本書是 <em>An Introduction to Statistical Learning</em> 這本書的進階，但更確切來說，<em>An Introduction to Statistical Learning</em> 是這本書的簡化版，因為 <em>An Introduction to Statistical Learning</em> 是比 <em>The Elements of Statistical Learning</em> 還晚出版。</li>
+<li>這本書不建議當作入門書，應該要看過 <em>An Introduction to Statistical Learning</em> 之後才看這本。</li>
+<li>因為內容太全面了，所以這本書比較像是一本參考書，而不是一本教科書。</li>
+<li>雖然在這本書的Introduction中有說，ch.1~ch.4及ch.7是必須的，其他章節可以按興趣選讀。<br />We recommend that Chapters 1&ndash;4 be first read in sequence. Chapter 7 should also be considered mandatory, as it covers central concepts that pertain to all learning methods. With this in mind, the rest of the book can be read sequentially, or sampled, depending on the reader&rsquo;s interest.<br />但在講後面的章節時，還是會提到前面ch.1~ch.4及ch.7以外的內容。</li>
+<li>Chapter 11有講Neural Networks，講得還不錯，<font color="red">但是在方程式(11.12)有很嚴重的筆誤</font>。要讀這個章節可以不用看過前面的章節（也不用看過 <cite>An Introduction to Statistical Learning</cite>），如果提到前面的部分就跳過。</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<!---------------------------------->
+<h3>Computer Vision Object Detection
+</h3>
+
+<p>如果直接讀理論會懂得很模糊，讀別人寫好的程式碼又太龐雜，而且很多莫名其妙的寫法，所以我都是先拿別人寫好的演算法，跑一次確定可行，再把training dataset改成自己的，接著才是研究程式碼及理論。</p>
+
+<p>很多時候，書本上的內容都已經跟不上最新的發展，而且書本的講解並沒有比較清楚。</p>
+
+<p>下面幾本是我看過的書，但我不推薦，因為這些書中的範例給的Object Detection的範例並不實用。例如Elgendy給的範例中，語法已經過期。Atienza給的範例，表現不怎麼好。</p>
+
+<table border="1">
+<tbody>
+<tr>
+<th>Author</th>
+<th>Title</th>
+<th>Comment</th>
+</tr>
+<tr>
+<td>Elgendy</td>
+<td>Deep Learning for Vision Systems</td>
+<td>
+<ul>
+<li>前面也有講Neural Networks及Convolution Neural Networks，也可以把這本書當作入門書。</li>
+<li>如果已經有ANN, CNN基礎的話也可以直接從Ch.7開始看。</li>
+<li>程式碼不完整，要到GitHub上下載完整的。</li>
+<li><font color="red">可惜Section 7.5的實作程式碼是以<a href="https://github.com/pierluigiferrari/ssd_keras">這個2018的專案</a>作為範例，但是隨著TensorFlow及Keras的更新，有很多地方會編譯錯誤</font>。筆者有嘗試修正，參考這裡的<a href="https://bfhaha.github.io/objectdetectionssd.html">記錄</a>。一開始遇到記憶體不夠的問題，後來在Google Cloud Compute Engine租用640 GB memory的主機，還是出現問題，參考<a href="https://github.com/pierluigiferrari/ssd_keras/issues/380">這裡</a>。</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>Rowel Atienza</td>
+<td>Advanced Deep Learning with TensorFlow 2 and Keras</td>
+<td>
+<ul>
+<li>如果已經有ANN, CNN基礎的話也可以直接從Ch.11開始看。</li>
+<li>程式碼不完整，要到GitHub上下載完整的。</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>Gonzalez</td>
+<td>Digital Image Processing</td>
+<td>
+（理論）Section 12.5, 12.6。這本書聽說是該領域的聖經。
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<!---------------------------------->
+<h3>Without Neural Network
+</h3>
+
+<table border="1">
+<tbody>
+<tr>
+<th>Author</th>
+<th>Title</th>
+<th>Comment</th>
+</tr>
+<tr>
+<td>James, Witten, Hastie, Tibshirani</td>
+<td>An Introduction to Statistical Learning</td>
+<td>
+<ul>
+<li>純理論。</li>
+<li>這本書沒有講Neural Networks，但有講Support Vector Machine, Random Forest, Principal Components Analysis, Linear Discriminant Analysis。</li>
+<li>這本書寫得很好，很清楚。</li>
+<li>建議先看過Casella的<cite>Statistical Inference</cite>再看這本書。雖然作者說不用太多基礎，但那是假設讀者可以接受課本給的公式而不去知道原理及證明，因為大部分公式沒有給證明，但會用直觀的方式讓讀者瞭解。</li>
+<li>Subsection 6.3.1 principal components的證明要用到orthogonal diagonalization，這可以參考Jolliffe的<cite>Principal Component Analysis</cite>或是<a href="http://bfhaha.github.io/note-jolliffe.html">我的讀書筆記</a>。</li>
+<li>Hastie跟Tibshirani兩位作者有在Youtube上放講解影片，參考<a href="https://www.youtube.com/watch?v=5N9V07EIfIg&amp;list=PLOg0ngHtcqbPTlZzRHA2ocQZqB1D_qZ5V&amp;ab_channel=DataScienceAnalytics">這裡</a>。有68部影片，每部長度約5~22分鐘不等，分章節歸類。這個影片會講解書中的一些觀念，但用不同的例子，所以我都把這個影片當作讀完每個章節後的複習。語速有點快，英文不夠好的同學可以開Youtube自動產生的字幕。兩位作者很幽默，偶爾會講一些笑話。</li>
+<li>書中有段關於bootstrap的講解講得很棒，參考p.188, line -4, In practice, however, the procedure for estimating...</li>
+<li>書中有段關於adjusted R&sup2;的講解講得很棒，參考p.212, line -2, The intuition behind the adjusted...</li>
+<li><a href="http://bfhaha.github.io/note-hastie.html">我的筆記</a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+</body>
+</html>

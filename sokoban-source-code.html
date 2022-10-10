@@ -1,0 +1,5168 @@
+﻿<html>
+
+<head>
+
+<title>手機遊戲Sokoban Touch的迷宮原始碼</title>
+<meta name="description" content="手機遊戲Sokoban Touch的迷宮原始碼">
+
+</head>
+
+<body>
+
+
+<h1>Sokoban Touch的迷宮原始碼，可以匯入解Sokoban的軟體求解。</h1>
+
+<ul>
+<li># 表示牆。</li>
+<li>$ 表示箱子。</li>
+<li>. 表示目標點。</li>
+<li>空格表示沒有東西。</li>
+<li>*表示目標點上已經有箱子。</li>
+<li>@ 表示人。</li>
+<li>+ 表示人站在目標點上。</li>
+</ul>
+
+<br>
+FirstStep+ #1 No.01<br>
+<br>
+####<br>
+#. ##<br>
+# $ #<br>
+# @ #<br>
+#####<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.02<br>
+<br>
+####<br>
+#  #<br>
+#  #<br>
+#  #<br>
+#$##<br>
+#@#<br>
+#.#<br>
+###<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.03<br>
+<br>
+   ####<br>
+####  #<br>
+#   @ #<br>
+# $#  #<br>
+#  # ##<br>
+## #  #<br>
+ # .  #<br>
+ ######<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.04<br>
+<br>
+   ####<br>
+  ## .#<br>
+ ##   #<br>
+##    #<br>
+#    ##<br>
+# $ ##<br>
+#@ ##<br>
+####<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.05<br>
+<br>
+#####<br>
+# @.#<br>
+# $ #<br>
+#.$ #<br>
+#####<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.06<br>
+<br>
+   ####<br>
+  ## .#<br>
+ ##  .#<br>
+##    #<br>
+# $  ##<br>
+# $ ##<br>
+#@ ##<br>
+####<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.07<br>
+<br>
+####<br>
+#  #<br>
+#  #<br>
+#  #<br>
+#$ #<br>
+#  #<br>
+#.##<br>
+#.##<br>
+#  #<br>
+#$@#<br>
+#  #<br>
+####<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.08<br>
+<br>
+######<br>
+##  .#<br>
+## #.#<br>
+##$$ #<br>
+#    #<br>
+#@  ##<br>
+######<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.09<br>
+<br>
+#####<br>
+#.. ####<br>
+#      #<br>
+# $ $  #<br>
+###@####<br>
+# $ $ #<br>
+#     #<br>
+### ..#<br>
+  #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.10<br>
+<br>
+ #####<br>
+ #   #<br>
+##$# #<br>
+#  # #<br>
+# $# #<br>
+#  ..#<br>
+## ###<br>
+#  #<br>
+#  #<br>
+# @#<br>
+####<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.11<br>
+<br>
+#########<br>
+#   #   #<br>
+# # # # #<br>
+# .   . #<br>
+###$#$###<br>
+#   #   #<br>
+# ##### #<br>
+#   @   #<br>
+#########<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.12<br>
+<br>
+#####<br>
+#   #<br>
+# #.##<br>
+# #. #<br>
+#  $ #<br>
+# #$##<br>
+#@  #<br>
+#####<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.13<br>
+<br>
+######<br>
+#....#<br>
+#  $$#<br>
+#@$$ #<br>
+###  #<br>
+  #  #<br>
+  #  #<br>
+  ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.14<br>
+<br>
+  ####<br>
+###  ###<br>
+#  .$$ #<br>
+#  . # #<br>
+# #  # #<br>
+# #### #<br>
+#     @#<br>
+########<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.15<br>
+<br>
+#####<br>
+#   ###<br>
+# $   #<br>
+##$## #<br>
+#.    #<br>
+#. @###<br>
+#####<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.16<br>
+<br>
+###<br>
+#.####<br>
+#.$  #<br>
+# #  #<br>
+# #@##<br>
+# #  #<br>
+#  $ #<br>
+###  #<br>
+  ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.17<br>
+<br>
+#####<br>
+#   ####<br>
+#    $ ##<br>
+# $$   @#<br>
+#  ###$##<br>
+###    #<br>
+  #    ##<br>
+  #...*.#<br>
+  #     #<br>
+  #######<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.18<br>
+<br>
+########<br>
+#   #  #<br>
+# $ .. #<br>
+### #  #<br>
+ ## # ##<br>
+ #  # #<br>
+ # @$ #<br>
+ #  ###<br>
+ ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.19<br>
+<br>
+ #####<br>
+ #   #<br>
+## # #<br>
+#@   ##<br>
+# # ..#<br>
+# $$# #<br>
+###   #<br>
+  #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #1 No.20<br>
+<br>
+#####<br>
+#   ##<br>
+# #.. #<br>
+#     #<br>
+##$#$##<br>
+ # @ #<br>
+ #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.01<br>
+<br>
+#######<br>
+###.  #<br>
+####  #<br>
+#  # ##<br>
+#    ##<br>
+# $# ##<br>
+##@$  #<br>
+###.  #<br>
+#######<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.02<br>
+<br>
+     ####<br>
+     # @#<br>
+   ###$ #<br>
+####  $ #<br>
+#.....  #<br>
+# $ $.$ #<br>
+######  #<br>
+     #$ #<br>
+     #  #<br>
+     ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.03<br>
+<br>
+########<br>
+#   #@ #<br>
+#   #  #<br>
+#   #. #<br>
+##     #<br>
+#  ##. #<br>
+# $$ # #<br>
+#  #   #<br>
+########<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.04<br>
+<br>
+#####<br>
+#   ###<br>
+# #$$ #<br>
+#..  @#<br>
+## # ##<br>
+ #   #<br>
+ #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.05<br>
+<br>
+    ####<br>
+    #  #<br>
+    #  #<br>
+    #  #<br>
+##### ##<br>
+#     @#<br>
+#  $*. #<br>
+#   ####<br>
+#####<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.06<br>
+<br>
+  ######<br>
+  #    #<br>
+  # .  #<br>
+  # . ##<br>
+##### #<br>
+#   # #<br>
+#   $ #<br>
+#  $# #<br>
+###@  #<br>
+  #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.07<br>
+<br>
+  ####<br>
+  #..#<br>
+ ##..#<br>
+## $.#<br>
+#@$ .#<br>
+# $ ##<br>
+# $ #<br>
+# $ #<br>
+# $ #<br>
+##  #<br>
+ ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.08<br>
+<br>
+ #######<br>
+ #  #  #<br>
+ #   $ #<br>
+ #  #  #<br>
+### # ##<br>
+#  .# #<br>
+# # #@#<br>
+#  .# #<br>
+### # ##<br>
+ #  #  #<br>
+ #   $ #<br>
+ #  #  #<br>
+ #######<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.09<br>
+<br>
+#####<br>
+#.  #<br>
+#$  #<br>
+#.$@#<br>
+#$  #<br>
+#.  #<br>
+#####<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.10<br>
+<br>
+ ####<br>
+ #@ #<br>
+## $#<br>
+#  .####<br>
+# $..  #<br>
+####$  #<br>
+   #  ##<br>
+   #  #<br>
+   ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.11<br>
+<br>
+ ########<br>
+##  #.  #<br>
+# $@#.  #<br>
+# $ #.$ #<br>
+# $ #. ##<br>
+# #$#. ##<br>
+#   ##  #<br>
+#       #<br>
+#####  ##<br>
+    ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.12<br>
+<br>
+#####<br>
+#  ..#<br>
+#  #.#<br>
+##$$ #<br>
+ # $ #<br>
+ # @##<br>
+ ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.13<br>
+<br>
+######<br>
+#... #<br>
+#$$@ #<br>
+#  $ #<br>
+#  ###<br>
+####<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.14<br>
+<br>
+#########<br>
+#@   #  #<br>
+#  ###$ #<br>
+##$#    #<br>
+#  # # ##<br>
+#  # $$##<br>
+# $  $  #<br>
+##......#<br>
+ ########<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.15<br>
+<br>
+ #####<br>
+ #   ##<br>
+ # .. #<br>
+## #. #<br>
+# $$$##<br>
+#@   #<br>
+##  ##<br>
+ ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.16<br>
+<br>
+######<br>
+#... #<br>
+#$$$@#<br>
+#  # #<br>
+#    #<br>
+######<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.17<br>
+<br>
+ ########<br>
+##      #<br>
+#  #### #<br>
+#@$ ..# #<br>
+#  #..  #<br>
+## $   ##<br>
+# $$## #<br>
+#      #<br>
+########<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.18<br>
+<br>
+########<br>
+#      #<br>
+# #$## #<br>
+# # .  #<br>
+# $@.# #<br>
+# # .# #<br>
+# #$## #<br>
+#      #<br>
+########<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.19<br>
+<br>
+  #####<br>
+  #   #<br>
+###.# #<br>
+#  .$ #<br>
+# #.$ #<br>
+#@  $##<br>
+###  #<br>
+  ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #2 No.20<br>
+<br>
+  #####<br>
+  #   #<br>
+### # #<br>
+# $$* #<br>
+# # . #<br>
+#@  .##<br>
+###  #<br>
+  ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.01<br>
+<br>
+#####<br>
+#@  #<br>
+# #$##<br>
+# *  #<br>
+##.  #<br>
+# .# #<br>
+#  $ #<br>
+#  ###<br>
+####<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.02<br>
+<br>
+   ####<br>
+####  #<br>
+#     #<br>
+#  #. #<br>
+#@$$*##<br>
+#  #. #<br>
+#     #<br>
+####  #<br>
+   ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.03<br>
+<br>
+#######<br>
+#  #  ##<br>
+#  @ $ #<br>
+#  #$  #<br>
+#..# $ #<br>
+#..  $##<br>
+####  #<br>
+   ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.04<br>
+<br>
+   ####<br>
+####  #<br>
+# $   #<br>
+# # # ##<br>
+#.*.#  #<br>
+#   $ @#<br>
+#  ##  #<br>
+########<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.05<br>
+<br>
+#######<br>
+##   ##<br>
+#  $  #<br>
+# # #@#<br>
+#..*# #<br>
+#   $ #<br>
+#  ## #<br>
+#######<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.06<br>
+<br>
+#######<br>
+##   @#<br>
+# $$  #<br>
+#  $ ##<br>
+### ###<br>
+#   . #<br>
+#     #<br>
+# . . #<br>
+#######<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.07<br>
+<br>
+  ####<br>
+  #  #<br>
+###  ###<br>
+# $*.  #<br>
+#  ..$ #<br>
+### $###<br>
+  # @#<br>
+  #  #<br>
+  ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.08<br>
+<br>
+    ####<br>
+    #  #<br>
+    #  #<br>
+    #  #<br>
+##### ##<br>
+#    $@#<br>
+#  $*..#<br>
+#   ####<br>
+#####<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.09<br>
+<br>
+ #####<br>
+ #   ##<br>
+## #.  #<br>
+#  ..# #<br>
+# #  $ #<br>
+#  $#$##<br>
+###@  #<br>
+  #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.10<br>
+<br>
+  ####<br>
+###  #<br>
+#    ###<br>
+# $**. #<br>
+# #  # #<br>
+# # @# #<br>
+# #### #<br>
+#      #<br>
+########<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.11<br>
+<br>
+  ####<br>
+  #. #<br>
+###* #<br>
+#@$  #<br>
+# $. #<br>
+# $. #<br>
+# $. #<br>
+# $. #<br>
+######<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.12<br>
+<br>
+  ####<br>
+  #  #<br>
+###. #<br>
+#@$. #<br>
+# $* #<br>
+# $. #<br>
+# $. #<br>
+# $. #<br>
+######<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.13<br>
+<br>
+  ####<br>
+  #  #<br>
+###* #<br>
+#@$. #<br>
+# $* #<br>
+# $. #<br>
+# $. #<br>
+# *. #<br>
+######<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.14<br>
+<br>
+  ####<br>
+  #. #<br>
+###* #<br>
+#@$. #<br>
+# $* ##<br>
+# $.  #<br>
+# $.  #<br>
+# $. ##<br>
+######<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.15<br>
+<br>
+  ####<br>
+  #. #<br>
+###* #<br>
+#@$. #<br>
+# $. ##<br>
+# $*  #<br>
+# $.  #<br>
+# $. ##<br>
+######<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.16<br>
+<br>
+  ####<br>
+  #. #<br>
+###. #<br>
+#@$* #<br>
+# $. #<br>
+# $* ##<br>
+# $.  #<br>
+#  *  #<br>
+#######<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.17<br>
+<br>
+  ####<br>
+  #. #<br>
+###. #<br>
+#@$* #<br>
+# $. ##<br>
+# $*  #<br>
+# $.  #<br>
+## *  #<br>
+ ######<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.18<br>
+<br>
+#####<br>
+#   ###<br>
+# $   #<br>
+##$## #<br>
+## .# #<br>
+#  .# #<br>
+#@#.  #<br>
+# $  ##<br>
+###  #<br>
+  ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.19<br>
+<br>
+########<br>
+#  .#  #<br>
+# $ #  #<br>
+## .  $#<br>
+ # + # ##<br>
+ ###$   #<br>
+   #  # #<br>
+   # ## #<br>
+   #    #<br>
+   ######<br>
+<br>
+<br>
+<br>
+FirstStep+ #FirstStep+ #3 No.20<br>
+<br>
+  ####<br>
+###  #<br>
+#  $ ##<br>
+# #.. #<br>
+#@ .# #<br>
+##$ $ #<br>
+ #  ###<br>
+ ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.01<br>
+<br>
+########<br>
+#   ##.#<br>
+# # ##.#<br>
+# @   .#<br>
+## ### #<br>
+#    # #<br>
+#  $ # #<br>
+#  $ # #<br>
+###$## #<br>
+  #    #<br>
+  ######<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.02<br>
+<br>
+#########<br>
+#### ...#<br>
+#  #  *.#<br>
+# $   $##<br>
+#  ###  #<br>
+## #@#  #<br>
+# $   $ #<br>
+#    #  #<br>
+#########<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.03<br>
+<br>
+#####<br>
+#   #<br>
+# # #<br>
+#   ####<br>
+##  ...#<br>
+#  ### #<br>
+# $  # #<br>
+# $  # #<br>
+###$## #<br>
+  #@   #<br>
+  ######<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.04<br>
+<br>
+#########<br>
+#       #<br>
+# ###$# #<br>
+### . $ #<br>
+# #.*.  #<br>
+# $ .  ##<br>
+# ###$#@#<br>
+#       #<br>
+#########<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.05<br>
+<br>
+########<br>
+#@  #  #<br>
+# $ .. #<br>
+## ##. #<br>
+## #  ##<br>
+#  #$ #<br>
+#  $  #<br>
+#  ####<br>
+####<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.06<br>
+<br>
+  #####<br>
+ ## @ #<br>
+##  $ ##<br>
+#  *.$.#<br>
+#.$.*  #<br>
+## $  ##<br>
+ ##  ##<br>
+  ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.07<br>
+<br>
+    #####<br>
+ ####   #<br>
+ #      #<br>
+## #$# ##<br>
+#  #@# #<br>
+#  $ # #<br>
+#  $ # ##<br>
+### ##  #<br>
+  # ... #<br>
+  #######<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.08<br>
+<br>
+#########<br>
+#  #   @#<br>
+#   $$$ #<br>
+#  # $  #<br>
+## #  ###<br>
+#  #  #<br>
+#  # ##<br>
+# .. #<br>
+# ..##<br>
+#####<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.09<br>
+<br>
+    ####<br>
+ #### @#<br>
+##     #<br>
+#  $$ ##<br>
+#   .##<br>
+### *#<br>
+  #$.#<br>
+  # .#<br>
+  #  #<br>
+  #  #<br>
+  ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.10<br>
+<br>
+#####<br>
+#...###<br>
+## $  #<br>
+# $$@ #<br>
+#  $$ #<br>
+#  $ ##<br>
+##...#<br>
+ #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.11<br>
+<br>
+######<br>
+#    #<br>
+#.. .#<br>
+#$$$$#<br>
+# . @#<br>
+##   #<br>
+ #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.12<br>
+<br>
+######<br>
+#    #<br>
+#.. .#<br>
+#$$$$#<br>
+# .*@#<br>
+## # #<br>
+ #   #<br>
+ #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.13<br>
+<br>
+  ######<br>
+  # .  #<br>
+  # .  #<br>
+  # * ##<br>
+##### #<br>
+#   # #<br>
+#   $ #<br>
+#  $# #<br>
+###@  #<br>
+  #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.14<br>
+<br>
+    #####<br>
+    #   #<br>
+    # # #<br>
+#####. @#<br>
+#  $ . ##<br>
+# #$#. #<br>
+#  $  ##<br>
+##   ##<br>
+ #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.15<br>
+<br>
+ ######<br>
+ #@   #<br>
+ #  $ #<br>
+ # #$##<br>
+## . #<br>
+#  .$#<br>
+#  . #<br>
+######<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.16<br>
+<br>
+####<br>
+#..###<br>
+#..  #<br>
+#.*  #<br>
+# #$$##<br>
+#$#   #<br>
+# #   #<br>
+#  $$##<br>
+#  @ #<br>
+######<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.17<br>
+<br>
+####<br>
+#..###<br>
+#..  #<br>
+#.*  #<br>
+#.#$$##<br>
+#$#   #<br>
+# #   #<br>
+# $$$##<br>
+#  @ #<br>
+#####<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.18<br>
+<br>
+###<br>
+#.####<br>
+#.   #<br>
+#.$  #<br>
+#.#$$##<br>
+#*#   #<br>
+#.#   #<br>
+#.$$$ #<br>
+#  @ ##<br>
+######<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.19<br>
+<br>
+ #####<br>
+ #   #<br>
+ # # ##<br>
+##... #<br>
+#   # #<br>
+# $$$ #<br>
+###  ##<br>
+  # @#<br>
+  ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #4 No.20<br>
+<br>
+########<br>
+#@ #   #<br>
+# $$   #<br>
+#  ## ##<br>
+##$##..#<br>
+#   $..#<br>
+# # ## #<br>
+#      #<br>
+########<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.01<br>
+<br>
+#########<br>
+#       #<br>
+# ##$## #<br>
+# #. .# #<br>
+# # @ # #<br>
+# #. .  #<br>
+# ##$## #<br>
+# $   $ #<br>
+#       #<br>
+#########<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.02<br>
+<br>
+#######<br>
+#    .#<br>
+# #$#.#<br>
+# $  .#<br>
+# $ #.#<br>
+# #$#.#<br>
+#@  $.#<br>
+####$ #<br>
+   #  #<br>
+   #  #<br>
+   ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.03<br>
+<br>
+####<br>
+#  #<br>
+#@$#<br>
+#  ######<br>
+##  $   #<br>
+#  $# $ #<br>
+# $ *.# #<br>
+##  ..###<br>
+ ## ..#<br>
+  #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.04<br>
+<br>
+######<br>
+#  # #<br>
+#@   #<br>
+#  $ #<br>
+##$*##<br>
+ # .#<br>
+ #  #<br>
+ #  #<br>
+ #$.#<br>
+ # .#<br>
+ ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.05<br>
+<br>
+#########<br>
+#  ##   #<br>
+#  $    #<br>
+#  ###$##<br>
+## ###  #<br>
+## ###  #<br>
+##$###..#<br>
+#     $ #<br>
+#   ##.+#<br>
+#########<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.06<br>
+<br>
+  ###<br>
+  #.#<br>
+  #.#<br>
+  #.#<br>
+###.###<br>
+# $ $ #<br>
+# $$  #<br>
+#  #  #<br>
+#  @  #<br>
+#######<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.07<br>
+<br>
+   ###<br>
+   #+#<br>
+   #*#<br>
+   #.#<br>
+####.####<br>
+#     $ #<br>
+# $   # #<br>
+# ###$# #<br>
+#       #<br>
+#########<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.08<br>
+<br>
+ ######<br>
+ #  $.#<br>
+ #  $.#<br>
+## #$.#<br>
+#   $+#<br>
+# # ###<br>
+#   #<br>
+#####<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.09<br>
+<br>
+<br>
+   ####<br>
+#### @#<br>
+#   $ #<br>
+# *...##<br>
+##$.$  #<br>
+ #  $  #<br>
+ #  ####<br>
+ ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.10<br>
+<br>
+   ####<br>
+#### @#<br>
+#   $ #<br>
+# $...##<br>
+##$ *. #<br>
+ #  $  #<br>
+ #  ####<br>
+ ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.11<br>
+<br>
+    ####<br>
+##### @#<br>
+#   $$ #<br>
+# $... #<br>
+##$..*$##<br>
+ # ...$ #<br>
+ # $$   #<br>
+ #  #####<br>
+ ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.12<br>
+<br>
+#######<br>
+#.....#<br>
+# $.$ #<br>
+# $#$ #<br>
+#  #  #<br>
+# $@$ #<br>
+#  #  #<br>
+#######<br>
+<br>
+<br>
+FirstStep+ #5 No.13<br>
+<br>
+  ####<br>
+  #  #<br>
+  #  #<br>
+###.$###<br>
+#  .$  #<br>
+#  .$@ #<br>
+###.$###<br>
+  #  #<br>
+  #  #<br>
+  ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.14<br>
+<br>
+#########<br>
+#      @#<br>
+# ##$$# #<br>
+# # . # #<br>
+# $...$ #<br>
+# # . # #<br>
+# ###$# #<br>
+#       #<br>
+#########<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.15<br>
+<br>
+#######<br>
+#     #<br>
+#   $ #<br>
+# .#$###<br>
+##.#   #<br>
+# .# $ #<br>
+# .#   #<br>
+# .#$###<br>
+#   $ #<br>
+#    @#<br>
+#######<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.16<br>
+<br>
+#######<br>
+#.....#<br>
+# $   #<br>
+## #$ #<br>
+# $#  #<br>
+#  $$ #<br>
+#  # @#<br>
+#######<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.17<br>
+<br>
+ ######<br>
+##    #<br>
+# $  $##<br>
+#  ##  #<br>
+#  ##$@#<br>
+##   $ #<br>
+ #..*..#<br>
+ #######<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.18<br>
+<br>
+########<br>
+#     @#<br>
+# $$ $ #<br>
+#  # $##<br>
+#  #  .#<br>
+#####$.#<br>
+   #  .#<br>
+   #  .#<br>
+   ## .#<br>
+    #  #<br>
+    #  #<br>
+    #  #<br>
+    ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.19<br>
+<br>
+  ######<br>
+###    #<br>
+#...$$ #<br>
+#...# @#<br>
+##$# $##<br>
+ # $   #<br>
+ #  $  #<br>
+ #   ###<br>
+ #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #5 No.20<br>
+<br>
+########<br>
+#  @#  #<br>
+# $ $  #<br>
+#  ##  #<br>
+##$.# $##<br>
+#  .#$  #<br>
+#  .$   #<br>
+## .#####<br>
+ # .#<br>
+ # .#<br>
+ ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.01<br>
+<br>
+######<br>
+#  @ ###<br>
+# $ $  #<br>
+# $# $ ##<br>
+#  .#   #<br>
+##..#$  #<br>
+#  .$   #<br>
+#  .#####<br>
+## .#<br>
+ ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.02<br>
+<br>
+  ######<br>
+  #    #<br>
+###$## #<br>
+# $. # #<br>
+# #. $ #<br>
+#  .$#@#<br>
+###. # #<br>
+  ##   #<br>
+  ######<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.03<br>
+<br>
+   ###<br>
+ ###@###<br>
+##     #<br>
+#  $ $ #<br>
+# #$ $ #<br>
+# $ ####<br>
+#.....#<br>
+#    ##<br>
+#  ###<br>
+####<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.04<br>
+<br>
+   ###<br>
+ ###@###<br>
+##     #<br>
+#  $ $ #<br>
+# #$ $ #<br>
+# $ ####<br>
+#.....#<br>
+# $ .##<br>
+#  ###<br>
+####<br>
+<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.05<br>
+<br>
+   ###<br>
+ ## @ ##<br>
+##     #<br>
+#  $ $ #<br>
+# #$ $ #<br>
+#$$ ####<br>
+#.....#<br>
+# $..##<br>
+#  ###<br>
+####<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.06<br>
+<br>
+   #####<br>
+   #...#<br>
+####.*.#<br>
+#@  #$ #<br>
+# $    #<br>
+###$$$ #<br>
+  #   ##<br>
+  #   #<br>
+  #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.07<br>
+<br>
+   #####<br>
+   #...#<br>
+####...#<br>
+#@  #$ #<br>
+# $  $ #<br>
+###$$$ #<br>
+  #   ##<br>
+  #   #<br>
+  #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.08<br>
+<br>
+#######<br>
+#.....#<br>
+# $ # #<br>
+#   # #<br>
+# $ $ #<br>
+### $ #<br>
+ #  ###<br>
+ # $ #<br>
+ # @ #<br>
+ #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.09<br>
+<br>
+  ####<br>
+###  #<br>
+#    ###<br>
+# #..  #<br>
+# $  # #<br>
+###**$ #<br>
+  #@ ###<br>
+  #  #<br>
+  ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.10<br>
+<br>
+  ####<br>
+###  #<br>
+#   $###<br>
+# #.*  #<br>
+#  ..# #<br>
+### $$@#<br>
+  #  ###<br>
+  #  #<br>
+  ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.11<br>
+<br>
+  ####<br>
+###  #<br>
+#  .$###<br>
+# #.$  #<br>
+#  . # #<br>
+###.$$@#<br>
+  #  ###<br>
+  #  #<br>
+  ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.12<br>
+<br>
+   ####<br>
+ ###  #<br>
+ #    ##<br>
+ # # $ #<br>
+ #@$$$ #<br>
+#### # ##<br>
+#..  #  #<br>
+#.*$    #<br>
+#..  ####<br>
+######<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.13<br>
+<br>
+  ######<br>
+###   @#<br>
+#  $ # #<br>
+#  $ $ #<br>
+#  $ $ #<br>
+###$# ##<br>
+#.....#<br>
+#.    #<br>
+####  #<br>
+   ####<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.14<br>
+<br>
+ #######<br>
+##  @  #<br>
+#   $  ##<br>
+# $###$ #<br>
+#  $ #  #<br>
+##$# $  #<br>
+##...####<br>
+# ...#<br>
+#   ##<br>
+#####<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.15<br>
+<br>
+  #####<br>
+  #   #<br>
+### $ #<br>
+# # $ #<br>
+#@  $###<br>
+#.*..*.#<br>
+#### $ #<br>
+   #   #<br>
+   #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.16<br>
+<br>
+########<br>
+#   #@.#<br>
+# #$$$.#<br>
+# $   .#<br>
+# $  ###<br>
+# $ ##<br>
+#...#<br>
+#####<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.17<br>
+<br>
+########<br>
+#  #   #<br>
+#  $ $@#<br>
+#  ##*##<br>
+## ##.#<br>
+#   $.#<br>
+# # #.##<br>
+#      #<br>
+####   #<br>
+   #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.18<br>
+<br>
+#########<br>
+#       #<br>
+# #$### #<br>
+# #   # #<br>
+# # ..# #<br>
+# $ ..# #<br>
+# # $ # #<br>
+# #$### #<br>
+#   @   #<br>
+#########<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.19<br>
+<br>
+#########<br>
+#   @   #<br>
+# ##### #<br>
+# #   # #<br>
+# $.. # #<br>
+##$ #$# #<br>
+## ..$  #<br>
+###   ###<br>
+  #####<br>
+<br>
+<br>
+<br>
+FirstStep+ #6 No.20<br>
+<br>
+#####<br>
+#@  ###<br>
+# # $ #<br>
+#     #<br>
+####*####<br>
+#  ...  #<br>
+# #$    #<br>
+#   #$###<br>
+###   #<br>
+  #####<br>
+<br>
+<br>
+<br>
+Step count No.01<br>
+<br>
+ #####<br>
+ #   ##<br>
+ #    #<br>
+##.+* #<br>
+# $ $##<br>
+#    #<br>
+######<br>
+<br>
+<br>
+<br>
+Step count No.02<br>
+<br>
+   ####<br>
+####  #<br>
+#  #  #<br>
+#  $.@#<br>
+#  $. #<br>
+###  ##<br>
+  ####<br>
+<br>
+<br>
+<br>
+Step count No.03<br>
+<br>
+######<br>
+#  @ #<br>
+# $*.#<br>
+# .$ #<br>
+##   #<br>
+######<br>
+<br>
+<br>
+<br>
+Step count No.04<br>
+<br>
+#######<br>
+#  . @#<br>
+# $.$ #<br>
+# $.$ #<br>
+#  #  #<br>
+#  .  #<br>
+#######<br>
+<br>
+<br>
+<br>
+Step count No.05<br>
+<br>
+#######<br>
+#   ###<br>
+#  $ ##<br>
+# $@$ #<br>
+#  $$ #<br>
+#.....#<br>
+#######<br>
+<br>
+<br>
+<br>
+Step count No.06<br>
+<br>
+ ######<br>
+ #   @#<br>
+ # $  #<br>
+##$.$ #<br>
+#.*.*.#<br>
+#  $ ##<br>
+#    #<br>
+######<br>
+<br>
+<br>
+<br>
+Step count No.07<br>
+<br>
+#######<br>
+##    #<br>
+#   $ #<br>
+#**+.*#<br>
+#  $  #<br>
+#   ###<br>
+#######<br>
+<br>
+<br>
+<br>
+Step count No.08<br>
+<br>
+ #####<br>
+## @ #<br>
+#....#<br>
+# $  #<br>
+#$$$##<br>
+#   #<br>
+#  ##<br>
+#  #<br>
+####<br>
+<br>
+<br>
+<br>
+Step count No.09<br>
+<br>
+#######<br>
+#    @#<br>
+#     #<br>
+# $.$ #<br>
+#..*.##<br>
+# $$  #<br>
+###   #<br>
+#######<br>
+<br>
+<br>
+<br>
+Step count No.10<br>
+<br>
+  #####<br>
+ ##  @#<br>
+##.$  #<br>
+# *.$ #<br>
+# $.* #<br>
+#  $.##<br>
+#   ##<br>
+#####<br>
+<br>
+<br>
+<br>
+Step count No.11<br>
+<br>
+  ####<br>
+ #   @#<br>
+# .$$. #<br>
+# .$ * #<br>
+# * $. #<br>
+# .$$. #<br>
+ #    #<br>
+  ####<br>
+<br>
+<br>
+<br>
+Step count No.12<br>
+<br>
+#######<br>
+#  # @#<br>
+# * * #<br>
+#     #<br>
+##$.$##<br>
+#     #<br>
+# .$. #<br>
+#  #  #<br>
+#######<br>
+<br>
+<br>
+<br>
+Step count No.13<br>
+<br>
+#######<br>
+# .@. #<br>
+# *$* #<br>
+## $ ##<br>
+ #   #<br>
+ #   #<br>
+ #   #<br>
+ #####<br>
+<br>
+<br>
+<br>
+Step count No.14<br>
+<br>
+#######<br>
+#     #<br>
+#  #@ #<br>
+# * * #<br>
+# * * #<br>
+##$#. #<br>
+ #   ##<br>
+ #####<br>
+<br>
+<br>
+<br>
+Step count No.15<br>
+<br>
+  ####<br>
+ ##  ##<br>
+## $. ##<br>
+#  .$@ #<br>
+#  $.  #<br>
+## .$ ##<br>
+ ##  ##<br>
+  ####<br>
+<br>
+<br>
+<br>
+Step count No.16<br>
+<br>
+#######<br>
+#  @  #<br>
+# $$  #<br>
+##.*. #<br>
+# .*.##<br>
+#  $$ #<br>
+#     #<br>
+#######<br>
+<br>
+<br>
+<br>
+Step count No.17<br>
+<br>
+ #####<br>
+ #   #<br>
+## @ ##<br>
+#  $  #<br>
+#.***.#<br>
+#  $  #<br>
+##   ##<br>
+ #   #<br>
+ #####<br>
+<br>
+<br>
+<br>
+Step count No.18<br>
+<br>
+#######<br>
+# @#..#<br>
+# $  $#<br>
+#  #..#<br>
+# $#. #<br>
+# $ $ #<br>
+#  #  #<br>
+#######<br>
+<br>
+<br>
+<br>
+Step count No.19<br>
+<br>
+#####<br>
+#  @#<br>
+#   #<br>
+#*$*#<br>
+# $ #<br>
+#...#<br>
+# $ #<br>
+#   #<br>
+#####<br>
+<br>
+<br>
+<br>
+Step count No.20<br>
+<br>
+#######<br>
+#  # @#<br>
+# .$. #<br>
+# $.$ #<br>
+# .$. #<br>
+# $.$ #<br>
+#  #  #<br>
+#######<br>
+<br>
+<br>
+<br>
+The entrance No.01<br>
+<br>
+ ####<br>
+##  ##<br>
+#@$  ##<br>
+# $  .#<br>
+###   #<br>
+  ## .#<br>
+   ####<br>
+<br>
+<br>
+<br>
+The entrance No.02<br>
+<br>
+#####<br>
+#   #<br>
+#.  #<br>
+#$$ #<br>
+#@ ##<br>
+#.##<br>
+###<br>
+<br>
+<br>
+<br>
+The entrance No.03<br>
+<br>
+ ####<br>
+##  #<br>
+#.  #<br>
+#$$ #<br>
+#@ ##<br>
+#.##<br>
+###<br>
+<br>
+<br>
+<br>
+The entrance No.04<br>
+<br>
+  ####<br>
+  #  #<br>
+###$ #<br>
+# $.@#<br>
+#    #<br>
+### .#<br>
+  #  #<br>
+  ####<br>
+<br>
+<br>
+<br>
+The entrance No.05<br>
+<br>
+  ######<br>
+  #@.  #<br>
+  # $  #<br>
+##### ##<br>
+#      #<br>
+#      #<br>
+### ####<br>
+ #  $ #<br>
+ #  . #<br>
+ ######<br>
+<br>
+<br>
+<br>
+The entrance No.06<br>
+<br>
+#######<br>
+#@    #<br>
+# # # #<br>
+# $.$ #<br>
+# #$# #<br>
+#.   .#<br>
+#######<br>
+<br>
+<br>
+<br>
+The entrance No.07<br>
+<br>
+    ###<br>
+ ###   #<br>
+#  $@  #<br>
+#  #.#$#<br>
+#  .#.  #<br>
+ #$#.#  #<br>
+ #   $  #<br>
+ #   ###<br>
+  ###<br>
+<br>
+<br>
+<br>
+The entrance No.08<br>
+<br>
+     ####<br>
+ #####  #<br>
+##      #<br>
+# .@$ . #<br>
+##$##$###<br>
+# . $ . #<br>
+#      ##<br>
+#  #####<br>
+####<br>
+<br>
+<br>
+<br>
+The entrance No.09<br>
+<br>
+   #####<br>
+ ###   #<br>
+## $   ##<br>
+# .###. #<br>
+#@$# #$ #<br>
+##.###. #<br>
+ #   $ ##<br>
+ #   ###<br>
+ #####<br>
+<br>
+<br>
+<br>
+The entrance No.10<br>
+<br>
+#########<br>
+#       #<br>
+# # * # #<br>
+#@ .$.  #<br>
+# *$#$* #<br>
+#  .$.  #<br>
+# # * # #<br>
+#       #<br>
+#########<br>
+<br>
+<br>
+<br>
+The entrance No.11<br>
+<br>
+#####<br>
+#   #<br>
+#@$ #<br>
+##$ #<br>
+ # $#<br>
+##$ ##<br>
+#    #<br>
+#....#<br>
+######<br>
+<br>
+<br>
+<br>
+The entrance No.12<br>
+<br>
+#######<br>
+#     #<br>
+# $   #<br>
+#$ #  #<br>
+#@$#$##<br>
+#....#<br>
+######<br>
+<br>
+<br>
+<br>
+The entrance No.13<br>
+<br>
+#####<br>
+#   ###<br>
+# $   #<br>
+# $ # #<br>
+## #@ #<br>
+#..#$ #<br>
+# $.  #<br>
+#  .###<br>
+#####<br>
+<br>
+<br>
+<br>
+The entrance No.14<br>
+<br>
+#######<br>
+#     #<br>
+#@$ $ #<br>
+####  #<br>
+##    #<br>
+# $$$##<br>
+#     #<br>
+#.....#<br>
+#######<br>
+<br>
+<br>
+<br>
+The entrance No.15<br>
+<br>
+#######<br>
+#.....#<br>
+####@ #<br>
+# $ $ #<br>
+#  $  #<br>
+# $ $ #<br>
+##   ##<br>
+ #####<br>
+<br>
+<br>
+<br>
+The entrance No.16<br>
+<br>
+  #####<br>
+ ##   ##<br>
+##  $  ##<br>
+#   .   #<br>
+# $ # $ #<br>
+##.###.##<br>
+# $   $ #<br>
+#  .@.  #<br>
+##  #  ##<br>
+ #######<br>
+<br>
+<br>
+<br>
+The entrance No.17<br>
+<br>
+#######<br>
+#  #  #<br>
+# $ $ #<br>
+# .#. #<br>
+#  .$@#<br>
+# .#. #<br>
+# $ $ #<br>
+#  #  #<br>
+#######<br>
+<br>
+<br>
+<br>
+The entrance No.18<br>
+<br>
+#####<br>
+#   #####<br>
+# #   $ #<br>
+# $..#@ #<br>
+# # $#$ #<br>
+# $..#  #<br>
+###   $ #<br>
+  #..####<br>
+  ####<br>
+<br>
+<br>
+<br>
+The entrance No.19<br>
+<br>
+ #####<br>
+## . ##<br>
+# . . #<br>
+# $ $ #<br>
+## # ##<br>
+# . . #<br>
+# $ $ #<br>
+## # ##<br>
+# $.$ #<br>
+#  @  #<br>
+#######<br>
+<br>
+<br>
+<br>
+The entrance No.20<br>
+<br>
+ #####<br>
+##   ##<br>
+#     #<br>
+#.*$$ #<br>
+#*.@$.#<br>
+#.*$$.#<br>
+#     #<br>
+##   ##<br>
+ #####<br>
+<br>
+<br>
+<br>
+The practice No.01<br>
+<br>
+######<br>
+#    #<br>
+# #. #<br>
+#@$  #<br>
+### ##<br>
+# $  #<br>
+# #  #<br>
+#  . #<br>
+######<br>
+<br>
+<br>
+<br>
+The practice No.02<br>
+<br>
+#######<br>
+#   . #<br>
+#.#$# #<br>
+# $ $@#<br>
+# # # #<br>
+# .   #<br>
+#######<br>
+<br>
+<br>
+<br>
+The practice No.03<br>
+<br>
+#####<br>
+#.  ##<br>
+#. $ #<br>
+#.$# #<br>
+#@ # #<br>
+# $# #<br>
+#    #<br>
+######<br>
+<br>
+<br>
+<br>
+The practice No.04<br>
+<br>
+  ####<br>
+###  ###<br>
+#   $  #<br>
+# @$#$ #<br>
+##  #  #<br>
+ ## # ###<br>
+ #...   #<br>
+ ####   #<br>
+    #####<br>
+<br>
+<br>
+<br>
+The practice No.05<br>
+<br>
+####<br>
+#  ###<br>
+#    #<br>
+# *..#<br>
+# $# #<br>
+# @$ #<br>
+#  ###<br>
+####<br>
+<br>
+<br>
+<br>
+<br>
+The practice No.06<br>
+<br>
+#####<br>
+# @ #<br>
+# $ #<br>
+#$#$##<br>
+# $ .#<br>
+#... #<br>
+######<br>
+<br>
+<br>
+<br>
+The practice No.07<br>
+<br>
+  ####<br>
+###  #<br>
+# $@ ##<br>
+# $*$ #<br>
+# .#. #<br>
+#  .  #<br>
+#######<br>
+<br>
+<br>
+<br>
+The practice No.08<br>
+<br>
+#######<br>
+#  #  #<br>
+# $ @$#<br>
+#  #  ##<br>
+# ###  #<br>
+#..# $ #<br>
+#.  $  #<br>
+#. #####<br>
+####<br>
+<br>
+<br>
+<br>
+The practice No.09<br>
+<br>
+   ####<br>
+####. #<br>
+#  *  #<br>
+#  #..#<br>
+##   ##<br>
+# $ $ #<br>
+# #$# #<br>
+#@    #<br>
+#######<br>
+<br>
+<br>
+<br>
+The practice No.10<br>
+<br>
+#######<br>
+# .#  #<br>
+#     #<br>
+##$$###<br>
+ #.@* #<br>
+ # $# ##<br>
+ #    .#<br>
+ #######<br>
+<br>
+<br>
+<br>
+The practice No.11<br>
+<br>
+ ####<br>
+ #  ###<br>
+ #  $ #<br>
+ #  # #<br>
+### # #<br>
+#  @* #<br>
+# $$$ #<br>
+# # . #<br>
+# ... #<br>
+#######<br>
+<br>
+<br>
+<br>
+The practice No.12<br>
+<br>
+  #####<br>
+  #   #<br>
+###$# #<br>
+#  @$ #<br>
+# #$# #<br>
+#   $ #<br>
+##$   #<br>
+#. ####<br>
+#   ..#<br>
+#   ..#<br>
+#######<br>
+<br>
+<br>
+<br>
+The practice No.13<br>
+<br>
+ ####<br>
+ #  #<br>
+ #  ####<br>
+ # $   #<br>
+ # #$  #<br>
+ # #@  #<br>
+##.#$# #<br>
+#  . . #<br>
+#   ####<br>
+#####<br>
+<br>
+<br>
+<br>
+The practice No.14<br>
+<br>
+ ####<br>
+ #  #<br>
+ #  ####<br>
+ # $   #<br>
+ # #$$ #<br>
+ # #@  #<br>
+##.#$# #<br>
+# ...$ #<br>
+# . ####<br>
+#####<br>
+<br>
+<br>
+<br>
+The practice No.15<br>
+<br>
+  #######<br>
+  #     #<br>
+  #   $ #<br>
+  # $$@ #<br>
+  #  * ##<br>
+#####.##<br>
+#   #.##<br>
+#    . ##<br>
+#####. ##<br>
+   # $  #<br>
+   #    #<br>
+   #   ##<br>
+   #####<br>
+<br>
+<br>
+<br>
+The practice No.16<br>
+<br>
+######<br>
+#    #<br>
+#.$. #<br>
+#$*$@#<br>
+#.$. #<br>
+#    #<br>
+###  #<br>
+  ####<br>
+<br>
+<br>
+<br>
+The practice No.17<br>
+<br>
+#######<br>
+#@  . #<br>
+# $$# #<br>
+#.# * #<br>
+# $ $.#<br>
+##  .##<br>
+ #####<br>
+<br>
+<br>
+<br>
+The practice No.18<br>
+<br>
+ ####<br>
+ #. ####<br>
+ # $  .#<br>
+ # # $ #<br>
+##  @ ##<br>
+# $ # #<br>
+# . .$#<br>
+####  #<br>
+   ####<br>
+<br>
+<br>
+<br>
+The practice No.19<br>
+<br>
+ ######<br>
+ #@#..##<br>
+ # $  .#<br>
+ # #.  #<br>
+ # ## .#<br>
+##$##$##<br>
+#  $   #<br>
+#   $  #<br>
+####   #<br>
+   #####<br>
+<br>
+<br>
+<br>
+The practice No.20<br>
+<br>
+ ########<br>
+ #..... #<br>
+ # .# $ #<br>
+ #  $ $ #<br>
+### #   #<br>
+# $$#  ##<br>
+#  $@###<br>
+#   ##<br>
+#####<br>
+<br>
+<br>
+<br>
+The challenge No.01<br>
+<br>
+####<br>
+#@ ####<br>
+# $$  ##<br>
+# $ #  #<br>
+# #  # #<br>
+# ...  #<br>
+#   ####<br>
+#####<br>
+<br>
+<br>
+<br>
+The challenge No.02<br>
+<br>
+####<br>
+#  #<br>
+#  #<br>
+#.$##<br>
+#. .#<br>
+#   #<br>
+#$$##<br>
+# @#<br>
+#  #<br>
+####<br>
+<br>
+<br>
+<br>
+The challenge No.03<br>
+<br>
+######<br>
+#@   #<br>
+# ##$#<br>
+# #  ####<br>
+# $     #<br>
+###$#$# #<br>
+ #  . . #<br>
+ #  . .##<br>
+ #######<br>
+<br>
+<br>
+<br>
+The challenge No.04<br>
+<br>
+####<br>
+#  ####<br>
+#  $  #<br>
+# .#$ #<br>
+##. $ #<br>
+##.#@ #<br>
+# . $ #<br>
+#   ###<br>
+#####<br>
+<br>
+<br>
+<br>
+The challenge No.05<br>
+<br>
+#######<br>
+#     #<br>
+# @   #<br>
+# #*# #<br>
+# $.  #<br>
+# #.# #<br>
+# $.$ #<br>
+# #*# #<br>
+#     #<br>
+#######<br>
+<br>
+<br>
+<br>
+The challenge No.06<br>
+<br>
+#######<br>
+#@    #<br>
+# #$#$#<br>
+# $   #<br>
+##  $ #<br>
+##$#  #<br>
+#.....#<br>
+#######<br>
+<br>
+<br>
+<br>
+The challenge No.07<br>
+<br>
+########<br>
+#      #<br>
+# $##$.#<br>
+#@     #<br>
+# $##$.#<br>
+#      #<br>
+# ## $.#<br>
+#   #..#<br>
+########<br>
+<br>
+<br>
+<br>
+The challenge No.08<br>
+<br>
+########<br>
+#      #<br>
+# $##$.#<br>
+#@     #<br>
+# $##$.#<br>
+#  #   #<br>
+#  # $.#<br>
+#   #..#<br>
+########<br>
+<br>
+<br>
+<br>
+The challenge No.09<br>
+<br>
+########<br>
+#      #<br>
+# $##$.#<br>
+#@     #<br>
+# $##$.#<br>
+#  ##  #<br>
+# #  $.#<br>
+# #  ..#<br>
+########<br>
+<br>
+<br>
+<br>
+The challenge No.10<br>
+<br>
+   ######<br>
+####@ . #<br>
+#     $ #<br>
+# * .#  #<br>
+## ###$##<br>
+# .# #  #<br>
+# $###$ #<br>
+#   .   #<br>
+#########<br>
+<br>
+<br>
+<br>
+The challenge No.11<br>
+<br>
+########<br>
+#. .#  #<br>
+# . #$ #<br>
+#. .$  #<br>
+## ##@##<br>
+# $  $#<br>
+#  $# #<br>
+#     #<br>
+#######<br>
+<br>
+<br>
+<br>
+The challenge No.12<br>
+<br>
+ ######<br>
+##    #<br>
+#   # #<br>
+# #$.$###<br>
+# .  @. #<br>
+###$.$ ##<br>
+  # ##  #<br>
+  #    ##<br>
+  ######<br>
+<br>
+<br>
+<br>
+The challenge No.13<br>
+<br>
+####<br>
+#@ #<br>
+# $####<br>
+#  *  #<br>
+#.*.  #<br>
+#  *###<br>
+# $ #<br>
+#  ##<br>
+####<br>
+<br>
+<br>
+<br>
+The challenge No.14<br>
+<br>
+#######<br>
+#. .  #<br>
+#  $$@#<br>
+##  #*##<br>
+ #*#   #<br>
+ # $$  #<br>
+ #  . .#<br>
+ #######<br>
+<br>
+<br>
+<br>
+The challenge No.15<br>
+<br>
+ #####<br>
+##.@.#<br>
+# $ $##<br>
+#  #  #<br>
+# $ $ #<br>
+##. . #<br>
+ ##$###<br>
+  #  #<br>
+ ##  #<br>
+ # *.#<br>
+ #   #<br>
+ #####<br>
+<br>
+<br>
+<br>
+The challenge No.16<br>
+<br>
+   ###<br>
+  ## ##<br>
+ ## @ ##<br>
+ #  $  #<br>
+## $.$ ##<br>
+#  * *  #<br>
+## .$. ##<br>
+ ## . ##<br>
+  #   #<br>
+  ## ##<br>
+   ###<br>
+<br>
+<br>
+<br>
+The challenge No.17<br>
+<br>
+   ###<br>
+  #   #<br>
+  #$$ #<br>
+ ##@  ##<br>
+#  ...$ #<br>
+# $...  #<br>
+ ##$$ ##<br>
+  #   #<br>
+  #####<br>
+<br>
+<br>
+<br>
+The challenge No.18<br>
+<br>
+    #<br>
+   # #<br>
+  #   #<br>
+ # .$. #<br>
+ # * * #<br>
+#  $@$  #<br>
+# $. .$ #<br>
+# $...$ #<br>
+ ### ###<br>
+   # #<br>
+  #   #<br>
+ #######<br>
+<br>
+<br>
+<br>
+The challenge No.19<br>
+<br>
+ #####<br>
+###  ##<br>
+#     #<br>
+#.*$$ #<br>
+#*.@$.#<br>
+#.*$$.#<br>
+#     #<br>
+###  ##<br>
+ #####<br>
+<br>
+<br>
+<br>
+The challenge No.20<br>
+<br>
+   ###<br>
+  #  @#<br>
+ #  $ #<br>
+# .$.#<br>
+#  $.#<br>
+ # .$ #<br>
+  #   #<br>
+   ###<br>
+<br>
+<br>
+<br>
+Another entrance No.01<br>
+<br>
+  ####<br>
+ ##@.#<br>
+##.$$#<br>
+#  $ #<br>
+#   .#<br>
+######<br>
+<br>
+<br>
+<br>
+Another entrance No.02<br>
+<br>
+  #####<br>
+ ##   ##<br>
+## $@$ ##<br>
+# $...$ #<br>
+#  .*.  #<br>
+# $...$ #<br>
+## $ $ ##<br>
+ ##   ##<br>
+  #####<br>
+<br>
+<br>
+<br>
+Another entrance No.03<br>
+<br>
+  #####<br>
+  #   #<br>
+###.$.###<br>
+# . $ . #<br>
+# $$#$$ #<br>
+# . $ . #<br>
+###.$.###<br>
+  # @ #<br>
+  #####<br>
+<br>
+<br>
+<br>
+Another entrance No.04<br>
+<br>
+#######<br>
+#     #<br>
+# $   #<br>
+#@# ###<br>
+#   $ #<br>
+# $ #.#<br>
+# $ *.#<br>
+# $ *.#<br>
+##  ..#<br>
+ ######<br>
+<br>
+<br>
+<br>
+Another entrance No.05<br>
+<br>
+ #####<br>
+##   ##<br>
+# . . #<br>
+# $ $ #<br>
+##   ##<br>
+###$###<br>
+# . . #<br>
+##$.$##<br>
+#     #<br>
+#@### #<br>
+### ###<br>
+<br>
+<br>
+<br>
+Another entrance No.06<br>
+<br>
+########<br>
+#     .#<br>
+#....  #<br>
+## ## ##<br>
+ #$$  #<br>
+ #   $#<br>
+ #  $ ###<br>
+ ### @$ #<br>
+   #    #<br>
+   ######<br>
+<br>
+<br>
+<br>
+Another entrance No.07<br>
+<br>
+ #####<br>
+##...##<br>
+#  *  #<br>
+# * * #<br>
+##* *##<br>
+#  *  #<br>
+# $$$ #<br>
+#  @  #<br>
+#######<br>
+<br>
+<br>
+<br>
+Another entrance No.08<br>
+<br>
+#######<br>
+#     #<br>
+# # #.#<br>
+#@$ $.#<br>
+# #$  #<br>
+# # #.#<br>
+# $ $.#<br>
+##   .#<br>
+ ######<br>
+<br>
+<br>
+<br>
+Another entrance No.09<br>
+<br>
+#######<br>
+#     #<br>
+# $  .#<br>
+#@# $.#<br>
+# $$#.#<br>
+# # #.#<br>
+# $ $.#<br>
+##   .#<br>
+ ######<br>
+<br>
+<br>
+<br>
+Another entrance No.10<br>
+<br>
+     ###<br>
+    #...#<br>
+    #...#<br>
+   ###@.#<br>
+   #    #<br>
+  # $ $ #<br>
+ #   # ##<br>
+ # $ #$ #<br>
+# $ #   #<br>
+#  # $ #<br>
+#  $   #<br>
+ #    #<br>
+  ####<br>
+<br>
+<br>
+<br>
+Another entrance No.11<br>
+<br>
+ #######<br>
+ #     #<br>
+ # $ $ #<br>
+###.*.###<br>
+#   .$  #<br>
+#  $.   #<br>
+###.*.###<br>
+ # $ $ #<br>
+ #  @  #<br>
+ #######<br>
+<br>
+<br>
+<br>
+Another entrance No.12<br>
+<br>
+  #####<br>
+  #...#<br>
+ #  $  #<br>
+#  $ $  #<br>
+###.#####<br>
+#     $ #<br>
+# $ $   #<br>
+#####.###<br>
+#  $    #<br>
+ #  @$ #<br>
+  #...#<br>
+  #####<br>
+<br>
+<br>
+<br>
+Another entrance No.13<br>
+<br>
+ #####<br>
+##   ##<br>
+# $ $ #<br>
+# @$  #<br>
+# $ $ #<br>
+##*.*##<br>
+#.. ..#<br>
+#######<br>
+<br>
+<br>
+<br>
+Another entrance No.14<br>
+<br>
+ ######<br>
+ # ...#<br>
+ # .+.#<br>
+ #$$###<br>
+ #  #<br>
+##  #<br>
+#  $##<br>
+# $  #<br>
+# $  #<br>
+#  $ #<br>
+###  #<br>
+  ####<br>
+<br>
+<br>
+<br>
+Another entrance No.15<br>
+<br>
+#######<br>
+#     #<br>
+#.*$*.#<br>
+#  #  #<br>
+#.$@$.#<br>
+#  #  #<br>
+#.$$$.#<br>
+#     #<br>
+#######<br>
+<br>
+<br>
+<br>
+Another entrance No.16<br>
+<br>
+#######<br>
+#     #<br>
+#.*$*.#<br>
+#  #  #<br>
+# $@$ #<br>
+#  #  #<br>
+#.*$*.#<br>
+#     #<br>
+#######<br>
+<br>
+<br>
+<br>
+Another entrance No.17<br>
+<br>
+#######<br>
+#  .  #<br>
+# *** #<br>
+#  #  #<br>
+# $$$ #<br>
+#  #  #<br>
+# *.* #<br>
+#  +  #<br>
+#######<br>
+<br>
+<br>
+<br>
+Another entrance No.18<br>
+<br>
+########<br>
+#  ..  #<br>
+#  $$  #<br>
+## .. ##<br>
+ # $$ #<br>
+ ## @##<br>
+ ##  ##<br>
+ # $$ #<br>
+## .. ##<br>
+#  $$  #<br>
+#  ..  #<br>
+########<br>
+<br>
+<br>
+<br>
+Another entrance No.19<br>
+<br>
+########<br>
+#      #<br>
+#    @ #<br>
+##$#$# #<br>
+#  # . ##<br>
+# $# .  #<br>
+#  # .  #<br>
+# $# .  #<br>
+#  #$. ##<br>
+#  $ . #<br>
+# $# . #<br>
+#    ###<br>
+######<br>
+<br>
+<br>
+<br>
+Another entrance No.20<br>
+<br>
+#######<br>
+#     ###<br>
+#  $@$. #<br>
+#.###$# #<br>
+# *.  # #<br>
+# # #.# #<br>
+# # ..$ #<br>
+# #$##$.#<br>
+# *  $  #<br>
+##     ##<br>
+ #######<br>
+<br>
+<br>
+<br>
+Another practice No.01<br>
+<br>
+#######<br>
+#     #<br>
+# $   #<br>
+#@  ###<br>
+# # $ #<br>
+# $ #.#<br>
+# $ *.#<br>
+# $ *.#<br>
+##  ..#<br>
+ ######<br>
+<br>
+<br>
+<br>
+Another practice No.02<br>
+<br>
+ ####<br>
+ #  ###<br>
+ #  $ ###<br>
+ #  #   #<br>
+ ##$#$  #<br>
+##  $ $ #<br>
+#   ##.##<br>
+#@   *..#<br>
+#  ##.. #<br>
+#########<br>
+<br>
+<br>
+<br>
+Another practice No.03<br>
+<br>
+#####<br>
+#   #<br>
+# $ ####<br>
+#  .*.@##<br>
+#  ## $ #<br>
+#  ## $ #<br>
+#  .*.  #<br>
+# $ #####<br>
+##  #<br>
+ ####<br>
+<br>
+<br>
+<br>
+Another practice No.04<br>
+<br>
+#####<br>
+#   ####<br>
+# #$*  #<br>
+#   $ @#<br>
+###  # #<br>
+ # $ # #<br>
+ # #.#.#<br>
+ # .   #<br>
+ #######<br>
+<br>
+<br>
+<br>
+Another practice No.05<br>
+<br>
+ ####<br>
+##  #<br>
+#@$ ##<br>
+#.$  #<br>
+##$  #<br>
+## $ #<br>
+#.*..#<br>
+######<br>
+<br>
+<br>
+<br>
+Another practice No.06<br>
+<br>
+ ####<br>
+ #@ ###<br>
+ # $. #<br>
+##  # ##<br>
+#.#$ $ #<br>
+# *  # #<br>
+#    . #<br>
+########<br>
+<br>
+<br>
+<br>
+Another practice No.07<br>
+<br>
+  ####<br>
+ ##  #<br>
+##  $#<br>
+#@*. ##<br>
+# *.  #<br>
+##  $ #<br>
+ ###  #<br>
+   ####<br>
+<br>
+<br>
+<br>
+Another practice No.08<br>
+<br>
+ #####<br>
+ # . ##<br>
+## *$ #<br>
+#  *@ #<br>
+#  *  #<br>
+# $* ##<br>
+## . #<br>
+ #####<br>
+<br>
+<br>
+<br>
+Another practice No.09<br>
+<br>
+    #####<br>
+    #   #<br>
+ #### $ #<br>
+##  #$$ #<br>
+# ..  $ #<br>
+# ..#$#@#<br>
+# ..  # #<br>
+#####$# #<br>
+    #   #<br>
+    #####<br>
+<br>
+<br>
+<br>
+Another practice No.10<br>
+<br>
+ ####<br>
+## .####<br>
+# $.#  #<br>
+#  . $ #<br>
+##$.#  #<br>
+## $#$ #<br>
+##$.# @#<br>
+#  . $ #<br>
+# $.#  #<br>
+## .####<br>
+ ####<br>
+<br>
+<br>
+<br>
+Another practice No.11<br>
+<br>
+###<br>
+#.#<br>
+#.#####<br>
+#.  $ ##<br>
+#*$$   #<br>
+#. #$  #<br>
+#.## ###<br>
+#   $  #<br>
+###   @#<br>
+  ######<br>
+<br>
+<br>
+<br>
+Another practice No.12<br>
+<br>
+  ###<br>
+  #@##<br>
+###$ ###<br>
+#      #<br>
+# ##.# #<br>
+#     .#<br>
+###$## ##<br>
+  # .$  #<br>
+ ##.*##.#<br>
+ #   $  #<br>
+## #$## #<br>
+#       #<br>
+#########<br>
+<br>
+<br>
+<br>
+Another practice No.13<br>
+<br>
+#####<br>
+#   #<br>
+# $ #<br>
+#@* #<br>
+##* ##<br>
+# .  #<br>
+# *  #<br>
+# * ##<br>
+##  #<br>
+ ####<br>
+<br>
+<br>
+<br>
+Another practice No.14<br>
+<br>
+ ### ###<br>
+#   #   #<br>
+#   $   #<br>
+# $###$ #<br>
+ # #@  #<br>
+#  # #$ #<br>
+# $#$#  #<br>
+#   . # #<br>
+##$...  #<br>
+## .*. ##<br>
+ ## . ##<br>
+  #####<br>
+<br>
+<br>
+<br>
+Another practice No.15<br>
+<br>
+ ####<br>
+##  ##<br>
+#  $.##<br>
+#   *.#<br>
+#.$$$@#<br>
+#   *.#<br>
+#  $.##<br>
+##  ##<br>
+ ####<br>
+<br>
+<br>
+<br>
+Another practice No.16<br>
+<br>
+ ######<br>
+ #   @##<br>
+## $*  #<br>
+# ..#. #<br>
+#   *  #<br>
+## #$###<br>
+ #  $ #<br>
+ #    #<br>
+ ######<br>
+<br>
+<br>
+<br>
+Another practice No.17<br>
+<br>
+  #####<br>
+ ##   ##<br>
+ # $ $ #<br>
+##  #  #<br>
+# $ #.###<br>
+# #@$ . #<br>
+#  .#*# #<br>
+### .   #<br>
+  #######<br>
+<br>
+<br>
+<br>
+Another practice No.18<br>
+<br>
+#######<br>
+# $.  #<br>
+# $.$$#<br>
+#..@..##<br>
+#$$.$  #<br>
+#  .$  #<br>
+#  #####<br>
+####<br>
+<br>
+<br>
+<br>
+Another practice No.19<br>
+<br>
+  ####<br>
+ #    #<br>
+#   $  #<br>
+#  *.###<br>
+# .**$ #<br>
+###*. @#<br>
+#   $  #<br>
+ #    #<br>
+  ####<br>
+<br>
+<br>
+<br>
+Another practice No.20<br>
+<br>
+########<br>
+#      #<br>
+#    @ #<br>
+##$#$# ##<br>
+#  # .  #<br>
+# $# .  #<br>
+#  # .  #<br>
+# $# . ##<br>
+#  #$. #<br>
+#  $ . #<br>
+# $# . #<br>
+#    ###<br>
+######<br>
+<br>
+<br>
+<br>
+Another challenge No.01<br>
+<br>
+ ####<br>
+ #  #####<br>
+ #      #<br>
+ ##.$$#@#<br>
+## .# . #<br>
+#  $#.* #<br>
+# $.* $ #<br>
+#   ##  #<br>
+### ## ##<br>
+  #    #<br>
+  ######<br>
+<br>
+<br>
+<br>
+Another challenge No.02<br>
+<br>
+#########<br>
+#   ##  #<br>
+# # #   #<br>
+# $@$ . #<br>
+#..###.##<br>
+# $ $   #<br>
+##  # ###<br>
+ ##   #<br>
+ ######<br>
+<br>
+<br>
+<br>
+Another challenge No.03<br>
+<br>
+  ######<br>
+  #    ##<br>
+  #.*#  #<br>
+###  $. #<br>
+# .$$ . #<br>
+# .$ $###<br>
+####$.#<br>
+   # @#<br>
+   ####<br>
+<br>
+<br>
+<br>
+Another challenge No.04<br>
+<br>
+#######<br>
+#   @ ##<br>
+#..$.$ #<br>
+#  ##. #<br>
+## $ $ #<br>
+ ## .$ #<br>
+  ##   #<br>
+   #####<br>
+<br>
+<br>
+<br>
+Another challenge No.05<br>
+<br>
+     ##<br>
+    # #<br>
+   #  @#<br>
+  # $ $#<br>
+ # $ $  #<br>
+# $ $ $ #<br>
+#  $ $  #<br>
+# $   ###<br>
+ #.##. #<br>
+# $ $ $##<br>
+#.....*.#<br>
+##..#...#<br>
+ #######<br>
+<br>
+<br>
+<br>
+Another challenge No.06<br>
+<br>
+  #####<br>
+###  @#<br>
+#.$ $##<br>
+#.$$ .#<br>
+#. $ .#<br>
+#. $$.#<br>
+##   ##<br>
+ #####<br>
+<br>
+<br>
+<br>
+Another challenge No.07<br>
+<br>
+    ####<br>
+ ####  #<br>
+ #  *  #<br>
+ #  #@ #<br>
+ # .*  #<br>
+##$##  #<br>
+#   #*##<br>
+#      #<br>
+#####  #<br>
+    #  #<br>
+    ####<br>
+<br>
+<br>
+<br>
+Another challenge No.08<br>
+<br>
+  #####<br>
+  # @ #<br>
+###$$$#<br>
+#   . ###<br>
+# .. .. #<br>
+###$.$  #<br>
+  # $ ###<br>
+  #   #<br>
+  #####<br>
+<br>
+<br>
+<br>
+Another challenge No.09<br>
+<br>
+ #####<br>
+ #   #<br>
+ #$@ #<br>
+## .*##<br>
+#  *. #<br>
+# $   #<br>
+####  #<br>
+   ####<br>
+<br>
+<br>
+<br>
+Another challenge No.10<br>
+<br>
+#########<br>
+#   .#  #<br>
+#   .#$ #<br>
+## #.$  #<br>
+## $.$ ##<br>
+## $.$ ##<br>
+#  $.# ##<br>
+# $#.#@ #<br>
+#  #.   #<br>
+######  #<br>
+     ####<br>
+<br>
+<br>
+<br>
+Another challenge No.11<br>
+<br>
+  ###<br>
+ # . #<br>
+#  *  #<br>
+# $.$@#<br>
+# $*. #<br>
+ #   #<br>
+  ###<br>
+<br>
+<br>
+<br>
+Another challenge No.12<br>
+<br>
+ ####<br>
+##  #<br>
+# $.####<br>
+# . $  #<br>
+#@$$.. #<br>
+# . $  #<br>
+# $.####<br>
+##  #<br>
+ ####<br>
+<br>
+<br>
+<br>
+Another challenge No.13<br>
+<br>
+   ####<br>
+   #  ##<br>
+####$. #<br>
+#   .$ #<br>
+# $.$.@#<br>
+#   .$ #<br>
+####$. #<br>
+   #  ##<br>
+   ####<br>
+<br>
+<br>
+<br>
+Another challenge No.14<br>
+<br>
+########<br>
+#     @#<br>
+# $$$###<br>
+# .*.* #<br>
+# **.. #<br>
+## $ # #<br>
+#      #<br>
+########<br>
+<br>
+<br>
+<br>
+Another challenge No.15<br>
+<br>
+######<br>
+#    #<br>
+#.#  #<br>
+#.# $#<br>
+#.$  #<br>
+#.$ @###<br>
+#.$    #<br>
+#.##$$ #<br>
+#     ##<br>
+#######<br>
+<br>
+<br>
+<br>
+Another challenge No.16<br>
+<br>
+  ####<br>
+ ## @#<br>
+## . ##<br>
+# .*. #<br>
+# $.$ #<br>
+#  ## #<br>
+##$$  #<br>
+ #   ##<br>
+ #####<br>
+<br>
+<br>
+<br>
+Another challenge No.17<br>
+<br>
+ #######<br>
+##     #<br>
+# *.*. #<br>
+#  $.$ #<br>
+# $*$#@#<br>
+#  $.$ #<br>
+# *.*. #<br>
+#     ##<br>
+#######<br>
+<br>
+<br>
+<br>
+Another challenge No.18<br>
+<br>
+#####<br>
+#   #####<br>
+# $$    #<br>
+#    #. #<br>
+###  $*##<br>
+  ## $.#<br>
+   # $.#<br>
+   # $.#<br>
+   #.#+#<br>
+   #####<br>
+<br>
+<br>
+<br>
+Another challenge No.19<br>
+<br>
+########<br>
+#      ##<br>
+#  .*   #<br>
+# ##$## #<br>
+# .*.*. #<br>
+# $ . $ #<br>
+# #$*$# #<br>
+##  @   #<br>
+ ########<br>
+<br>
+<br>
+<br>
+Another challenge No.20<br>
+<br>
+ #####<br>
+## @ ####<br>
+#  $ #  #<br>
+# $$$ $ #<br>
+#  $ #$ #<br>
+###  #  #<br>
+ # $ #  #<br>
+ #   #  #<br>
+ # ## $##<br>
+## ##   #<br>
+# .. .*.#<br>
+# ..#...#<br>
+#########<br>
+<br>
+<br>
+<br>
+Overcome! No.01<br>
+<br>
+####<br>
+#  ###<br>
+#@$$ ##<br>
+#  *. #<br>
+#..*  #<br>
+##  $ #<br>
+ ###  #<br>
+   ####<br>
+<br>
+<br>
+<br>
+Overcome! No.02<br>
+<br>
+######<br>
+# @  #<br>
+#  #.#<br>
+# $$ #<br>
+#.$..#<br>
+# $###<br>
+#  #<br>
+####<br>
+<br>
+<br>
+<br>
+Overcome! No.03<br>
+<br>
+#######<br>
+# .#  #<br>
+#.  $ #<br>
+#$*#  #<br>
+#.  $@#<br>
+# .#  #<br>
+# $## #<br>
+##    #<br>
+ ######<br>
+<br>
+<br>
+<br>
+Overcome! No.04<br>
+<br>
+######<br>
+#    #<br>
+#@.$.#<br>
+#$$* #<br>
+#.$. #<br>
+#    #<br>
+######<br>
+<br>
+<br>
+<br>
+Overcome! No.05<br>
+<br>
+###<br>
+#. #<br>
+# $ #<br>
+#.$  #<br>
+#  $+ #<br>
+#.$  #<br>
+# $ #<br>
+#. #<br>
+###<br>
+<br>
+<br>
+<br>
+Overcome! No.06<br>
+<br>
+#######<br>
+#  #  #<br>
+#     #<br>
+# #$# #<br>
+#.@.$.#<br>
+# #$# ##<br>
+#      #<br>
+#  #   #<br>
+########<br>
+<br>
+<br>
+<br>
+Overcome! No.07<br>
+<br>
+#######<br>
+#     #<br>
+#..  .#<br>
+#  #$$#<br>
+#$$ $ #<br>
+# . + #<br>
+#######<br>
+<br>
+<br>
+<br>
+Overcome! No.08<br>
+<br>
+#########<br>
+#    .  #<br>
+#  # #  #<br>
+# ##$## #<br>
+#.  @   #<br>
+# ##$##.#<br>
+#  # #  #<br>
+## $ $ ##<br>
+ #  .  #<br>
+ #######<br>
+<br>
+<br>
+<br>
+Overcome! No.09<br>
+<br>
+  ####<br>
+###  ###<br>
+# $    ##<br>
+# @#$#. #<br>
+## $  . #<br>
+ # #  . #<br>
+ #$  #.##<br>
+ #  ####<br>
+ ####<br>
+<br>
+<br>
+<br>
+Overcome! No.10<br>
+<br>
+  #######<br>
+  #     #<br>
+  # $ $ #<br>
+  # $$  #<br>
+  #  . ##<br>
+#####.##<br>
+#   #.##<br>
+# @  . ##<br>
+#####$ ##<br>
+   # $  #<br>
+   #. . #<br>
+   #   ##<br>
+   #####<br>
+<br>
+<br>
+<br>
+Overcome! No.11<br>
+<br>
+#######<br>
+#  $. ##<br>
+#  $ ..#<br>
+## #. .#<br>
+# @##$##<br>
+# $ $  #<br>
+#  #   #<br>
+########<br>
+<br>
+<br>
+<br>
+Overcome! No.12<br>
+<br>
+ ####<br>
+ #  #####<br>
+ #+$    #<br>
+ # # .$ #<br>
+## # # ##<br>
+# $. # ##<br>
+#    $. #<br>
+#####   #<br>
+    #####<br>
+<br>
+<br>
+<br>
+Overcome! No.13<br>
+<br>
+    ####<br>
+ ####  #<br>
+ #@ $  #<br>
+ # $## ##<br>
+##$ #...#<br>
+#   # . #<br>
+# $ #. ##<br>
+### $  #<br>
+  # # ##<br>
+  #   #<br>
+  #####<br>
+<br>
+<br>
+<br>
+Overcome! No.14<br>
+<br>
+    ####<br>
+   ##. ##<br>
+   # ..@#<br>
+####$. .#<br>
+#    #  #<br>
+#  #$#  #<br>
+# $# $ ##<br>
+##  $  #<br>
+ ##   ##<br>
+  #####<br>
+<br>
+<br>
+<br>
+Overcome! No.15<br>
+<br>
+######<br>
+#..$.#<br>
+#$ $ #<br>
+#.$ @#<br>
+#$ $ #<br>
+#..$.#<br>
+######<br>
+<br>
+<br>
+<br>
+Overcome! No.16<br>
+<br>
+ ####<br>
+##  ####<br>
+#  $#  ##<br>
+# @ .*  #<br>
+#.# * #.#<br>
+#  *$   #<br>
+##  #$  #<br>
+ ####   #<br>
+    #####<br>
+<br>
+<br>
+<br>
+Overcome! No.17<br>
+<br>
+#########<br>
+#  ###  #<br>
+# $###$ #<br>
+# $ @   #<br>
+#    .  #<br>
+###*.*###<br>
+###...###<br>
+###*.*###<br>
+#  .    #<br>
+# $   $ #<br>
+# $###$ #<br>
+#  ###  #<br>
+#########<br>
+<br>
+<br>
+<br>
+Overcome! No.18<br>
+<br>
+#########<br>
+# . # . #<br>
+# $...$ #<br>
+#$*$.$*$#<br>
+#.......#<br>
+#.$ . $.#<br>
+#$*$ $*$#<br>
+#   $   #<br>
+## $$$ ##<br>
+ #  @  #<br>
+ #######<br>
+<br>
+<br>
+<br>
+Overcome! No.19<br>
+<br>
+#####<br>
+#   ####<br>
+# $    ##<br>
+## # $  #<br>
+ #$ # # #<br>
+ #  # # #<br>
+##$ # . #<br>
+#   $.*.#<br>
+# $##*. #<br>
+#  @$...#<br>
+######  #<br>
+     ####<br>
+<br>
+<br>
+<br>
+Overcome! No.20<br>
+<br>
+  #####<br>
+ ## @ ##<br>
+## $.$ ##<br>
+#  $.$  #<br>
+#  *.*  #<br>
+### . ###<br>
+  # * #<br>
+  #   #<br>
+  #####<br>
+<br>
+<br>
+<br>
+Promotion test No.01<br>
+<br>
+ ####<br>
+ #  #<br>
+ # @#<br>
+ #$.#<br>
+## .#<br>
+# $.#<br>
+#  .#<br>
+##$ #<br>
+ #  #<br>
+ #$ #<br>
+ #  #<br>
+ ####<br>
+<br>
+<br>
+<br>
+Promotion test No.02<br>
+<br>
+ ######<br>
+ #    #<br>
+ #@ $ #<br>
+##*#  #<br>
+#  ##$##<br>
+# .$.. #<br>
+#  #   #<br>
+########<br>
+<br>
+<br>
+<br>
+Promotion test No.03<br>
+<br>
+########<br>
+#     @#<br>
+#   $$ #<br>
+##$## ##<br>
+##  $ ##<br>
+## #  ##<br>
+#  $ $ #<br>
+#......#<br>
+########<br>
+<br>
+<br>
+<br>
+Promotion test No.04<br>
+<br>
+########<br>
+#   #  #<br>
+# @    #<br>
+### $.$#<br>
+  ##.*.#<br>
+  # $.$##<br>
+  #     #<br>
+  ###   #<br>
+    #####<br>
+<br>
+<br>
+<br>
+Promotion test No.05<br>
+<br>
+#######<br>
+#.....#<br>
+##@#$ #<br>
+# * $$#<br>
+#  $$ #<br>
+#     #<br>
+#######<br>
+<br>
+<br>
+<br>
+Promotion test No.06<br>
+<br>
+########<br>
+#     @#<br>
+#  $   #<br>
+##$##$##<br>
+##  $ ##<br>
+##  # ##<br>
+#  $ $ #<br>
+#......#<br>
+########<br>
+<br>
+<br>
+<br>
+Promotion test No.07<br>
+<br>
+ ######<br>
+ # @  #<br>
+ #. #.#<br>
+ # ** #<br>
+ #.  .#<br>
+###$$###<br>
+#      #<br>
+# $# $ #<br>
+##     #<br>
+ #######<br>
+<br>
+<br>
+<br>
+Promotion test No.08<br>
+<br>
+######<br>
+#@   ##<br>
+# $ $ #<br>
+##*#  #<br>
+#     #<br>
+##*#  #<br>
+#.$ $ #<br>
+# ...##<br>
+######<br>
+<br>
+<br>
+<br>
+Promotion test No.09<br>
+<br>
+########<br>
+#     @#<br>
+#   $$ #<br>
+## ## ##<br>
+##  $ ##<br>
+## ## ##<br>
+#  $ $ #<br>
+#..... #<br>
+########<br>
+<br>
+<br>
+<br>
+Promotion test No.10<br>
+<br>
+  #####<br>
+ ##@  #<br>
+ # .  #<br>
+##$.$##<br>
+#  . #<br>
+# $.$#<br>
+## . #<br>
+ #$.$#<br>
+ #   #<br>
+ #####<br>
+<br>
+<br>
+<br>
+Promotion test No.11<br>
+<br>
+ ########<br>
+ # . .  #<br>
+ #..... #<br>
+ # . . ##<br>
+## # # #<br>
+#  $ $ ##<br>
+# $$$$$ #<br>
+#  $@$  #<br>
+###    ##<br>
+  ######<br>
+<br>
+<br>
+<br>
+Promotion test No.12<br>
+<br>
+  ####<br>
+ ##@ ##<br>
+ #    #<br>
+##$$$ ##<br>
+# .*.. #<br>
+# *$$* #<br>
+# * $. #<br>
+#  ..  #<br>
+########<br>
+<br>
+<br>
+<br>
+Promotion test No.13<br>
+<br>
+ ######<br>
+###  ##<br>
+#     #<br>
+#.*$$ #<br>
+#*.+$.#<br>
+# *$$.#<br>
+#     #<br>
+###  ##<br>
+ ######<br>
+<br>
+<br>
+<br>
+Promotion test No.14<br>
+<br>
+  #####<br>
+ ## . ##<br>
+ #  .  #<br>
+## ... ##<br>
+# $## # #<br>
+#   $   #<br>
+#  $#$  #<br>
+### #  ##<br>
+ #  # $#<br>
+ #  @  #<br>
+ ##   ##<br>
+  #####<br>
+<br>
+<br>
+<br>
+Promotion test No.15<br>
+<br>
+    #<br>
+   ###<br>
+  ## ##<br>
+ ## + ##<br>
+##  *  ##<br>
+#  $*$  #<br>
+##  *  ##<br>
+ ## . ##<br>
+  ## ##<br>
+   ###<br>
+    #<br>
+<br>
+<br>
+<br>
+Promotion test No.16<br>
+<br>
+########<br>
+#     @#<br>
+# $  $ #<br>
+## # ###<br>
+##  $ ##<br>
+# $## ##<br>
+#  $ $ #<br>
+#......#<br>
+########<br>
+<br>
+<br>
+<br>
+Promotion test No.17<br>
+<br>
+ #######<br>
+##  .  ##<br>
+#   #$  #<br>
+##$##.$ #<br>
+# $...  #<br>
+# $*##  #<br>
+#   # $ #<br>
+##@ .  ##<br>
+ #######<br>
+<br>
+<br>
+<br>
+Promotion test No.18<br>
+<br>
+#######<br>
+#  @  #<br>
+# ### #<br>
+#. $ .#<br>
+# $ $ #<br>
+#*.*.*#<br>
+# $ $ #<br>
+#. $ .#<br>
+# ### #<br>
+#     #<br>
+#######<br>
+<br>
+<br>
+<br>
+Promotion test No.19<br>
+<br>
+    #####<br>
+ ####   #<br>
+ #@  .$ #<br>
+ #.#$#  #<br>
+##$ *..##<br>
+#  ### #<br>
+# $ # $#<br>
+#   *  #<br>
+### .  #<br>
+  ######<br>
+<br>
+<br>
+<br>
+Promotion test No.20<br>
+<br>
+ ######<br>
+##   @#<br>
+# $.$ #<br>
+# .*$ #<br>
+#.* *.#<br>
+# .*$ #<br>
+# $.$ #<br>
+#    ##<br>
+######<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.01<br>
+<br>
+####<br>
+#. #<br>
+#.$####<br>
+#  @  #<br>
+# ### #<br>
+#   $ #<br>
+#  ####<br>
+#  #<br>
+####<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.02<br>
+<br>
+   ####<br>
+   #  ##<br>
+   #@  ##<br>
+   # $  #<br>
+   ## $ #<br>
+#####$  #<br>
+#.##  $ #<br>
+#..  $ ##<br>
+#.. $ ##<br>
+##.  ##<br>
+ #####<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.03<br>
+<br>
+#########<br>
+#.   #  #<br>
+#. $    #<br>
+# .#$   #<br>
+#### $ ##<br>
+  #  #$ #<br>
+  #  #@ #<br>
+  #$ $  #<br>
+  # $####<br>
+  #. .#<br>
+  #.. #<br>
+  #####<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.04<br>
+<br>
+#######<br>
+#. # .#<br>
+#.*$*.#<br>
+#. # .#<br>
+# $#$ #<br>
+#  #  #<br>
+# $#$ #<br>
+#  $  #<br>
+#  @  #<br>
+#######<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.05<br>
+<br>
+######<br>
+#  . #<br>
+# $# ##<br>
+#  .@ #<br>
+##$#$ #<br>
+#  . ##<br>
+#  #$#<br>
+#  . #<br>
+######<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.06<br>
+<br>
+ #######<br>
+##  @  ##<br>
+# $   $ #<br>
+#  $ $  #<br>
+### ## ##<br>
+#....#  #<br>
+##.. $$ #<br>
+#....#  #<br>
+#### # ##<br>
+ #    $ #<br>
+ # $$$  #<br>
+ #     ##<br>
+ #######<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.07<br>
+<br>
+  ####<br>
+ ##  ##<br>
+##  . #<br>
+# $ # #<br>
+#  $# #<br>
+#.#.$@#<br>
+#    ##<br>
+######<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.08<br>
+<br>
+#######<br>
+#  @  #<br>
+# $#$ #<br>
+# . . #<br>
+##* *##<br>
+# . . #<br>
+# $#$ #<br>
+#     #<br>
+#######<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.09<br>
+<br>
+ ####<br>
+##  #<br>
+# $ #####<br>
+# .. .$ #<br>
+#  ## $@#<br>
+#  ##   #<br>
+# ..$.$ #<br>
+# $ #####<br>
+##  #<br>
+ ####<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.10<br>
+<br>
+####<br>
+#. #<br>
+#.$###<br>
+#.$  ##<br>
+#. $@ #<br>
+#.$ $ #<br>
+#    ##<br>
+######<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.11<br>
+<br>
+  ####<br>
+###  #<br>
+# $$ #<br>
+# ...#<br>
+# # ##<br>
+#  $@#<br>
+#  $.#<br>
+######<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.12<br>
+<br>
+#######<br>
+#     #<br>
+# $ # #<br>
+#@# # #<br>
+# $$# #<br>
+# # # #<br>
+# # *.#<br>
+# $ *.#<br>
+##  ..#<br>
+ ######<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.13<br>
+<br>
+#####<br>
+#   #<br>
+# $.#<br>
+#@$.###<br>
+# #.$ #<br>
+# $.  #<br>
+# #.$ #<br>
+# $.  #<br>
+#  .$ #<br>
+#######<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.14<br>
+<br>
+  ######<br>
+###  # ##<br>
+#   $#  #<br>
+# $  @$ #<br>
+# $ # $ #<br>
+## ##$  #<br>
+#...    #<br>
+# ..####<br>
+##.##<br>
+ ###<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.15<br>
+<br>
+ ####<br>
+##  #<br>
+# $@#<br>
+#   #<br>
+##$####<br>
+#. $ .#<br>
+#.  $ #<br>
+###  .#<br>
+  #####<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.16<br>
+<br>
+  #####<br>
+ #     #<br>
+# $.*.$ #<br>
+# .$ $. #<br>
+#@* * * #<br>
+# .$ $. #<br>
+# $.*.$ #<br>
+ #     #<br>
+  #####<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.17<br>
+<br>
+ ####<br>
+ #  ##<br>
+## $@#<br>
+#..$$#<br>
+#**$.#<br>
+#..  #<br>
+## $ #<br>
+ #  ##<br>
+ ####<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.18<br>
+<br>
+  ######<br>
+###    ##<br>
+#  $    #<br>
+#**.****#<br>
+#...+...#<br>
+#$$$$$$$#<br>
+#       #<br>
+##   #  #<br>
+ ########<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.19<br>
+<br>
+#########<br>
+#     @ #<br>
+# $..$  #<br>
+#*## ##.#<br>
+#  $.$  #<br>
+# $  $ $#<br>
+#.## ##.#<br>
+# $...$ #<br>
+#       #<br>
+#########<br>
+<br>
+<br>
+<br>
+Another plate(sweet) No.20<br>
+<br>
+ ### ###<br>
+#   #   #<br>
+# # # # #<br>
+#  . .  #<br>
+ ##$#$##<br>
+# $ # $ #<br>
+# #. .# #<br>
+#   #   #<br>
+ ## #.##<br>
+#  $ $  #<br>
+# #.# #@#<br>
+#   #   #<br>
+ ### ###<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.01<br>
+<br>
+ ######<br>
+###  ##<br>
+#     #<br>
+# *$$.#<br>
+#*.+* #<br>
+# *$$.#<br>
+#     #<br>
+###  ##<br>
+ ######<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.02<br>
+<br>
+ #####<br>
+##   ##<br>
+#     #<br>
+#.*$$.#<br>
+#*.@$.#<br>
+#.*$$.#<br>
+#  $  #<br>
+##   ##<br>
+ #####<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.03<br>
+<br>
+ ######<br>
+###  ##<br>
+#     #<br>
+# *$$ #<br>
+#*.+*.#<br>
+# *$$.#<br>
+#     #<br>
+###  ##<br>
+ ######<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.04<br>
+<br>
+#######<br>
+#     ###<br>
+#@$ * $ #<br>
+##  # $ #<br>
+ ##.#.#.#<br>
+ ##.#.#.#<br>
+##  #   #<br>
+# $ *$$ #<br>
+#      ##<br>
+########<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.05<br>
+<br>
+######<br>
+#   .#<br>
+##$$.#<br>
+#  $.#<br>
+#  $.#<br>
+#  $.#<br>
+# $$.#<br>
+##@ .#<br>
+ #####<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.06<br>
+<br>
+  ####<br>
+  # @#<br>
+###  ###<br>
+# $*.$ #<br>
+#  ..  #<br>
+# $.*$ #<br>
+##    ##<br>
+ ######<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.07<br>
+<br>
+##########<br>
+#        #<br>
+# ###### #<br>
+# # .  # #<br>
+# # *  $@#<br>
+# #*.**# #<br>
+# $ *  # #<br>
+# # .  # #<br>
+# ###$## #<br>
+#        #<br>
+##########<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.08<br>
+<br>
+####<br>
+#  ###<br>
+#.$#@ #<br>
+#     #<br>
+#.$***#<br>
+#     #<br>
+#.$#  #<br>
+#  ###<br>
+####<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.09<br>
+<br>
+#####<br>
+#   ####<br>
+# $@#  #<br>
+# $$$$ #<br>
+# #... #<br>
+# #*.* #<br>
+# .    #<br>
+########<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.10<br>
+<br>
+########<br>
+#  # @ ##<br>
+# $#$$  #<br>
+#  # ## #<br>
+# $#  # #<br>
+#  .*.# #<br>
+#  .#.# #<br>
+###...$ #<br>
+  #$ # ##<br>
+  # $  #<br>
+  #    #<br>
+  ######<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.11<br>
+<br>
+ ####<br>
+ #..#<br>
+##$$##<br>
+#  $ #<br>
+#.  .#<br>
+#*$ .#<br>
+#  $ #<br>
+## $##<br>
+ #. #<br>
+ # @#<br>
+ ####<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.12<br>
+<br>
+    #####<br>
+    #   #<br>
+ #### $ #<br>
+ #  #$$ #<br>
+##..  $ #<br>
+# ..#$#@#<br>
+# ..  # #<br>
+#####$# #<br>
+    #   #<br>
+    #####<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.13<br>
+<br>
+########<br>
+#   # @#<br>
+#   $$ #<br>
+##$##  #<br>
+##    ##<br>
+#  #$###<br>
+#  $ $ #<br>
+#......#<br>
+########<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.14<br>
+<br>
+########<br>
+#   #  #<br>
+#   $@ #<br>
+##$##$ #<br>
+## $  ##<br>
+#. #  ##<br>
+#  $$$.#<br>
+#..*...#<br>
+########<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.15<br>
+<br>
+#######<br>
+#@  . ###<br>
+#.##**  #<br>
+# *     #<br>
+# $. #$##<br>
+# $ ## #<br>
+# $ .  #<br>
+#  #####<br>
+####<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.16<br>
+<br>
+#####<br>
+# @ #<br>
+# $ ####<br>
+#    # #<br>
+###  $ #<br>
+ # $$# #<br>
+ #.... #<br>
+ #  #  #<br>
+ #######<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.17<br>
+<br>
+  #####<br>
+  #   #<br>
+ ## $ #<br>
+##  $ #<br>
+# *** #<br>
+# ...@#<br>
+# *** #<br>
+# $  ##<br>
+#   ##<br>
+#   #<br>
+#####<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.18<br>
+<br>
+ ######<br>
+ # $..#<br>
+ #+$**#<br>
+ #  *.#<br>
+ # $..#<br>
+###$####<br>
+#   $  #<br>
+# $    #<br>
+#  #####<br>
+#  #<br>
+####<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.19<br>
+<br>
+#######<br>
+#  .  #<br>
+# $*  #<br>
+# #.# #<br>
+# $ $@#<br>
+# #.# #<br>
+# $.$ #<br>
+#  .  #<br>
+#######<br>
+<br>
+<br>
+<br>
+Another plate(spicy) No.20<br>
+<br>
+ ######<br>
+###  ##<br>
+#     #<br>
+# *$* #<br>
+#*.+$.#<br>
+# *$* #<br>
+#     #<br>
+###  ##<br>
+ ######<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.01<br>
+<br>
+ #######<br>
+##     ##<br>
+# *   * #<br>
+# * # * #<br>
+#   #   #<br>
+# . # . #<br>
+# $***$ #<br>
+### @ ###<br>
+  #####<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.02<br>
+<br>
+ #######<br>
+ #  @  #<br>
+## $#$ ##<br>
+#   #   #<br>
+#  *.*  #<br>
+###. .###<br>
+#  *.*  #<br>
+#   #   #<br>
+## $#$ ##<br>
+ #     #<br>
+ #######<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.03<br>
+<br>
+  ######<br>
+ ##. ..#<br>
+ #. $ $#<br>
+ # $ $ ##<br>
+### ##@ #<br>
+# $ $ $ #<br>
+#  $ #  #<br>
+##.. ..##<br>
+ #######<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.04<br>
+<br>
+#####<br>
+#   ##<br>
+#    ##<br>
+##$ $ ###<br>
+#..##@$ #<br>
+#.*.#$$ #<br>
+# .*    #<br>
+# . # $ #<br>
+#####   #<br>
+    #####<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.05<br>
+<br>
+    ####<br>
+#####  #<br>
+#...#$ #<br>
+#*...  #<br>
+# .# $$##<br>
+#   $ $ #<br>
+## $$ @ #<br>
+ #  ##  #<br>
+ ########<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.06<br>
+<br>
+   #####<br>
+  ##   #<br>
+  #    #<br>
+  #..$.#<br>
+  ### *#<br>
+  # $*.#<br>
+###  ..#<br>
+#  $$###<br>
+#@$$ #<br>
+#    #<br>
+######<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.07<br>
+<br>
+########<br>
+#. #   #<br>
+#.  $  #<br>
+#. # $ #<br>
+#.$ $ ##<br>
+#. # $ #<br>
+#.  $ ##<br>
+#.## $ #<br>
+#.  $  #<br>
+#.$ # @#<br>
+#     ##<br>
+########<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.08<br>
+<br>
+#########<br>
+#       #<br>
+# *.*.* #<br>
+# $   $ #<br>
+# *.*.* #<br>
+# $ $ $ #<br>
+# *.*.*@#<br>
+# $ $ $ #<br>
+# *.*.* #<br>
+# $   $ #<br>
+# *.*.  #<br>
+#       #<br>
+#########<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.09<br>
+<br>
+ #####<br>
+##   ##<br>
+#   $ #<br>
+#.*$$.#<br>
+#*+.  #<br>
+#.*$$.#<br>
+#   $ #<br>
+##   ##<br>
+ #####<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.10<br>
+<br>
+   #####<br>
+   #   #<br>
+ ### $ #<br>
+ # $ #$##<br>
+## $  $ #<br>
+#@$  #  #<br>
+#  # *..#<br>
+##  $.*.#<br>
+ ####...#<br>
+    #####<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.11<br>
+<br>
+  #######<br>
+### .#  #<br>
+#   .   #<br>
+#  $*$  #<br>
+# **+**##<br>
+## $*$  #<br>
+#   .   #<br>
+#   #  ##<br>
+########<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.12<br>
+<br>
+#########<br>
+#@      #<br>
+# $$*$$ #<br>
+# $.*.$ #<br>
+# ..$.. #<br>
+# .$$$. #<br>
+#..$ $..#<br>
+#.$.$.$.#<br>
+# . * . #<br>
+# $$.$$ #<br>
+# $.*.$ #<br>
+#       #<br>
+#########<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.13<br>
+<br>
+########<br>
+#..*...#<br>
+#...$  #<br>
+#### $ #<br>
+#  $@# #<br>
+# $ $$ #<br>
+# $$   #<br>
+#      #<br>
+########<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.14<br>
+<br>
+#########<br>
+#@  .   #<br>
+#  .*.  #<br>
+# * * * #<br>
+# $.$.$ #<br>
+# $$$$$ #<br>
+#...*...#<br>
+# $$$$$ #<br>
+# $. .$ #<br>
+# .$.$. #<br>
+# $.*.$ #<br>
+#   .   #<br>
+#########<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.15<br>
+<br>
+  ######<br>
+###    ##<br>
+#  $    #<br>
+#.*.***.#<br>
+#..*+*..#<br>
+#$$$$$$$#<br>
+#       #<br>
+##   #  #<br>
+ ########<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.16<br>
+<br>
+#########<br>
+#   @   #<br>
+# .$#$# #<br>
+#.*.# $ #<br>
+# . $ . #<br>
+## #$.*.#<br>
+#  $ #. #<br>
+# $. # ##<br>
+# .*. $ #<br>
+# #.#$  #<br>
+# $$  $ #<br>
+#   #   #<br>
+#########<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.17<br>
+<br>
+  #####<br>
+  #   #<br>
+### $ ###<br>
+#  *.*  #<br>
+#  *@*  #<br>
+#  *.*  #<br>
+### $ ###<br>
+  #   #<br>
+  #####<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.18<br>
+<br>
+#########<br>
+#   #   #<br>
+# $   $ #<br>
+#$##$## #<br>
+#..#  . #<br>
+#..###..#<br>
+# .# #..#<br>
+## ### ##<br>
+#  #  $ #<br>
+#  $ $@ #<br>
+# $#$ $ #<br>
+##     ##<br>
+ #######<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.19<br>
+<br>
+#########<br>
+#  @#   #<br>
+# $$#  $#<br>
+# $ #   #<br>
+#   #  $#<br>
+# $$#...#<br>
+# $ $...#<br>
+#   #...#<br>
+#########<br>
+<br>
+<br>
+<br>
+I'm up to my neck No.20<br>
+<br>
+#########<br>
+#@  #   #<br>
+# $$.$$ #<br>
+# $..*  #<br>
+# $* *$ #<br>
+# ..$.. #<br>
+#..$#$..#<br>
+# ..$.. #<br>
+# $* *$ #<br>
+#  *..$ #<br>
+# $$.$$ #<br>
+#   #   #<br>
+#########<br>
+<br>
+
+
+</body>
+</html>

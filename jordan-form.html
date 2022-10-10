@@ -1,0 +1,66 @@
+﻿<html>
+<head>
+
+<title>Jordan Canonical Form個人偏好的證明</title>
+<meta name="description" content="Jordan Canonical Form個人偏好的證明">
+
+<style>
+  table{text-align: center;}
+</style>
+</head>
+<body>
+
+
+<h1>Jordan Form</h1>
+
+<p>Jordan Canonical Form是線性代數的一個大難關，大部分學生都是看Friedberg, Insel, Spence三人本Linear Algebra來學習的，不過這本書在Jordan Form這個部分寫得很不好，應該說這本書想要有Hoffman的嚴謹，但又不能使用Abstract Algebra的工具，所以犧牲了直觀，很多定理不管是敘述本身或是證明方法都很莫名其妙。</p>
+
+<p>證明Jordan Form的方法很多，可以用Abstract Algebra的Modules over PID，也可以先證Rational Canonical Form，不過筆者在這裡預設的讀者都是大學生，所以不考慮這兩種證法。</p>
+
+<p>下面是筆者找到最容易理解的證法，就是先念Damiano（等下會解釋這是哪本書）的Section 6.2，再跳到Brown的Theorem 4.2(a)~(c)，最後再回Damiano的Proposition 6.3.4。兩本書中的幾個定理之間的詳細關係如下。</p>
+
+
+<table>
+<tbody>
+<tr>
+<td><del>Brown, thm.III.3.21</del><br />complicated</td>
+<td>=</td>
+<td>Damiano, sec.6.2</td>
+<td>&nbsp;</td>
+<td><del>Damiano, prop.6.3.1</del><br />complicated</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&darr;</td>
+<td>&nbsp;</td>
+<td>&darr;</td>
+<td>&nbsp;</td>
+<td>&darr;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td><del>Brown, thm.III.4.2(d)</del></td>
+<td>&larr;</td>
+<td>Brown, thm.4.2(a)~(c)</td>
+<td>=</td>
+<td>Damiano, prop.6.3.4</td>
+<td>=</td>
+<td>Axler, 8.21(a)</td>
+</tr>
+</tbody>
+</table>
+
+<p>Damiano是指Damiano跟Little的A Course in Linear Algebra。Section 6.2是A Canonical Form for Nilpotent Mappings，這其實是Jordan Form的墊腳石，（Friedberg就捨棄了這個部分，當然就顯得沒來由，）這本書的定理都講得很清楚，特別是Proposition 6.2.4，利用點圖(cycle tableau)來幫助理解證明，很漂亮！</p>
+
+<p>題外話，Little也是Commutative Algebra的入門聖經Ideals, Varieties, Algorithms的共同作者之一。</p>
+
+<p>但Damiano的Proposition 6.3.1的證明太複雜，所以這部分參考Brown的A Second Course in Linear Algebra其中的Theorem 4.2(a)~(c)，這本書雖然用了一些Abstract Algebra的符號，沒學過的讀者其實猜一猜不難知道意思。其中用到algebra homomorphism，不知道這個東西的讀者可以直觀地想成，把linear transformation T代入多項式f(x)中得到f(T)。另外，這定理的證明用了一個關鍵的步驟，就是互質的多項式可以組合成1，這個定理高中有稍微提過，建議讀者可以直觀地理解就好。</p>
+
+<p>另外，要讀懂Brown的Theorem 4.2(a)~(c)，還需要用到一些Lemma，不過這些Lemma本身就很重要，這幾個Lemma在Friedberg中對應的定理分別為<font color="red">Theorem 5.23, Theorem 5.24, Theorem 7.12(a), Theorem 7.14</font>。</p>
+
+<p>另外，Axler是指Linear Algebra Done Right，這本書用了一個不太一樣的證法，有興趣的讀者也可以看一看。</p>
+
+</body>
+</html>

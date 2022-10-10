@@ -1,0 +1,141 @@
+﻿<html>
+<head>
+
+<title>標準差為什麼要這樣定義</title>
+<meta name="description" content="標準差為什麼要這樣定義，比較Standard Deviation及Mean Absolute Deviation">
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+</head>
+<body>
+
+<h1>標準差為什麼要這樣定義？</h1>
+
+<p>
+我們學的標準差定義為\(\sqrt{\frac{\sum_{i=1}^{n}(x_i-\mu)^2}{n}}\)，書上說這個數值刻劃了資料的離散程度，但既然要刻劃數值的離散程度，\(\frac{\sum_{i=1}^{n}|x_i-\mu|}{n}\)不是更直觀嗎？這個問題我也想了很久，目前比較可以接受的答案如下。
+</p>
+
+<p>
+其實兩個公式各有各自的名稱。
+<table>
+<tr><td><a href="https://en.wikipedia.org/wiki/Standard_deviation">Standard Deviation</a></td><td>\(\sqrt{\frac{\sum_{i=1}^{n}(x_i-\mu)^2}{n}}\)</td></tr>
+<tr><td><a href="https://en.wikipedia.org/wiki/Average_absolute_deviation">Mean Absolute Deviation</a></td><td>\(\frac{\sum_{i=1}^{n}|x_i-\mu|}{n}\)</td></tr>
+</table>
+</p>
+
+<p>定義前者為"標準"差的理由是，在常用的幾個distribution之下，Standard Deviation的公式比較漂亮，Mean Absolute Deviation的公式比較複雜。我把它們列成表格比較。</p>
+
+
+
+<table border="1">
+<tbody>
+<tr>
+<td>Discrete</td>
+<td>P.M.F.</td>
+<td>Explanation</td>
+<td>Standard Deviation</td>
+<td>Mean Absolute Deviation</td>
+</tr>
+<tr>
+<td>Uniform</td>
+<td>\(f(x)=\frac{1}{m}\), <br>\(x=1, 2, ..., m\)</td>
+<td>\(m\) 顆球中取到 \(x\) 號的機率</td>
+<td>\(\sqrt{\frac{m^2-1}{12}}\)</td>
+<td>\(\left\{\begin{array}{ll}\frac{m}{4}&amp;\text{for }m\text{ even}\\\frac{(m-1)(m+1)}{4m}&amp;\text{for }m\text{ odd}\\\end{array}\right.\)</td>
+</tr>
+<tr>
+<td>Bernoulli</td>
+<td>\(f(x)=p^x(1-p)^{1-x}\), <br>\(x=0, 1\)</td>
+<td>投 \(1\) 次硬幣，出現 \(x\) 次正面的機率</td>
+<td>\(\sqrt{p(1-p)}\)</td>
+<td>\(2p(1-p)\)</td>
+</tr>
+<tr>
+<td>Binomial</td>
+<td>\(f(x)={n\choose x}p^x(1-p)^{n-x}\), <br>\(x=0, 1, 2, ..., n\)</td>
+<td>投 \(n\) 次硬幣，出現 \(x\) 次正面的機率</td>
+<td>\(\sqrt{np(1-p)}\)</td>
+<td>\(2(1-p)^{n-\lfloor np\rfloor}p^{\lfloor np\rfloor+1}(\lfloor np\rfloor+1){n\choose \lfloor np\rfloor+1}\)</td>
+</tr>
+<tr>
+<td>Geometric</td>
+<td>\(f(x)=(1-p)^{x-1}p\), <br>\(x=1, 2, 3, ...\)</td>
+<td>經歷 \(x-1\) 次失敗，在第 \(x\) 次成功的機率</td>
+<td>\(\sqrt{\frac{1-p}{p^2}}\)</td>
+<td>\(2(1-p)^{\lfloor 1/p \rfloor}\lfloor \frac{1}{p} \rfloor\)</td>
+</tr>
+<tr>
+<td>Poisson</td>
+<td>\(f(x)=\frac{\lambda^x e^{-\lambda}}{x!}\), <br>\(x=0, 1, 2, ...\)</td>
+<td>在某段長度為 \(L\) 的時間內，有 \(x\) 次電話來電的機率，\(\lambda\) 為在時間 \(L\) 中，平均來電的次數，\(\lambda&gt;0\)</td>
+<td>\(\sqrt{\lambda}\)</td>
+<td>\(\frac{2e^{-\lambda}\lambda^{\lfloor \lambda \rfloor +1}}{\lfloor \lambda \rfloor!}\)</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<br>
+
+<table border="1">
+<tbody>
+<tr>
+<td>Continuous</td>
+<td>P.D.F.</td>
+<td>Explanation</td>
+<td>Standard Deviation</td>
+<td>Mean Absolute Deviation</td>
+</tr>
+<tr>
+<td>Uniform</td>
+<td>\(f(x)=\frac{1}{b-a}\), <br />\(a\leq x\leq b\)</td>
+<td>在 \([a, b]\) 區間選一點的機率，直覺上選一點的機率應該是 \(0\)，但其實是由C.D.F. 微分推過來的。</td>
+<td>\(\frac{b-a}{\sqrt{12}}\)</td>
+<td>\(\frac{1}{4}(b-a)\)</td>
+</tr>
+<tr>
+<td>Exponential</td>
+<td>\(f(x)=\frac{1}{\theta}e^{-x/\theta}\), <br />\(0\leq x<\infty\)</td>
+<td>第 \(1\) 次來電的等待時間為 \(x\) 的機率。\(\lambda\) 為單位時間中，平均來電的次數。注意與Poisson中 \(\lambda\) 的意義不同。<br>\(\theta=\frac{1}{\lambda}\)</td>
+<td>\(\theta\)</td>
+<td>\(\frac{2\theta}{e}\)</td>
+</tr>
+<tr>
+<td>Gamma</td>
+<td>\(f(x)=\frac{1}{\Gamma(\alpha)\theta^{\alpha}}x^{\alpha-1}e^{-x/\theta}\), <br />\(0&lt;x&lt;\infty\)</td>
+<td>第 \(\alpha\) 次來電的等待時間為 \(x\) 的機率。\(\lambda\) 為單位時間中，平均來電的次數。<br>\(\theta=\frac{1}{\lambda}\)</td>
+<td>\(\sqrt{\alpha}\theta\)</td>
+<td>???</td>
+</tr>
+<tr>
+<td>Chi-Square</td>
+<td>\(f(x)=\frac{1}{\Gamma(r/2)2^{r/2}}x^{r/2-1}e^{-x/2}\), <br />\(0&lt;x&lt;\infty\)</td>
+<td>Gamma分配中，\(\theta=2, \alpha=\frac{r}{2}\)<br>\(r=1, 2, ...\)</td>
+<td>\(\sqrt{2r}\)</td>
+<td>???</td>
+</tr>
+<tr>
+<td>Normal</td>
+<td>\(f(x)=\frac{1}{\sigma \sqrt{2\pi}}e^{-(x-\mu)^2/(2\sigma^2)}\), <br />\(-\infty&lt;x&lt;\infty\)</td>
+<td>&nbsp;</td>
+<td>\(\sigma\)</td>
+<td>\(\sqrt{\frac{2}{\pi}}\sigma\)</td>
+</tr>
+<tr>
+<td>Beta</td>
+<td>\(f(x)=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha-1}(1-x)^{\beta-1}\), <br />\(0&lt;x&lt;1\)</td>
+<td>&nbsp;</td>
+<td>\(\sqrt{\frac{\alpha\beta}{(\alpha+\beta+1)(\alpha+\beta)^2}}\)</td>
+<td>???</td>
+</tr>
+</tbody>
+</table>
+
+<p>Mean Absolute Deviation的公式是從這裡<a href="https://mathworld.wolfram.com/MeanDeviation.html">Wolfram Math World</a>看來的。其他公式主要是參考Hogg跟Tanis的Probability and Statistical Inference。</p>
+
+<p><a href="https://stats.stackexchange.com/questions/81986/mean-absolute-deviation-vs-standard-deviation">更多理由</a></p>
+
+
+</body>
+</html>

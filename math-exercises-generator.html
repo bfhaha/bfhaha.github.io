@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+<title>JavaScript數學習題產生器範例</title>
+<meta name="description" content="JavaScript數學習題產生器範例">
+
+<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+
+</head>
+<body>
+
+  <h2>變數</h2>
+  分子：<input id="input1" autocomplete="off"><br>
+  分母：<input id="input2" autocomplete="off"><br>
+  小數後第幾位：<input id="input3" autocomplete="off"><br>
+  
+  <h2>題目</h2>
+  一最簡分數，其分子分母和為<div id="output1"></div>，將其化為小數後到第<div id="output3"></div>位四捨五入得<div id="output2"></div>，求此分數為？
+  
+  <h2>解答</h2>
+  <div id="answer"></div>
+  
+
+<script>
+
+var input1 = $('#input1');
+var input2 = $('#input2');
+var input3 = $('#input3');
+
+var output1 = $('#output1');
+var output2 = $('#output2');
+var output3 = $('#output3');
+
+var answer = $('#answer');
+
+input1.on('keyup', function () {
+  output1.html(eval(parseInt(input1.val())+parseInt(input2.val())));
+  output2.html(eval(parseInt(input1.val())/parseInt(input2.val())).toFixed(input3.val()));
+  output3.html(input3.val());
+  answer.html(input1.val()+"/"+input2.val());
+});
+input2.on('keyup', function () {
+  output1.html(eval(parseInt(input1.val())+parseInt(input2.val())));
+  output2.html(eval(parseInt(input1.val())/parseInt(input2.val())).toFixed(input3.val()));
+  output3.html(input3.val());
+  answer.html(input1.val()+"/"+input2.val());
+});
+input3.on('keyup', function () {
+  output1.html(eval(parseInt(input1.val())+parseInt(input2.val())));
+  output2.html(eval(parseInt(input1.val())/parseInt(input2.val())).toFixed(input3.val()));
+  output3.html(input3.val());
+  answer.html(input1.val()+"/"+input2.val());
+});
+
+</script>
+</body>
+</html>

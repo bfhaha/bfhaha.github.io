@@ -1,0 +1,326 @@
+﻿<html>
+<head>
+
+<title>Jolliffe的Principal Component Analysis的筆記</title>
+<meta name="description" content="Jolliffe的Principal Component Analysis的筆記">
+  
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+
+</head>
+<body>
+
+
+
+<ul>
+
+<!---------------------------------->
+<li>p.5, line 5:<br>
+\[
+\text{Var}(\boldsymbol{\alpha}_1'\mathbf{x})=\boldsymbol{\alpha}_1' \mathbf{\Sigma} \boldsymbol{\alpha}_1
+\]
+
+<br><br>
+<b>Proof:</b> See Hogg IMS, p.141, thm.2.6.3 or equation (2.6.16).
+</li><br>
+
+
+<!---------------------------------->
+<li>p.5, line 13:<br>
+To maximize \(\boldsymbol{\alpha}_1' \mathbf{\Sigma} \boldsymbol{\alpha}_1\) subject to \(\boldsymbol{\alpha}_1'\boldsymbol{\alpha}_1=1\), the standard approach is to use the technique of Lagrange multipliers. Maximize
+\[
+\boldsymbol{\alpha}_1' \mathbf{\Sigma} \boldsymbol{\alpha}_1-\lambda(\boldsymbol{\alpha}_1' \boldsymbol{\alpha}_1-1),
+\]
+where \(\lambda\) is a Lagrange multiplier. Differentiation with respect to \(\boldsymbol{\alpha}_1\) gives
+\[
+\mathbf{\Sigma} \boldsymbol{\alpha}_1-\lambda \boldsymbol{\alpha}_1=\mathbf{0},
+\]
+
+<br><br>
+<b>Proof:</b> Recall that we have to solve \(\lambda\) in 
+\[
+\nabla \boldsymbol{\alpha}_1' \mathbf{\Sigma} \boldsymbol{\alpha}_1=\lambda \nabla (\boldsymbol{\alpha}_1'\boldsymbol{\alpha}_1-1)
+\]
+Suppose that 
+\[
+\boldsymbol{\alpha}_1=
+\begin{pmatrix}
+c_1\\
+c_2\\
+\vdots \\
+c_n
+\end{pmatrix}
+\]
+Then 
+\[
+\begin{array}{rcl}
+\nabla \boldsymbol{\alpha}_1' \mathbf{\Sigma} \boldsymbol{\alpha}_1
+&=& \left(\frac{\partial}{\partial c_1}\boldsymbol{\alpha}_1' \mathbf{\Sigma} \boldsymbol{\alpha}_1, \frac{\partial}{\partial c_2}\boldsymbol{\alpha}_1' \mathbf{\Sigma} \boldsymbol{\alpha}_1, ..., \frac{\partial}{\partial c_n}\boldsymbol{\alpha}_1' \mathbf{\Sigma} \boldsymbol{\alpha}_1\right) \\
+&=& \left(\frac{\partial}{\partial c_1}\sum_{i=1}^{n}\sum_{j=1}^{n}c_ic_j\mathbf{\Sigma}_{ij}, \frac{\partial}{\partial c_2}\sum_{i=1}^{n}\sum_{j=1}^{n}c_ic_j\mathbf{\Sigma}_{ij}, ..., \frac{\partial}{\partial c_n}\sum_{i=1}^{n}\sum_{j=1}^{n}c_ic_j\mathbf{\Sigma}_{ij}\right) \\
+&=& \left(\sum_{j=1}^{n}c_j\mathbf{\Sigma}_{1j}+\sum_{i=1}^{n}c_i\mathbf{\Sigma}_{i1}, \sum_{j=1}^{n}c_j\mathbf{\Sigma}_{2j}+\sum_{i=1}^{n}c_i\mathbf{\Sigma}_{i2}, ..., \sum_{j=1}^{n}c_j\mathbf{\Sigma}_{nj}+\sum_{i=1}^{n}c_i\mathbf{\Sigma}_{in}\right) \\
+&\stackrel{\mathbf{\Sigma}\text{ is symmetry}}{=}& \left(\frac{\partial}{\partial c_1}\sum_{i=1}^{n}\sum_{j=1}^{n}c_ic_j\mathbf{\Sigma}_{ij}, \frac{\partial}{\partial c_2}\sum_{i=1}^{n}\sum_{j=1}^{n}c_ic_j\mathbf{\Sigma}_{ij}, ..., \frac{\partial}{\partial c_n}\sum_{i=1}^{n}\sum_{j=1}^{n}c_ic_j\mathbf{\Sigma}_{ij}\right) \\
+&=& \left(2\sum_{j=1}^{n}c_j\mathbf{\Sigma}_{1j}, 2\sum_{j=1}^{n}c_j\mathbf{\Sigma}_{2j}, ..., 2\sum_{j=1}^{n}c_j\mathbf{\Sigma}_{nj}\right) \\
+&=& (2\mathbf{\Sigma} \boldsymbol{\alpha}_1)^T
+\end{array}.
+\]
+On the other hand, 
+\[
+\begin{array}{rcl}
+\nabla (\boldsymbol{\alpha}_1'\boldsymbol{\alpha}_1-1)
+&=& \left(\frac{\partial}{\partial c_1}(\boldsymbol{\alpha}_1'\boldsymbol{\alpha}_1-1), \frac{\partial}{\partial c_2}(\boldsymbol{\alpha}_1'\boldsymbol{\alpha}_1-1), ..., \frac{\partial}{\partial c_n}(\boldsymbol{\alpha}_1'\boldsymbol{\alpha}_1-1)\right) \\
+&=& \left(\frac{\partial}{\partial c_1}\sum_{i=1}^{n}c_i^2, \frac{\partial}{\partial c_2}\sum_{i=1}^{n}c_i^2, ..., \frac{\partial}{\partial c_n}\sum_{i=1}^{n}c_i^2\right) \\
+&=& \left(2c_1, 2c_2, ..., 2c_n\right) \\
+&=& (2\boldsymbol{\alpha}_1)^T. 
+\end{array}
+\]
+Therefore, 
+Solving \(\nabla \boldsymbol{\alpha}_1' \mathbf{\Sigma} \boldsymbol{\alpha}_1=\lambda \nabla (\boldsymbol{\alpha}_1'\boldsymbol{\alpha}_1-1)\) is equivalent to solving \(\mathbf{\Sigma} \boldsymbol{\alpha}_1=\lambda \boldsymbol{\alpha}_1\).
+</li><br>
+
+
+<!---------------------------------->
+<li>p.5, line -4:<br>
+\[
+\text{Cov}(\boldsymbol{\alpha}_1'\mathbf{x}, \boldsymbol{\alpha}_2'\mathbf{x})=\boldsymbol{\alpha}_1'\mathbf{\Sigma}\boldsymbol{\alpha}_2
+\]
+
+<br><br>
+<b>Proof:</b> See Casella, p.170, thm.4.5.3.
+</li><br>
+
+
+<!---------------------------------->
+<li>p.6, line -11:<br>
+It should be noted that sometimes the vectors \(\boldsymbol{\alpha}_k\) are referred to as `principal components.' This usage, though sometimes defended (see Dawkins (1990), Kuhfeld (1990) for some discussion), is confusing. It is preferable to reserve the term `principal components' for the derived variables \(\boldsymbol{\alpha}_k'\mathbf{x}\), and refer to \(\boldsymbol{\alpha}_k\) as the vector of coefficients or loadings for the \(k\)th PC. Some authors distinguish between the terms `loadings' and `coefficients,' depending on the normalization constraint used, but they will be
+used interchangeably in this book.
+
+<br><br>
+<b>Proof:</b> 
+</li><br>
+
+
+
+<!---------------------------------->
+<li>p.18, line 12:<br>
+It is well known that the eigenvectors of \(\mathbf{\Sigma}^{-1}\) are the same as those of \(\mathbf{\Sigma}\), and that the eigenvalues of \(\mathbf{\Sigma}^{-1}\) are the reciprocals of those of \(\mathbf{\Sigma}\), 
+
+<br><br>
+<b>Proof:</b> If \(\mathbf{\Sigma}\mathbf{v}=\lambda \mathbf{\Sigma}\), then 
+\[
+\mathbf{\Sigma}^{-1}\mathbf{v}=\frac{1}{\lambda}\mathbf{\Sigma}^{-1}\lambda \mathbf{v}=\frac{1}{\lambda}\mathbf{\Sigma}^{-1}\mathbf{\Sigma}\mathbf{v}=\frac{1}{\lambda}\mathbf{v}.
+\]
+</li><br>
+
+
+<!---------------------------------->
+<li>p.18, line -16:<br>
+Equation (2.2.2) also implies that the half-lengths of the principal axes are proportional to \(\lambda_1^{1/2}, \lambda_2^{1/2}, ..., \lambda_p^{1/2}\).
+
+<br><br>
+<b>Proof:</b> Consider the simple case, 
+\(\frac{z_1^2}{\lambda_1}+\frac{z_2^2}{\lambda_2}=c\). When \(z_2=0\), the length of the principal axis is \(2c\sqrt{\lambda_1}\). So the half-length of the principal axis is \(c\sqrt{\lambda_1}\).
+</li><br>
+
+
+<!---------------------------------->
+<li>p.18, line 15:<br>
+\(\mathbf{A}\mathbf{\Sigma}^{-1}\mathbf{A}=\mathbf{\Lambda}^{-1}\).
+
+<br><br>
+<b>Proof:</b> It should be \(\mathbf{A}'\mathbf{\Sigma}^{-1}\mathbf{A}=\mathbf{\Lambda}^{-1}\).
+</li><br>
+
+
+<!---------------------------------->
+<li>p.18, line -14:<br>
+This result is statistically important if the random vector \(\mathbf{x}\) has a multivariate normal distribution. In this case, the ellipsoids given by (2.2.1) define contours of constant probability for the distribution of \(\mathbf{x}\). <b>The first (largest) principal axis of such ellipsoids will then define the direction in which statistical variation is greatest</b>, which is another way of expressing the algebraic definition of the first PC given in Section 1.1. The direction
+of the first PC, defining the first principal axis of constant probability ellipsoids, is illustrated in Figures 2.1 and 2.2 in Section 2.3. 
+
+<br><br>
+<b>Proof:</b> See p.5, line 4, the vector \(\boldsymbol{\alpha}_1\) maximizes \(\text{Var}(\boldsymbol{\alpha}_1'\mathbf{x})\).
+</li><br>
+
+
+<!---------------------------------->
+<li>p.18, line -7:<br>
+The second principal axis maximizes statistical variation, <b>subject to being orthogonal to the first</b>, and so on, again corresponding to the algebraic definition. This interpretation of PCs, as defining the principal axes of ellipsoids of constant density, was mentioned by Hotelling (1933) in his original paper.
+
+<br><br>
+<b>Proof:</b> See p.5, line -1, \(\boldsymbol{\alpha}_2'\boldsymbol{\alpha}_1=0\).
+</li><br>
+
+
+<!---------------------------------->
+<li>p.19, line -5:<br>
+To prove Property G2, first note that \(\mathbf{x}_1, \mathbf{x}_2\) have the same mean \(\boldsymbol{\mu}\) and covariance matrix \(\mathbf{\Sigma}\). Hence \(\mathbf{y}_1, \mathbf{y}_2\) also have the same mean and covariance matrix, \(\mathbf{B}'\boldsymbol{\mu}, \mathbf{B}'\mathbf{\Sigma}\mathbf{B}\) respectively.
+
+<br><br>
+<b>Proof:</b> See Hogg IMS, p.140, thm.2.6.2 or equation (2.6.11) and p.141, thm.2.6.3 or equation (2.6.16)
+</li><br>
+
+
+<!---------------------------------->
+<li>p.34, prop.G3:<br>
+As before, suppose that the observations \(\mathbf{x}_1, \mathbf{x}_2, ..., \mathbf{x}_n\) are transformed by \(\mathbf{y}_i=\mathbf{B}'\mathbf{x}_i\), \(i=1, 2, ..., n\), where \(\mathbf{B}\) is s \((p\times q)\) matrix with orthonormal columns, so that \(\mathbf{y}_1, \mathbf{y}_2, ..., \mathbf{y}_n\) are projections of \(\mathbf{x}_1, \mathbf{x}_2, ..., \mathbf{x}_n\) onto a \(q\)-dimensional subspace. A measure of `goodness-of-fit' of this \(q\)-dimensional subspace to \(\mathbf{x}_1, \mathbf{x}_2, ..., \mathbf{x}_n\) can be defined as the sum of squared perpendicular distances of \(\mathbf{x}_1, \mathbf{x}_2, ..., \mathbf{x}_n\) from the subspace. This measure is minimized when \(\mathbf{B}=\mathbf{A}_q\).
+
+<br><br>
+<b>Proof:</b> 
+
+這個定理的證明中，Distances are preserved under orthogonal transformations, so the squared distance \(\mathbf{m}_i'\mathbf{m}_i\) of \(\mathbf{y}_i\) from the origin is the same in \(y\) coordinates as in \(x\) coordinates. 這句話看不懂，而且最後要用到Property A1。我直接用p.5的方法（Lagrange Multiplier）證明 \(\mathbf{B}=\mathbf{A}_q\) 的時候，\(\sum_{i=1}^{n}\mathbf{m}_i'\mathbf{m}_i\) 有最大值，就不用使用Property A1。
+
+<br><br>
+
+\[
+\begin{array}{lll}
+\sum_{i=1}^{n} \langle \mathbf{m}_i, \mathbf{m}_i\rangle
+&=& \sum_{i=1}^{n} \langle \underline{\langle \mathbf{x}_i, \mathbf{z}_1\rangle \mathbf{z}_1+\langle \mathbf{x}_i, \mathbf{z}_2\rangle \mathbf{z}_2+\cdots +\langle \mathbf{x}_i, \mathbf{z}_q\rangle \mathbf{z}_q\rangle}, \underline{\langle \mathbf{x}_i, \mathbf{z}_1\rangle \mathbf{z}_1+\langle \mathbf{x}_i, \mathbf{z}_2\rangle \mathbf{z}_2+\cdots +\langle \mathbf{x}_i, \mathbf{z}_q\rangle \mathbf{z}_q\rangle}\rangle \\
+&=& \sum_{i=1}^{n} \langle \mathbf{x}_i, \mathbf{z}_1\rangle^2 +\langle \mathbf{x}_i, \mathbf{z}_2\rangle^2 +\cdots +\langle \mathbf{x}_i, \mathbf{z}_q\rangle^2 \\
+&=& \langle \mathbf{x}_1, \mathbf{z}_1\rangle^2 +\langle \mathbf{x}_1, \mathbf{z}_2\rangle^2 +\cdots +\langle \mathbf{x}_1, \mathbf{z}_q\rangle^2 \\
+&+& \langle \mathbf{x}_2, \mathbf{z}_1\rangle^2 +\langle \mathbf{x}_2, \mathbf{z}_2\rangle^2 +\cdots +\langle \mathbf{x}_2, \mathbf{z}_q\rangle^2 \\
+&+& \cdots \\
+&+& \langle \mathbf{x}_n, \mathbf{z}_1\rangle^2 +\langle \mathbf{x}_n, \mathbf{z}_2\rangle^2 +\cdots +\langle \mathbf{x}_n, \mathbf{z}_q\rangle^2 \\
+&=& \mathbf{z}_1^T \mathbf{x}_1 \mathbf{x}_1^T \mathbf{z}_1+\mathbf{z}_2^T \mathbf{x}_1 \mathbf{x}_1^T \mathbf{z}_2+\cdots+\mathbf{z}_q^T \mathbf{x}_1 \mathbf{x}_1^T \mathbf{z}_q \\
+&+& \mathbf{z}_1^T \mathbf{x}_2 \mathbf{x}_2^T \mathbf{z}_1+\mathbf{z}_2^T \mathbf{x}_2 \mathbf{x}_2^T \mathbf{z}_2+\cdots+\mathbf{z}_q^T \mathbf{x}_2 \mathbf{x}_2^T \mathbf{z}_q \\
+&+& \cdots \\
+&+& \mathbf{z}_1^T \mathbf{x}_n \mathbf{x}_n^T \mathbf{z}_1+\mathbf{z}_2^T \mathbf{x}_n \mathbf{x}_n^T \mathbf{z}_2+\cdots+\mathbf{z}_q^T \mathbf{x}_n \mathbf{x}_n^T \mathbf{z}_q \\
+&=& \mathbf{z}_1^T(\mathbf{x}_1\mathbf{x}_1^T+\mathbf{x}_2\mathbf{x}_2^T+\cdots+\mathbf{x}_n\mathbf{x}_n^T)\mathbf{z}_1 \\
+&+& \mathbf{z}_2^T(\mathbf{x}_1\mathbf{x}_1^T+\mathbf{x}_2\mathbf{x}_2^T+\cdots+\mathbf{x}_n\mathbf{x}_n^T)\mathbf{z}_2 \\
+&+& \cdots \\
+&+& \mathbf{z}_q^T(\mathbf{x}_1\mathbf{x}_1^T+\mathbf{x}_2\mathbf{x}_2^T+\cdots+\mathbf{x}_n\mathbf{x}_n^T)\mathbf{z}_q.
+\end{array}
+\]
+接著利用如p.5的討論，考慮 \(\mathbf{z}_1, \mathbf{z}_2, ..., \mathbf{z}_q\) 的每一個分量，並對其做微分，當 \(\mathbf{z}_1, \mathbf{z}_2, ..., \mathbf{z}_q\) 為 \(\sum_{i=1}^{n}\mathbf{x}_i\mathbf{x}_i^T\) 的eigenvector時，\(\sum_{i=1}^{n}\langle \mathbf{m}_i, \mathbf{m}_i\rangle\) 有最大值。
+
+<br><br>
+
+這裡改一下定理使用的符號並簡化敘述：
+
+<ul>
+<li>首先將 \(\sum_{i=1}^{n}\mathbf{x}_i \mathbf{x}_i^T\) 正交對角化，得到
+\[
+\sum_{i=1}^{n}\mathbf{x}_i \mathbf{x}_i^T
+=PDP^T.
+\]
+其中 \(P=(\mathbf{z}_1|\mathbf{z}_2|\cdots|\mathbf{z}_q)\)，也就是只取前 \(q\) 個orthonormal eigenvector，\(q\lt p\)，\(D=\text{diag}(\lambda_1, \lambda_2, ..., \lambda_q)\), \(\lambda_1\gt \lambda_2\gt \cdots \gt \lambda_q\).</li>
+<li>考慮 \(\mathbf{m}_i=\text{proj}_{\text{span}(\mathbf{z}_1, \mathbf{z}_2, ..., \mathbf{z}_q)}\mathbf{x}_i\)</li>
+<li>定義 \(\mathbf{r}_i=\mathbf{x}_i-\mathbf{m}_i\)</li>
+<li>\(\sum_{i=1}^{n}\mathbf{m}_i'\mathbf{m}_i\) 有最大值。</li>
+<li>\(\sum_{i=1}^{n}\mathbf{r}_i'\mathbf{r}_i\) 有最小值。</li>
+</ul>
+
+<br><br>
+
+關於Property G3，有一個地方需要特別說明。參考下圖，考慮最簡單的情況，假設我們只有兩個樣本點，\(\mathbf{x}_1=(1, 0)^T, \mathbf{x}_2=(0, 1)^T\)，如果我們要決定一條直線，滿足樣本點到這條直線的垂直距離平方和最小，如果只有給這樣的條件還不夠，我們還要對這條直線多一些條件，例如
+
+<ul>
+<li>如果這條直線必須通過原點，那就會決定出圖中的那條斜線。</li>
+<li>如果這條直線必須通過 \(\frac{\mathbf{x}_1+\mathbf{x}_2}{2}\)，那就會決定出圖中的那條水平直線（非座標軸）。</li>
+</ul>
+
+<br><br>
+
+<canvas id="myCanvas" width="170" height="170" style="border:1px solid #d3d3d3;"></canvas>
+
+<script>
+
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+
+//line 1
+ctx.moveTo(10, 130);
+ctx.lineTo(130, 130);
+
+//line 2
+ctx.moveTo(20, 145);
+ctx.lineTo(20, 40);
+
+//line 3
+ctx.moveTo(10, 100);
+ctx.lineTo(30, 100);
+
+//line 4
+ctx.moveTo(50, 120);
+ctx.lineTo(50, 140);
+
+//slanting line
+ctx.moveTo(10, 140);
+ctx.lineTo(80, 70);
+
+//horizontal line
+ctx.moveTo(10, 115);
+ctx.lineTo(95, 115);
+
+ctx.stroke();
+
+//label 1
+ctx.font = "30px Arial";
+ctx.fillText("x", 135, 135);
+
+//label 2
+ctx.font = "30px Arial";
+ctx.fillText("y", 15, 30);
+
+//label 3
+ctx.font = "30px Arial";
+ctx.fillText("\u25cf", 40, 140);
+
+//label 4
+ctx.font = "30px Arial";
+ctx.fillText("\u25cf", 10, 110);
+
+</script>
+
+<br><br>
+
+幾何上來看，當 \(p=2, q=1\)，\(\mathbf{z}_1\) 決定了某個通過原點的直線，樣本點到這個直線的垂直距離平方和最小；類似地，當 \(p=3, q=2\)，\(\mathbf{z}_1, \mathbf{z}_2\) 決定了某個通過原點的平面，樣本點到這個平面的垂直距離平方和最小。
+
+<br><br>
+
+但是這個Property討論的 \(\mathbf{z}_1, \mathbf{z}_2, ..., \mathbf{z}_q\) 都<font color="red">必定通過原點</font>，我們在其他地方使用的時候不是這個，<font color="red">而是要通過 \(\overline{\mathbf{x}}=\sum_{i=1}^{n}\mathbf{x}_i\)</font>。所以我們在使用Property G3的時候，要把 \(\mathbf{x}_1, \mathbf{x}_2, ..., \mathbf{x}_n\) 換成 \(\mathbf{x}_1-\overline{\mathbf{x}}, \mathbf{x}_2-\overline{\mathbf{x}}, ..., \mathbf{x}_n-\overline{\mathbf{x}}\)。（其實就是把原點移到 \(\overline{\mathbf{x}}\)，然後再套用Property G3罷了。）
+<br><br>
+這裡提供一個例子，假設有三個樣本點 \(\mathbf{x}_1=(3, 4)^T, \mathbf{x}_2=(8, 3)^T, \mathbf{x}_3=(9, 8)^T\)，我們要決定一條直線，滿足樣本點到這條直線的垂直距離平方和最小，
+
+<ul>
+<li>如果這條直線必須通過原點，那就是求 \(\sum_{i=1}^{n}\mathbf{x}_i\mathbf{x}_i^T\) 對應到最大eigenvalue的eigenvector，這個eigenvector的方向就是那條直線的方向。</li>
+<li>如果這條直線必須通過 \(\overline{\mathbf{x}}=\sum_{i=1}^{n}\mathbf{x}_i\)，那就是求 \(\sum_{i=1}^{n}(\mathbf{x}_i-\overline{\mathbf{x}})(\mathbf{x}_i-\overline{\mathbf{x}})^T\) 對應到最大eigenvalu的eigenvector，這個eigenvector的方向就是那條直線的方向。<font color="lightgray">在這個情況下，這條直線為 \(y=0.67x+0.56\)，其中 \(\sum_{i=1}^{n}(\mathbf{x}_i-\overline{\mathbf{x}})(\mathbf{x}_i-\overline{\mathbf{x}})^T=\begin{pmatrix}20.67&8\\8&14\end{pmatrix}\)。當然，也可以直接套Casella, p.582, subsec.12.2.11的公式求出來。</font></li>
+</ul>
+
+<table border="1">
+<tbody>
+<tr>
+<td>population</td>
+<td>sample</td>
+</tr>
+<tr>
+<td>\(\mathbf{X}=\begin{pmatrix}X_1\\ X_2\\ \vdots\\ X_p\end{pmatrix}\) or \(\mathbf{X}-\boldsymbol{\mu}=\begin{pmatrix}X_1-\mu_{X_1}\\ X_2-\mu_{X_2}\\ \vdots\\ X_p-\mu_{X_p}\end{pmatrix}\)</td>
+<td>\(\mathbf{x}_1, \mathbf{x}_2, ..., \mathbf{x}_n\) are \(p\times 1\) column vectors</td>
+</tr>
+<tr>
+<td>\(\mathbf{\Sigma}=\text{Cov}(\mathbf{X})=\text{Cov}(\mathbf{X}-\boldsymbol{\mu})\)</td>
+<td>\(\overline{\mathbf{x}}=\frac{1}{n}\sum_{i=1}^{n}\mathbf{x}_i\)<br />\(S=(\mathbf{x}_1-\overline{\mathbf{x}}|\mathbf{x}_2-\overline{\mathbf{x}}|\cdots |\mathbf{x}_n-\overline{\mathbf{x}})\)</td>
+</tr>
+<tr>
+<td>\(\mathbf{\Sigma}=PDP^T\)<br />\(P=(\mathbf{u}_1|\mathbf{u}_2|\cdots|\mathbf{u}_q)\), a \(p\times q\) matrix, \(q\lt p\), that is, we only use the first \(q\) orthonormal eigenvectors.<br />\(D=\text{diag}(\lambda_1, \lambda_2, ..., \lambda_q)\), \(\lambda_1\gt \lambda_2\gt \cdots \gt \lambda_q\)</td>
+<td>\(SS^T=\sum_{i=1}^{n}(\mathbf{x}_i-\overline{\mathbf{x}})(\mathbf{x}_i-\overline{\mathbf{x}})^T=PDP^T\)<br />\(P=(\mathbf{z}_1|\mathbf{z}_2|\cdots|\mathbf{z}_q)\), a \(p\times q\) matrix, \(q\lt p\), that is, we only use the first \(q\) orthonormal eigenvectors.<br />\(D=\text{diag}(\lambda_1, \lambda_2, ..., \lambda_q)\), \(\lambda_1\gt \lambda_2\gt \cdots \gt \lambda_q\)</td>
+</tr>
+<tr>
+<td>principal components<br />\(Z_1=\mathbf{u}_1^T \mathbf{X}, Z_2=\mathbf{u}_2^T \mathbf{X}, ..., Z_q=\mathbf{u}_q^T \mathbf{X}\)<br />or \(Z_1=\mathbf{u}_1^T (\mathbf{X}-\boldsymbol{\mu}), Z_2=\mathbf{u}_2^T (\mathbf{X}-\boldsymbol{\mu}), ..., Z_q=\mathbf{u}_q^T (\mathbf{X}-\boldsymbol{\mu})\)</td>
+<td>principal components<br>\(\begin{pmatrix}\mathbf{z}_1^T(\mathbf{x}_1-\overline{\mathbf{x}})\\ \mathbf{z}_1^T(\mathbf{x}_2-\overline{\mathbf{x}})\\ \vdots \\ \mathbf{z}_1^T(\mathbf{x}_n-\overline{\mathbf{x}})\end{pmatrix}, \begin{pmatrix}\mathbf{z}_2^T(\mathbf{x}_1-\overline{\mathbf{x}})\\ \mathbf{z}_2^T(\mathbf{x}_2-\overline{\mathbf{x}})\\ \vdots \\ \mathbf{z}_2^T(\mathbf{x}_n-\overline{\mathbf{x}})\end{pmatrix}, ..., \begin{pmatrix}\mathbf{z}_q^T(\mathbf{x}_1-\overline{\mathbf{x}})\\ \mathbf{z}_q^T(\mathbf{x}_2-\overline{\mathbf{x}})\\ \vdots \\ \mathbf{z}_q^T(\mathbf{x}_n-\overline{\mathbf{x}})\end{pmatrix}\)</td>
+</tr>
+<tr>
+<td>我們想要用 \(X_1, X_2, ..., X_p\) 線性組合出 \(Z_1, Z_2, ..., Z_q\)，<br />使得 \(\text{Var}(Z_1), \text{Var}(Z_2), ..., \text{Var}(Z_q)\) 盡可能地大，<br />而且 \(\text{Var}(Z_1)\gt \text{Var}(Z_2)\gt \cdots \gt \text{Var}(Z_q)\)</td>
+<td>假設 \(M=\begin{pmatrix}<br />\mathbf{z}_1^T(\mathbf{x}_1-\overline{\mathbf{x}}) &amp; \mathbf{z}_2^T(\mathbf{x}_1-\overline{\mathbf{x}}) &amp; \cdots &amp; \mathbf{z}_q^T(\mathbf{x}_1-\overline{\mathbf{x}}) \\ <br />\mathbf{z}_1^T(\mathbf{x}_2-\overline{\mathbf{x}}) &amp; \mathbf{z}_2^T(\mathbf{x}_2-\overline{\mathbf{x}}) &amp; \cdots &amp; \mathbf{z}_q^T(\mathbf{x}_2-\overline{\mathbf{x}}) \\ <br />\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ <br />\mathbf{z}_1^T(\mathbf{x}_n-\overline{\mathbf{x}}) &amp; \mathbf{z}_2^T(\mathbf{x}_n-\overline{\mathbf{x}}) &amp; \cdots &amp; \mathbf{z}_q^T(\mathbf{x}_n-\overline{\mathbf{x}})<br />\end{pmatrix}\)，<br />也就是以principal components為column的矩陣，則 \(M\) 的第 \(i\) row給出了用 \(\mathbf{z}_1, \mathbf{z}_2, ..., \mathbf{z}_q\) 線性組合出 \(\text{proj}_{\text{span}(\mathbf{z}_1, \mathbf{z}_2, ..., \mathbf{z}_q)}(\mathbf{x}_i-\overline{\mathbf{x}})\) 的係數。如果是平面上的點投影到直線上，則這些係數表示了投影點到原點的距離，這些距離加起來會是最大（\(\sum_{i=1}^{n}\mathbf{m}_i'\mathbf{m}_i\)最大），也就是說，這些平面上的點，在這個方向的變異程度最大。<br><br>計算上，先用Excel算出 \(SS^T\)，再用wolframalpha的diagonalize指令將 \(SS^T\) 對角化，求出eigenvector (column)構成的matrix \(Q\)（可能要換eigenvector的順序，按照對應的eigenvalue的大小遞減排序），再用transpose(orthogonalize(transpose(Q))) 求出 \(\mathbf{z}_1, \mathbf{z}_2, ..., \mathbf{z}_q\)（要做兩次transpose是因為orthogonalize是處理row vector）。<br><br>\(\mathbf{z}_i\) 中的分量的正負號可能會隨著不同的計算方法而有差異，例如 \(\mathbf{z}_2=(0.544, -0.839)^T\) 或是 \(\mathbf{z}_2=(-0.544, 0.839)^T\)，但本質上都是一樣的，都滿足 \(\mathbf{z}_i^T \mathbf{z}_i=1, \mathbf{z}_i^T \mathbf{z}_j=0\)。</td>
+</tr>
+</tbody>
+</table>
+
+</li><br>
+
+
+
+
+</ul>
+
+
+</body>
+</html>
