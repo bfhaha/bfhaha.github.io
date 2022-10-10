@@ -1,0 +1,95 @@
+﻿<html>
+
+<head>
+
+<title>破解PDF的DRM保護</title>
+<meta name="description" content="破解PDF的DRM保護">
+
+</head>
+
+<body>
+有些archive.org上的電子書不能直接下載，只能用"借"的，而且還有借閱人數跟借閱時間的限制（真是莫名其妙，完全背電子書之道而馳），這些借閱的電子書PDF檔都會有DRM的保護，本文討論如何破解。
+<ul>
+
+<li>在archive.org找到要借的電子書，如果已經被借走，那就要預約排隊。可以借閱後要選擇借閱14天，只借1小時的話不能下載。
+<br><img width="70%" src="img/crack_pdf_drm/drm_01.jpg">
+</li>
+
+<li>借閱後選擇下載。
+<br><img width="70%" src="img/crack_pdf_drm/drm_02.jpg">
+</li>
+
+<li>如果還沒安裝Adobe Digital Edition（以下簡稱ADE）的話先安裝，或是直接到<a href="https://www.adobe.com/solutions/ebook/digital-editions/download.html">官方網站</a>下載安裝。
+<br><img width="70%" src="img/crack_pdf_drm/drm_03.jpg">
+</li>
+
+<li>安裝完後下載借閱的電子書。
+<br><img width="70%" src="img/crack_pdf_drm/drm_04.jpg">
+</li>
+
+<li>會得到一個副檔名是acsm的檔案，例如URLLink.acsm。
+<br><img width="70%" src="img/crack_pdf_drm/drm_05.jpg">
+</li>
+
+<li>直接開啟該檔案<font color="red">URLLink.acsm</font>，預設會用ADE開啟。
+<br><img width="70%" src="img/crack_pdf_drm/drm_06.jpg">
+</li>
+
+<li>ADE會再另外下載一份電子書的原始PDF檔，例如<font color="red">ebook.pdf</font>，通常會下載到[我的文件]中的一個[My Digital Editions]資料夾，但這個PDF檔有加上DRM保護，所以無法直接用Adobe Acrobat開啟。
+<br><img width="70%" src="img/crack_pdf_drm/drm_07.jpg">
+</li>
+
+<li>下載Calibre這個電子書閱讀暨管理軟體，不常用的話下載<a href="https://calibre-ebook.com/download_portable">免安裝版(Portable)</a>就好。這個portable是一個自解壓縮檔，執行後選擇要放解壓縮檔案的地方即可。</li>
+
+<li>接著下載<a href="http://download.epubor.com/sold/DeDRM_plugin.zip">Calibre DRM Removal Plugins</a>，是一個壓縮檔，<font color="red">不要</font>解壓縮。</li>
+
+<li>執行Calibre，如果是用portable版，就到剛剛解壓縮的地方執行calibre-portable.exe</li>
+
+<li>第一次執行會要你選擇語言，為了能夠配合等下安裝plugin的教學，我們選擇英文。
+<br><img width="70%" src="img/crack_pdf_drm/drm_08.jpg">
+</li>
+
+<li>接著會要你選擇你看ebook的裝置，這隨便選就好。
+<br><img width="70%" src="img/crack_pdf_drm/drm_09.jpg">
+</li>
+
+<li>按照<a href="https://www.epubor.com/calibre-drm-removal-plugins.html">網頁指示</a>安裝plugin
+    <ul>
+    <li>選擇Preferences，
+<br><img width="70%" src="img/crack_pdf_drm/drm_10.jpg">
+    </li>
+    <li>往下拉到Plugins，
+<br><img width="70%" src="img/crack_pdf_drm/drm_11.jpg">
+    </li>
+    <li>選擇Load plugin from file，
+<br><img width="70%" src="img/crack_pdf_drm/drm_12.jpg">
+    </li>
+    <li>選擇剛剛下載的DeDRM_plugin.zip。
+    </li>
+    <li>病毒警告，今天這個社會，什麼東西沒有毒？
+<br><img width="70%" src="img/crack_pdf_drm/drm_13.jpg">
+    </li>
+    <li>安裝完成。
+<br><img width="70%" src="img/crack_pdf_drm/drm_14.jpg">
+    </li>
+    <li>按下Apply讓設定生效。
+<br><img width="70%" src="img/crack_pdf_drm/drm_15.jpg">
+    </li>
+    <li>關閉剛剛的Preferences。
+<br><img width="70%" src="img/crack_pdf_drm/drm_16.jpg">
+    </li>
+    </ul>
+</li>
+
+<li>這時候在Calibre，按[Add books]讀入加入DRM保護的PDF檔，<font color="red">注意，是讀取ebook.pdf，不是讀取URLLink.acsm</font>。如果成功加入清單，而且點兩下可以用Adobe Acrobat開啟，就表示已移除DRM保護。
+<br><img width="70%" src="img/crack_pdf_drm/drm_17.jpg">
+</li>
+
+<li>在該本書上按右鍵將其另存新檔，通常會以這本書的相關資訊，例如作者名，自動建立資料夾儲存。
+<br><img width="70%" src="img/crack_pdf_drm/drm_18.jpg">
+</li>
+
+</ul>
+  
+</body>
+</html>

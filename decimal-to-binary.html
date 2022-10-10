@@ -1,0 +1,41 @@
+﻿<html>
+
+<head>
+
+<title>用迴圈將遞增的十進位轉為二進位，並在前面補0</title>
+<meta name="description" content="用迴圈將遞增的十進位轉為二進位，並在前面補0">
+
+</head>
+
+<body>
+ 
+<h1>用迴圈將遞增的十進位轉為二進位，並在前面補0</h1>
+  
+<ul>
+<li>parseInt(i, 10)是指要處理i這個10進位的數字。</li>
+<li>toString(2)是指轉換成2進位的數字。</li>
+<li>padStart(10,0)是指要用0補滿10位。</li>
+</ul>
+
+<pre>
+
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;p id="demo"&gt;&lt;/p&gt;
+
+&lt;script&gt;
+var temp = "";
+for(i=0; i&lt;1024; i++){
+   temp += parseInt(i, 10).toString(2).padStart(10,0) + "&lt;br&gt;";
+}
+document.getElementById("demo").innerHTML = temp;
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+</body>
+</html>

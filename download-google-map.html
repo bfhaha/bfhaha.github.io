@@ -1,0 +1,163 @@
+﻿<html>
+
+<head>
+
+<title>用PowerShell大範圍下載Google Map地圖</title>
+<meta name="description" content="用PowerShell大範圍下載Google Map地圖">
+
+<style>
+code, pre {background-color: lightgray;}
+</style>
+
+</head>
+
+<body>
+
+<h1>用PowerShell大範圍下載Google Map地圖</h1>
+
+<p><span style="color: red;">請按右鍵另存，尺寸太大，用Chrome直接打開的話很容易當機</span>。<a href="https://www.dropbox.com/s/6537ztzp7f102nf/TaichungMap.jpg?dl=0">台中市中心地圖</a>。
+</p>
+
+<p>本文討論將Google Map上的地圖儲存下來，關於本地圖，有如下幾點說明。
+</p>
+
+<ul>
+
+<li>我試過<a href="http://www.codres.de/google-map-saver">Google Map Saver (GMS)</a>，但是在我的電腦上無法使用，不管是GMS或是GMS.NET都不行。Google Maps Buddy也掛了，網路上有一些看似仿冒的，我不敢安裝。
+</li>
+
+<li>本地圖加入bfhaha字樣的浮水印，我其實不想加的，因為版權是歸Google，但我怕網路上有人把我連文帶圖地完全複製過去，還說是自己做的，那就很討人厭了。
+</li>
+
+<li>如果想要編輯的話，尺寸太大無法用小畫家開啟，可以用PhotoShop打開。
+</li>
+
+<li>本地圖包含地標，可以不加地標，但Google的路名跟路標是一起的，所以關閉路標時會連路名一起關閉。
+</li>
+
+<li>關閉路標（標籤）的方法：
+  <ol>
+  <li>開啟Google Map。</li>
+  <li>按F12。</li>
+  <li>切換到[Elements]標籤。</li>
+  <li>切換到[衛星]檢視（左上角有個三個橫槓的圖示，點進去選擇）。</li>
+  <li>在Elements內容裡隨處點一下，按Ctrl+F。</li>
+  <li>搜尋[已停用標籤]。</li>
+  <li>這個[已停用標籤]是放在一個label的tag裡，裡面有個style屬性，值是"display:none"，把它刪掉。（這個動作的原理是讓這個[已停用標籤]顯示出來。</li>
+  <li>注意[Elements]中，[已停用標籤]所在的tag是label，而它上一層的tag是button。</li>
+  <li>這時候切換到[地圖]檢視，你會發現剛剛提到的那個button中有個屬性style，它的值變成"display: none;"，把它刪掉。（預設中，只有切到[衛星]檢視時才能開啟或關閉標籤，這個動作就是在[地圖]檢視時依然能夠看到[已停用標籤]。）</li>
+  <li>你可以發現這時候是在[地圖]檢視，但還是有[已停用標籤]的選項，點下去後標籤就不見了。</li>
+  </ol>
+</li>
+
+</ul>
+
+<p>下面討論我是如何下載的，我不打算討論細節，我只會講幾個重點，請按照您自己的需求做修改。</p>
+
+<ul>
+<li>其實也沒什麼技術可言，就是利用PowerShell模擬鍵盤按鍵來移動Google Map，再用PowerShell中的擷取螢幕畫面功能來獲得大範圍的地圖。</li>
+<li>程式碼在下面，該說的都放在註解裡了。</li>
+<li>這段擷取螢幕畫面的PowerShell程式碼是從<a href="https://stackoverflow.com/questions/2969321/">這裡</a>學來的。</li>
+<li>執行時請注意把滑鼠移動到地圖外，否則滑鼠不小心放在地標上時會跳出地標詳細資訊的泡泡。</li>
+<li>不要為了加速而修改延遲的秒數，就是Sleep 1，太快的話電腦反應不過來反而無法成功完成任務。</li>
+<li>不知道可不可以用變化網址的方法來下載地圖，例如https://www.google.com.tw/maps/@24.152031,120.681024,17.22z。</li>
+<li>或是試試<a href="https://blog.eprint.com.tw/screengrab-google-maps/">這個</a>。</li>
+</ul>
+
+<p>將地圖擷取下來後，接下來就是合併的工作，我用ImageMagick來完成。
+</p>
+
+
+<ul>
+<li>假設我的小地圖存成1.jpg, 2.jpg, 3.jpg, 4.jpg, 5.jpg, 6.jpg，
+我想要按照如下的方式合併。
+<table border="1">
+<tr><td>1</td><td>2</td></tr>
+<tr><td>3</td><td>4</td></tr>
+<tr><td>5</td><td>6</td></tr>
+</table>
+</li>
+<li>通常ImageMagick會安裝在C:\Program Files\ImageMagick-x.x.x-xxx目錄下，先把圖檔放到這裡。</li>
+<li>在命令提示字元的捷徑上按右鍵，<span style="color: red;">選擇以系統管理員身分執行。（這很重要，因為這樣其他軟體存取系統資料夾的檔案時才不會失敗。）</span>切換到安裝ImageMagick的目錄之下（利用cd..還有cd Program Files這些指令）。</li>
+<li>輸入下列合併的指令magick montage 1.jpg 2.jpg 3.jpg 4.jpg 5.jpg 6.jpg -mode Concatenate -tile 2x3 output.jpg，注意到圖檔間沒有逗號，注意到後面的幾乘幾代表的是直欄數乘以橫列數，會輸出成output.jpg，這個指令是在<a href="http://www.imagemagick.org/Usage/montage/#concatenate">這裡</a>學來的。</li>
+<li>因為可能有好幾百個jpg圖檔，所以可以利用Excel生成出1.jpg, 2.jpg, ..., 然後貼到Word，把分段符號^p換成空白，再貼上命令提示字元。</li>
+<li>如果要加入浮水印，輸入指令magick convert -size 140x80 xc:none -fill grey -gravity NorthWest -draw "text 10,10 'Copyright'" -gravity SouthEast -draw "text 5,15 'Copyright'" miff:- | magick composite -tile - output.jpg watermark.jpg，output.jpg是要加入浮水印的原始檔案，watermark.jpg是輸出後的檔案，Copyright可以改成你要的字樣，不支援中文的字樣，這個指令是在<a href="http://www.imagemagick.org/Usage/annotating/#wmark_text">這裡</a>學來的。</li>
+</ul>
+
+
+
+<pre>
+# 設定比例尺為100公尺（有四個等級），我設定為最長的那個等級。
+
+$total = 1 # 分割總數計數器
+
+# 看你需要多大的地圖範圍調整直欄數跟橫列數
+# 可以先在Google map中算好，需要向右（下）移動幾步到最右（下）邊，要記得除以迴圈中向右（下）的步數
+# 建議先設小的數值跑一次，確定擷取出來的地圖接合無誤。
+$numberOfColumns = 12 # 直欄數
+$numberOfRows = 26 # 橫列數
+
+# 在Google Map中按下方向鍵時，移動的距離是不固定的，
+# 但是按住Shift再加方向鍵，移動的距離就是固定的，
+# 如果比例尺按照上面的設定，則每按下一次Shift加方向鍵，就移動256個畫素，
+# 所以下面的(x, y)座標必須滿足x2-x1=y2-y1接為256的倍數，
+# 這樣照出來的小地圖邊界才能完美接合。
+# 例如我向右移動四步，並且照下一張，所以我x2-x1=256*4=1024，
+# 例如我向下移動兩步，並且照下一張，所以我y2-y1=256*2=512。
+# (x1, y1)就是照片的左上角座標，(x2, y2)就是照片的右下角座標，
+# 注意到(x, y)座標是以螢幕左上角做為原點的。
+$x1 = 100; $y1 = 129;
+$x2 = 1124; $y2 = 641;
+
+# 讓系統取得title叫做[Chrome]的視窗
+# 並讓該視窗變成當前視窗
+$wshell = New-Object -ComObject wscript.shell;
+$wshell.AppActivate('Chrome')
+Sleep 1
+
+for($r=1; $r -le $numberOfRows; ++$r)
+{
+    for($c = 1; $c -le $numberOfColumns; ++$c)
+    {
+        # 擷取畫面
+        [Reflection.Assembly]::LoadWithPartialName("System.Drawing")
+        function screenshot([Drawing.Rectangle]$bounds, $path) 
+        {
+            $bmp = New-Object Drawing.Bitmap $bounds.width, $bounds.height
+            $graphics = [Drawing.Graphics]::FromImage($bmp)    
+            $graphics.CopyFromScreen($bounds.Location, [Drawing.Point]::Empty, $bounds.size)
+            $bmp.Save($path)
+            $graphics.Dispose()
+            $bmp.Dispose()
+        }
+        $bounds = [Drawing.Rectangle]::FromLTRB($x1, $y1, $x2, $y2)
+        
+        # 將擷取的畫面存檔。
+        # 請將存檔路徑設在桌面或是下載資料夾，
+        # C槽或是其他系統資料夾存檔時需要詢問權限，會造成存檔失敗。
+        # 注意到會覆蓋原本同名的檔案（不會警告）。
+        screenshot $bounds "C:\Users\bfhaha\Downloads\$total.jpg"
+        ++$total
+        Sleep 1
+
+        # 向右移動四步
+        $wshell.SendKeys('+{RIGHT}'); Sleep 1
+        $wshell.SendKeys('+{RIGHT}'); Sleep 1
+        $wshell.SendKeys('+{RIGHT}'); Sleep 1
+        $wshell.SendKeys('+{RIGHT}'); Sleep 1
+        # 迴圈後會繼續擷取畫面並向右移動
+    }
+
+    # 回到最左邊
+    for($i = 1; $i -le ($numberOfColumns * 4); ++$i)
+    {$wshell.SendKeys('+{LEFT}'); Sleep 1}
+
+    # 往下兩步
+    $wshell.SendKeys('+{DOWN}'); Sleep 1
+    $wshell.SendKeys('+{DOWN}'); Sleep 1
+    # 接著會開始在下一列擷取畫面
+}
+</pre>
+
+</body>
+</html>

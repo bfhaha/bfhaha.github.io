@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+
+<title>ANOVA</title>
+<meta name="description" content="ANOVA">
+
+<head>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+</head>
+<body>
+
+
+<h1>ANOVA</h1>
+
+
+<ul>
+<li><a href="#timing">使用時機</a></li>
+<li><a href="#formulas">公式</a></li>
+<li><a href="#picture">圖形</a></li>
+<li><a href="#table">表格</a></li>
+
+</ul>
+
+<!---------------------------------->
+<!---------------------------------->
+
+<h2 id="timing">使用時機</h2>
+
+\[
+\begin{array}{cccccc}
+\text{treatment 1} & \text{treatment 2} & \cdots & \text{treatment k} \\
+x_{11} & x_{12} & \cdots & x_{1k} \\
+x_{21} & x_{22} & \cdots & x_{2k} \\
+\vdots & \vdots & \ddots & \vdots \\
+x_{n_1 1} & x_{n_2 2} & \cdots & x_{n_k k} \\
+\downarrow & \downarrow & \cdots & \downarrow & \searrow \\
+\overline{x}_1 & \overline{x}_2 & \cdots & \overline{x}_k & & \bar{\bar{x}}
+\end{array}
+\]
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+
+<h2 id="formulas">公式</h2>
+
+\[
+\begin{array}{rcl}
+\text{SSE} &=& \sum_{j=1}^{k}\sum_{i=1}^{n_j}(x_{ij}-\overline{x}_j)^2=\sum_{j=1}^{k} (n_j-1)s_j^2 \\
+\text{SSTR} &=& \sum_{j=1}^{k} n_j(\overline{x}_j-\bar{\bar{x}})^2 \\
+\text{SST} &=& \sum_{j=1}^{k}\sum_{i=1}^{n_j}(x_{ij}-\bar{\bar{x}})^2
+\end{array}
+\]
+
+
+<!---------------------------------->
+<!---------------------------------->
+
+<h2 id="picture">圖形</h2>
+
+\[
+\begin{array}{cccc}
+ & & & \text{SST}\\
+\text{SSE} & \downarrow & \searrow & \\
+ & & \longrightarrow \\
+ & & \text{SSTR}
+\end{array}
+\]
+
+
+<!---------------------------------->
+<!---------------------------------->
+
+<h2 id="table">表格</h2>
+
+<table border="1">
+<tr><th>source of variation</th><th>sum of squares</th><th>degrees of freedom</th><th>mean square</th><th>\(F\)</th></tr>
+<tr><td>Treatments</td><td>\(\text{SSTR}\)</td><td>\(k-1\)</td><td>\(\text{MSTR}=\frac{\text{SSTR}}{k-1}\)</td><td>\(F=\frac{\text{MSTR}}{\text{MSE}}\)</td></tr>
+<tr><td>Error</td><td>\(\text{SSE}\)</td><td>\(n-k\)</td><td>\(\text{MSE}=\frac{\text{SSE}}{n-k}\)</td><td></td></tr>
+<tr><td>Total</td><td>\(\text{SST}\)</td><td>\(n-1\)</td><td></td><td></td></tr>
+</table>
+
+
+<p>與Simple Linear Regression \(\text{E}(y)=\beta_0+\beta_1 x\)比較一下</p>
+
+
+<table border="1">
+<tr><th>source of variation</th><th>sum of squares</th><th>degrees of freedom</th><th>mean square</th><th>\(F\)</th></tr>
+<tr><td>Regression</td><td>\(\text{SSR}\)</td><td>\(1\)</td><td>\(\text{MSR}=\frac{\text{SSR}}{1}\)</td><td>\(F=\frac{\text{MSR}}{\text{MSE}}\)</td></tr>
+<tr><td>Error</td><td>\(\text{SSE}\)</td><td>\(n-2\)</td><td>\(\text{MSE}=\frac{\text{SSE}}{n-2}\)</td><td></td></tr>
+<tr><td>Total</td><td>\(\text{SST}\)</td><td>\(n-1\)</td><td></td><td></td></tr>
+</table>
+
+<p>Multiple Regression \(\text{E}(y)=\beta_0+\beta_1 x_1+\beta_2 x_2+\cdots+\beta_p x_p.\)</p>
+
+
+<table border="1">
+<tr><th>source of variation</th><th>sum of squares</th><th>degrees of freedom</th><th>mean square</th><th>\(F\)</th></tr>
+<tr><td>Regression</td><td>\(\text{SSR}\)</td><td>\(p\)</td><td>\(\text{MSR}=\frac{\text{SSR}}{p}\)</td><td>\(F=\frac{\text{MSR}}{\text{MSE}}\)</td></tr>
+<tr><td>Error</td><td>\(\text{SSE}\)</td><td>\(n-p-1\)</td><td>\(\text{MSE}=\frac{\text{SSE}}{n-p-1}\)</td><td></td></tr>
+<tr><td>Total</td><td>\(\text{SST}\)</td><td>\(n-1\)</td><td></td><td></td></tr>
+</table>
+
+
+
+
+
+
+
+
+</body>
+</html>
+

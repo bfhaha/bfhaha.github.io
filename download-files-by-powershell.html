@@ -1,0 +1,101 @@
+﻿<html>
+
+<head>
+
+<title>用PowerShell批次下載網頁上的檔案</title>
+<meta name="description" content="用PowerShell批次下載網頁上的檔案">
+
+<style>
+pre, code {background-color: lightgray;}
+</style>
+
+</head>
+
+<body>
+
+<h1>用PowerShell批次下載網頁上的檔案（檔名有規律或是沒規律）</h1>
+  
+<h2>Section 1. 檔名有規律</h2>
+
+<p>本範例是想要自動下載某個網站中的所有檔案，檔名具有規律（例如編號遞增），避免一個一個點選下載的繁瑣作業。
+</p>
+
+<p>本專案是參考這篇<a href="https://kheresy.wordpress.com/2016/04/18/downlod-web-files-by-powershell/">批次下載網站的檔案</a>的教學，並做了一些修改。
+</p>
+
+<p>在這裡的範例，下載的檔案格式如下（注意其中id的遞增變化)。這個範例的檔案已經不存在了，請改為自己要下載的檔案網址。
+</p>
+
+<pre>
+http://www.toefl.com/download?id=1&type=lyric
+http://www.toefl.com/download?id=2&type=lyric
+http://www.toefl.com/download?id=3&type=lyric
+</pre>
+
+<p>開啟Windows PowerShell ISE（不是Windows PowerShell），修改下面的程式碼並輸入，存檔執行。
+</p>
+
+<pre>
+#將網域網址儲存在字串$SourceUrl中
+$SourceUrl = "http://www.toefl.com/download?id="
+$suffix = "&type=lyric"
+
+#迴圈下載
+#Invoke-WebRequest必須要Windows 8或是PowerShell 3才有支援
+for($Idx = 1; $Idx -le 10; ++$Idx)
+{
+    Write-Host ($SourceUrl + $Idx + $suffix)
+    #也可以寫 $SourceUrl + $Idx + "xxx.mp3"
+    Invoke-WebRequest ($SourceUrl + $Idx + $suffix) -OutFile "$Idx.txt"
+    #也可以寫 -OutFile "xxx-$Idx-xxx.mp3"
+    Sleep 1
+}
+</pre>
+
+<p><font color="red">預設會下載到C:\Users\使用者名稱資料夾中</font>
+</p>
+
+<p>如果出現 無法辨識 'xxx.ps1' 辭彙是否為Cmdlet、函數、指令檔或可執行程式的名稱。...（通常第一次執行時會如此，）則必須用系統管理員的身分（按右鍵），開啟Windows PowerShell ISE，輸入Set-ExecutionPolicy RemoteSigned執行，並且同意執行原則變更。
+</p>
+
+<p>其中有用到Invoke-WebRequest指令，該指令在Powershell 3才有支援，如果是windows 7預設不是Powershell 3，windows 8才是，<font color="red">所以用Windows 7的話要另外下載Powershell 3</font>。（微軟現在已經沒有提供獨立的PowerShell 3安裝檔，而是將其打包在更新檔當中，有點強迫更新。）
+</p>
+
+<h2>Section 2. 檔名沒有規律</h2>
+  
+
+<p>如果是檔名沒有規律的檔案，（不過前面的網域都是一樣的，）第一步要先取得下載檔案的網址，可以先把網頁上的檔案列表複製下來貼到Excel中，再參考<a href="http://tonysnote.blogspot.com/2010/03/excel.html">這篇教學</a>，將下載連結的網址解析出來。（或是google搜尋"excel取得超連結網址"）
+</p>
+
+<p>接著在Excel中利用一些截取字串的函數，例如mid(...)來取得檔案名稱。另外，如果在Excel中想要合併某個字串及儲存格的內容，可以用concatenate，要合併的字串要包含在一對雙引號中，如果字串中有包含雙引號，要用CHAR(34)。<font color="gray">（另一個方法是用兩個雙引號，不過這個方法很容易看到眼花。）</font>例如A2儲存格的內容為Song，那麼公式=concatenate(CHAR(34), A2, CHAR(34))的結果就會是"Song"。<font color="gray">（或是=concatenate("""", A2, """")。）</font>
+</p>
+
+<pre>
+#檔案名稱儲存在一個名為$FileName的陣列裡
+[String[]]$FileName=
+"a_dear_john_letter.wma",
+"A_Whiter_Shade_Of Pale.wma",
+"Across_the_universe.wma"
+#如果這些檔名含有/符號，那在目標資料夾就必須有對應的資料夾，例如abc/xyz.txt，就必須要有abc這個資料夾。
+#另一個解決辦法是，如果含有符號/，可以在-OutFile $FileName[$Idx]後面加substring(n)
+#例如-OutFile $FileName[$Idx].substring(5)，這個方法可把前5個字元刪除，藉此來把/符號刪除。
+
+#將網域網址儲存在字串$SourceUrl中
+$SourceUrl = "http://203.64.159.67/~english/studio/wmaa/"
+
+#迴圈下載
+#Invoke-WebRequest必須要Windows 8或是PowerShell 3才有支援
+for($Idx = 0; $Idx -le $FileName.Length; ++$Idx)
+{
+    Write-Host ($SourceUrl + $FileName[$Idx])
+    Invoke-WebRequest ($SourceUrl + $FileName[$Idx]) -OutFile $FileName[$Idx]
+    Sleep 3
+}
+
+#如果想知道下載的檔案是下載到哪裡，
+#打開命令提示字元（開始＼執行＼cmd），
+#預設的目錄就是下載檔案的位置。
+</pre>
+
+</body>
+</html>

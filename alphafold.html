@@ -1,0 +1,69 @@
+﻿<html>
+
+<head>
+
+<title>AlphaFold簡化版教學</title>
+<meta name="description" content="AlphaFold簡化版教學">
+
+</head>
+
+<body>
+
+<h1>AlphaFold簡化版教學</h1>
+
+<p><a href="https://deepmind.com/research/case-studies/alphafold">AlphaFold</a>是Google DeepMind出的預測胺基酸如何組合出蛋白質（<a href="https://en.wikipedia.org/wiki/Protein_folding">Protein Folding Problem</a>）的演算法，官方原始碼參考<a href="https://github.com/deepmind/alphafold/">GitHub這裡</a>，因為這個演算法對硬體的要求很高，所以原始碼的介紹中有提供一個可以在Google Colab執行的<a href="https://colab.research.google.com/github/deepmind/alphafold/blob/main/notebooks/AlphaFold.ipynb">簡化版本</a>，本文在介紹這個簡化版本的執行。
+</p>
+
+<p>其實也很簡單，就是依序執行這個Google Colab notebook中的各個指令就好，下面只是提供一些額外的說明。
+</p>
+
+<ul>
+
+<!---------------------------------->
+<li>首先，這個notebook是公開版本，不允許私人編輯，所以執行的話會出現下面的訊息，我們按取消，並點選[Copy to Drive]，複製到自己的Google Drive來執行。</li>
+
+<img width="70%" src="img/alphafold/alphafold_01.jpg">
+
+<!---------------------------------->
+<li>再來就是安裝及下載，點選執行按鈕即可，下面會顯示進度。</li>
+
+<img width="70%" src="img/alphafold/alphafold_02.jpg">
+
+<!---------------------------------->
+<li>接著要輸入protein的amino acid sequence，原本已經有提供一個範例了，但我們改用Campbell Biology課本中的範例（Figure 5.18），這個protein叫做transthyretin。</li>
+
+<pre>
+GPTGTGESKC PLMVKVLDAV RGSPAINVAV HVFRKAADDT WEPFASGKTS ESGELHGLTT EEEFVEGIYK VEIDTKSYWK ALGISPFHEH AEVVFTANDS GPRRYTIAAL LSPYSYSTTA VVTNPKE
+</pre>
+
+<img width="70%" src="img/alphafold/alphafold_03.jpg">
+
+<!---------------------------------->
+<li>如果讀者想要知道其他protein的amino acid sequence，我推薦<a href="https://www.uniprot.org/">UniProt</a>這個網站，輸入protein的名稱（例如collagen或是hemoglobin），找到想要查詢的protein（同名的protein可能有好幾個），進到protein的資訊頁後即可在[Sequences]找到。左邊可以篩選顯示的資訊，否則太多資訊很雜亂。</li>
+
+<img width="70%" src="img/alphafold/alphafold_04.jpg">
+
+<!---------------------------------->
+<li>[Structure]也會顯示protein的結構，可惜不是彩色的。</li>
+
+<img width="70%" src="img/alphafold/alphafold_05.jpg">
+
+<!---------------------------------->
+<li>注意到，課本給的amino acid sequence有127個amino acid，而UniProt給出的則有147個amino acid，最前面多出了20個amino acid，這20個amino acid是truncation signal(127 a.a. after the truncation of signal sequence from 147 a.a.)，參考<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6628571/">這篇論文</a>，在UniProt的[PTM / Processing]也有簡要的說明。<font color="red">注意，課本給的amino acid sequence只構成一個polypeptide，而transthyretin則是由四個一樣的這個polypeptide所組成。</font></li>
+
+<img width="70%" src="img/alphafold/alphafold_06.jpg">
+
+<!---------------------------------->
+<li>回到Google Colab，接著搜尋資料庫及預測，這要花一點時間，筆者的範例中，這兩個步驟花了一個小時才完成。</li>
+
+<img width="70%" src="img/alphafold/alphafold_07.jpg">
+
+<!---------------------------------->
+<li>執行完就可以看到預測的結果，在模型上用左鍵拖曳就可以旋轉，滾輪可以放大或縮小模型。</li>
+
+<img width="70%" src="img/alphafold/alphafold_08.jpg">
+
+</ul>
+
+</body>
+</html>

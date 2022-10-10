@@ -1,0 +1,1438 @@
+﻿<html>
+<head>
+
+<title>常用機率分布</title>
+<meta name="description" content="常用的機率分布">
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+
+<style>
+h2 {color:red;}
+h3 {color:blue;}
+</style>
+
+</head>
+<body>
+
+<h1>Common Distributions</h1>
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Table of Common Distributions</h2>
+
+<table border="1">
+<tbody>
+<tr style="background:lightgray">
+<td>Discrete</td>
+<td>Explanation</td>
+<td>P.M.F.</td>
+<td>Mean \(\mu\)</td>
+<td>Variance \(\sigma^2\)</td>
+<td>M.G.F.</td>
+</tr>
+<tr>
+<td>Uniform</td>
+<td>\(n\) 顆球中取到 \(x\) 號的機率</td>
+<td>\(f(x)=\frac{1}{n}\), <br />\(x=1, 2, ..., n\)</td>
+<td>\(\mu=\frac{n+1}{2}\)</td>
+<td>\(\sigma^2=\frac{(n+1)(n-1)}{12}\)</td>
+<td>\(M(t)=\frac{1}{n}\sum_{i=1}^{n}e^{it}\)</td>
+</tr>
+<tr>
+<td>Bernoulli<br />(Binomial \(n=1\))</td>
+<td>投 \(1\) 次硬幣，出現 \(x\) 次正面的機率</td>
+<td>\(f(x)=p^x(1-p)^{1-x}\), <br />\(x=0, 1\)</td>
+<td>\(\mu=p\)</td>
+<td>\(\sigma^2=p(1-p)\)</td>
+<td>\(M(t)=1-p+pe^t\)</td>
+</tr>
+<tr>
+<td>Binomial</td>
+<td>投 \(n\) 次硬幣，出現 \(x\) 次正面的機率</td>
+<td>\(f(x)=\binom{n}{x}p^x(1-p)^{n-x}\), <br />\(x=0, 1, 2, ..., n\)</td>
+<td>\(\mu=np\)</td>
+<td>\(\sigma^2=np(1-p)\)</td>
+<td>\(M(t)=(1-p+pe^t)^n\)</td>
+</tr>
+<tr>
+<td>Geometric<br />(Negative Binomial \(r=1\))</td>
+<td>總共 \(x\) 次試驗，前 \(x-1\) 次失敗，第 \(x\) 次是成功的機率</td>
+<td>\(f(x)=(1-p)^{x-1}p\), <br />\(x=1, 2, 3, ...\)</td>
+<td>\(\mu=\frac{1}{p}\)</td>
+<td>\(\sigma^2=\frac{1-p}{p^2}\)</td>
+<td>\(M(t)=\frac{pe^t}{1-e^t+pe^t}\)</td>
+</tr>
+<tr>
+<td>Negative Binomial<br />\(r=1, 2, 3, ...\)</td>
+<td>總共 \(x\) 次試驗，前 \(x-1\) 次中有 \(r-1\) 次成功，\(x-r\) 次失敗，第 \(x\) 次是成功的機率。</td>
+<td>\(f(x)=\binom{x-1}{r-1}p^r (1-p)^{x-r}\),<br />\(x=r, r+1, r+2, ...\)</td>
+<td>\(\mu=\frac{r}{p}\)</td>
+<td>\(\sigma^2=\frac{r(1-p)}{p^2}\)</td>
+<td>\(M(t)=\left(\frac{pe^t}{1-e^t+pe^t}\right)^r\)</td>
+</tr>
+<tr>
+<td>Hypergeometric</td>
+<td>\(N\) 顆球中，\(R\) 顆紅，\(B\) 顆藍，取 \(n\) 顆，得到 \(x\) 顆紅，\(n-x\) 顆藍的機率。</td>
+<td>\(f(x)=\frac{\binom{R}{x}\binom{B}{n-x}}{\binom{N}{n}}\),<br />\(x\leq R, n-x\leq B\)</td>
+<td>\(\mu=n\cdot \frac{R}{N}\)</td>
+<td>\(\sigma^2=n\cdot \frac{R}{N}\cdot \frac{B}{N}\cdot \frac{N-n}{N-1}\)</td>
+<td>太複雜了</td>
+</tr>
+<tr>
+<td>Poisson</td>
+<td>在單位時間中，有 \(x\) 次電話來電的機率。\(\lambda\) 為單位時間中，平均來電的次數。\(\lambda&gt;0\)</td>
+<td>\(f(x)=\frac{\lambda^x e^{-\lambda}}{x!}\), <br />\(x=0, 1, 2, ...\)</td>
+<td>\(\mu=\lambda\)</td>
+<td>\(\sigma^2=\lambda\)</td>
+<td>\(M(t)=e^{-\lambda(1-e^t)}\)</td>
+</tr>
+<tr style="background:lightgray">
+<td>Continuous</td>
+<td>Explanation</td>
+<td>P.D.F.</td>
+<td>Mean&nbsp;</td>
+<td>Variance</td>
+<td>M.G.F.</td>
+</tr>
+<tr>
+<td>Uniform</td>
+<td>在 \([a, b]\) 區間選一點的機率，直覺上選一點的機率應該是 \(0\)，但其實是由C.D.F. 微分推過來的。</td>
+<td>\(f(x)=\frac{1}{b-a}\), <br />\(a\leq x\leq b\)</td>
+<td>\(\mu=\frac{a+b}{2}\)</td>
+<td>\(\sigma^2=\frac{(b-a)^2}{12}\)</td>
+<td>\(M(t)=\frac{e^{tb}-e^{ta}}{tb-ta}\)</td>
+</tr>
+<tr>
+<td>Gamma</td>
+<td>第 \(\alpha\) 次來電的等待時間為 \(x\) 的機率。\(\lambda\) 為單位時間中，平均來電的次數。<br />\(\theta=\frac{1}{\lambda}\)，\(\theta\) 為第1次來電前的平均等待時間。</td>
+<td>\(f(x)=\frac{1}{\Gamma(\alpha)\theta^{\alpha}}x^{\alpha-1}e^{-x/\theta}\), <br />\(0\leq x&lt;\infty\)</td>
+<td>\(\mu=\alpha \theta\)&nbsp;</td>
+<td>\(\sigma^2=\alpha\theta^2\)</td>
+<td>\(M(t)=\frac{1}{(1-\theta t)^{\alpha}}\)</td>
+</tr>
+<tr>
+<td>Exponential<br />(Gamma, \(\alpha=1\))</td>
+<td>第 \(1\) 次來電的等待時間為 \(x\) 的機率。\(\lambda\) 為單位時間中，平均來電的次數。<br />\(\theta=\frac{1}{\lambda}\)，\(\theta\) 為第1次來電前的平均等待時間。</td>
+<td>\(f(x)=\frac{1}{\theta}e^{-x/\theta}\), <br />\(0\leq x&lt;\infty\)</td>
+<td>\(\mu=\theta\)&nbsp;</td>
+<td>\(\sigma^2=\theta^2\)</td>
+<td>\(M(t)=\frac{1}{1-\theta t}\)&nbsp;</td>
+</tr>
+<tr>
+<td>Chi-Square<br />(Gamma, \(\theta=2, \alpha=\frac{r}{2}\))<br />\(r=1, 2, ...\)</td>
+<td>&nbsp;</td>
+<td>\(f(x)=\frac{1}{\Gamma(r/2)2^{r/2}}x^{r/2-1}e^{-x/2}\), <br />\(0\leq x&lt;\infty\)</td>
+<td>\(\mu=r\)&nbsp;</td>
+<td>\(\sigma^2=2r\)</td>
+<td>\(M(t)=\frac{1}{(1-2t)^{r/2}}\)</td>
+</tr>
+<tr>
+<td>Normal</td>
+<td>&nbsp;</td>
+<td>\(f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}\), <br />\(-\infty&lt;x&lt;\infty\)</td>
+<td>\(\mu=\mu\)&nbsp;</td>
+<td>\(\sigma^2=\sigma^2\)</td>
+<td>\(M(t)=e^{\mu t+\sigma^2 t^2/2}\)&nbsp;</td>
+</tr>
+<tr>
+<td>Beta</td>
+<td>&nbsp;</td>
+<td>\(f(x)=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha-1}(1-x)^{\beta-1}\), <br />\(0\leq x \leq 1\)</td>
+<td>\(\mu=\frac{\alpha}{\alpha+\beta}\)</td>
+<td>\(\sigma^2=\frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}\)</td>
+<td>太複雜了</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Index of Proofs</h2>
+
+
+
+
+
+<table border="1">
+<tbody>
+<tr style="background:lightgray">
+<td>Discrete</td>
+<td>&sum;p.m.f.=1</td>
+<td>Mean \(\mu\)</td>
+<td>Variance \(\sigma^2\)</td>
+<td>M.G.F.</td>
+</tr>
+<tr>
+<td><a href="#disUniMot">Uniform</a></td>
+<td><a href="#disUniSum">直接證</a></td>
+<td><a href="#disUniMean">直接證</a></td>
+<td><a href="#disUniVar">直接證</a></td>
+<td><a href="#disUniMgf">直接證</a></td>
+</tr>
+<tr>
+<td><a href="#berMot">Bernoulli</a></td>
+<td><a href="#berSum">直接證</a></td>
+<td><a href="#berMean">直接證</a></td>
+<td><a href="#berVar">直接證</a></td>
+<td>&darr;</td>
+</tr>
+<tr>
+<td><a href="#binMot">Binomial</a></td>
+<td><a href="#binSum">直接證</a></td>
+<td><a href="#binMean">用m.g.f.推</a></td>
+<td><a href="#binVar">用m.g.f.推</a></td>
+<td><a href="#binMgf">直接證</a></td>
+</tr>
+<tr>
+<td><a href="#geoMot">Geometric</a></td>
+<td><a href="#geoSum">直接證</a></td>
+<td><a href="#geoMean">直接證</a></td>
+<td><a href="#geoVar">直接證</a></td>
+<td>&darr;</td>
+</tr>
+<tr>
+<td><a href="#negMot">Negative Binomial</a></td>
+<td><a href="#negSum">直接證</a></td>
+<td><a href="#negMean">用m.g.f.推</a></td>
+<td><a href="#negVar">用m.g.f.推</a></td>
+<td><a href="#negMgf">直接證</a></td>
+</tr>
+<tr>
+<td><a href="#hypMot">Hypergeometric</a></td>
+<td><a href="#hypSum">直接證</a></td>
+<td><a href="#hypMean">直接證</a></td>
+<td><a href="#hypVar">直接證</a></td>
+<td>太複雜了</td>
+</tr>
+<tr>
+<td><a href="#poiMot">Poisson</a></td>
+<td><a href="#poiSum">直接證</a></td>
+<td><a href="#poiMean">用m.g.f.推</a></td>
+<td><a href="#poiVar">用m.g.f.推</a></td>
+<td><a href="#poiMgf">直接證</a></td>
+</tr>
+<tr style="background:lightgray">
+<td>Continuous</td>
+<td>&int;p.d.f.=1</td>
+<td>Mean \(\mu\)</td>
+<td>Variance \(\sigma^2\)</td>
+<td>M.G.F.</td>
+</tr>
+<tr>
+<td><a href="#conUniMot">Uniform</a></td>
+<td><a href="#conUniSum">直接證</a></td>
+<td><a href="#conUniMean">直接證</a></td>
+<td><a href="#conUniVar">直接證</a></td>
+<td><a href="#conUniMgf">直接證</a></td>
+</tr>
+<tr>
+<td><a href="#gamMot">Gamma</a></td>
+<td><a href="#gamSum">直接證</a></td>
+<td><a href="#gamMean">用m.g.f.推</a></td>
+<td><a href="#gamVar">用m.g.f.推</a></td>
+<td><a href="#gamMgf">直接證</a></td>
+</tr>
+<tr>
+<td><a href="#expMot">Exponential</a></td>
+<td>&uarr;</td>
+<td>&uarr;</td>
+<td>&uarr;</td>
+<td>&uarr;</td>
+</tr>
+<tr>
+<td><a href="#chiMot">Chi-Square</a></td>
+<td>&uarr;</td>
+<td>&uarr;</td>
+<td>&uarr;</td>
+<td>&uarr;</td>
+</tr>
+<tr>
+<td><a href="#norMot">Normal</a></td>
+<td><a href="#norSum">直接證</a></td>
+<td><a href="#norMean">用m.g.f.推</a></td>
+<td><a href="#norVar">用m.g.f.推</a></td>
+<td><a href="#norMgf">直接證</a></td>
+</tr>
+<tr>
+<td><a href="#betaMot">Beta</a></td>
+<td><a href="#betaSum">直接證</a></td>
+<td><a href="#betaMean">直接證</a></td>
+<td><a href="#betaVar">直接證</a></td>
+<td>太複雜了</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Discrete Uniform</h2>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="disUniMot">Motivation</h2>
+
+<p>
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="disUniSum">&sum;p.m.f.=1</h2>
+
+<p>\(\sum_{x=1}^{n}f(x)=\sum_{x=1}^{n}\frac{1}{n}=\frac{1}{n}\cdot n=1\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="disUniMean">Expected Value</h2>
+
+<p>\(\mu=E(X)=\sum_{x=1}^{n}xf(x)=\sum_{x=1}^{n}x\frac{1}{n}=\frac{1}{n}\frac{(1+n)n}{2}=\frac{n+1}{2}\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="disUniVar">Variance</h2>
+
+<p>\(E(X^2)=\sum_{x=1}^{n}x^2 f(x)=\sum_{x=1}^{n}x^2\frac{1}{n}=\frac{1}{n}\frac{n(n+1)(2n+1)}{6}=\frac{(n+1)(2n+1)}{6}\).
+</p>
+
+<p>\(\sigma^2=E(X^2)-E(X)^2=\frac{(n+1)(2n+1)}{6}-\left(\frac{n+1}{2}\right)^2=\frac{(n+1)(n-1)}{12}\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="disUniMgf">Moment Generating Function</h2>
+
+<p>\(M(t)=E(e^{tX})=\sum_{x=1}^{n}e^{tx}f(x)=\sum_{x=1}^{n}e^{tx}\frac{1}{n}=\frac{1}{n}\sum_{i=1}^{n}e^{it}\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Bernoulli</h2>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="berMot">Motivation</h2>
+
+<p>
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="berSum">&sum;p.m.f.=1</h2>
+
+<p>\(\sum_{x=0}^{1}f(x)=\sum_{x=0}^{1}p^x(1-p)^{1-x}=p^0(1-p)^1+p^1(1-p)^0=(1-p)+p=1\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="berMean">Expected Value</h2>
+
+<p>\(\mu=E(X)=\sum_{x=0}^{1}xf(x)=\sum_{x=0}^{1}xp^x(1-p)^{1-x}=0\cdot p^0(1-p)^1+1\cdot p^1(1-p)^0=p\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="berVar">Variance</h2>
+
+<p>\(E(X^2)=\sum_{x=0}^{1}x^2 f(x)=\sum_{x=0}^{1}x^2 p^x(1-p)^{1-x}=0^2\cdot p^0(1-p)^1+1^2\cdot p^1(1-p)^0=p\).
+</p>
+
+<p>\(\sigma^2=E(X^2)-E(X)^2=p-p^2=p(1-p)\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="berMgf">Moment Generating Function</h2>
+
+<p>A special case of the m.g.f. of the binomial distribution.  
+</p>
+
+<!--
+<p>\(M(t)=E(e^{tX})=\sum_{x=0}^{1}e^{tx}f(x)=\sum_{x=0}^{1}e^{tx}p^x(1-p)^{1-x}=e^0\cdot p^0(1-p)^1+e^t\cdot p^1(1-p)^0=(1-p)+e^t p=1-p+pe^t\).
+</p>
+-->
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Binomial</h2>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="binMot">Motivation</h2>
+
+<p>會叫binomial的原因是因為公式中的binomial coefficient \(\binom{n}{x}\)。
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="binSum">&sum;p.m.f.=1</h2>
+
+<p>\(\sum_{x=0}^{n}f(x)=\sum_{x=0}^{n} \binom{n}{x}p^x(1-p)^{n-x}=\binom{n}{0}p^0(1-p)^{n}+\binom{n}{1}p^1(1-p)^{n-1}+\binom{n}{2}p^2(1-p)^{n-2}+\cdots+\binom{n}{n}p^n(1-p)^{0}=[p+(1-p)]^n=1\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="binMean">Expected Value</h2>
+
+<p>\(M'(t)=n(1-p+pe^t)^{n-1}pe^t\).
+</p>
+
+<p>\(\mu=E(X)=M'(0)=np\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="binVar">Variance</h2>
+
+<p>\(M''(t)=n(n-1)(1-p+pe^t)^{n-2}(pe^t)^2+n(1-p+pe^t)^{n-1}pe^t\).
+</p>
+
+<p>\(\sigma^2=E(X^2)-E(X)^2=M''(0)-\mu^2=n(n-1)p^2+np-n^2p^2=np(1-p)\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="binMgf">Moment Generating Function</h2>
+
+<p>\(M(t)=E(e^{tX})=\sum_{x=0}^{n}e^{tx}f(x)=\sum_{x=0}^{n}e^{tx}\binom{n}{x}p^x(1-p)^{n-x}=\sum_{x=0}^{n}\binom{n}{x}(pe^t)^x(1-p)^{n-x}=(1-p+pe^t)^n\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Geometric</h2>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="geoMot">Motivation</h2>
+
+<p>會叫Geometric的原因是因為p.m.f. \(f(x)\) 在 \(x=1, 2, ...\) 的時候是一個geometric sequence \(p, (1-p)p, (1-p)^2 p, ...\)。
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="geoSum">&sum;p.m.f.=1</h2>
+
+<p>\(\sum_{x=1}^{\infty}f(x)=\sum_{x=1}^{\infty}(1-p)^{x-1}p=p[1+(1-p)+(1-p)^2+\cdots]=p\cdot \frac{1}{1-(1-p)}=1\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="geoMean">Expected Value</h2>
+
+<p>\(\mu=E(X)=\sum_{x=1}^{\infty}xf(x)=\sum_{x=1}^{\infty}x(1-p)^{x-1}p\).
+
+<p>
+\[
+\begin{array}{rlll}
+\mu & = & p[1\cdot (1-p)^0+ & 2\cdot (1-p)^1+3\cdot (1-p)^2+\cdots ] \\
+(1-p)\mu & = & p[ & 1\cdot (1-p)^1+2\cdot (1-p)^2+\cdots ]
+\end{array}
+\]
+</p>
+
+<p>上面兩式相減，
+\[
+p\mu=\mu-(1-p)\mu=p[1+(1-p)+(1-p)^2+\cdots]=1
+\]
+</p>
+
+<p>所以 \(\mu=\frac{1}{p}\)。
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="geoVar">Variance</h2>
+
+<p>\(E(X^2)=\sum_{x=1}^{\infty}x^2 f(x)=\sum_{x=1}^{\infty}x^2(1-p)^{x-1}p\).
+</p>
+
+<p>
+\[
+\begin{array}{rllllllll}
+E(X^2) & = & p[1^2\cdot (1-p)^0 & + & 2^2\cdot (1-p)^1 & + & 3^2\cdot (1-p)^2 & + & \cdots ] \\
+(1-p)E(X^2) & = & p[ & & 1^2\cdot (1-p)^1 & + & 2^2\cdot (1-p)^2 & + & \cdots ] 
+\end{array}
+\]
+上面兩式相減，其差再乘以 \((1-p)\)。
+\[
+\begin{array}{rllllllll}
+pE(X^2) & = & p[1\cdot (1-p)^0 & + & 3\cdot (1-p)^1 & + & 5\cdot (1-p)^2 & + & \cdots] \\
+(1-p)pE(X^2) & = & p[ & & 1\cdot (1-p)^1 & + & 3\cdot (1-p)^2 & + & \cdots ] \\
+\end{array}
+\]
+</p>
+
+<p>再次將上面兩式相減。
+\[
+p^2 E(X^2)=p+2p(1-p)[1+(1-p)+(1-p)^2+\cdots]=2-p.
+\]
+</p>
+
+<p>\(E(X^2)=\frac{2-p}{p^2}\).
+</p>
+
+<p>\(\sigma^2=E(X^2)-E(X)^2=\frac{2-p}{p^2}-\frac{1}{p^2}=\frac{1-p}{p^2}\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="geoMgf">Moment Generating Function</h2>
+
+<p>A special case of the m.g.f. of the negative binomial distribution. 
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Negative Binomial</h2>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="negMot">Motivation</h2>
+
+<p>會叫負二項式分布是因為用到了負指數的二項式定理。
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="negSum">&sum;p.m.f.=1</h2>
+
+<p>Recall that
+\[
+\begin{array}{llllll}
+f(y) & = & (1-y)^{-r}, & f(0) & = & 1, \\
+f'(y) & = & -r(1-y)^{-r-1}(-1), & f'(0) & = & r, \\
+f''(y) & = & -r(-r-1)(1-y)^{-r-2}, & f''(0) & = & r(r+1), \\
+f'''(y) & = & -r(-r-1)(-r-2)(1-y)^{-r-3}(-1), & f'''(0) & = & r(r+1)(r+2), \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots
+\end{array}
+\]
+</p>
+
+<p>Therefore, 
+\[
+\begin{array}{lll}
+f(y)=(1-y)^{-r} 
+& = & \frac{f(0)}{0!}y^0+\frac{f'(0)}{1!}y^1+\frac{f''(0)}{2!}y^2+\frac{f'''(0)}{3!}y^3+\cdots \\
+& = & 1+\sum_{k=1}^{\infty} \frac{r(r+1)(r+2)\cdots [r+(k-1)]}{k!} y^k \\
+& = & 1+\sum_{k=1}^{\infty} \frac{(r-1)!r(r+1)(r+2)\cdots [r+(k-1)]}{k!(r-1)!} y^k \\
+& = & \sum_{k=0}^{\infty} \frac{[r+(k-1)]!}{k!(r-1)!} y^k \\
+& = & \sum_{k=0}^{\infty} \binom{r+k-1}{r-1} y^k.
+\end{array}
+\]
+Let \(x=r+k\). Then 
+\[
+f(y)=(1-y)^{-r}=\sum_{x=r}^{\infty} \binom{x-1}{r-1}y^{x-r}\tag{*}
+\]
+</p>
+
+<p>Substitute \(y\) by \(1-p\) in (*), we have
+\[
+p^{-r}=\sum_{x=r}^{\infty} \binom{x-1}{r-1}(1-p)^{x-r}
+\]
+</p>
+
+<p>Then
+\[
+\sum\text{p.m.f.}=\sum_{x=r}^{\infty} \binom{x-1}{r-1}p^r(1-p)^{x-r}
+=p^r\sum_{x=r}^{\infty} \binom{x-1}{r-1}(1-p)^{x-r}
+=p^r\cdot p^{-r}
+=1
+\]
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="negMean">Expected Value</h2>
+
+<p>\(M'(t)=r\left(\frac{pe^t}{1-e^t+pe^t}\right)^{r-1}\frac{(1-e^t+pe^t)pe^t-pe^t(-e^t+pe^t)}{(1-e^t+pe^t)^2}=r\frac{(pe^t)^r}{(1-e^t+pe^t)^{r+1}}\).
+</p>
+
+<p>\(\mu=E(X)=M'(0)=\frac{r}{p}\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="negVar">Variance</h2>
+
+<p>\(M''(t)=r\cdot \frac{(1-e^t+pe^t)^{r+1}r(pe^t)^{r-1}\cdot pe^t-(pe^t)^r(r+1)(1-e^t+pe^t)^r(-e^t+pe^t)}{(1-e^t+pe^t)^{2r+2}}=r\cdot (pe^t)^r\frac{(1-e^t+pe^t)r-(r+1)(-e^t+pe^t)}{(1-e^t+pe^t)^{r+2}}\).
+</p>
+
+<p>\(M''(0)=rp^r\frac{pr-(r+1)(-1+p)}{p^{r+2}}=r\cdot\frac{r+1-p}{p^2}\).
+</p>
+
+<p>\(\sigma^2=E(X^2)-E(X)^2=M''(0)-\mu^2=r\cdot \frac{r+1-p}{p^2}-\frac{r^2}{p^2}=\frac{r(1-p)}{p^2}\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="negMgf">Moment Generating Function</h2>
+
+<p>Substitute \(y\) by \((1-p)e^t\) in (*), we have
+\[
+[1-(1-p)e^t]^{-r}=\sum_{x=r}^{\infty} \binom{x-1}{r-1}[(1-p)e^t]^{x-r}
+\]
+</p>
+
+<p>Then
+\[
+M(t)=E(e^{tX})=\sum_{x=r}^{\infty} e^{tx}\binom{x-1}{r-1}p^r(1-p)^{x-r}
+=p^r(e^t)^r\sum_{x=r}^{\infty} \binom{x-1}{r-1}[(1-p)e^t]^{x-r}
+=(pe^t)^r[1-(1-p)e^t]^{-r}
+=\left(\frac{pe^t}{1-e^t+pe^t}\right)^r
+\]
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Hypergeometric</h2>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="hypMot">Motivation</h2>
+
+<p>Geometric progression中文翻成等比數列，就是後項除以前項為一個固定值的數列。我們來看hypergeometric distribution在取 \(x=0, 1, 2, ..., R\) 所形成的數列，並觀察後項除以前項，
+\[
+\frac{\binom{R}{x+1}\binom{B}{n-(x+1)}}{\binom{N}{n}}&divide;\frac{\binom{R}{x}\binom{B}{n-x}}{\binom{N}{n}}
+=\frac{R-x}{x+1}\cdot \frac{n-x}{B-n+x+1}
+\]
+<span style="color:red">雖然後項除以前項並不是一個“固定值”，但卻是一個“固定形式”的 \(x\) 的有理函數</span>。這就是我們稱其為"hyper"geometric的理由，這是從<a href="https://stats.stackexchange.com/questions/90605/">這篇文章</a>中知道的。
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="hypSum">&sum;p.m.f.=1</h2>
+
+<p>我們要用到Vandermonde's identity. 
+\[
+\binom{R+B}{n}=\sum_{k=0}^{n}\binom{R}{k}\binom{B}{n-k}
+\]
+也很好證，注意到
+\[
+\begin{array}{rcl}
+\sum_{l=0}^{R+B}\binom{R+B}{l}x^l
+&=& (1+x)^{R+B} \\
+&=& (1+x)^{R}(1+x)^{B} \\
+&=& \left(\sum_{i=0}^{R}\binom{R}{i}x^i\right)\left(\sum_{j=0}^{B}\binom{B}{j}x^j\right) \\
+&=& \sum_{l=0}^{R+B}\left(\sum_{k=0}^{l}\binom{R}{k}\binom{B}{l-k}\right)x^l.
+\end{array}
+\]
+最後，比較係數即得到我們要的等式。注意到如果 \(\binom{a}{b}\) 中的 \(b\gt a\)，我們定義 \(\binom{a}{b}=0\)。所以Vandermonde's identity中如果有 \(n-k\gt B\) 的情況，則 \(\binom{B}{n-k}=0\)，不影響原本的等式成立。
+</p>
+
+<p>我們回來討論hypergeometric distribution。注意到這個分布的定義中，有一個 \(n-x\leq B\) 的條件，也就是 \(n-B\leq x\)，我們剛剛講過，如果 \(b\gt a\)，則 \(\binom{a}{b}=0\)，所以如果 \(0\leq x\lt n-B\)，則 \(n-x\gt B\) 且 \(\binom{B}{n-x}=0\)。所以我們在“計算”這個分布時，連同 \(0\leq x\lt n-B\) 的情況都可以考慮進去，所以利用Vandermonde's identity，我們有
+\[
+\sum_{x=0}^{R} f(x)
+=\sum_{x=0}^{R}\frac{\binom{R}{x}\binom{B}{n-x}}{\binom{N}{n}}
+=\frac{\binom{N}{n}}{\binom{N}{n}}
+=1.
+\]
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="hypMean">Expected Value</h2>
+
+<p>
+\[
+\begin{array}{rcl}
+E(X)
+&=& \sum_{x=0}^{R} xf(x) \\
+&=& \sum_{x=0}^{R} x\frac{\binom{R}{x}\binom{B}{n-x}}{\binom{N}{n}} \\
+&=& \sum_{x=0}^{R} x\cdot \frac{R!}{x!(R-x)!}\cdot \frac{\binom{B}{n-x}}{\frac{N}{n}\binom{N-1}{n-1}} \\
+&=& R\frac{n}{N} \sum_{x=1}^{R} \frac{(R-1)!}{(x-1)!(R-x)!}\cdot \frac{\binom{B}{n-x}}{\binom{N-1}{n-1}} \\
+&=& R\frac{n}{N} \sum_{x=1}^{R} \frac{\binom{R-1}{x-1}\binom{B}{n-x}}{\binom{N-1}{n-1}} \\
+&=& R\frac{n}{N} \sum_{x=1}^{x=R} \frac{\binom{R-1}{x-1}\binom{B}{(n-1)-(x-1)}}{\binom{N-1}{n-1}} \\
+&\stackrel{y=x-1}{=}& R\frac{n}{N} \sum_{y=0}^{y=R-1} \frac{\binom{R-1}{y}\binom{B}{(n-1)-y}}{\binom{N-1}{n-1}} \\
+&=& n\cdot \frac{R}{N}.
+\end{array}
+\]
+注意到我們中間約分 \(x\) 的時候把第一項 \(x=0\) 拿掉。而最後一個等式再次用到了hypergeometric distribution的 \(\sum \text{p.m.f.}=1\) 這個條件。
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="hypVar">Variance</h2>
+
+<p>我們先求 \(E(X^2)\)，類似期望值的求法，所以我們直接在期望值最後面得到的式子中再加入 \(x\)。
+\[
+\begin{array}{rcl}
+E(X^2)
+&=& n\frac{R}{N} \sum_{x=1}^{x=R} x\frac{\binom{R-1}{x-1}\binom{B}{(n-1)-(x-1)}}{\binom{N-1}{n-1}} \\
+&\stackrel{x=(x-1)+1}{=}& n\frac{R}{N} \left[\sum_{x=1}^{x=R} \frac{(x-1)\binom{R-1}{x-1}\binom{B}{(n-1)-(x-1)}}{\binom{N-1}{n-1}}+\sum_{x=1}^{x=R} \frac{\binom{R-1}{x-1}\binom{B}{(n-1)-(x-1)}}{\binom{N-1}{n-1}}\right] \\
+&\stackrel{y=x-1}{=}& n\frac{R}{N} \left[\sum_{y=0}^{y=R-1} \frac{y\binom{R-1}{y}\binom{B}{(n-1)-y}}{\binom{N-1}{n-1}}+\sum_{y=0}^{y=R-1} \frac{\binom{R-1}{y}\binom{B}{(n-1)-y}}{\binom{N-1}{n-1}}\right] \\
+&=& n\frac{R}{N}\left[(n-1)\frac{R-1}{N-1}+1\right]
+\end{array}
+\]
+最後的兩個summation，第一個是用到了期望值的公式，第二個summaton是用到了 \(\sum\text{p.m.f.}=1\) 這個條件。
+</p>
+
+<p>所以，
+\[
+\begin{array}{rcl}
+\sigma^2=E(X^2)-E(X)^2
+&=& n\frac{R}{N}\left[(n-1)\frac{R-1}{N-1}+1\right]-\left(n\frac{R}{N}\right)^2 \\
+&=& n\frac{R}{N}\left[(n-1)\frac{R-1}{N-1}+1-n\frac{R}{N}\right] \\
+&=& n\frac{R}{N}\left[\frac{N(n-1)(R-1)+N(N-1)-nR(N-1)}{N(N-1)}\right] \\
+&=& n\frac{R}{N}\frac{(N-R)(N-n)}{N(N-1)} \\
+&=& n\cdot \frac{R}{N}\cdot \frac{B}{N}\cdot \frac{N-n}{N-1}.
+\end{array}
+\]
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="hypMgf">Moment Generating Function</h2>
+
+<p>太複雜了，不討論。
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Poisson</h2>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="poiMot">Motivation</h2>
+
+<p>Some experiments result in counting the number of times particular events occur at given times or with given physical objects. For example, we could count the number of cell phone calls passing through a relay tower between 9 and l0 A.M., the number of flaws in 100 feet of wire, the number of customers that arrive at a ticket window between 12 noon and 2 P.M., or the number of defects in a 100-foot roll of aluminum screen that is 2 feet wide. Counting such events can be looked upon as observations
+of a random variable associated with an approximate Poisson process, provided that the conditions in the following definition are satisfied.
+</p>
+
+<p><strong>Definition 2.6-1</strong>
+Let the number of occurrences of some event in a given continuous interval be counted. Then we have an <strong>approximate Poisson process</strong> with parameter \(\lambda\gt 0\) if the following conditions are satisfied:
+</p>
+
+<ul type="a">
+<li>The numbers of occurrences in nonoverlapping subintervals are independent.</li>
+<li>The probability of exactly one occurrence in a sufficiently short subinterval of length \(h\) is approximately \(\lambda h\).</li>
+<li>The probability of two or more occurrences in a sufficiently short subinterval is essentially zero.</li>
+</ul>
+
+<p><strong>REMARK</strong>
+We use <em>approximate</em> to modify the Poisson process since we use <em>approximately</em> in (b) and <em>essentially</em> in (c) to avoid the “little o” notation. Occasionally, we simply say “Poisson process” and drop <em>approximate</em>.
+</p>
+
+<p>Suppose that an experiment satisfies the preceding three conditions of an approximate Poisson process. Let \(X\) denote the number of occurrences in an interval of length \(1\) (where “length 1” represents one unit of the quantity under consideration). We would like to find an approximation for \(P(X=x)\), where \(x\) is a nonnegative integer. To achieve this, we partition the unit interval into \(n\) subintervals of equal length \(1/n\). If \(n\) is sufficiently large (i.e., much larger than \(x\)), we
+shall approximate the probability that there are \(x\) occurrences in this unit interval by finding the probability that exactly \(x\) of these \(n\) subintervals each has one occurrence. The probability of one occurrence in any one subinterval of length \(1/n\) is approximately \(\lambda(1/n)\), by condition (b). The probability of two or more occurrences in any one subinterval is essentially zero, by condition (c). So, for each subinterval, there is exactly one occurrence with a probability of approximately \(\lambda(1/n)\). Consider the occurrence or nonoccurrence in each subinterval as a Bernoulli trial. By condition (a), we have a sequence of \(n\) Bernoulli trials with probability \(n\) approximately
+equal to \(\lambda(1/n)\). Thus, an approximation for \(P(X=x)\) is given by the binomial probability
+\[
+\frac{n!}{x!(n-x)!}\left(\frac{\lambda}{n}\right)^x\left(1-\frac{\lambda}{n}\right)^{n-x}.
+\]
+If \(n\) increases without bound, then 
+\[
+\lim_{n\to \infty}\frac{n!}{x!(n-x)!}\left(\frac{\lambda}{n}\right)^x\left(1-\frac{\lambda}{n}\right)^{n-x}
+=\lim_{n\to \infty}\frac{n(n-1)\cdots(n-x+1)}{n^x}\frac{\lambda^x}{x!}\left(1-\frac{\lambda}{n}\right)^{n}\left(1-\frac{\lambda}{n}\right)^{-x}. 
+\]
+Now, for fixed \(x\), we have
+\[
+\begin{array}{rcl}
+\lim_{n\to \infty}\frac{n(n-1)\cdots(n-x+1)}{n^x} &=& \lim_{n\to \infty}\left[(1)\left(1-\frac{1}{n}\right)\cdots\left(1-\frac{x-1}{n}\right)\right]=1, \\
+\lim_{n\to \infty}\left(1-\frac{\lambda}{n}\right)^{n} &=& e^{-\lambda}, \\
+\lim_{n\to \infty}\left(1-\frac{\lambda}{n}\right)^{-x} &=& 1.
+\end{array}
+\]
+Thus, 
+\[
+\lim_{n\to \infty}\frac{n!}{x!(n-x)!}\left(\frac{\lambda}{n}\right)^x\left(1-\frac{\lambda}{n}\right)^{n-x}
+=\frac{\lambda^x e^{-\lambda}}{x!}
+=P(X=x).
+\]
+The distribution of probability associated with this process has a special name. We say that the random variable \(X\) has a <strong>Poisson distribution</strong> if its pmf is of the form
+\[
+f(x)=\frac{\lambda^x e^{-\lambda}}{x!}, x=0, 1, 2, ...,
+\]
+where \(\lambda\gt 0\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="poiSum">&sum;p.m.f.=1</h2>
+
+<p>Recall that the Maclaurin's series of \(e^x\) is \(\sum_{k=0}^{\infty} \frac{x^k}{k!} \). Therefore, \(\sum_{x=0}^{\infty} f(x)=\sum_{x=0}^{\infty} \frac{\lambda^x e^{-\lambda}}{x!}=e^{-\lambda}\sum_{x=0}^{\infty} \frac{\lambda^x}{x!}=e^{-\lambda}e^{\lambda}=1\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="poiMean">Expected Value</h2>
+
+<p>\(M'(t)=\lambda e^t \cdot e^{-\lambda(1-e^t)}=\lambda e^{t-\lambda+\lambda e^t}\).
+</p>
+
+<p>\(\mu=E(X)=M'(0)=\lambda\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="poiVar">Variance</h2>
+
+<p>\(M''(t)=\lambda(1+\lambda e^t)e^{t-\lambda+\lambda e^t}\).
+</p>
+
+<p>\(\sigma^2=E(X^2)-E(X)^2=M''(0)-\mu^2=\lambda(1+\lambda)-\lambda^2=\lambda\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="poiMgf">Moment Generating Function</h2>
+
+<p>\(M(t)=E(e^{tX})=\sum_{x=0}^{\infty} e^{tx}f(x)=\sum_{x=0}^{\infty} e^{tx}\frac{\lambda^x e^{-\lambda}}{x!}=e^{-\lambda}\sum_{x=0}^{\infty} \frac{(e^t\lambda)^x}{x!}=e^{-\lambda}e^{e^t\lambda}=e^{-\lambda(1-e^t)}\).
+</p>
+
+
+
+
+
+
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Continuous Uniform</h2>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="conUniMot">Motivation</h2>
+
+<p>
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="conUniSum">&int;p.d.f.=1</h2>
+
+<p>\(\int_{a}^{b} f(x)dx=\int_{a}^{b}\frac{1}{b-a}dx=\frac{b-a}{b-a}=1\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="conUniMean">Expected Value</h2>
+
+<p>\(\mu=E(X)=\int_{a}^{b} xf(x)dx=\int_{a}^{b} \frac{x}{b-a} dx=\frac{1}{b-a}\left[\frac{x^2}{2}\right]_{a}^{b}=\frac{b+a}{2}\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="conUniVar">Variance</h2>
+
+<p>\(E(X^2)=\int_{a}^{b} x^2 f(x)dx=\int_{a}^{b} \frac{x^2}{b-a}dx=\frac{1}{b-a}\left[\frac{x^3}{3}\right]_{a}^{b}=\frac{b^2+ab+a^2}{3}\).
+</p>
+
+<p>\(\sigma^2=E(X^2)-E(X)^2=\frac{b^2+ab+a^2}{3}-\left(\frac{b+a}{2}\right)^2=\frac{(b-a)^2}{12}\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="conUniMgf">Moment Generating Function</h2>
+
+<p>\(M(t)=E(e^{tX})=\int_{a}^{b} e^{tx}f(x)dx=\int_{a}^{b} e^{tx}\frac{1}{b-a}dx=\frac{1}{b-a}\cdot \frac{1}{t}\left[e^{tx}\right]_{a}^{b}=\frac{e^{tb}-e^{ta}}{tb-ta}\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Gamma</h2>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="gamMot">Motivation</h2>
+
+<p>In the (approximate) Poisson process with mean \(\lambda\), we have seen that the waiting time until the first occurrence has an exponential distribution.We now let \(W\) denote the waiting time until the \(\alpha\)th occurrence and find the distribution of \(W\).
+</p>
+
+<p>The cdf of \(W\) when \(w\geq 0\) is given by
+\[
+\begin{array}{lll}
+F(w) &=& P(W\leq w)=1-P(W\gt w) \\
+     &=& 1-P(\text{fewer than }\alpha\text{ occurrences in }[0, w]) \\
+     &=& 1-\sum_{k=0}^{\alpha-1} \frac{(\lambda w)^k e^{-\lambda w}}{k!},
+\end{array}
+\]
+since the number of occurrences in the interval \([0,w]\) has a Poisson distribution with mean \(\lambda w\). Because \(W\) is a continuous-type random variable, \(F'(w)\), if it exists, is equal to the pdf of \(W\). Also, provided that \(w\gt 0\), we have
+\[
+\begin{array}{lll}
+F'(w) &=& \lambda e^{-\lambda w}-e^{-\lambda w} \sum_{k=1}^{\alpha-1}\left[\frac{k(\lambda w)^{k-1}\lambda}{k!}-\frac{(\lambda w)^k \lambda}{k!}\right] \\
+&=& \lambda e^{-\lambda w}-e^{-\lambda w}\left[\lambda-\frac{\lambda(\lambda w)^{\alpha-1}}{(\alpha-1)!}\right] \\
+&=& \frac{\lambda(\lambda w)^{\alpha-1}}{(\alpha-1)!}e^{-\lambda w}.
+\end{array}
+\]
+If \(w\lt 0\), then \(F(w)=0\) and \(F'(w)=0\). A pdf of this form is said to be one of the gamma type, and the random variable \(W\) is said to have a <strong>gamma distribution</strong>.
+</p>
+
+<p>Before determining the characteristics of the gamma distribution, let us consider the gamma function for which the distribution is named. The <strong>gamma function</strong> is defined by
+\[
+\Gamma(t)=\int_{0}^{\infty} y^{t-1} e^{-y} dy, 0\lt t.
+\]
+This integral is positive for \(0\lt t\) because the integrand is positive. Values of it are often given in a table of integrals. If \(t\gt 1\), integration of the gamma function of \(t\) by parts yields
+\[
+\begin{array}{lll}
+\Gamma(t) &=& \left[-y^{t-1}e^{-y}\right]_{0}^{\infty}+\int_{0}^{\infty} (t-1)y^{t-2}e^{-y} dy \\
+&=& (t-1)\int_{0}^{\infty} y^{t-2}e^{-y} dy=(t-1)\Gamma(t-1).
+\end{array}
+\]
+For example, \(\Gamma(6)=5\Gamma(5)\) and \(\Gamma(3)=2\Gamma(2)=(2)(1)\Gamma(1)\). Whenever \(t=n\), a positive integer, we have, by repeated application of \(\Gamma(t)=(t-1)\Gamma(t-1)\), 
+\[
+\Gamma(n)=(n-1)\Gamma(n-1)=(n-1)(n-2)\cdots (2)(1)\Gamma(1).
+\]
+However, 
+\[
+\Gamma(1)=\int_{0}^{\infty} e^{-y} dy=1.
+\]
+Thus, when \(n\) is positive integer, we have
+\[
+\Gamma(n)=(n-1)!.
+\]
+For this reason, the gamma function is called the generalized factorial. [Incidentally, \(\Gamma(1)\) corresponds to \(0!\), and we have noted that \(\Gamma(1)=1\), which is consistent with earlier discussions.]
+</p>
+
+<p>Let us now formally define the pdf of the gamma distribution and find its
+characteristics. The random variable \(X\) has a <strong>gamma distribution</strong> if its pdf is defined by
+\[
+f(x)=\frac{1}{\Gamma(\alpha)\theta^{\alpha}}x^{\alpha-1}e^{-x/\theta}, 0\leq x\lt \infty.
+\]
+</p>
+
+<p>Hence, \(W\), the waiting time until the \(\alpha\)th occurrence in an approximate Poisson process has a gamma distribution with parameters \(\alpha\) and \(\theta=1/\lambda\). 
+</p>
+
+<p>下面是我個人慣用的記法。
+</p>
+
+<p>要先講Gamma function，關於Gamma function的嚴謹討論，可以參考Wade's <cite>An Introduction to Analysis</cite>，Section 12.6。不妨想像回到古代，在一次大學微積分期末考，教授為了考驗學生分部積分與瑕積分，連續出了好幾題類似的題目：
+\[
+\begin{array}{lllll}
+\int_{0}^{\infty} e^{-x}dx &=& 1 &=& 0! \\
+\int_{0}^{\infty} xe^{-x}dx &=& 1 &=& 1! \\
+\int_{0}^{\infty} x^2 e^{-x}dx &=& 2 &=& 2! \\
+\int_{0}^{\infty} x^3 e^{-x}dx &=& 6 &=& 3! \\
+\int_{0}^{\infty} x^4 e^{-x}dx &=& 24 &=& 4! \\
+& \vdots & & \vdots 
+\end{array}
+\]
+聰明的學生們注意到了規律，
+\[\int_{0}^{\infty} x^n e^{-x}dx=n!,\]
+其中 \(n\) 是非負整數。
+</p>
+
+<p>關鍵的地方在這，我們以前定義階乘的時候只能定義正整數 \(n\) 的階乘，也就是
+\[n!=n\times (n-1) \times (n-2)\times \cdots \times 2\times 1.\]
+（另外再定義 \(0!=1\)。）
+現在我們有了等式 \(\int_{0}^{\infty} x^n e^{-x}dx=n!\)，我們就可以把階乘的定義推廣到任意正數 \(\alpha\)，這就是Gamma function的動機之一（推廣正整數的階乘），實際上Gamma function是如下的定義：
+\[
+\Gamma(\alpha)\stackrel{\text{def.}}{=}\int_0^{\infty} x^{\alpha-1}e^{-x}dx.
+\]
+注意到並不是 \(\Gamma(\alpha)=\int_0^{\infty} x^{\alpha}e^{-x}dx\)。
+</p>
+
+<p>由上面的討論可以知道，當 \(\alpha\) 為正整數時，我們有 \(\Gamma(\alpha+1)=\alpha!=\alpha(\alpha-1)!=\alpha\Gamma(\alpha)\)。既使 \(\alpha\) 不是正整數，我們仍然有 \(\Gamma(\alpha+1)=\alpha\Gamma(\alpha)\) 這個等式，證明如下。首先，利用分部積分，我們有
+\[
+\Gamma(\alpha)
+=\int_{0}^{\infty} x^{\alpha-1}e^{-x}dx 
+=\left[\frac{1}{2}x^{\alpha}e^{-x}\right]_{0}^{\infty}-\frac{1}{2}\int_{0}^{\infty}\left[(\alpha-2)x^{\alpha-1}e^{-x}-x^{\alpha}e^{-x}\right]dx
+\]
+於是
+\[
+\begin{array}{rcl}
+\Gamma(\alpha) &=& \frac{-1}{2}(\alpha-2)\Gamma(\alpha)+\frac{1}{2}\Gamma(\alpha+1) \\
+2\Gamma(\alpha) &=& -(\alpha-2)\Gamma(\alpha)+\Gamma(\alpha+1) \\
+\alpha\Gamma(\alpha) &=& \Gamma(\alpha+1)
+\end{array}
+\]
+</p>
+
+<p>回來討論Gamma distribution，由 \(\Gamma(\alpha)\) 的定義，把 \(\Gamma(\alpha)\) 移項，得到
+\[
+\int_0^{\infty} \frac{1}{\Gamma(\alpha)}x^{\alpha-1}e^{-x}dx=1.
+\]
+這說明了
+\[
+f(x)=\frac{1}{\Gamma(\alpha)}x^{\alpha-1}e^{-x}dx, 0 \lt x \lt \infty
+\]
+是一個probability density function。但這還不是大家定義的Gamma distribution。
+</p>
+
+<p>假設隨機變數 \(X\) 的p.d.f.為
+\[f(x)=\frac{1}{\Gamma(\alpha)}x^{\alpha-1}e^{-x}dx, 0 \lt x \lt \infty\]
+則 \(Y=\theta X\) 的p.d.f.為
+\[
+f(y)=\frac{1}{\Gamma(\alpha)\theta^{\alpha}}y^{\alpha-1}e^{-y/\theta}
+\]
+（\(Y=g(X), f_Y(y)=f_X(g^{-1}(y))\left|\frac{d}{dy}g^{-1}(y)\right|\)，參考Casella, p.51, thm.2.1.5，）
+這就是Gamma distribution。
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="gamSum">&int;p.d.f.=1</h2>
+
+<p>
+\[
+\begin{array}{rcl}
+\int_{0}^{\infty} f(x)dx
+&=& \int_{0}^{\infty} \frac{1}{\Gamma(\alpha)\theta^{\alpha}}x^{\alpha-1}e^{-x/\theta} dx \\
+&\stackrel{y=x/\theta}{=}& \frac{1}{\Gamma(\alpha)} \int_{0}^{\infty} \frac{1}{\theta^{\alpha}}(\theta y)^{\alpha-1}e^{-y}\theta dy \\
+&=& \frac{1}{\Gamma(\alpha)} \int_{0}^{\infty} y^{\alpha-1}e^{-y} dy \\
+&=& \frac{1}{\Gamma(\alpha)}\cdot \Gamma(\alpha)=1.
+\end{array}
+\]
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="gamMean">Expected Value</h2>
+
+<p>\(M'(t)=\frac{\alpha\theta}{(1-\theta t)^{\alpha+1}}\).
+</p>
+
+<p>\(\mu=E(X)=M'(0)=\alpha\theta\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="gamVar">Variance</h2>
+
+<p>\(M''(t)=\frac{\alpha\theta^2(\alpha+1)}{(1-\theta t)^{\alpha+2}}\).
+</p>
+
+<p>\(\sigma^2=E(X^2)-E(X)^2=M''(0)-\mu^2=\alpha\theta^2(\alpha+1)-\alpha^2\theta^2=\alpha\theta^2\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="gamMgf">Moment Generating Function</h2>
+
+<p>
+\[
+\begin{array}{rcl}
+M(t) 
+&=& E(e^{tX})=\int_{0}^{\infty} e^{tx} f(x)dx=\int_{0}^{\infty} e^{tx} \frac{1}{\Gamma(\alpha)\theta^{\alpha}} x^{\alpha-1} e^{-x/\theta} dx \\
+&=& \frac{1}{\Gamma(\alpha)}\int_{0}^{\infty} \frac{x^{\alpha-1}}{\theta^{\alpha}} e^{-(1-\theta t)x/\theta} dx \\ 
+&\stackrel{y=(1-\theta t)x/\theta}{=}& \frac{1}{\Gamma(\alpha)}\int_{0}^{\infty} \frac{1}{\theta^{\alpha}} \left(\frac{\theta y}{1-\theta t}\right)^{\alpha-1} e^{-y} \frac{\theta}{1-\theta t} dy \\
+&=& \frac{1}{\Gamma(\alpha)}\int_{0}^{\infty} \frac{1}{(1-\theta t)^{\alpha}} y^{\alpha-1} e^{-y} dy \\
+&=& \frac{1}{(1-\theta t)^{\alpha}}\cdot \frac{1}{\Gamma(\alpha)} \int_{0}^{\infty} y^{\alpha-1} e^{-y} dy \\
+&=& \frac{1}{(1-\theta t)^{\alpha}}\cdot \frac{1}{\Gamma(\alpha)}\cdot \Gamma(\alpha) \\
+&=& \frac{1}{(1-\theta t)^{\alpha}}.
+\end{array}
+\]
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Exponential</h2>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="expMot">Motivation</h2>
+
+<p>
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="expSum">&int;p.d.f.=1</h2>
+
+<p>
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="expMean">Expected Value</h2>
+
+<p>
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="expVar">Variance</h2>
+
+<p>
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="expMgf">Moment Generating Function</h2>
+
+<p>
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Chi-Square</h2>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="chiMot">Motivation</h2>
+
+<p>如果從Chi-Square distribution是Gamma distribution在 \(\theta=2, \alpha=\frac{r}{2}\) 的特例來看，會覺得很沒道理，我們下面用一個比較自然的角度來得到Chi-Square distribution。
+</p>
+
+<p>由Casella, p.53, exa.2.1.9的討論中，如果 \(X\sim \text{normal}(0, 1)\)，則 \(X^2\sim \text{Gamma}(\frac{1}{2}, 2)\)。再利用Casella, p.183, exa.4.6.8的方法，如果 \(X_i\sim \text{Gamma}(\frac{1}{2}, 2)\)，則 \(Z=X_1+X_2+\cdots+X_r\sim \text{Gamma}(\frac{r}{2}, 2)\)，也就是
+\[
+f_Z(z)=\frac{1}{\Gamma(r/2)2^{r/2}}z^{\alpha-1}e^{-z/2}.
+\]
+這個分布特別重要，所以另外給它獨立的的名稱，稱為Chi-Square distribution。
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="chiSum">&int;p.d.f.=1</h2>
+
+<p>
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="chiMean">Expected Value</h2>
+
+<p>
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="chiVar">Variance</h2>
+
+<p>
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="chiMgf">Moment Generating Function</h2>
+
+<p>
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Normal</h2>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="norMot">Motivation</h2>
+
+<p>
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="norSum">&int;p.d.f.=1</h2>
+
+<p>At first, we have to know the integral \(\int_{-\infty}^{\infty} e^{-x^2} dx\). 
+</p>
+
+<p>Let \(I=\int_{-\infty}^{\infty} e^{-x^2} dx\). Then 
+\[
+\begin{array}{rcl}
+I^2 
+&=& \int_{-\infty}^{\infty} e^{-x^2} dx \int_{-\infty}^{\infty} e^{-y^2} dy \\
+&=& \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} e^{-(x^2+y^2)} dx dy \\
+&=& \int_{0}^{2\pi} \int_{0}^{\infty} e^{-r^2} rdr d\theta \\
+&=& \pi. 
+\end{array}
+\]
+Thus, \(I=\sqrt{\pi}\). 
+</p>
+
+<p>Therefore, 
+\[
+\begin{array}{rcl}
+\int_{-\infty}^{\infty} f(x)dx
+&=& \int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)} dx \\
+&=& \frac{1}{\sqrt{\pi}}\int_{-\infty}^{\infty}\frac{1}{\sqrt{2}\sigma}\exp{\left[-\left(\frac{x-\mu}{\sqrt{2}\sigma}\right)^2\right]} dx \\ 
+&\stackrel{u=(x-\mu)/(\sqrt{2}\sigma)}{=}& \frac{1}{\sqrt{\pi}}\int_{-\infty}^{\infty} e^{-u^2} du \\
+&=& \frac{1}{\sqrt{\pi}}\cdot \sqrt{\pi} \\
+&=& 1. 
+\end{array}
+\]
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="norMean">Expected Value</h2>
+
+<p>\(M'(t)=(\mu+\sigma^2 t)e^{\mu t+\sigma^2 t^2/2}\).
+</p>
+
+<p>\(\mu=E(X)=M'(0)=\mu\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="norVar">Variance</h2>
+
+<p>\(M''(t)=\sigma^2 e^{\mu t+\sigma^2 t^2/2}+(\mu+\sigma^2 t)^2 e^{\mu t+\sigma^2 t^2/2}\).
+</p>
+
+<p>\(\sigma^2=E(X^2)-E(X)^2=M''(0)-\mu^2=(\sigma^2+\mu^2)-\mu^2=\sigma^2\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="norMgf">Moment Generating Function</h2>
+
+<p>
+\[
+\begin{array}{rcl}
+M(t)=E(e^{tX})=\int_{-\infty}^{\infty} e^{tx}f(x)dx 
+&=& \int_{-\infty}^{\infty}e^{tx}\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)} dx \\
+&=& \int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}\exp{\left[\frac{2\sigma^2 tx-(x-\mu)^2}{2\sigma^2}\right]} dx \\
+&=& \int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}\exp{\left[\frac{-(x^2-2\mu x-2\sigma^2 tx+\mu^2)}{2\sigma^2}\right]} dx \\
+&=& \int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}\exp{\left\{\frac{-[x^2-2(\mu+\sigma^2 t)x+\mu^2]}{2\sigma^2}\right\}} dx \\
+&=& \int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}\exp{\left\{\frac{-[x^2-2(\mu+\sigma^2 t)x+(\mu+\sigma^2 t)^2]+2\mu\sigma^2 t+\sigma^4 t^2}{2\sigma^2}\right\}} dx \\
+&=& \exp{\left(\mu t+\frac{\sigma^2 t^2}{2}\right)} \int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}\exp{\left\{\frac{-[x-(\mu+\sigma^2 t)]^2}{2\sigma^2}\right\}} dx \\
+&=& e^{\mu t+\sigma^2 t^2/2}.
+\end{array}
+\]
+The last integrand is the p.d.f. of normal distribution with mean \(\mu+\sigma^2 t\). So the integral is \(1\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>Beta</h2>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="betaMot">Motivation</h2>
+
+<p>Let \(X\) and \(Y\) have independent gamma distribution with parameters \(\alpha, \theta\) and \(\beta, \theta\), respectively. That is, the joint pdf of \(X\) and \(Y\) is 
+\[
+f_{X, Y}(x, y)=\frac{1}{\Gamma(\alpha)\Gamma(\beta)\theta^{\alpha+\beta}}x^{\alpha-1}y^{\beta-1}\exp{\left(-\frac{x+y}{\theta}\right)}, 0\lt x\lt \infty, 0\lt y\lt \infty.
+\]
+(See Hogg and Tanis's <cite>Probability and Statistical Inference</cite> and Definition 4.1.10 and Definition 4.2.5 in Casella and Berger's <cite>Statistical Inference</cite>.)
+</p>
+
+<p>Consider 
+\[
+U=\frac{X}{X+Y}, V=X+Y, 
+\]
+or equivalently, 
+\[
+X=UV, Y=U-UV.
+\]
+The Jacobian is
+\[
+J=\left|\begin{matrix}v&u\\-v&1-u\end{matrix}\right|=v(1-u)+uv=v.
+\]
+Thus, the joint pdf \(f_{U, V}(u, v)\) of \(U\) and \(V\) is
+\[
+f_{U, V}(u, v)=|v|\frac{1}{\Gamma(\alpha)\Gamma(\beta)\theta^{\alpha+\beta}}(uv)^{\alpha-1}(v-uv)^{\beta-1}e^{-v/\theta},
+\]
+where the support is \(0\lt u\lt 1, 0\lt v\lt \infty\), which is the mapping of \(0\lt x\lt \infty\) and \(0\lt y\lt \infty\). 
+(See (4.3.2) in Casella and Berger's <cite>Statistical Inference</cite>.)
+</p>
+
+<p>To find the marginal pdf of \(U\), we integrate this joint pdf on \(v\). We see that the marginal pdf of \(U\) is
+\[
+f_{U}(u)=\frac{u^{\alpha-1}(1-u)^{\beta-1}}{\Gamma(\alpha)\Gamma(\beta)}\int_{0}^{\infty} \frac{v^{\alpha+\beta-1}}{\theta^{\alpha+\beta}}e^{-v/\theta} dv.
+\]
+But the integral in this expression is that of a gamma pdf with parameters \(\alpha+\beta\) and \(\theta\), except for \(\Gamma(\alpha+\beta)\) in the denominator; hence, the integral equals \(\Gamma(\alpha+\beta)\), and we have
+\[
+f_U(u)=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}u^{\alpha-1}(1-u)^{\beta-1}, 0\lt u\lt 1.
+\]
+(See (4.1.3) in Casella and Berger's <cite>Statistical Inference</cite>.)
+</p>
+
+<p>We say that \(U\) has a <strong>beta pdf</strong> with parameters \(\alpha\) and \(\beta\). 
+</p>
+
+<p>注意到，因為 \(f_{U, V}(u, v)\) 是 \(U, V\) 的joint pdf，所以
+\[
+\int_{0}^{1} f_U(u) du
+=\int_{0}^{1} \left(\int_{0}^{\infty} f_{U, V}(u, v) dv\right) du
+=\int_{0}^{1} \int_{0}^{\infty} f_{U, V}(u, v) dv du
+=1.
+\tag{**}
+\]
+</p>
+
+<p>另外，因為
+\[
+1
+=\int_{0}^{1} f_U(u) du
+=\int_{0}^{1} \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}u^{\alpha-1}(1-u)^{\beta-1}du
+=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\int_{0}^{1} u^{\alpha-1}(1-u)^{\beta-1}du
+\]
+所以
+\[
+\int_{0}^{1} u^{\alpha-1}(1-u)^{\beta-1}du=\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}
+\]
+上面這個積分稱為Beta function（以 \(\alpha, \beta\) 為變數），所以這個等式說明了Beta function跟Gamma function的關係，同時也說明了前面討論的分布為什麼要叫Beta distribution。
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="betaSum">&int;p.d.f.=1</h2>
+
+<p>在(**)證明過了。
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="betaMean">Expected Value</h2>
+
+<p>
+\[
+\begin{array}{rcl}
+\mu=E(X)=\int_{0}^{1}xf(x)dx
+&=& \int_{0}^{1}x\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha-1}(1-x)^{\beta-1}dx \\
+&=& \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\cdot \frac{\Gamma(\alpha+1)\Gamma(\beta)}{\Gamma(\alpha+1+\beta)} \\
+&=& \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)}\cdot \frac{\Gamma(\alpha+1)}{\Gamma(\alpha+1+\beta)} \\
+&=& \frac{\Gamma(\alpha+\beta)\alpha\Gamma(\alpha)}{\Gamma(\alpha)(\alpha+\beta)\Gamma(\alpha+\beta)} \\
+&=& \frac{\alpha}{\alpha+\beta}
+\end{array}
+\]
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="betaVar">Variance</h2>
+
+<p>類似前面 \(E(X)\) 的討論，
+\[
+\begin{array}{rcl}
+E(X^2) 
+&=& \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\cdot \frac{\Gamma(\alpha+2)\Gamma(\beta)}{\Gamma(\alpha+2+\beta)} \\
+&=& \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\cdot \frac{(\alpha+1)\Gamma(\alpha+1)\Gamma(\beta)}{(\alpha+1+\beta)\Gamma(\alpha+1+\beta)} \\
+&=& \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\cdot \frac{(\alpha+1)\alpha\Gamma(\alpha)\Gamma(\beta)}{(\alpha+1+\beta)(\alpha+\beta)\Gamma(\alpha+\beta)} \\
+&=& \frac{(\alpha+1)\alpha}{(\alpha+\beta+1)(\alpha+\beta)}
+\end{array}
+\]
+</p>
+
+<p>\(\sigma^2=E(X^2)-E(X)^2=\frac{(\alpha+1)\alpha}{(\alpha+\beta+1)(\alpha+\beta)}-\frac{\alpha^2}{(\alpha+\beta)^2}=\frac{\alpha\beta}{(\alpha+\beta+1)(\alpha+\beta)^2}\).
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<h3 id="betaMgf">Moment Generating Function</h2>
+
+<p>太複雜了，不討論。
+</p>
+
+
+
+
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>其他性質</h2>
+
+<p>上表中，除了兩個uniform（discrete及continuous）及兩個沒有給出mgf（Hypergeometric及Beta）的分布外，全部都有可加性。也就是說，如果\(X_1, X_2, ..., X_n\)是服從xxx分布的iid random sample，則\(X_1+X_2+\cdots+X_n\)也服從xxx分布。
+</p>
+
+<p>注意到，推導一些連續型分配的期望值及變異數時，用到了 \(E(X)=M'(0)\) 及 \(E(X^2)=M''(0)\)，例如
+\[
+M'(t)
+=\frac{d}{dt}\int_{-\infty}^{\infty} e^{tx} f(x)dx
+=\int_{-\infty}^{\infty} \frac{d}{dt} e^{tx} f(x)dx
+=\int_{-\infty}^{\infty} xe^{tx} f(x)dx
+\]
+其中微分跟積分交換這個動作需要用到一個定理做為基礎。
+\[
+\frac{d}{dy}\int_{a}^{b} f(x, y)dx=\int_{a}^{b} \frac{\partial f}{\partial y}(x, y)dx
+\]
+參考Wade's <cite>An Introduction to Analysis</cite>，Theorem 11.5。
+</p>
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<h2>其他分布</h2>
+
+<p>這些分布雖然不用記，但是要知道由來。
+</p>
+
+<table border="1">
+<tbody>
+<tr>
+<td>Continuous</td>
+<td>Explanation</td>
+<td>P.D.F.</td>
+<td>Mean&nbsp;</td>
+<td>Variance</td>
+<td>M.G.F.</td>
+</tr>
+<tr>
+<td>Cauchy</td>
+<td>\(\frac{\text{n}(0, 1)}{\text{n}(0, 1)}\)</td>
+<td>\(f(x)=\frac{1}{\pi}\frac{1}{x^2+1}\), <br />\(-\infty &lt; x &lt; \infty\)</td>
+<td>不存在</td>
+<td>不存在</td>
+<td>不存在</td>
+</tr>
+<tr>
+<td>\(t\)-distribution</td>
+<td>\(\frac{\text{n}(0, 1)}{\sqrt{\frac{\chi_{n-1}^2}{n-1}}}\)</td>
+<td>太複雜了</td>
+<td>\(0\)</td>
+<td>\(\frac{\nu}{\nu-2}\)</td>
+<td>不存在</td>
+</tr>
+<tr>
+<td>\(F\)-distribution</td>
+<td>\(\frac{\chi_p^2/p}{\chi_q^2/q}\)</td>
+<td>太複雜了</td>
+<td>\(\frac{q}{q-2}\)</td>
+<td>太複雜了</td>
+<td>不存在</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿<html>
+
+<head>
+
+<title>用Python及Selenium抓取奇摩字典英文單字的音標</title>
+<meta name="description" content="用Python及Selenium抓取奇摩字典英文單字的音標">
+
+<style>
+pre, code {background-color: lightgray;}
+</style>
+</head>
+
+<body>
+
+<h1>抓取奇摩字典英文單字的音標</h1>
+
+<pre>
+from selenium import webdriver 
+from selenium.common.exceptions import NoSuchElementException
+
+import time # For pause
+
+# For MacOS, place getCoordinate.py and chromedriver under users\bfhaha
+driver = webdriver.Chrome(r'C:\Users\bfhaha\chromedriver')
+
+vocabulary = [
+"follicle",
+"polio",
+"groove",
+
+]
+
+n = len(vocabulary)
+
+f = open("getKK.txt", "a", encoding='UTF-8')
+f.truncate(0) # empty getKK.txt
+
+for i in range(n):
+  driver.get("https://tw.dictionary.search.yahoo.com/search?p=" + vocabulary[i])
+  time.sleep(2)
+  try:
+    kk = driver.find_element_by_xpath("//span[@class = ' fz-14']").text
+    f.write(kk)
+  except NoSuchElementException as exception:
+    f.write("NULL")
+  f.write("\n")
+f.close()
+</pre>
+
+</body>
+
+</html>

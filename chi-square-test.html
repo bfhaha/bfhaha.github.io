@@ -1,0 +1,771 @@
+﻿<html>
+<head>
+
+<title>A Proof of Pearson's Chi-Square Goodness-of-Fit Test</title>
+<meta name="description" content="A Proof of Pearson's Chi-Square Goodness-of-Fit Test">
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+
+<style>
+.note {
+  color: blue;
+}
+</style>
+
+</head>
+<body>
+
+
+<h1>A Proof of Pearson's Chi-Square Goodness-of-Fit Test</h1>
+
+<!---------------------------------->
+<!---------------------------------->
+<h2>Contents</h2>
+
+<ul>
+<li><a href="#theorem">Theorem</a></li>
+<li><a href="#proof">Proof</a>
+  <ul>
+  <li><a href="#partI">Part I</a></li>
+  <li><a href="#partII">Part II</a></li>
+  <li><a href="#partIII">Part III</a></li>
+  <li><a href="#partIV">Part IV</a></li>
+  <li><a href="#partV">Part V</a></li>
+  </ul>
+</li>
+<li><a href="#anotherproof">Another Incomplete Proof</a></li>
+<li><a href="#noproof">The textbooks which have no proof</a></li>
+<li><a href="#note">Note</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+
+
+<!---------------------------------->
+<!---------------------------------->
+<h2 id="theorem">Theorem</h2>
+
+
+<ul>
+
+<li>
+[Hogg, PSI, p.416]
+To generalize, we let an experiment have \(k\) (instead of only two) mutually exclusive and exhaustive outcomes, say, \(A_1, A_2, ..., A_k\). Let \(p_i=P(A_i)\), and thus \(\sum_{i=1}^{k}p_i=1\). The experiment is repeated \(n\) independent times, and we let \(Y_i\) represent the number of times the experiment results in \(A_i\), \(i=1, 2, ..., k\). This joint distribution of \(Y_1, Y_2, ..., Y_{k−1}\) is a straightforward generalization of the binomial distribution, as follows.
+</li><br>
+
+
+<li>
+[Hogg, PSI, p.416]
+In considering the joint pmf, we see that
+\[
+f(y_1, y_2, ..., y_{k-1})=P(Y_1=y_1, Y_2=y_2, ..., Y_{k-1}=y_{k-1}),
+\]
+where \(y_1, y_2, ..., y_{k-1}\) are nonnegative integers such that \(y_1+y_2+\cdots+y_{k-1}\leq n\). Note that we do not need to consider \(Y_k\), since, once the other \(k-1\) random variables are observed to equal \(y_1, y_2, ..., y_{k-1}\), respectively, we know that 
+\[
+Y_k=n-y_1-y_2-\cdots-y_{k-1}=y_k, \text{ say}.
+\]
+From the independence of the trials, the probability of each particular arrangement of \(y_1\) \(A_1\)s, \(y_2\) \(A_2\)s, ..., \(y_k\) \(A_k\)s is
+\[
+p_1^{y_1}p_2^{y_2}\cdots p_k^{y_k}.
+\]
+The number of such arrangements is the multinomial coefficient
+\[
+{n\choose y_1, y_2, ..., y_k}=\frac{n!}{y_1! y_2!\cdots y_k!}.
+\]
+Hence, the product of these two expressions gives the joint pmf of \(Y_1, Y_2, ..., Y_{k-1}\):
+\[
+f(y_1, y_2, ..., y_{k-1})=\frac{n!}{y_1! y_2!\cdots y_k!}p_1^{y_1}p_2^{y_2}\cdots p_k^{y_k}.
+\]
+(Recall that \(y_k=n-y_1-y_2-\cdots-y_{k-1}\).)
+</li><br>
+
+
+<li>
+[Hogg, PSI, p.416]
+Pearson then constructed an expression similar to \(Q_1\) (Equation 9.1-1), which involves \(Y_1\) and \(Y_2=n-Y_1\), that we denote by \(Q_{k-1}\), which involves \(Y_1, Y_2, ..., Y_{k-1}\), and \(Y_k=n-Y_1-Y_2-\cdots -Y_{k-1}\), namely, 
+\[
+Q_{k-1}=\sum_{i=1}^{k}\frac{(Y_i-np_i)^2}{np_i}.
+\]
+He argued that \(Q_{k-1}\) has an approximate chi-square distribution with \(k-1\) degree of freedom in much the same way we argued that \(Q_1\) is approximately \(\chi^2(1)\). We accept Pearson's conclusion, as the proof is beyond the level of this text.
+</li><br>
+
+</ul>
+
+
+<!---------------------------------->
+<!---------------------------------->
+<h2 id="proof">Proof</h2>
+
+
+<p class="note">
+The main idea is from <a href="http://personal.psu.edu/drh20/asymp/fall2006/lectures/ANGELchpt07.pdf">this lecture note</a> by David Hunter in Penn State Department of Statistics. [Keeping, sec.13.5, 13.6, appendix A.17] has a partial discussion. If you know where I can find a complete proof in a book. Please give me an email.
+</p>
+
+<!---------------------------------->
+<h3 id="partI">Part I</h3>
+
+<ul>
+
+<li class="note">
+We need some preliminaries.
+</li>
+
+
+<li>
+[Hogg, IMS, p.140]
+In Section 2.5 we discussed the covariance between two random variables. In this section we want to extend this discussion to the \(n\)-variate case. Let \(\mathbf{X}=(X_1, ..., X_n)'\) be an \(n\)-dimensional random vector. Recall that we defined \(\text{E}(\mathbf{X})=(\text{E}(X_1), ..., \text{E}(X_n))'\), that is, the expectation of a random vector is just the vector of the expectations of its components. 
+</li><br>
+
+<li>
+[Hogg, IMS, p.140]
+Now suppose \(\mathbf{W}\) is an \(m\times n\) matrix of random variables, say, \(\mathbf{W}=[W_{ij}]\) for the random variables \(W_{ij}\), \(1\leq i\leq m\) and \(1\leq j\leq n\). Note that we can always string out the matrix into an \(mn\times 1\) random vector. Hence, we define the expectation of a random matrix 
+\[
+\text{E}[\mathbf{W}]=[\text{E}(W_{ij})].
+\tag{2.6.10}
+\]
+As the following theorem shows, the linearity of the expectation operator easily follows from this definition:
+</li><br>
+
+<li>
+[Hogg, IMS, p.141]
+Let \(\mathbf{X}=(X_1, ..., X_n)'\) be an \(n\)-dimensional random vector, such that \(\sigma_i^2=\text{Var}(X_i)\lt \infty\). The <b>mean</b> of \(\mathbf{X}\) is \(\mathbf{\mu}=\text{E}[\mathbf{X}]\) and we define its <b>variance-covariance matrix</b> as
+\[
+\text{Cov}(\mathbf{X})=\text{E}[(\mathbf{X}-\mathbf{\mu})(\mathbf{X}-\mathbf{\mu})']=[\sigma_{ij}], 
+\tag{2.6.13}
+\]
+where \(\sigma_{ii}\) denotes \(\sigma_i^2\). As Exercise 2.6.8 shows, the \(i\)th diagonal entry of \(\text{Cov}(\mathbf{X})\) is \(\sigma_i^2=\text{Var}(X_i)\) and the \((i, j)\)th off diagonal entry is \(\text{Cov}(X_i, X_j)\).
+</li><br>
+
+<li>
+[Hogg, IMS, p.350]
+As another simple application, consider the multivariate analog of the sample mean and sample variance. Let \(\{\mathbf{X}_n\}\) be a sequence of iid random vectors with common mean vector \(\mathbf{\mu}\) and variance-covariance matrix \(\Sigma\). Denote the vector of means by 
+\[
+\overline{\mathbf{X}}_n=\frac{1}{n}\sum_{i=1}^{n}\mathbf{X}_i.
+\tag{5.4.5}
+\]
+Of course, \(\overline{\mathbf{X}}_n\) is just the vector of sample means, \((\overline{X}_1, ..., \overline{X}_p)'\). By the Weak Law of Large Numbers. Theorem 5.1.1, \(\overline{X}_j\to \mu_j\), in probability, for each \(j\). Hence, by Theorem 5.4.1, \(\overline{\mathbf{X}}_n\to \mathbf{\mu}\), in probability.
+</li><br>
+
+
+<li class="note">
+這張圖可以幫助你理解
+\[
+\begin{array}{cccc|ccc}
+\mathbf{X}_1 & \mathbf{X}_2 & \cdots & \mathbf{X}_n & \overline{\mathbf{X}}_n & \to & \mathbf{\mu} \\
+|| & || & \cdots & || & || & & || \\
+\begin{bmatrix}X_{11}\\X_{21}\\\vdots\\X_{p1}\end{bmatrix}
+& 
+\begin{bmatrix}X_{12}\\X_{22}\\\vdots\\X_{p2}\end{bmatrix}
+& 
+\cdots
+& 
+\begin{bmatrix}X_{1n}\\X_{2n}\\\vdots\\X_{pn}\end{bmatrix}
+&
+\begin{bmatrix}\overline{X}_1\\\overline{X}_2\\\vdots\\\overline{X}_p\end{bmatrix}
+&
+\begin{matrix}\to\\\to\\\vdots\\\to\end{matrix}
+&
+\begin{bmatrix}\mu_1\\\mu_2\\\vdots\\\mu_p\end{bmatrix}
+\end{array}
+\]
+這裡的 \(\overline{X}_k\) 定義成 \(\overline{X}_k=\frac{\sum_{l=1}^{n}X_{kl}}{n}\)，我覺得寫成 \(\overline{X}_{k\Box}\) 會更一目瞭然。
+這裡所說的common mean vector \(\mathbf{\mu}\) and variance-covariance matrix \(\Sigma\) 是指 
+\[
+\text{E}(\mathbf{X}_1)=\text{E}(\mathbf{X}_2)=\cdots =\mathbf{\mu}
+\]
+也就是說，
+\[
+\text{E}(X_{i1})=\text{E}(X_{i2})=\cdots=\mu_i \text{ for }i=1, 2, ...
+\]
+及
+\[
+\text{Cov}(\mathbf{X}_1)=\text{Cov}(\mathbf{X}_2)=\cdots =\Sigma
+\]
+</li><br>
+
+</ul>
+
+
+<!---------------------------------->
+<h3 id="partII">Part II</h3>
+
+<ul>
+
+<li class="note">
+Let \(\mathbf{X}_1, \mathbf{X}_2, ...\) be a sequence of independent and identically distributed \(k\)-variate random vectors. For each \(i\), \(\mathbf{X}_i\) has a multinomial distribution \(\text{multinomial}(1, \mathbf{p})\), where
+\[
+\mathbf{p}=\begin{bmatrix}
+p_1\\
+p_2\\
+\vdots\\
+p_k
+\end{bmatrix}
+\]
+</li><br>
+
+<li class="note">
+Each \(X_{ij}\) is either \(0\) or \(1\). As the following figure shows. Each column has exactly one \(1\) and \(0\) elsewhere. 
+\[
+\begin{array}{ccccc}
+\mathbf{X}_1 & \mathbf{X}_2 & \cdots & \mathbf{X}_n &  \\
+|| & || & \cdots & || &  \\
+\begin{bmatrix}X_{11}\\X_{21}\\\vdots\\X_{k1}\end{bmatrix}
+& 
+\begin{bmatrix}X_{12}\\X_{22}\\\vdots\\X_{k2}\end{bmatrix}
+& 
+\cdots
+& 
+\begin{bmatrix}X_{1n}\\X_{2n}\\\vdots\\X_{kn}\end{bmatrix}
+&
+\begin{matrix} \sum_{j=1}^{n}X_{1j}=n\overline{X}_1=n\overline{X}_{1\Box}=Y_1\\\sum_{j=1}^{n}X_{2j}=n\overline{X}_2=n\overline{X}_{2\Box}=Y_2\\\vdots\\\sum_{j=1}^{n}X_{kj}=n\overline{X}_k=n\overline{X}_{k\Box}=Y_k\end{matrix} 
+\end{array}
+\]
+Recall that \(Y_i\) represent the number of times the experiment results in \(A_i\), \(i=1, 2, ..., k\).
+</li><br>
+
+
+<li class="note">
+By [Casella, p.182, line 5], \(X_{ij}\sim \text{B}(1, p_i)\). So 
+\[
+\text{E}(X_{ij})=p_i\text{ and }\text{Var}(X_{ij})=p_i(1-p_i).
+\]
+By [Casella, p.182, line -10], 
+\[
+\text{Cov}(X_{kj}, X_{lj})=-p_k p_l.
+\]
+Thus, 
+\[
+\text{E}(\mathbf{X}_1)=\text{E}(\mathbf{X}_2)=\cdots=\mathbf{p}
+\]
+and variance-covariance matrix of \(\mathbf{X}_1, \mathbf{X}_2, ...\) is 
+\[
+\text{Cov}(\mathbf{X}_1)=\text{Cov}(\mathbf{X}_2)=\cdots=\Sigma=
+\begin{bmatrix}
+p_1(1-p_1) & -p_1 p_2 & \cdots & -p_1 p_k \\
+-p_2 p_1 & p_2(1-p_2) & \cdots & -p_2 p_k \\
+\vdots & \vdots & \ddots & \vdots \\
+-p_k p_1 & -p_k p_2 & \cdots & p_k(1-p_k)
+\end{bmatrix}
+\]
+Note that the sum of every entries in any column or row of \(\Sigma\) is \(0\). Hence, \(\det{\Sigma}=0\) and \(\Sigma\) is not invertible. 
+</li><br>
+
+</ul>
+
+
+<!---------------------------------->
+<h3 id="partIII">Part III</h3>
+
+<ul>
+
+<li class="note">
+For each \(j=1, 2, ...\), consider 
+\[
+\mathbf{Z}_j=
+\begin{bmatrix}
+X_{1j}\\
+X_{2j}\\
+\vdots\\
+X_{k-1, j}
+\end{bmatrix}
+\]
+Check that 
+\[\text{E}(\mathbf{Z}_1)=\text{E}(\mathbf{Z}_2)=\cdots =\mathbf{p}^*=
+\begin{bmatrix}
+p_1\\
+p_2\\
+\vdots\\
+p_{k-1}
+\end{bmatrix}
+\tag{*}
+\]
+and the variance-covariance matrix of \(\mathbf{Z}_1, \mathbf{Z}_2, ...\) is 
+\[
+\text{Cov}(\mathbf{Z}_1)=\text{Cov}(\mathbf{Z}_2)=\cdots =\Sigma^*=
+\begin{bmatrix}
+p_1(1-p_1) & -p_1 p_2 & \cdots & -p_1 p_{k-1} \\
+-p_2 p_1 & p_2(1-p_2) & \cdots & -p_2 p_{k-1} \\
+\vdots & \vdots & \ddots & \vdots \\
+-p_{k-1} p_1 & -p_{k-1} p_2 & \cdots & p_{k-1}(1-p_{k-1})
+\end{bmatrix}
+\tag{**}
+\]
+That is, the upper-left \((k-1)\times (k-1)\) submatrix of \(\Sigma\). 
+</li><br>
+
+
+<li class="note">
+Note that 
+\[
+\begin{array}{lll}
+\Sigma^*
+&=&
+\begin{bmatrix}
+p_1(1-p_1) & -p_1 p_2 & \cdots & -p_1 p_{k-1} \\
+-p_2 p_1 & p_2(1-p_2) & \cdots & -p_2 p_{k-1} \\
+\vdots & \vdots & \ddots & \vdots \\
+-p_{k-1} p_1 & -p_{k-1} p_2 & \cdots & p_{k-1}(1-p_{k-1})
+\end{bmatrix} \\
+&=&
+\begin{bmatrix}
+p_1 \\
+& p_2 \\
+& & \ddots \\
+& & & p_{k-1}
+\end{bmatrix}
+-
+\begin{bmatrix}
+p_1\\
+p_2\\
+\vdots\\
+p_{k-1}
+\end{bmatrix}
+\begin{bmatrix}
+p_1 & p_2 & \cdots & p_{k-1}
+\end{bmatrix}\\
+&=&
+\text{diag}(p_1, p_2, ..., p_{k-1})
+-\mathbf{p^*}(\mathbf{p}^*)^T
+\end{array}.
+\]
+Now, \(\Sigma^*\) is invertible and its inverse is 
+\[
+\begin{array}{lll}
+(\Sigma^*)^{-1}
+&=&
+\begin{bmatrix}
+\frac{1}{p_1}+\frac{1}{p_k} & \frac{1}{p_k} & \cdots & \frac{1}{p_k} \\
+\frac{1}{p_k} & \frac{1}{p_2}+\frac{1}{p_k} & \cdots & \frac{1}{p_k} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{1}{p_k} & \frac{1}{p_k} & \cdots & \frac{1}{p_{k-1}}+\frac{1}{p_k}
+\end{bmatrix} \\
+&=&
+\begin{bmatrix}
+\frac{1}{p_1} \\
+& \frac{1}{p_2} \\
+& & \ddots \\
+& & & \frac{1}{p_{k-1}}
+\end{bmatrix}
++\frac{1}{p_k}
+\begin{bmatrix}
+1&1&\cdots&1\\
+1&1&\cdots&1\\
+\vdots&\vdots&\ddots&\vdots\\
+1&1&\cdots&1
+\end{bmatrix}\\
+&=&
+\text{diag}(\frac{1}{p_1}, \frac{1}{p_2}, ..., \frac{1}{p_{k-1}})+\frac{1}{p_k}\mathbf{1}\mathbf{1}^T,
+\end{array}
+\tag{***}
+\]
+where 
+\[
+\mathbf{1}=
+\begin{bmatrix}
+1\\
+1\\
+\vdots\\
+1
+\end{bmatrix}.
+\]
+It is easy to check that it is indeed the inverse by using that 
+\[
+\begin{array}{rcl}
+(\mathbf{p}^*)^T\text{diag}(\frac{1}{p_1}, 
+\frac{1}{p_2}, ..., \frac{1}{p_{k-1}}) &=& \mathbf{1}^T, \\\text{diag}(p_1, p_2, ..., p_{k-1})\mathbf{1}&=& \mathbf{p}^*, \\
+(\mathbf{p}^*)^T \mathbf{1} &=& p_1+p_2+\cdots+p_{k-1}=1-p_k.
+\end{array}
+\]
+</li><br>
+
+</ul>
+
+
+<!---------------------------------->
+<h3 id="partIV">Part IV</h3>
+
+<ul>
+
+<li>
+[Hogg, IMS, p.351, def.5.4.2]
+Let \(\{\mathbf{X}_n\}\) be a sequence of random vectors with \(\mathbf{X}_n\) having distribution function \(F_n(\mathbf{x})\) and \(\mathbf{X}\) be a random vector with distribution function \(F(\mathbf{x})\). Then \(\{\mathbf{X}_n\}\) <b>converges in distribution</b> to \(\mathbf{X}\) if 
+\[
+\lim_{n\to \infty} F_n(\mathbf{x})=F(\mathbf{x}), 
+\tag{5.4.8}
+\]
+for all points \(\mathbf{x}\) at which \(F(\mathbf{x})\) is continuous. We write \(\mathbf{X}_n\stackrel{D}{\to}\mathbf{X}\).
+</li><br>
+
+
+<li>
+[Hogg, IMS, p.351, thm.5.4.4]
+(Multivariate Central Limit Theorem). Let \(\{\mathbf{X}_n\}\) be a sequence of iid random vectors with common mean vector \(\mathbf{\mu}\) and variance-covariance matrix \(\Sigma\) which is positive definite. Assume that the common moment generating function \(M(\mathbf{t})\) exists in an open neighborhood of \(\mathbf{0}\). Let 
+\[
+\mathbf{Y}_n=\frac{1}{\sqrt{n}}\sum_{i=1}^{n}(\mathbf{X}_i-\mathbf{\mu})=\sqrt{n}(\overline{\mathbf{X}}-\mathbf{\mu}).
+\]
+Then \(\mathbf{Y}_n\) converges in distribution to a \(\text{N}_p(\mathbf{0}, \Sigma)\) distribution.
+</li><br>
+
+<li class="note">
+Consider that 
+\[
+\begin{array}{rcl}
+\overline{\mathbf{Z}}_n
+&=& \frac{\mathbf{Z}_1+\mathbf{Z}_2+\cdots+\mathbf{Z}_n}{n} \\
+&=& \begin{bmatrix}
+\frac{X_{11}+X_{12}+\cdots+X_{1n}}{n}\\
+\frac{X_{21}+X_{22}+\cdots+X_{2n}}{n}\\
+\vdots\\
+\frac{X_{k-1, 1}+X_{k-1, 2}+\cdots+X_{k-1, n}}{n}
+\end{bmatrix} \\
+&=& 
+\begin{bmatrix}
+\overline{X}_{1\Box}\\
+\overline{X}_{2\Box}\\
+\vdots\\
+\overline{X}_{k-1,\Box}
+\end{bmatrix}
+\end{array}
+\]
+By (*), (**) and the Multivariate Central Limit Theorem, 
+\[
+\sqrt{n}(\overline{\mathbf{Z}}_n-\mathbf{p}^*)\stackrel{d}{\to}\text{N}_{k-1}(\mathbf{0}, \Sigma^*).
+\tag{****}
+\]
+</li><br>
+
+<li>
+[Hogg, IMS, p.202, thm.3.5.1]
+Suppose \(\mathbf{X}\) has a \(\text{N}_n(\mathbf{\mu}, \Sigma)\) distribution, where \(\Sigma\) is positive definite. Then the random variable \(Y=(\mathbf{X}-\mathbf{\mu})'\Sigma^{-1}(\mathbf{X}-\mathbf{\mu})\) has a \(\chi^2(n)\) distribution.
+</li><br>
+
+<li class="note">
+\((\mathbf{X}-\mathbf{\mu})'\) means the transpose of \(\mathbf{X}-\mathbf{\mu}\). That is, 
+\[
+(\mathbf{X}-\mathbf{\mu})'=(\mathbf{X}-\mathbf{\mu})^T
+\]
+</li><br>
+
+<li class="note">
+By [Hogg, IMS, p.202, thm.3.5.1], (\(\mathbf{X}=\sqrt{n}(\overline{\mathbf{Z}}_n-\mathbf{p}^*)\) and \(\mathbf{\mu}=\mathbf{0}\)), 
+\[
+\sqrt{n}(\overline{\mathbf{Z}}_n-\mathbf{p}^*)^T(\Sigma^*)^{-1}\sqrt{n}(\overline{\mathbf{Z}}_n-\mathbf{p}^*)
+\] 
+has a \(\chi^2(k-1)\) distribution.
+</li><br>
+
+
+</ul>
+
+
+<!---------------------------------->
+<h3 id="partV">Part V</h3>
+
+<ul>
+
+<li class="note">
+The final step is to show that 
+\[
+\sqrt{n}(\overline{\mathbf{Z}}_n-\mathbf{p}^*)^T(\Sigma^*)^{-1}\sqrt{n}(\overline{\mathbf{Z}}_n-\mathbf{p}^*)
+=\sum_{i=1}^{k}\frac{(Y_i-np_i)^2}{np_i}
+\]
+Note that 
+\[
+\overline{\mathbf{Z}}_n-\mathbf{p}^*=
+\begin{bmatrix}
+\overline{X}_{1\Box}-p_1\\
+\overline{X}_{2\Box}-p_2\\
+\vdots\\
+\overline{X}_{k-1, \Box}-p_{k-1}
+\end{bmatrix}
+\]
+Therefore, 
+\[
+\begin{array}{cl}
+& \sqrt{n}(\overline{\mathbf{Z}}_n-\mathbf{p}^*)^T(\Sigma^*)^{-1}\sqrt{n}(\overline{\mathbf{Z}}_n-\mathbf{p}^*) \\
+\stackrel{\text{(***)}}{=}& n(\overline{\mathbf{Z}}_n-\mathbf{p}^*)^T(\Sigma^*)^{-1}(\overline{\mathbf{Z}}_n-\mathbf{p}^*) \\
+=& n(\overline{\mathbf{Z}}_n-\mathbf{p}^*)^T\left(\text{diag}(\frac{1}{p_1}, \frac{1}{p_2}, ..., \frac{1}{p_{k-1}})+\frac{1}{p_k}\mathbf{1}\mathbf{1}^T\right)(\overline{\mathbf{Z}}_n-\mathbf{p}^*) \\
+=& n\left[(\overline{\mathbf{Z}}_n-\mathbf{p}^*)^T\text{diag}(\frac{1}{p_1}, \frac{1}{p_2}, ..., \frac{1}{p_{k-1}})(\overline{\mathbf{Z}}_n-\mathbf{p}^*) +\frac{1}{p_k}(\overline{\mathbf{Z}}_n-\mathbf{p}^*)^T\mathbf{1}\mathbf{1}^T(\overline{\mathbf{Z}}_n-\mathbf{p}^*)\right] \\
+=& n\left[\sum_{i=1}^{k-1}\frac{(\overline{X}_{i\Box}-p_i)^2}{p_i} +\frac{1}{p_k}\sum_{i, j=1}^{k-1}(\overline{X}_{i\Box}-p_i)(\overline{X}_{j\Box}-p_j)\right] \\
+=& n\left\{\sum_{i=1}^{k-1}\frac{(\overline{X}_{i\Box}-p_i)^2}{p_i} +\frac{1}{p_k}\left[\sum_{i=1}^{k-1}(\overline{X}_{i\Box}-p_i)\right]^2\right\} \\
+=& \sum_{i=1}^{k-1}\frac{(n\overline{X}_{i\Box}-np_i)^2}{np_i}+\frac{\left[\sum_{i=1}^{k-1}(n\overline{X}_{i\Box}-np_i)\right]^2}{np_k} \\
+\stackrel{\sum_{i=1}^{k}n\overline{X}_{i\Box}=\sum_{i=1}^{k}Y_i=n}{=}& \sum_{i=1}^{k-1}\frac{(n\overline{X}_{i\Box}-np_i)^2}{np_i}+\frac{\left[(n-n\overline{X}_{k\Box})-n(1-p_k)\right]^2}{np_k} \\
+=& \sum_{i=1}^{k}\frac{(n\overline{X}_{i\Box}-np_i)^2}{np_i} \\
+=& \sum_{i=1}^{k}\frac{(Y_i-np_i)^2}{np_i} 
+\end{array}
+\]
+</li><br>
+
+
+</ul>
+
+<!---------------------------------->
+<!---------------------------------->
+<h2 id="anotherproof">Another Incomplete Proof</h2>
+
+<p>下面是另一個不完整的證法，主要是參考<a href="https://math.stackexchange.com/questions/839940/proof-of-pearsons-chi-squared-test">這裡</a>，這個證法看起來不需要用到Multivariate Normal Distribution，但最後一步要證明sum of dependent normal random variables is still normal的時候（標記三個問號???的地方），就不可避免地要用到Multivariate Normal，參考<a href="https://math.stackexchange.com/questions/233880/what-is-the-distribution-of-sum-of-dependent-normal-random-variables">這裡</a>。</p>
+
+
+<ul>
+
+<li>
+By [Casella, p.182, line 5], \(Y_i\sim \text{B}(n, p_i)\). 
+Then by the Central Limit Theorem or De-Moivre Laplace Theorem, \(Y_i\sim \text{N}(np_i, np_i(1-p_i))\).
+</li><br>
+
+
+<li>
+Let \(X_i=\frac{Y_i-np_i}{\sqrt{np_i}}\).
+Then 
+\[
+X_i=\frac{Y_i-np_i}{\sqrt{np_i}}=\frac{Y_i-np_i}{\sqrt{np_i(1-p_i)}}\sqrt{1-p_i}\stackrel{\text{Central Limit Theorem}}{\sim}\sqrt{1-p_i}\text{N}(0, 1).
+\]
+By [Casella, p.184, cor.4.6.10], 
+\(X_i\sim \text{N}(0, 1-p_i)\).
+This follows that 
+\[
+\text{Var}(X_i)=1-p_i
+\tag{i}
+\]
+</li><br>
+
+
+<li>
+If \(i\neq j\), then 
+\[
+\begin{array}{rcl}
+\text{Cov}(X_i, X_j)
+&=& \text{Cov}(\frac{Y_i-np_i}{\sqrt{np_i}}, \frac{Y_j-np_j}{\sqrt{np_j}}) \\
+&\stackrel{\text{Cov}(aX+b, cY+d)=ac\text{Cov}(X, Y)}{=}& \frac{1}{\sqrt{np_i}}\cdot \frac{1}{\sqrt{np_j}}\cdot\text{Cov}(Y_i, Y_j) \\
+&\stackrel{\text{[Casella, p.182, line -10]}}{=}& \frac{1}{\sqrt{np_i}}\cdot \frac{1}{\sqrt{np_j}}\cdot (-np_i p_j) \\
+&=& -\sqrt{p_i p_j}
+\end{array}
+\tag{ii}
+\]
+</li><br>
+
+<li>
+By (i) and (ii), 
+\[
+\text{Cov}(\mathbf{X})=
+\begin{bmatrix}
+1-p_1 & -\sqrt{p_1 p_2} & \cdots & -\sqrt{p_1 p_k} \\
+-\sqrt{p_2 p_1} & 1-p_2 & \cdots & -\sqrt{p_2 p_k} \\
+\vdots & \vdots & \ddots & \vdots \\
+-\sqrt{p_k p_1} & -\sqrt{p_k p_2} & \cdots & 1-p_k 
+\end{bmatrix}
+=I-\mathbf{p}\mathbf{p}^T, 
+\tag{iii}
+\]
+where
+\[
+\mathbf{p}=
+\begin{bmatrix}
+\sqrt{p_1}\\
+\sqrt{p_2}\\
+\vdots\\
+\sqrt{p_k}
+\end{bmatrix}.
+\]
+</li><br>
+
+
+<li>
+We find the eigenvalues of \(\text{Cov}(\mathbf{X})\). Note that 
+\(\mathbf{p}^T\mathbf{p}=p_1+p_2+\cdots+p_k=1\).
+\[
+\begin{array}{rcl}
+\det{(\text{Cov}(\mathbf{X})-\lambda I)}
+&=& \det{(I-\mathbf{p}\mathbf{p}^T-\lambda I)} \\
+&=& \det{((1-\lambda)I-\mathbf{p}\mathbf{p}^T)} \\
+&=& (1-\lambda)^k \det{\left(I-\frac{1}{1-\lambda}\mathbf{p}\mathbf{p}^T\right)} \\
+&\stackrel{\text{Sylvester's Theorem}}{=}& (1-\lambda)^k\left(1-\frac{1}{1-\lambda}\mathbf{p}^T\mathbf{p}\right) \\
+&=& -\lambda(1-\lambda)^{k-1}.
+\end{array}
+\]
+The eigenvalues of \(\text{Cov}(\mathbf{X})\) are \(0\) and \(1\) with \(k-1\) multiplicity.
+</li><br>
+
+
+<li>
+Since \(\text{Cov}(\mathbf{X})\) is symmetric, \(\text{Cov}(\mathbf{X})\) is orthogonally diagonalizable. 
+(See [Friedberg, p.384, thm.6.20].) That is, there exists an orthogonal matrix \(Q\) (\(QQ^T=Q^TQ=I\)) such that 
+\[
+Q\text{Cov}(\mathbf{X})Q^T=
+\left[
+\begin{array}{c|c}
+I_{k-1} & O \\
+\hline
+O & 0
+\end{array}
+\right]
+\text{ and }
+Q\text{Cov}(\mathbf{X})=
+\left[
+\begin{array}{c|c}
+I_{k-1} & O \\
+\hline
+O & 0
+\end{array}
+\right]Q
+\tag{iv}
+\]
+</li><br>
+
+
+<li>
+Set 
+\[
+\mathbf{Z}=Q\mathbf{X}
+\tag{v}
+\]
+</li><br>
+
+
+<li>
+Note that 
+\[
+\text{Cov}(\mathbf{Z})
+=\text{Cov}(Q\mathbf{X})
+\stackrel{\text{[Hogg, IMS, p.141, thm.2.63]}}{=}Q\text{Cov}(\mathbf{X})Q^T=
+\left[
+\begin{array}{c|c}
+I_{k-1} & O \\
+\hline
+O & 0
+\end{array}
+\right]
+\tag{vi}
+\]
+</li><br>
+
+
+</ul>
+
+<p>Now, we prove the main four results.</p>
+
+<ul>
+
+<li>
+For each \(i\), by (v), \(Z_i\) is a linear combination of normal random variables \(X_1, X_2, ..., X_k\). By ???, \(Z_i\) is also normal.
+</li><br>
+
+
+<li>
+Since \(\text{E}(X_i)=0\), by [Casella, p.57], \(\text{E}(Z_i)=0\). By (vi), \(\text{Var}(Z_i)=1\) for \(i=1, 2, ..., k-1\).
+</li><br>
+
+
+<li>
+By (vi), \(\text{Cov}(Z_i, Z_j)=0\) for \(i\neq j\). That is, \(Z_i\) and \(Z_j\) are uncorrelated. By [Roussas, Course, p.466, cor.2], \(Z_1, Z_2, ..., Z_k\) are independent.
+</li><br>
+
+
+<li>
+Now,
+\[
+\begin{array}{cl}
+\text{check that}& \mathbf{p}^T\mathbf{X}=0 \text{ by their definitions}\\
+\Rightarrow& \text{Cov}(\mathbf{X})\mathbf{X}\stackrel{\text{(iii)}}{=}(I-\mathbf{p}\mathbf{p}^T)\mathbf{X}=\mathbf{X}-\mathbf{p}\mathbf{p}^T\mathbf{X}=\mathbf{X} \\
+\Rightarrow& \mathbf{Z}\stackrel{\text{(v)}}{=}Q\mathbf{X}=Q(\text{Cov}(\mathbf{X})\mathbf{X})=(Q\text{Cov}(\mathbf{X}))\mathbf{X}\stackrel{\text{(iv)}}{=}\left[
+\begin{array}{c|c}
+I_{k-1} & O \\
+\hline
+O & 0
+\end{array}
+\right]
+Q\mathbf{X} \\
+\Rightarrow & Z_k=0
+\end{array}
+\]
+This follows that 
+\[\sum_{i=1}^{k-1}Z_i^2=\sum_{i=1}^{k}Z_i^2
+\]
+and 
+\[
+\sum_{i=1}^{k-1}Z_i^2
+=\sum_{i=1}^{k}Z_i^2
+=\mathbf{Z}^T\mathbf{Z}
+=(Q\mathbf{X})^T(Q\mathbf{X})
+=\mathbf{X}^T Q^T Q \mathbf{X}
+=\mathbf{X}^T \mathbf{X}
+=\sum_{i=1}^{k}X_i^2.
+\]
+</li><br>
+
+
+</ul>
+
+Finall, by the above four results and [Casella, p.219, lem.5.3.2], we have 
+\[
+\sum_{i=1}^{k}X_i^2\sim \chi^2(k-1).
+\]
+
+
+<!---------------------------------->
+<!---------------------------------->
+<h2 id="noproof">The textbooks which have no proof</h2>
+
+<ul>
+<li>[Hogg, PSI, p.416] We accept Pearson's conclusion, as the proof is beyond the level of this text.</li>
+<li>[Hogg, IMS, p.284] It is proved in a more advanced course that, as \(n\to \infty\), \(Q_{k−1}\) has an approximate \(\chi^2(n-1)\) distribution.</li>
+<li>[Mood, p.445] We will not prove the above theorem, but we will indicate its proof for \(k=1\).</li>
+<li>[DeGroot, p.626] In 1900, Karl Pearson proved the following result, whose proof will not be given here.</li>
+</ul>
+
+<!---------------------------------->
+<!---------------------------------->
+<h2 id="note">Note</h2>
+
+<ul>
+
+<li>This theorem can be proved by maximum likelihood estimator. See [Rice, p.341] or [Roussas, Course, p.370] or [Spokoiny, p.205]</li>
+
+<li>This proof is similar to the approximation of multinomial by multivariate normal. See <a href="https://stats.stackexchange.com/questions/34547/what-is-the-normal-approximation-of-the-multinomial-distribution">here</a></li>
+
+<li>
+Some books don't require that \(\Sigma\) is invertible. In that case, you can use [Hogg, IMS, p.202, thm.3.5.2] directly. At the end of Part II, we have 
+\[
+\sqrt{n}(\overline{\mathbf{X}}_n-\mathbf{p})\stackrel{d}{\to} \text{N}_k(\mathbf{0}, \Sigma).
+\]
+By [Hogg, IMS, p.202, thm.3.5.2], (\(A=\left[\begin{array}{c|c}I_{k-1}&\mathbf{0}\end{array}\right], \mathbf{b}=\mathbf{0}\)), 
+\[
+\sqrt{n}(\overline{\mathbf{Z}}_n-\mathbf{p}^*)=A\sqrt{n}(\overline{\mathbf{X}}_n-\mathbf{p})\stackrel{d}{\to} N_{k-1}(\mathbf{0}, \Sigma^*).
+\]
+A same result as (****).
+</li>
+
+
+</ul>
+
+<!---------------------------------->
+<!---------------------------------->
+<h2 id="references">References</h2>
+
+<ul>
+
+<li>[Casella] Casella and Berger's <i>Statistical Inference</i></li>
+
+<li>[DeGroot] DeGroot and Schervish's <i>Probability and Statistics</i></li>
+
+<li>[Friedberg] Friedberg, Insel and Spence's <i>Linear Algebra</i></li>
+
+<li>[Hogg, PSI] Hogg and Tanis's <i>Probability and Statistical Inference</i></li>
+
+<li>[Hogg, IMS] Hogg, McKean and Craig's <i>Introduction to Mathematical Statistics</i></li>
+
+<li>[Keeping] Keeping's <i>Introduction to Statistical Inference</i></li>
+
+<li>[Mood] Mood, Graybill and Boes's <i>Introduction to Theory of Statistics</i></li>
+
+<li>[Rice] Rice's <i>Mathematical Statistics and Data Analysis</i></li>
+
+<li>[Roussas, Course] Roussas's <i>A Course in Mathematical Statistics</i></li>
+
+<li>[Spokoiny] Spokoiny and Dickhaus's <i>Basics of Modern Mathematical Statistics</i></li>
+
+
+</ul>
+
+</body>
+</html>
