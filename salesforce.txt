@@ -1,0 +1,19 @@
+﻿[在SOQL刪除]
+SELECT Id, Subject FROM Event
+SELECT Id, Name FROM Quote 
+SELECT Id, Name FROM Opportunity
+SELECT Id, Name FROM Lead
+SELECT Id, Name FROM Contact
+
+[在setup搜尋]
+在Setup執行disable quote
+在Setup刪除path
+在Setup執行disable path
+刪除flow
+
+[在object-manager]
+刪除course標籤
+刪除Event的repeat
+
+[在sales]
+標籤排序
