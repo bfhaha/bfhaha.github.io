@@ -4,7 +4,7 @@
 <title>墊板隨機出題</title>
 
 <style>
-p,h1 {font-size: 120px;}
+div,h1 {font-size: 120px;}
 </style>
 
 </head>
@@ -15,17 +15,41 @@ p,h1 {font-size: 120px;}
 
 
 
-<p id="no01">2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113</p><br>
+<div>第一題</div>
+<div id="no01">2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113</div>
 
-<p id="no02"></p><br>
-<p id="no03"></p><br>
-<p id="no04"></p><br>
-<p id="no05"></p><br>
-<p id="no06"></p><br>
-<p id="no07"></p><br>
-<p id="no08"></p><br>
-<p id="no09"></p><br>
-<p id="no10"></p><br>
+<hr>
+
+<div>第二題</div>
+<div id="no02"></div>
+
+<div>第三題</div>
+<div id="no03"></div>
+
+<div>第四題</div>
+<div id="no04"></div>
+
+<div>第五題</div>
+<div id="no05"></div>
+
+<div>第六題</div>
+<div id="no06"></div>
+
+<hr>
+
+<div>第七題</div>
+<div id="no07"></div>
+
+<div>第八題</div>
+<div id="no08"></div>
+
+<hr>
+
+<div>第九題</div>
+<div id="no09"></div>
+
+<div>第十題</div>
+<div id="no10"></div>
 
 
 
@@ -59,6 +83,7 @@ function shuffle(array) {
 
 var ranNums_square = shuffle([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]);
 
+// 15^2, 20^2, 25^2, 30^2 were deleted.
 var square = [
 "11*11=121",
 "12*12=144",
@@ -99,6 +124,7 @@ document.getElementById("no06").innerHTML = square[ranNums_square[4]];
 
 var ranNums_fast = shuffle([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77]);
 
+// 15^2, 25^2, 35^2 were deleted.
 var fast = [
 "11*19=209",
 "12*18=216",
@@ -190,6 +216,7 @@ document.getElementById("no08").innerHTML = fast[ranNums_fast[1]];
 
 var ranNums_dec = shuffle([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]);
 
+// 0.25^2, 0.25*0.75, 0.75*0.25, 0.75^2 were deleted.
 var dec = [
 "0.125*0.875=7/64",
 "0.125*0.75=3/32",
