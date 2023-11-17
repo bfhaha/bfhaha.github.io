@@ -14,14 +14,6 @@ code, pre {background-color: lightgray;}
 
 <h1>自動每天在多個LINE群組公告檔案</h1>
 
-<!--<p>筆者工作的補習班，助教要每天上傳每日數學的題目到學生的LINE群組，這裡說明如何將這個工作自動化。</p>-->
-
-<p>各位工作同仁你們好，我是福哥。在執行長的英明領導之下，曙光補習班的規模越來越大，隨著員工、老師、學生人數不斷增加，如果工作都使用傳統的手動處理，那人力成本將會是以乘法增加（人力成本=管理學生成本&times;學生人數）；但如果能夠將這些繁瑣的工作交給電腦自動處理，那人力成本則是按除法減少（人力成本=機器人建置成本&divide;學生人數）。</p>
-
-<p>這裡以每天讓電腦自動公告一個圖檔到每個學生的LINE群組為例，詳細說明如何設置電腦處理這項工作。這個方法同樣也可以用在其他類似的事情上，例如每週公告指派的作業、每月公告事項等等。</p>
-
-<p>如果老師有其他類似的需求，只要稍微懂一點Python，也可以將程式碼稍做修改後完成。</p>
-
 <!---------------------------------->
 <!---------------------------------->
 <!---------------------------------->
@@ -30,37 +22,37 @@ code, pre {background-color: lightgray;}
 <ul>
 
 <li>先建立一個測試群組，假設就取名叫[測試群組]，來測試是否能夠順利公告檔案。</li>
-<img width="70%" src="https://bfhaha.github.io/img/00.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/00.jpg">
 
 <li>到<a href="https://notify-bot.line.me/en/">LINE Notify</a>首頁，並且按右上角的[Log in]登入。</li>
-<img width="70%" src="https://bfhaha.github.io/img/01.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/01.jpg">
 
 <li>登入後點選右上角的帳號，選擇[My page]。</li>
-<img width="70%" src="https://bfhaha.github.io/img/02.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/02.jpg">
 
 <li>選擇[Generate token]。</li>
-<img width="70%" src="https://bfhaha.github.io/img/03.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/03.jpg">
 
 <li>搜尋關鍵字，選擇剛剛建立的[測試群組]，然後輸入要自動公告檔案的機器人的名稱，這裡以[測試公告機器人]為例，最後按下[Generate token]</li>
-<img width="70%" src="https://bfhaha.github.io/img/05.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/05.jpg">
 
 <li>會產生一組代幣金鑰，<span style="color:red">按下[Copy]複製金鑰</span>，請妥善收存此金鑰，避免遺失，這個金鑰沒辦法事後查詢。有這個金鑰也相當於可以控制機器人在群組中的公告。</li>
-<img width="70%" src="https://bfhaha.github.io/img/06.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/06.jpg">
 
 <li>關閉金鑰顯示頁面後，可以看到順利串連此服務。</li>
-<img width="70%" src="https://bfhaha.github.io/img/07.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/07.jpg">
 
 <li>同時，LINE中也會多出一位[LINE Notify]的好友，這個好友就是等下要在群組中公告的機器人。</li>
-<img width="70%" src="https://bfhaha.github.io/img/08.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/08.jpg">
 
 <li>這位[LINE Notify]也有說明要如何利用它，就是把它邀請到群組中。</li>
-<img width="70%" src="https://bfhaha.github.io/img/09.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/09.jpg">
 
 <li>將這個[LINE Notify]加入剛剛的[測試群組]中。</li>
-<img width="70%" src="https://bfhaha.github.io/img/10.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/10.jpg">
 
 <li>順利加入群組。</li>
-<img width="70%" src="https://bfhaha.github.io/img/11.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/11.jpg">
 
 <li>接著我們要執行讓機器人在群組公告的python指令，python程式碼如下。</li>
 <pre>
@@ -102,7 +94,7 @@ r = s.post(url, headers=LINE_HEADERS, files=file, data=data)
 這裡特別感謝<a href="https://stackoverflow.com/questions/48380382/how-to-use-line-notify-for-send-images">stack overflow</a>上的ucode協助。如果不是要上傳圖檔，而是要上傳訊息，也可以參考STEAM教育學習網上的<a href="https://steam.oxxostudio.tw/category/python/spider/line-notify.html">這篇教學</a>
 
 <li>執行此Python腳本，就可以看到機器人成功傳送圖檔。</li>
-<img width="70%" src="https://bfhaha.github.io/img/12.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/12.jpg">
 
 <li><span style="color:red">注意到</span>，一個金鑰只能控制一個群組中的機器人，也就是說，就算之後把這個機器人加到其他群組，當你利用此金鑰控制這個機器人公告時，機器人也只會在原本的群組中公告而已。所以如果有兩個群組都要設置機器人，那就要申請兩個金鑰，我們在下一個部份討論。</li>
 
@@ -235,36 +227,36 @@ C:\Users\bfhaha\AppData\Local\Programs\Python\Python37\python.exe C:\Users\bfhah
 <ul>
 
 <li>點選[開始]，搜尋[工作排程器]，執行[工作排程器]。點選右邊的[建立基本工作]。</li>
-<img width="70%" src="https://bfhaha.github.io/img/13.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/13.jpg">
 
 <li>輸入名稱。</li>
-<img width="70%" src="https://bfhaha.github.io/img/14.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/14.jpg">
 
 <li>設定執行頻率。</li>
-<img width="70%" src="https://bfhaha.github.io/img/15.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/15.jpg">
 
 <li>設定執行時間。</li>
-<img width="70%" src="https://bfhaha.github.io/img/16.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/16.jpg">
 
 <li>設定動作。</li>
-<img width="70%" src="https://bfhaha.github.io/img/17.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/17.jpg">
 
 <li>設定執行的程式，在這裡就是<code>C:\Users\bfhaha\run.bat</code>。</li>
-<img width="70%" src="https://bfhaha.github.io/img/18.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/18.jpg">
 <br>
 <span style="color:red">注意到，如果有引數的話，[新增引數]要輸入完整的路徑。</span>例如執行程式為<code>C:\Users\bfhaha\AppData\Local\Programs\Python\Python37\python.exe</code>及引數為<code>C:\Users\bfhaha\AppData\Local\Programs\Python\Python37\hello.py</code>。
 
 <li>最後按下完成。</li>
-<img width="70%" src="https://bfhaha.github.io/img/19.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/19.jpg">
 
 <li>等待第一次排程執行後，在[工作排程器]首頁按下[重新整理]，並把頁面往下拉，可以看到剛剛新增的排程。</li>
-<img width="70%" src="https://bfhaha.github.io/img/20.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/20.jpg">
 
 <li>點選兩下此排程，可以看到所有排程列表。注意到在此頁面中，往右拉有一個欄位為[上次執行結果]，可以看到排程是否順利被執行，例如出現(0x2)錯誤訊息，就表示找不到檔案或是存取檔案被拒絕，可以檢查一下檔名或路徑。</li>
-<img width="70%" src="https://bfhaha.github.io/img/21.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/21.jpg">
 
 <li>再點選兩下此排程，可以編輯此排程的細節。</li>
-<img width="70%" src="https://bfhaha.github.io/img/22.jpg">
+<img width="70%" src="https://bfhaha.github.io/img/LINE-Notify/22.jpg">
 
 <li>在未來如果要新增公告的群組，要記得
   <ul>
