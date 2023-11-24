@@ -19,11 +19,12 @@ button {width:48%;
 
 
 <button onclick="playAll();this.disabled=true;">Play</button>
-<button onclick="stopPlaying()">Stop</button>
-<br>
-<br>
-<button onclick="resumePlaying()">Resume</button>
 <button onclick="reload()">Reload</button>
+<!--
+Resume在Android Chrome無法使用
+<button onclick="stopPlaying()">Stop</button>
+<button onclick="resumePlaying()">Resume</button>
+-->
 
 
 <div>第一題</div>
@@ -546,6 +547,7 @@ async function playAll(){
 
 }
 
+/*
 function stopPlaying(){
   speechSynthesis.pause()
 }
@@ -553,6 +555,7 @@ function stopPlaying(){
 function resumePlaying(){
   speechSynthesis.resume()
 }
+*/
 
 function reload(){
   location.reload()
