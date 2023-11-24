@@ -1,4 +1,5 @@
 
+
 <!-- saved from url=(0035)https://bfhaha.github.io/plate.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>曙光數學墊板練習模擬考</title>
@@ -18,8 +19,13 @@ button {width:48%;
 <h1>曙光墊板練習模擬考</h1>
 
 
-<button onclick="playAll();this.disabled=true;">Play</button>
+<button onclick="playAll(4)" id="bt1">Play (2 sec.)</button>
 <button onclick="reload()">Reload</button>
+<br>
+<br>
+<button onclick="playAll(6)" id="bt2">Play (4 sec.)</button>
+<button onclick="playAll(8)" id="bt3">Play (6 sec.)</button>
+
 <!--
 Resume在Android Chrome無法使用
 <button onclick="stopPlaying()">Stop</button>
@@ -442,21 +448,15 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-speakingRate = 1;
-
-const synth = window.speechSynthesis;
 
 let examTitle = new SpeechSynthesisUtterance("曙光墊板練習模擬考");
 examTitle.lang = "zh-TW";
-examTitle.rate = speakingRate;
 
 let writeName = new SpeechSynthesisUtterance("請寫上姓名");
 writeName.lang = "zh-TW";
-writeName.rate = speakingRate;
 
 let writeNumber = new SpeechSynthesisUtterance("請標上題號");
 writeNumber.lang = "zh-TW";
-writeNumber.rate = speakingRate;
 
 ////////////////////////////////
 
@@ -498,18 +498,19 @@ utterance[10] = new SpeechSynthesisUtterance(decQ[ranNums_dec[1]]);
 for(i=1; i<11; i++) {
   number[i].lang = "zh-TW";
   utterance[i].lang = "zh-TW";
-
-  number[i].rate = speakingRate;
-  utterance[i].rate = speakingRate;
 }
 
 
 ////////////////////////////////
 
-async function playAll(){
+async function playAll(speed){
   
   // Notice that the waiting time is counted from the speaking start, 
   // not from the end
+
+  document.getElementById("bt1").disabled = true;
+  document.getElementById("bt2").disabled = true;
+  document.getElementById("bt3").disabled = true;  
 
   speechSynthesis.speak(examTitle);  
   await sleep(3000);
@@ -529,38 +530,29 @@ async function playAll(){
 
   for(i=2; i<9; i++) {
     speechSynthesis.speak(number[i]);
+    await sleep(2000);
+    speechSynthesis.speak(utterance[i]);
     await sleep(3000);
     speechSynthesis.speak(utterance[i]);
-    await sleep(4000);
-    speechSynthesis.speak(utterance[i]);
-    await sleep(5000);
+    await sleep(speed*1000);
   }
 
   for(i=9; i<11; i++) {
     speechSynthesis.speak(number[i]);
-    await sleep(3000);
+    await sleep(2000);
     speechSynthesis.speak(utterance[i]);
-    await sleep(5000);
+    await sleep(4000);
     speechSynthesis.speak(utterance[i]);
-    await sleep(5000);
+    await sleep(speed*1000+1000);
   }
 
 }
-
-/*
-function stopPlaying(){
-  speechSynthesis.pause()
-}
-
-function resumePlaying(){
-  speechSynthesis.resume()
-}
-*/
 
 function reload(){
   location.reload()
 }
 
+// If the browser reloads, run this code.
 const beforeUnloadHandler = (event) => {
 
   // Recommended
