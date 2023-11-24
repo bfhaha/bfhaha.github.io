@@ -1,13 +1,14 @@
 
-<html>
-
-<head>
+<!-- saved from url=(0035)https://bfhaha.github.io/plate.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>曙光數學墊板練習模擬考</title>
 
 <style>
 
 div,h1 {font-size: 20px;}
-button {width:100%;height:100px;font-size:40px;}
+button {width:100%;
+        height:100px;
+        font-size:40px;}
 </style>
 
 </head>
@@ -17,7 +18,16 @@ button {width:100%;height:100px;font-size:40px;}
 <h1>曙光墊板練習模擬考</h1>
 
 
-<button onclick="playAll()">PlayAll</button>
+<button onclick="playAll();this.disabled=true;">Play</button>
+<br>
+<br>
+<button onclick="stopPlaying()">Stop</button>
+<br>
+<br>
+<button onclick="resumePlaying()">Resume</button>
+<br>
+<br>
+<button onclick="reload()">Reload</button>
 
 
 <div>第一題</div>
@@ -26,44 +36,44 @@ button {width:100%;height:100px;font-size:40px;}
 <hr><!---------------------------------->
 
 <div>第二題</div>
-<span id="no02Q"></span>
-<span id="no02A"></span>
+<span id="no02Q">26×26</span>
+<span id="no02A">=676</span>
 
 <div>第三題</div>
-<span id="no03Q"></span>
-<span id="no03A"></span>
+<span id="no03Q">18×18</span>
+<span id="no03A">=324</span>
 
 <div>第四題</div>
-<span id="no04Q"></span>
-<span id="no04A"></span>
+<span id="no04Q">35×35</span>
+<span id="no04A">=1225</span>
 
 <div>第五題</div>
-<span id="no05Q"></span>
-<span id="no05A"></span>
+<span id="no05Q">17×17</span>
+<span id="no05A">=289</span>
 
 <div>第六題</div>
-<span id="no06Q"></span>
-<span id="no06A"></span>
+<span id="no06Q">12×12</span>
+<span id="no06A">=144</span>
 
 <hr><!---------------------------------->
 
 <div>第七題</div>
-<span id="no07Q"></span>
-<span id="no07A"></span>
+<span id="no07Q">72×78</span>
+<span id="no07A">=5616</span>
 
 <div>第八題</div>
-<span id="no08Q"></span>
-<span id="no08A"></span>
+<span id="no08Q">71×79</span>
+<span id="no08A">=5609</span>
 
 <hr><!---------------------------------->
 
 <div>第九題</div>
-<span id="no09Q"></span>
-<span id="no09A"></span>
+<span id="no09Q">0.25×0.875</span>
+<span id="no09A">=7/32</span>
 
 <div>第十題</div>
-<span id="no10Q"></span>
-<span id="no10A"></span>
+<span id="no10Q">0.125×0.375</span>
+<span id="no10A">=3/64</span>
 
 <!---------------------------------->
 <!---------------------------------->
@@ -435,7 +445,7 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-speakingRate = 0.5;
+speakingRate = 1;
 
 let examTitle = new SpeechSynthesisUtterance("曙光墊板練習模擬考");
 examTitle.lang = "zh-TW";
@@ -538,12 +548,34 @@ async function playAll(){
 
 }
 
+function stopPlaying(){
+  speechSynthesis.pause()
+}
 
+function resumePlaying(){
+  speechSynthesis.resume()
+}
+
+function reload(){
+  location.reload()
+}
+
+const beforeUnloadHandler = (event) => {
+
+  // Recommended
+  event.preventDefault();
+
+  // Included for legacy support, e.g. Chrome/Edge < 119
+  event.returnValue = true;
+  
+  speechSynthesis.cancel()
+};
 
 
 
 </script>
 
-</body>
 
-</html>
+
+
+</body></html>
