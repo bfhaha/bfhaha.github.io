@@ -448,7 +448,7 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-
+// Do not change .rate property as possible. It makes the voice sounds bad.
 let examTitle = new SpeechSynthesisUtterance("曙光墊板練習模擬考");
 examTitle.lang = "zh-TW";
 
