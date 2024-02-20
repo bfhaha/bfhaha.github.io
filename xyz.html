@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+
+<h1>Systems of Linear Equations: Three Variables</h1>
+
+<p id="eq1"></p>
+<p id="eq2"></p>
+<p id="eq3"></p>
+
+<p id="ans">This is a paragraph.</p>
+
+<script>
+
+x = Math.floor(Math.random() * 21) -10;
+y = Math.floor(Math.random() * 21) -10;
+z = Math.floor(Math.random() * 21) -10;
+
+a = Math.floor(Math.random() * 21) -10;
+b = Math.floor(Math.random() * 21) -10;
+c = Math.floor(Math.random() * 21) -10;
+
+d = Math.floor(Math.random() * 21) -10;
+e = Math.floor(Math.random() * 21) -10;
+f = Math.floor(Math.random() * 21) -10;
+
+g = Math.floor(Math.random() * 21) -10;
+h = Math.floor(Math.random() * 21) -10;
+i = Math.floor(Math.random() * 21) -10;
+
+s = "(" + a + ")x+(" + b + ")y+(" + c + ")z=" + (a*x+b*y+c*z);
+t = "(" + d + ")x+(" + e + ")y+(" + f + ")z=" + (d*x+e*y+f*z);
+u = "(" + g + ")x+(" + h + ")y+(" + i + ")z=" + (g*x+h*y+i*z);
+
+document.getElementById("eq1").innerHTML = s;
+document.getElementById("eq2").innerHTML = t;
+document.getElementById("eq3").innerHTML = u;
+
+solution = "x=" + x + ", " + "y=" + y + ", " + "z=" + z;
+
+document.getElementById("ans").innerHTML = solution;
+
+</script>
+
+</body>
+</html> 
