@@ -1,0 +1,68 @@
+<html>
+
+<head>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+</head>
+
+<body>
+
+<p><strong>Theorem 13.18 Jordan-H&ouml;lder.</strong> <em>Any two composition series of \(G\) are isomorphic.</em>
+</p>
+
+<p>
+PROOF. We shall employ mathematical induction on the length of the composition series. If the length of a composition series is 1, then \(G\) must be a simple group. In this case any two composition series are isomorphic.
+</p>
+
+<span style="color:blue"></span>
+
+<p>
+Suppose now that the theorem is true for all groups having a composition series of length \(k\), where \(1 \leq k \lt n\). <span style="color:blue">（這裡的歸納法假設是說，假設所有長度比 \(n\) 短的composition series都是isomorphic。）</span>Let
+\[
+\begin{array}{l}
+G = H_n \supset H_{n-1} \supset \cdots \supset H_1 \supset H_0 = \{ e \} \\
+G = K_m \supset K_{m-1} \supset \cdots \supset K_1 \supset K_0 = \{ e \} 
+\end{array}
+\]
+be two composition series for \(G\). We can form two new subnormal series for \(G\) since \(H_i \cap K_{m-1}\) is normal in \(H_{i+1} \cap K_{m-1}\) and \(K_j \cap H_{n-1}\) is normal in \(K_{j+1} \cap H_{n-1}\):
+\[
+\begin{array}{l}
+G = H_n \supset H_{n-1} \supset H_{n-1} \cap K_{m-1} \supset \cdots \supset H_0 \cap K_{m-1} = \{ e \} \\
+G = K_m \supset K_{m-1} \supset K_{m-1} \cap H_{n-1} \supset \cdots \supset K_0 \cap H_{n-1} = \{ e \}.
+\end{array}
+\]
+<span style="color:blue">（其中 \(H_{n-1}\vartriangleright H_{n-1}\cap K_{m-1}\) 是因為 \(A\triangleleft C, B\triangleleft C \Rightarrow A\cap B\triangleleft C\)。）</span>
+Since \(H_i \cap K_{m-1}\) is normal in \(H_{i+1} \cap K_{m-1}\), the Second Isomorphism Theorem (Theorem 11.12) implies that
+\[
+\begin{array}{ll}
+(H_{i+1} \cap K_{m-1}) / (H_i \cap K_{m-1}) & = (H_{i+1} \cap K_{m-1}) / (H_i \cap ( H_{i+1} \cap K_{m-1} )) \\
+& \cong H_i (H_{i+1} \cap K_{m-1})/ H_i,
+\end{array}
+\]
+<span style="color:blue">（上面的式子由後往前看會比較好懂。）</span>
+where \(H_i\) is normal in \(H_i (H_{i+1} \cap K_{m-1})\). Since \(\{ H_i \}\) is a composition series, \(H_{i+1} / H_i\) must be simple; <span style="color:blue">（一樣由 \(A\triangleleft C, B\triangleleft C \Rightarrow A\cap B\triangleleft C\) 及 \(A\triangleleft C, B\triangleleft C\Rightarrow AB\triangleleft C\) 得到 \(H_i(H_{i+1}\cap K_{m-1})\triangleleft H_{i+1}\)。）</span>consequently, \(H_i (H_{i+1} \cap K_{m-1})/ H_i\) is either \(H_{i+1}/H_i\) or \(H_i/H_i\). That is, \(H_i (H_{i+1} \cap K_{m-1})\) must be either \(H_i\) or \(H_{i+1}\). 
+<span style="color:blue">（先記住一個小引理，\(AB=A\Rightarrow B\subseteq A\)，我們等下會一直用到。假設 \(H_i(H_{i+1}\cap K_{m-1})=H_i\)，則由剛剛提到的小引理，得到 \(H_{i+1}\cap K_{m-1}\subseteq H_i\)，又因為 \(H_{i+1}\cap K_{m-1}\subseteq K_{m-1}\)，所以 \(H_{i+1}\cap K_{m-1}\subseteq H_i\cap K_{m-1}\)，於是就有了 \(H_{i+1}\cap K_{m-1}=H_i\cap K_{m-1}\)，也就是下面的series可能變得更短。）</span>
+Removing any nonproper inclusions from the series
+\[ H_{n-1} \supset H_{n-1} \cap K_{m-1} \supset \cdots \supset H_0 \cap K_{m-1} = \{ e \}, \]
+we have a composition series for \(H_{n-1}\). Our induction hypothesis says that this series must be equivalent to the composition series
+\[ H_{n-1} \supset \cdots \supset H_1 \supset H_0 = \{ e \}. \]
+Hence, the composition series
+\[ G = H_n \supset H_{n-1} \supset \cdots \supset H_1 \supset H_0 = \{ e \} \]
+and
+\[ G = H_n \supset H_{n-1} \supset H_{n-1} \cap K_{m-1} \supset \cdots \supset H_0 \cap K_{m-1} = \{ e \} ...(1)\]
+are equivalent. <span style="color:blue">（到這裡有兩個情形，一種是 \(H_{n-1}= H_{n-1}K_{m-1}\)，另一種是 \(H_{n-1}\subsetneq H_{n-1}K_{m-1}\)。假設是第一種 \(H_{n-1}= H_{n-1}K_{m-1}\)，則由剛剛提到的小引理，得到 \(H_{n-1}\supseteq K_{m-1}\)，於是(1)中，\(H_{n-1}\cap K_{m-1}=K_{m-1}\)。然後可以對這個 \(H_{n-1}\cap K_{m-1}=K_{m-1}\) 套用歸納法假設。假設是第二種情形 \(H_{n-1}\subsetneq H_{n-1}K_{m-1}\)，則接課本的otherwise。）</span>If \(H_{n-1} = K_{m-1}\), then the composition series \(\{H_i \}\) and \(\{ K_j \}\) are equivalent and we are done; otherwise, \(H_{n-1} K_{m-1}\) is a normal subgroup of \(G\) properly containing \(H_{n-1}\). In this case \(H_{n-1} K_{m-1} = G\) <span style="color:blue">（因為 \(G/H_{n-1}\) 是simple。）</span>and we can apply the Second Isomorphism Theorem once again; that is,
+\[ K_{m-1} / (K_{m-1} \cap H_{n-1}) \cong (H_{n-1} K_{m-1}) / H_{n-1} = G/H_{n-1}. ...(2)\]
+Therefore,
+\[ G = H_n \supset H_{n-1} \supset H_{n-1} \cap K_{m-1} \supset \cdots \supset H_0 \cap K_{m-1} = \{ e \} ...(3) \]
+and
+\[ G = K_m \supset K_{m-1} \supset K_{m-1} \cap H_{n-1} \supset \cdots \supset K_0 \cap H_{n-1} = \{ e \} ...(4)\]
+are equivalent and the proof of the theorem is complete.
+
+<br><br>
+<span style="color:blue">注意到，(3)其實就是(1)，前面已經知道它們跟 \(\{H_i\}\) 是isomorphic了。(2)就證明了(3)跟(4)中，\(H_n/H_{n-1}\cong K_{m-1}/(K_{m-1}\cap H_{n-1})\)，利用類似的討論，可以得到(3)跟(4)中，\(H_{n-1}/(H_{n-1}\cap K_{m-1})\cong K_m/K_{m-1}\)。然後也是利用類似的討論，得到(4)跟 \(\{K_j\}\) 是isomorphic的。</span>
+
+<br><br>
+<span style="color:blue">對於(3)跟(4)，我們對於第二個inclusion之後的部分，再利用歸納假設，可以得到這兩個部分是isomorphic的。</span>
+
+</body>
+</html>
