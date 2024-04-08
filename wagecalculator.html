@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>薪水計算機</title>
+<meta name="description" content="薪水計算機">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+<p>
+個指<input id="input1" autocomplete="off">小時+個指<input id="input2" autocomplete="off">小時+輔導<input id="input3" autocomplete="off">小時
+</p>
+
+<p>
+薪水為<span id="output1"></span>*500+<span id="output2"></span>*500+<span id="output3"></span>*600=<span id="answer"></span>
+</p>
+
+<script>
+
+var input1 = $('#input1');
+var input2 = $('#input2');
+var input3 = $('#input3');
+
+var output1 = $('#output1');
+var output2 = $('#output2');
+var output3 = $('#output3');
+
+var answer = $('#answer');
+
+input1.on('keyup', function () {
+  output1.html(input1.val());
+  output2.html(input2.val());
+  output3.html(input3.val());
+  answer.html(eval(input1.val()*500+input2.val()*500+input3.val()*600));
+});
+input2.on('keyup', function () {
+  output1.html(input1.val());
+  output2.html(input2.val());
+  output3.html(input3.val());
+  answer.html(eval(input1.val()*500+input2.val()*500+input3.val()*600));
+});
+input3.on('keyup', function () {
+  output1.html(input1.val());
+  output2.html(input2.val());
+  output3.html(input3.val());
+  answer.html(eval(input1.val()*500+input2.val()*500+input3.val()*600));
+});
+
+</script>
+</body>
+</html>
