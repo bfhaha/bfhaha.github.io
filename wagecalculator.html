@@ -15,7 +15,7 @@
 </p>
 
 <p>
-薪水為<span id="output1"></span>*500+<span id="output2"></span>*500+<span id="output3"></span>*600=<span id="answer"></span>
+薪水為<span id="output1"></span>*500+<span id="output2"></span>*500+<span id="output3"></span>*600-健保426-勞保266=<span id="answer"></span>
 </p>
 
 <script>
@@ -34,19 +34,19 @@ input1.on('keyup', function () {
   output1.html(input1.val());
   output2.html(input2.val());
   output3.html(input3.val());
-  answer.html(eval(input1.val()*500+input2.val()*500+input3.val()*600));
+  answer.html(eval(input1.val()*500+input2.val()*500+input3.val()*600-426-266));
 });
 input2.on('keyup', function () {
   output1.html(input1.val());
   output2.html(input2.val());
   output3.html(input3.val());
-  answer.html(eval(input1.val()*500+input2.val()*500+input3.val()*600));
+  answer.html(eval(input1.val()*500+input2.val()*500+input3.val()*600-426-266));
 });
 input3.on('keyup', function () {
   output1.html(input1.val());
   output2.html(input2.val());
   output3.html(input3.val());
-  answer.html(eval(input1.val()*500+input2.val()*500+input3.val()*600));
+  answer.html(eval(input1.val()*500+input2.val()*500+input3.val()*600-426-266));
 });
 
 </script>
