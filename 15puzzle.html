@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+
+td {
+  font-size: 50px;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<h1>15 puzzle</h1>
+
+<table border="1" width="200" height="200">
+<tr>
+<td id="e11" onclick="myFunction11()">1</td>
+<td id="e12" onclick="myFunction12()">2</td>
+<td id="e13" onclick="myFunction13()">3</td>
+</tr>
+<tr>
+<td id="e21" onclick="myFunction21()">4</td>
+<td id="e22" onclick="myFunction22()">5</td>
+<td id="e23" onclick="myFunction23()">6</td>
+</tr>
+<tr>
+<td id="e31" onclick="myFunction31()">8</td>
+<td id="e32" onclick="myFunction32()">7</td>
+<td id="e33" onclick="myFunction33()"></td>
+</tr>
+</table>
+
+<p>將上面拼圖拼成如下順序，獎金500元，點擊數字即可移動。</p>
+
+<table border="1" width="200" height="200">
+<tr>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr>
+<td>7</td>
+<td>8</td>
+<td></td>
+</tr>
+</table>
+
+<script>
+
+const e11 = document.getElementById("e11");
+const e12 = document.getElementById("e12");
+const e13 = document.getElementById("e13");
+
+const e21 = document.getElementById("e21");
+const e22 = document.getElementById("e22");
+const e23 = document.getElementById("e23");
+
+const e31 = document.getElementById("e31");
+const e32 = document.getElementById("e32");
+const e33 = document.getElementById("e33");
+
+const test = document.getElementById("test");
+
+function myFunction11() {
+  if (e12.innerHTML == "") {
+    e12.innerHTML = e11.innerHTML;
+    e11.innerHTML = "";
+  }
+  if (e21.innerHTML == "") {
+    e21.innerHTML = e11.innerHTML;
+    e11.innerHTML = "";
+  }
+}
+
+function myFunction13() {
+  if (e12.innerHTML == "") {
+    e12.innerHTML = e13.innerHTML;
+    e13.innerHTML = "";
+  }
+  if (e23.innerHTML == "") {
+    e23.innerHTML = e13.innerHTML;
+    e13.innerHTML = "";
+  }
+}
+
+function myFunction31() {
+  if (e32.innerHTML == "") {
+    e32.innerHTML = e31.innerHTML;
+    e31.innerHTML = "";
+  }
+  if (e21.innerHTML == "") {
+    e21.innerHTML = e31.innerHTML;
+    e31.innerHTML = "";
+  }
+}
+
+function myFunction33() {
+  if (e32.innerHTML == "") {
+    e32.innerHTML = e33.innerHTML;
+    e33.innerHTML = "";
+  }
+  if (e23.innerHTML == "") {
+    e23.innerHTML = e33.innerHTML;
+    e33.innerHTML = "";
+  }
+}
+
+////////////
+
+function myFunction12() {
+  if (e11.innerHTML == "") {
+    e11.innerHTML = e12.innerHTML;
+    e12.innerHTML = "";
+  }
+  if (e13.innerHTML == "") {
+    e13.innerHTML = e12.innerHTML;
+    e12.innerHTML = "";
+  }
+  if (e22.innerHTML == "") {
+    e22.innerHTML = e12.innerHTML;
+    e12.innerHTML = "";
+  }
+}
+
+function myFunction21() {
+  if (e11.innerHTML == "") {
+    e11.innerHTML = e21.innerHTML;
+    e21.innerHTML = "";
+  }
+  if (e31.innerHTML == "") {
+    e31.innerHTML = e21.innerHTML;
+    e21.innerHTML = "";
+  }
+  if (e22.innerHTML == "") {
+    e22.innerHTML = e21.innerHTML;
+    e21.innerHTML = "";
+  }
+}
+
+function myFunction23() {
+  if (e13.innerHTML == "") {
+    e13.innerHTML = e23.innerHTML;
+    e23.innerHTML = "";
+  }
+  if (e33.innerHTML == "") {
+    e33.innerHTML = e23.innerHTML;
+    e23.innerHTML = "";
+  }
+  if (e22.innerHTML == "") {
+    e22.innerHTML = e23.innerHTML;
+    e23.innerHTML = "";
+  }
+}
+
+function myFunction32() {
+  if (e33.innerHTML == "") {
+    e33.innerHTML = e32.innerHTML;
+    e32.innerHTML = "";
+  }
+  if (e31.innerHTML == "") {
+    e31.innerHTML = e32.innerHTML;
+    e32.innerHTML = "";
+  }
+  if (e22.innerHTML == "") {
+    e22.innerHTML = e32.innerHTML;
+    e32.innerHTML = "";
+  }
+}
+
+////////////
+
+function myFunction22() {
+  if (e12.innerHTML == "") {
+    e12.innerHTML = e22.innerHTML;
+    e22.innerHTML = "";
+  }
+  if (e21.innerHTML == "") {
+    e21.innerHTML = e22.innerHTML;
+    e22.innerHTML = "";
+  }
+  if (e23.innerHTML == "") {
+    e23.innerHTML = e22.innerHTML;
+    e22.innerHTML = "";
+  }
+  if (e32.innerHTML == "") {
+    e32.innerHTML = e22.innerHTML;
+    e22.innerHTML = "";
+  }
+}
+
+
+</script>
+
+
+</body>
+
+</html>
