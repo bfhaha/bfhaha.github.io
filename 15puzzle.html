@@ -7,6 +7,9 @@
 td {
   font-size: 200px;
   text-align: center;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 </style>
 </head>
@@ -35,7 +38,7 @@ td {
 
 <p>將上面拼圖拼成如下順序，獎金500元，點擊數字即可移動。</p>
 
-<button onclick="reload()" width="200" height="200">重新整理</button>
+<button onclick="reload()" width="100%" height="400">重新整理</button>
 
 <table border="1" width="800" height="800">
 <tr>
