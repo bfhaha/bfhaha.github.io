@@ -1,0 +1,315 @@
+
+<!-- saved from url=(0035)https://bfhaha.github.io/plate.html -->
+<html>
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>三角函數和角、倍角、半角公式亂序默寫</title>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+
+<style>
+
+div,h1 {font-size: 20px;}
+button {width:48%;
+        height:200px;
+        font-size:40px;}
+</style>
+
+</head>
+
+<body>
+
+<h1>三角函數和角、倍角、半角公式亂序默寫</h1>
+
+
+<button onclick="playAll(4)" id="bt1">Play</button>
+<button onclick="reload()">Reload</button>
+
+<!--
+Resume在Android Chrome無法使用
+<button onclick="stopPlaying()">Stop</button>
+<button onclick="resumePlaying()">Resume</button>
+-->
+
+
+<div>第一題</div>
+<span id="no01Q"></span>
+<span id="no01A"></span>
+
+<div>第二題</div>
+<span id="no02Q"></span>
+<span id="no02A"></span>
+
+<div>第三題</div>
+<span id="no03Q"></span>
+<span id="no03A"></span>
+
+<div>第四題</div>
+<span id="no04Q"></span>
+<span id="no04A"></span>
+
+<div>第五題</div>
+<span id="no05Q"></span>
+<span id="no05A"></span>
+
+<div>第六題</div>
+<span id="no06Q"></span>
+<span id="no06A"></span>
+
+<div>第七題</div>
+<span id="no07Q"></span>
+<span id="no07A"></span>
+
+<div>第八題</div>
+<span id="no08Q"></span>
+<span id="no08A"></span>
+
+<div>第九題</div>
+<span id="no09Q"></span>
+<span id="no09A"></span>
+
+<div>第十題</div>
+<span id="no10Q"></span>
+<span id="no10A"></span>
+
+<div>第十一題</div>
+<span id="no11Q"></span>
+<span id="no11A"></span>
+
+<div>第十二題</div>
+<span id="no12Q"></span>
+<span id="no12A"></span>
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+
+<script>
+
+////////////////////////////////
+////////////////////////////////
+////////////////////////////////
+
+function shuffle(array) {
+    var i = array.length,
+        j = 0,
+        temp;
+
+    while (i--) {
+
+        j = Math.floor(Math.random() * (i+1));
+
+        // swap randomly chosen element with current element
+        temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+
+    }
+
+    return array;
+}
+
+////////////////////////////////
+////////////////////////////////
+////////////////////////////////
+
+var random_ordering = shuffle([0,1,2,3,4,5,6,7,8,9,10,11]);
+
+var formulaQSpeaking = [
+"sine . ! . alpha plus beta . ! . ",
+"sine . ! . alpha minus beta . ! . ",
+"cosine . ! . alpha plus beta . ! . ",
+"cosine . ! . alpha minus beta . ! . ", 
+"tangent . ! . alpha plus beta . ! . ",
+"tangent . ! . alpha minus beta . ! . ",
+"sine . ! . 2 theta . ! . ",
+"cosine . ! . 2 theta . ! . ", 
+"tangent . ! . 2 theta . ! . ",
+"sine . ! . theta over 2 . ! . ",
+"cosine . ! . theta over 2 . ! . ", 
+"tangent . ! . theta over 2 . ! . "
+]
+
+var formulaQReading = [
+"sin (&alpha; + &beta;)",
+"sin (&alpha; - &beta;)",
+"cos (&alpha; + &beta;)",
+"cos (&alpha; - &beta;)", 
+"tan (&alpha; + &beta;)",
+"tan (&alpha; - &beta;)",
+"sin 2&theta;",
+"cos 2&theta;", 
+"tan 2&theta;",
+"sin &theta;/2",
+"cos &theta;/2", 
+"tan &theta;/2"
+]
+
+var formulaA = [
+" = sin &alpha; cos &beta; + sin &beta; cos &alpha;",
+" = sin &alpha; cos &beta; - sin &beta; cos &alpha;",
+" = cos &alpha; cos &beta; - sin &alpha; sin &beta;",
+" = cos &alpha; cos &beta; + sin &alpha; sin &beta;",
+" = (tan &alpha; + tan &beta;) / (1 - tan &alpha; tan &beta;)",
+" = (tan &alpha; - tan &beta;) / (1 + tan &alpha; tan &beta;)",
+" = 2 sin &theta; cos &theta;",
+" = cos&sup2;&theta; - sin&sup2;&theta; = 1 - 2 sin&sup2;&theta; = 2 cos&sup2;&theta; - 1",
+" = (2 tan &alpha;) / (1 - tan&sup2;&theta;)",
+" = &plusmn; &radic;(1 - cos &theta;) / &radic; 2",
+" = &plusmn; &radic;(1 + cos &theta;) / &radic; 2",
+" = sin &theta; / (1 + cos &theta;)"
+]
+
+document.getElementById("no01Q").innerHTML = formulaQReading[random_ordering[0]];
+document.getElementById("no01A").innerHTML = formulaA[random_ordering[0]];
+
+document.getElementById("no02Q").innerHTML = formulaQReading[random_ordering[1]];
+document.getElementById("no02A").innerHTML = formulaA[random_ordering[1]];
+
+document.getElementById("no03Q").innerHTML = formulaQReading[random_ordering[2]];
+document.getElementById("no03A").innerHTML = formulaA[random_ordering[2]];
+
+document.getElementById("no04Q").innerHTML = formulaQReading[random_ordering[3]];
+document.getElementById("no04A").innerHTML = formulaA[random_ordering[3]];
+
+document.getElementById("no05Q").innerHTML = formulaQReading[random_ordering[4]];
+document.getElementById("no05A").innerHTML = formulaA[random_ordering[4]];
+
+document.getElementById("no06Q").innerHTML = formulaQReading[random_ordering[5]];
+document.getElementById("no06A").innerHTML = formulaA[random_ordering[5]];
+
+document.getElementById("no07Q").innerHTML = formulaQReading[random_ordering[6]];
+document.getElementById("no07A").innerHTML = formulaA[random_ordering[6]];
+
+document.getElementById("no08Q").innerHTML = formulaQReading[random_ordering[7]];
+document.getElementById("no08A").innerHTML = formulaA[random_ordering[7]];
+
+document.getElementById("no09Q").innerHTML = formulaQReading[random_ordering[8]];
+document.getElementById("no09A").innerHTML = formulaA[random_ordering[8]];
+
+document.getElementById("no10Q").innerHTML = formulaQReading[random_ordering[9]];
+document.getElementById("no10A").innerHTML = formulaA[random_ordering[9]];
+
+document.getElementById("no11Q").innerHTML = formulaQReading[random_ordering[10]];
+document.getElementById("no11A").innerHTML = formulaA[random_ordering[10]];
+
+document.getElementById("no12Q").innerHTML = formulaQReading[random_ordering[11]];
+document.getElementById("no12A").innerHTML = formulaA[random_ordering[11]];
+
+////////////////////////////////
+////////////////////////////////
+////////////////////////////////
+
+////////////////////////////////
+////////////////////////////////
+////////////////////////////////
+
+////////////////////////////////
+////////////////////////////////
+////////////////////////////////
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// Do not change .rate property as possible. It makes the voice sounds bad.
+let examTitle = new SpeechSynthesisUtterance("三角函數和角、倍角、半角公式亂序默寫");
+examTitle.lang = "zh-TW";
+
+////////////////////////////////
+
+let number = [];
+
+number[1] = new SpeechSynthesisUtterance("第一題");
+number[2] = new SpeechSynthesisUtterance("第二題");
+number[3] = new SpeechSynthesisUtterance("第三題");
+number[4] = new SpeechSynthesisUtterance("第四題");
+number[5] = new SpeechSynthesisUtterance("第五題");
+number[6] = new SpeechSynthesisUtterance("第六題");
+number[7] = new SpeechSynthesisUtterance("第七題");
+number[8] = new SpeechSynthesisUtterance("第八題");
+number[9] = new SpeechSynthesisUtterance("第九題");
+number[10] = new SpeechSynthesisUtterance("第十題");
+number[11] = new SpeechSynthesisUtterance("第十一題");
+number[12] = new SpeechSynthesisUtterance("第十二題");
+
+////////////////////////////////
+
+let utterance = [];
+
+utterance[1] = new SpeechSynthesisUtterance(formulaQSpeaking[random_ordering[0]]);
+utterance[2] = new SpeechSynthesisUtterance(formulaQSpeaking[random_ordering[1]]);
+utterance[3] = new SpeechSynthesisUtterance(formulaQSpeaking[random_ordering[2]]);
+utterance[4] = new SpeechSynthesisUtterance(formulaQSpeaking[random_ordering[3]]);
+utterance[5] = new SpeechSynthesisUtterance(formulaQSpeaking[random_ordering[4]]);
+utterance[6] = new SpeechSynthesisUtterance(formulaQSpeaking[random_ordering[5]]);
+utterance[7] = new SpeechSynthesisUtterance(formulaQSpeaking[random_ordering[6]]);
+utterance[8] = new SpeechSynthesisUtterance(formulaQSpeaking[random_ordering[7]]);
+utterance[9] = new SpeechSynthesisUtterance(formulaQSpeaking[random_ordering[8]]);
+utterance[10] = new SpeechSynthesisUtterance(formulaQSpeaking[random_ordering[9]]);
+utterance[11] = new SpeechSynthesisUtterance(formulaQSpeaking[random_ordering[10]]);
+utterance[12] = new SpeechSynthesisUtterance(formulaQSpeaking[random_ordering[11]]);
+
+////////////////////////////////
+
+for(i=1; i<13; i++) {
+  number[i].lang = "zh-TW";
+//  utterance[i].lang = "zh-TW";
+}
+
+
+////////////////////////////////
+
+async function playAll(speed){
+  
+  // Notice that the waiting time is counted from the speaking start, 
+  // not from the end
+
+  document.getElementById("bt1").disabled = true;
+
+  speechSynthesis.speak(examTitle);  
+  await sleep(6000);
+
+  ////////////////////////////////
+
+  for(i=1; i<13; i++) {
+    speechSynthesis.speak(number[i]);
+    await sleep(3000);
+    speechSynthesis.speak(utterance[i]);
+    await sleep(3000);
+    speechSynthesis.speak(utterance[i]);
+    await sleep(3000);
+    speechSynthesis.speak(utterance[i]);
+    await sleep(speed*1000);
+  }
+}
+
+function reload(){
+  location.reload()
+}
+
+// If the browser reloads, run this code.
+const beforeUnloadHandler = (event) => {
+
+  // Recommended
+  event.preventDefault();
+
+  // Included for legacy support, e.g. Chrome/Edge < 119
+  event.returnValue = true;
+  
+  speechSynthesis.cancel()
+};
+
+
+
+</script>
+
+
+
+
+
+</body></html>
