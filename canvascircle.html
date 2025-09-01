@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>圓形與文字編輯器</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    canvas { border: 1px solid black; display: block; margin-top: 10px; }
+    .controls { margin-bottom: 10px; }
+    .item { margin: 5px 0; }
+    textarea { width: 100%; height: 200px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h2>圓形與文字編輯器 (WYSIWYG)</h2>
+  <div class="controls">
+    <button onclick="addCircle()">新增圓形</button>
+    <button onclick="addText()">新增文字</button>
+    畫布寬:<input type="number" id="canvasWidth" value="600" onchange="resizeCanvas()">
+    畫布高:<input type="number" id="canvasHeight" value="400" onchange="resizeCanvas()">
+  </div>
+  <div id="inputs"></div>
+  <canvas id="canvas" width="600" height="400"></canvas>
+  <h3>產生的程式碼</h3>
+  <textarea id="codeOutput" readonly></textarea>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const inputsDiv = document.getElementById("inputs");
+    const codeOutput = document.getElementById("codeOutput");
+
+    let shapes = [];
+
+    function addCircle() {
+      const circle = { type: "circle", x: 100, y: 100, r: 50 };
+      shapes.push(circle);
+      const div = document.createElement("div");
+      div.className = "item";
+      div.innerHTML = `
+        圓心X:<input type="number" value="${circle.x}" onchange="updateShape(this, 'x', ${shapes.length - 1})">
+        圓心Y:<input type="number" value="${circle.y}" onchange="updateShape(this, 'y', ${shapes.length - 1})">
+        半徑:<input type="number" value="${circle.r}" onchange="updateShape(this, 'r', ${shapes.length - 1})">
+      `;
+      inputsDiv.appendChild(div);
+      draw();
+    }
+
+    function addText() {
+      const text = { type: "text", content: "文字", x: 150, y: 150, size: 20 };
+      shapes.push(text);
+      const div = document.createElement("div");
+      div.className = "item";
+      div.innerHTML = `
+        文字:<input type="text" value="${text.content}" onchange="updateShape(this, 'content', ${shapes.length - 1})">
+        X:<input type="number" value="${text.x}" onchange="updateShape(this, 'x', ${shapes.length - 1})">
+        Y:<input type="number" value="${text.y}" onchange="updateShape(this, 'y', ${shapes.length - 1})">
+        大小:<input type="number" value="${text.size}" onchange="updateShape(this, 'size', ${shapes.length - 1})">
+      `;
+      inputsDiv.appendChild(div);
+      draw();
+    }
+
+    function updateShape(input, key, index) {
+      shapes[index][key] = key === "content" ? input.value : Number(input.value);
+      draw();
+    }
+
+    function resizeCanvas() {
+      const w = Number(document.getElementById("canvasWidth").value);
+      const h = Number(document.getElementById("canvasHeight").value);
+      canvas.width = w;
+      canvas.height = h;
+      draw();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      shapes.forEach(shape => {
+        if (shape.type === "circle") {
+          ctx.beginPath();
+          ctx.arc(shape.x, shape.y, shape.r, 0, Math.PI * 2);
+          ctx.stroke();
+        } else if (shape.type === "text") {
+          ctx.font = `${shape.size}px Arial`;
+          ctx.fillText(shape.content, shape.x, shape.y);
+        }
+      });
+      updateCode();
+    }
+
+    function updateCode() {
+      let code = `const canvas = document.getElementById("canvas");\n`;
+      code += `canvas.width = ${canvas.width};\n`;
+      code += `canvas.height = ${canvas.height};\n`;
+      code += `const ctx = canvas.getContext("2d");\n\n`;
+      shapes.forEach((shape, i) => {
+        if (shape.type === "circle") {
+          code += `// 圓形 ${i + 1}\n`;
+          code += `ctx.beginPath();\n`;
+          code += `ctx.arc(${shape.x}, ${shape.y}, ${shape.r}, 0, Math.PI * 2);\n`;
+          code += `ctx.stroke();\n\n`;
+        } else if (shape.type === "text") {
+          code += `// 文字 ${i + 1}\n`;
+          code += `ctx.font = "${shape.size}px Arial";\n`;
+          code += `ctx.fillText("${shape.content}", ${shape.x}, ${shape.y});\n\n`;
+        }
+      });
+      codeOutput.value = code;
+    }
+  </script>
+</body>
+</html>
