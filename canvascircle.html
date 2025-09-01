@@ -90,10 +90,10 @@
     }
 
     function updateCode() {
-      let code = `const canvas = document.getElementById("canvas");\n`;
+      let code = `var canvas = document.getElementById("canvas");\n`;
       code += `canvas.width = ${canvas.width};\n`;
       code += `canvas.height = ${canvas.height};\n`;
-      code += `const ctx = canvas.getContext("2d");\n\n`;
+      code += `var ctx = canvas.getContext("2d");\n\n`;
       shapes.forEach((shape, i) => {
         if (shape.type === "circle") {
           code += `// 圓形 ${i + 1}\n`;
