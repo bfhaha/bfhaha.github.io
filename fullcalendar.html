@@ -97,19 +97,15 @@ document.addEventListener('DOMContentLoaded', function() {
           const newTitle = prompt("新名稱");
           if (!newTitle) return;
 
-          await fetch(API_URL, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              action: "updateSingle",
-              title: newTitle,
-              startTime: "10:00",
-              endTime: "11:00",
-              date: info.event.startStr
-            })
-          });
+const params = new URLSearchParams({
+  action: "add",
+  title: title,
+  startTime: "10:00",
+  endTime: "11:00",
+  daysOfWeek: JSON.stringify([info.date.getDay()])
+});
+
+await fetch(API_URL + "?" + params.toString());
         }
 
         if (choice === "2") {
