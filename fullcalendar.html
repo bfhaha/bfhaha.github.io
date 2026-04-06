@@ -55,24 +55,31 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     },
 
-    dateClick: async function(info) {
-      const title = prompt("輸入會議名稱");
-      if (!title) return;
+dateClick: async function(info) {
+  const title = prompt("輸入會議名稱");
+  if (!title) return;
 
-      try {
-        const res = await fetch(API_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            action: "add",
-            title: title,
-            startTime: "10:00",
-            endTime: "11:00",
-            daysOfWeek: [info.date.getDay()]
-          })
-        });
+  try {
+    // 用 GET + query string 取代 POST
+    const params = new URLSearchParams({
+      action: "add",
+      title: title,
+      startTime: "10:00",
+      endTime: "11:00",
+      daysOfWeek: JSON.stringify([info.date.getDay()])
+    });
+
+    const res = await fetch(API_URL + "?" + params.toString());
+    const result = await res.json();
+
+    console.log("新增結果:", result);
+
+    calendar.refetchEvents();
+
+  } catch (err) {
+    console.error("新增錯誤:", err);
+  }
+}
 
         const result = await res.json();
         console.log("新增結果:", result);
