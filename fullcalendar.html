@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+</head>
+<body>
+  <div id="calendar"></div>
+
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbwvdeppvV5IBPNTlCSHvnPNGne2QB6YcV74DM9WXccc44nObZYfhPbrUylw3yNJrQpGYw/exec";
+
+document.addEventListener('DOMContentLoaded', function() {
+
+  const calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
+    initialView: 'dayGridMonth',
+    selectable: true,
+
+    events: async function(fetchInfo, successCallback, failureCallback) {
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+
+        console.log("GET資料:", data);
+
+        let events = [];
+
+        data.forEach(e => {
+          if (e.deleted === true || e.deleted === "true") return;
+
+          if (e.daysOfWeek) {
+            events.push({
+              id: e.id,
+              title: e.title,
+              daysOfWeek: JSON.parse(e.daysOfWeek),
+              startTime: e.startTime,
+              endTime: e.endTime
+            });
+          }
+
+          if (e.exceptionDate) {
+            events.push({
+              title: e.title,
+              start: e.exceptionDate + "T" + e.startTime,
+              end: e.exceptionDate + "T" + e.endTime
+            });
+          }
+        });
+
+        successCallback(events);
+
+      } catch (err) {
+        console.error("讀取失敗:", err);
+        failureCallback(err);
+      }
+    },
+
+    dateClick: async function(info) {
+      const title = prompt("輸入會議名稱");
+      if (!title) return;
+
+      try {
+        const res = await fetch(API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            action: "add",
+            title: title,
+            startTime: "10:00",
+            endTime: "11:00",
+            daysOfWeek: [info.date.getDay()]
+          })
+        });
+
+        const result = await res.json();
+        console.log("新增結果:", result);
+
+        if (result.status === "success") {
+          calendar.refetchEvents();
+        } else {
+          alert("新增失敗：" + result.message);
+        }
+
+      } catch (err) {
+        console.error("新增錯誤:", err);
+        alert("新增失敗，請看console");
+      }
+    },
+
+    eventClick: async function(info) {
+      const choice = prompt("1=改這一週 2=刪整個系列");
+
+      try {
+        if (choice === "1") {
+          const newTitle = prompt("新名稱");
+          if (!newTitle) return;
+
+          await fetch(API_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              action: "updateSingle",
+              title: newTitle,
+              startTime: "10:00",
+              endTime: "11:00",
+              date: info.event.startStr
+            })
+          });
+        }
+
+        if (choice === "2") {
+          await fetch(API_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              action: "deleteSeries",
+              id: info.event.id
+            })
+          });
+        }
+
+        calendar.refetchEvents();
+
+      } catch (err) {
+        console.error("操作失敗:", err);
+        alert("操作失敗");
+      }
+    }
+  });
+
+  calendar.render();
+});
+</script>
+</body>
+</html>
+
+
+
+
