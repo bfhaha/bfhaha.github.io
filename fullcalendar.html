@@ -1,148 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 <head>
-  <meta charset="utf-8">
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+  <meta charset="UTF-8">
+  <title>FullCalendar + Google Sheet</title>
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.7/main.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.7/main.global.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    #calendar { max-width: 900px; margin: 0 auto; }
+  </style>
 </head>
 <body>
+  <h1>我的會議月曆</h1>
   <div id="calendar"></div>
 
-<script>
-const API_URL = "https://script.google.com/macros/s/AKfycbwvdeppvV5IBPNTlCSHvnPNGne2QB6YcV74DM9WXccc44nObZYfhPbrUylw3yNJrQpGYw/exec";
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbwvdeppvV5IBPNTlCSHvnPNGne2QB6YcV74DM9WXccc44nObZYfhPbrUylw3yNJrQpGYw/exec"; // 改成你的 Apps Script 網址
 
-document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
+      const calendarEl = document.getElementById('calendar');
 
-  const calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
-    initialView: 'dayGridMonth',
-    selectable: true,
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
 
-    events: async function(fetchInfo, successCallback, failureCallback) {
-      try {
-        const res = await fetch(API_URL);
-        const data = await res.json();
+        // 讀取事件
+        events: async function(fetchInfo, successCallback, failureCallback) {
+          try {
+            const res = await fetch(API_URL);
+            const data = await res.json();
+            console.log("GET資料:", data);
 
-        console.log("GET資料:", data);
+            // 將 Google Sheet 資料轉成 FullCalendar event
+            const events = data.map(item => ({
+              id: item.id || item[0],
+              title: item.title || item[1],
+              start: item.startTime || item[2],
+              end: item.endTime || item[3],
+              daysOfWeek: item.daysOfWeek ? JSON.parse(item.daysOfWeek) : undefined
+            }));
 
-        let events = [];
+            successCallback(events);
 
-        data.forEach(e => {
-          if (e.deleted === true || e.deleted === "true") return;
-
-          if (e.daysOfWeek) {
-            events.push({
-              id: e.id,
-              title: e.title,
-              daysOfWeek: JSON.parse(e.daysOfWeek),
-              startTime: e.startTime,
-              endTime: e.endTime
-            });
+          } catch (err) {
+            console.error("讀取失敗:", err);
+            failureCallback(err);
           }
+        },
 
-          if (e.exceptionDate) {
-            events.push({
-              title: e.title,
-              start: e.exceptionDate + "T" + e.startTime,
-              end: e.exceptionDate + "T" + e.endTime
+        // 點日期新增事件
+        dateClick: async function(info) {
+          const title = prompt("輸入會議名稱");
+          if (!title) return;
+
+          try {
+            const params = new URLSearchParams({
+              action: "add",
+              title: title,
+              startTime: "10:00",
+              endTime: "11:00",
+              daysOfWeek: JSON.stringify([info.date.getDay()])
             });
+
+            // ✅ 這裡完全用 GET，不用 POST
+            const res = await fetch(API_URL + "?" + params.toString());
+            const result = await res.json();
+            console.log("新增結果:", result);
+
+            calendar.refetchEvents();
+
+          } catch (err) {
+            console.error("新增錯誤:", err);
           }
-        });
+        }
+      });
 
-        successCallback(events);
-
-      } catch (err) {
-        console.error("讀取失敗:", err);
-        failureCallback(err);
-      }
-    },
-
-dateClick: async function(info) {
-  const title = prompt("輸入會議名稱");
-  if (!title) return;
-
-  try {
-    // 用 GET + query string 取代 POST
-    const params = new URLSearchParams({
-      action: "add",
-      title: title,
-      startTime: "10:00",
-      endTime: "11:00",
-      daysOfWeek: JSON.stringify([info.date.getDay()])
+      calendar.render();
     });
-
-    const res = await fetch(API_URL + "?" + params.toString());
-    const result = await res.json();
-
-    console.log("新增結果:", result);
-
-    calendar.refetchEvents();
-
-  } catch (err) {
-    console.error("新增錯誤:", err);
-  }
-}
-
-        const result = await res.json();
-        console.log("新增結果:", result);
-
-        if (result.status === "success") {
-          calendar.refetchEvents();
-        } else {
-          alert("新增失敗：" + result.message);
-        }
-
-      } catch (err) {
-        console.error("新增錯誤:", err);
-        alert("新增失敗，請看console");
-      }
-    },
-
-    eventClick: async function(info) {
-      const choice = prompt("1=改這一週 2=刪整個系列");
-
-      try {
-        if (choice === "1") {
-          const newTitle = prompt("新名稱");
-          if (!newTitle) return;
-
-const params = new URLSearchParams({
-  action: "add",
-  title: title,
-  startTime: "10:00",
-  endTime: "11:00",
-  daysOfWeek: JSON.stringify([info.date.getDay()])
-});
-
-await fetch(API_URL + "?" + params.toString());
-        }
-
-        if (choice === "2") {
-          await fetch(API_URL, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              action: "deleteSeries",
-              id: info.event.id
-            })
-          });
-        }
-
-        calendar.refetchEvents();
-
-      } catch (err) {
-        console.error("操作失敗:", err);
-        alert("操作失敗");
-      }
-    }
-  });
-
-  calendar.render();
-});
-</script>
+  </script>
 </body>
 </html>
-
-
-
-
